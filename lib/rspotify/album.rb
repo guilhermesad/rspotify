@@ -2,7 +2,7 @@ module RSpotify
 
   class Album < Base
 
-    attr_accessor :album_type, :images
+    attr_accessor :album_type, :images, :tracks
 
     def self.find(id)
       super(id, 'album')
@@ -15,6 +15,10 @@ module RSpotify
     def initialize(options = {})
       @album_type = options['album_type']
       @images     = options['images']
+
+      if options['tracks']
+        @tracks = options['tracks']['items'].map { |t| Track.new (t) }
+      end
 
       super(options)
     end
