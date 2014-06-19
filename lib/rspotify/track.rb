@@ -14,7 +14,7 @@ module RSpotify
     end
 
     def initialize(options = {})
-      @album             = Album.new options['album']
+      @album             = Album.new options['album'] if options['album']
       @artists           = options['artists'].map { |a| Artist.new a }
       @available_markets = options['available_markets']
       @disc_number       = options['disc_number']
