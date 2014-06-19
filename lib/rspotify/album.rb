@@ -4,6 +4,10 @@ module RSpotify
 
     attr_accessor :album_type, :images
 
+    def self.find(id)
+      super(id, 'album')
+    end
+
     def self.search(query, limit = 20, offset = 0)
       super(query, 'album', limit, offset)
     end

@@ -33,6 +33,16 @@ album.images #=> (Image array)
 artists = tracks.first.artists
 artists.first.name #=> "Black Sabbath"
 artists.first.uri  #=> "spotify:artist:5M52tdBnJaKSvOpJGz8mfZ"
+
+# Find by id
+artist = RSpotify::Artist.find('5K4W6rqBFWDnAN6FQUkS6x')
+artist.genres #=> ["Alternative Rap", "East Coast Rap", "Hardcore Rap", "Hip Hop", "Midwest Rap", "Pop-Rap", "Rap"]
+
+album = RSpotify::Album.find('0uZ8zQLHru4BiNTL2PQY91')
+album.album_type #=> "single"
+
+track = RSpotify::Track.find('2qmxggATKFIeg68guRSG3r')
+track.duration_ms #=> "270800"
 ```
 More documentation will follow
 

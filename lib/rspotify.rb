@@ -4,7 +4,7 @@ require 'json'
 require 'restclient'
 
 module RSpotify
-  
+
   BASE_URI = 'https://api.spotify.com/v1/'
   VERBS = %w(get post put delete)
 
@@ -12,7 +12,7 @@ module RSpotify
   autoload :Artist, 'rspotify/artist'
   autoload :Album,  'rspotify/album'
   autoload :Track,  'rspotify/track'
-  
+
   VERBS.each do |verb|
     define_singleton_method verb do |path, *params|
       url = BASE_URI + path
