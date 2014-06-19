@@ -43,6 +43,9 @@ album.album_type #=> "single"
 
 track = RSpotify::Track.find('2qmxggATKFIeg68guRSG3r')
 track.duration_ms #=> 270800
+
+user = RSpotify::User.find('wizzler')
+user.external_urls["spotify"] #=> "https://open.spotify.com/user/wizzler"
 ```
 More documentation will follow
 
