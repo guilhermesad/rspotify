@@ -2,7 +2,7 @@ module RSpotify
 
   class Artist < Base
 
-    attr_accessor :genres, :images, :popularity
+    attr_accessor :genres, :images, :name, :popularity
 
     def self.find(id)
       super(id, 'artist')
@@ -15,6 +15,7 @@ module RSpotify
     def initialize(options = {})
       @genres     = options['genres']
       @images     = options['images']
+      @name       = options['name']
       @popularity = options['popularity']
 
       super(options)

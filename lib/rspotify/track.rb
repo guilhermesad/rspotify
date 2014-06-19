@@ -2,8 +2,8 @@ module RSpotify
 
   class Track < Base
 
-    attr_accessor :album, :artists, :available_markets, :disc_number, :duration_ms,
-                  :explicit, :external_ids, :popularity, :preview_url, :track_number
+    attr_accessor :album, :artists, :available_markets, :disc_number, :duration_ms, :explicit,
+                  :external_ids, :name, :popularity, :preview_url, :track_number
 
     def self.find(id)
       super(id, 'track')
@@ -21,6 +21,7 @@ module RSpotify
       @duration_ms       = options['duration_ms']
       @explicit          = options['explicit']
       @external_ids      = options['external_ids']
+      @name              = options['name']
       @popularity        = options['popularity']
       @preview_url       = options['preview_url']
       @track_number      = options['track_number']

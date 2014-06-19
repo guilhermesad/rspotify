@@ -2,7 +2,7 @@ module RSpotify
 
   class Base
 
-    attr_accessor :external_urls, :href, :id, :name, :type, :uri
+    attr_accessor :external_urls, :href, :id, :type, :uri
 
     def self.find(id, type)
       pluralized_type = "#{type}s"
@@ -32,7 +32,6 @@ module RSpotify
       @external_urls = options['external_urls']
       @href          = options['href']
       @id            = options['id']
-      @name          = options['name']
       @type          = options['type']
       @uri           = options['uri']
     end
