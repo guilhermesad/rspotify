@@ -12,6 +12,7 @@ module RSpotify
   autoload :Artist, 'rspotify/artist'
   autoload :Album,  'rspotify/album'
   autoload :Track,  'rspotify/track'
+  autoload :User,   'rspotify/user'
 
   VERBS.each do |verb|
     define_singleton_method verb do |path, *params|
