@@ -42,7 +42,7 @@ album = RSpotify::Album.find('0uZ8zQLHru4BiNTL2PQY91')
 album.album_type #=> "single"
 
 track = RSpotify::Track.find('2qmxggATKFIeg68guRSG3r')
-track.duration_ms #=> "270800"
+track.duration_ms #=> 270800
 ```
 More documentation will follow
 
