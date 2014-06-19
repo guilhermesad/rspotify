@@ -18,7 +18,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO
+This gem is pretty new and authentication has not yet been implemented. So far you can access public data such as albums, tracks and artists:
+
+```ruby
+tracks = RSpotify::Track.search('Paranoid')
+
+tracks.first.name       #=> "Paranoid"
+tracks.first.popularity #=> 68
+
+album = tracks.first.album
+album.name   #=> "Paranoid (Remastered)"
+album.images #=> (Image array)
+
+artists = tracks.first.artists
+artists.first.name #=> "Black Sabbath"
+artists.first.uri  #=> "spotify:artist:5M52tdBnJaKSvOpJGz8mfZ"
+```
+More documentation will follow
 
 ## Contributing
 
