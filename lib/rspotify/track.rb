@@ -5,6 +5,10 @@ module RSpotify
     attr_accessor :album, :artists, :available_markets, :disc_number, :duration_ms,
                   :explicit, :external_ids, :popularity, :preview_url, :track_number
 
+    def self.find(id)
+      super(id, 'track')
+    end
+
     def self.search(query, limit = 20, offset = 0)
       super(query, 'track', limit, offset)
     end
