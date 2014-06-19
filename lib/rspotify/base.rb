@@ -4,8 +4,12 @@ module RSpotify
 
     attr_accessor :external_urls, :href, :id, :name, :type, :uri
 
-    def self.find(id)
-      #TODO
+    def self.find(id, type)
+      pluralized_type = "#{type}s"
+      type_class = eval type.capitalize
+
+      json = RSpotify.get "#{pluralized_type}/#{id}"
+      type_class.new json
     end
 
     def self.search(query, type, limit = 20, offset = 0)
