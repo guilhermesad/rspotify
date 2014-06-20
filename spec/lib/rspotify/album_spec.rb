@@ -27,7 +27,7 @@ describe RSpotify::Album do
     it 'should belong to correct artists' do
       artists = @album.artists
       expect(artists)      .to be_an Array
-      expect(artists.size) .to be 1
+      expect(artists.size) .to eq 1
   
       artist = artists.first
       expect(artist)      .to be_an RSpotify::Artist
@@ -38,7 +38,7 @@ describe RSpotify::Album do
     it 'should have correct tracks' do
       tracks = @album.tracks
       expect(tracks)             .to be_an Array
-      expect(tracks.size)        .to be 12
+      expect(tracks.size)        .to eq 12
       expect(tracks.first)       .to be_an RSpotify::Track
       expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'R U Mine?', 'Arabella', 'Fireside')
     end

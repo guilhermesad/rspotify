@@ -27,7 +27,7 @@ describe RSpotify::Track do
     it 'should belong to correct artists' do
       artists = @track.artists
       expect(artists)      .to be_an Array
-      expect(artists.size) .to be 1
+      expect(artists.size) .to eq 1
   
       artist = artists.first
       expect(artist)      .to be_an RSpotify::Artist
