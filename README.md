@@ -40,9 +40,11 @@ artist.genres #=> ["Alternative Rap", "East Coast Rap", "Hardcore Rap", "Hip Hop
 
 album = RSpotify::Album.find('0uZ8zQLHru4BiNTL2PQY91')
 album.album_type #=> "single"
+album.tracks     #=> (Track array)
 
 track = RSpotify::Track.find('2qmxggATKFIeg68guRSG3r')
 track.duration_ms #=> 270800
+track.album       #=> (Album object)
 
 user = RSpotify::User.find('wizzler')
 user.external_urls["spotify"] #=> "https://open.spotify.com/user/wizzler"
