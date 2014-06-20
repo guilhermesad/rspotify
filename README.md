@@ -30,7 +30,7 @@ tracks.first.popularity #=> 86
 
 artists = tracks.first.artists
 artists.first.name #=> "Arctic Monkeys"
-artists.first.href #=> "https://api.spotify.com/v1/artists/7Ln80lUS6He07XvHI8qqHH"
+artists.first.uri  #=> "spotify:artist:7Ln80lUS6He07XvHI8qqHH"
 
 album = tracks.first.album
 album.name   #=> "AM"
@@ -49,7 +49,7 @@ track.duration_ms #=> 270800
 track.album       #=> (Album object)
 
 user = RSpotify::User.find('wizzler')
-user.uri                      #=> "spotify:user:wizzler"
+user.href                     #=> "https://api.spotify.com/v1/users/wizzler"
 user.external_urls["spotify"] #=> "https://open.spotify.com/user/wizzler"
 ```
 
