@@ -6,7 +6,8 @@ module RSpotify
                   :images, :name, :owner, :public, :tracks
 
     def self.find(user_id, id)
-      #TODO
+      json = RSpotify.auth_get("users/#{user_id}/playlists/#{id}")
+      Playlist.new json
     end
 
     def self.search
