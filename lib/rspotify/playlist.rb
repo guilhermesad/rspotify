@@ -27,10 +27,5 @@ module RSpotify
       super(options)
     end
 
-    def tracks
-      json = RSpotify.auth_get("users/#{@owner['id']}/playlists/#{@id}/tracks")
-      json['items'].map{ |t| Track.new t['track'] }
-    end
-
   end
 end
