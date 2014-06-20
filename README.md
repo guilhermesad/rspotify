@@ -23,22 +23,22 @@ Directly access Spotify public data such as albums, tracks, artists and users:
 ```ruby
 require 'rspotify'
 
-tracks = RSpotify::Track.search('Paranoid')
+tracks = RSpotify::Track.search('Do I wanna know?')
 
-tracks.first.name       #=> "Paranoid"
-tracks.first.popularity #=> 68
-
-album = tracks.first.album
-album.name   #=> "Paranoid (Remastered)"
-album.images #=> (Image array)
+tracks.first.name       #=> "Do I Wanna Know?"
+tracks.first.popularity #=> 86
 
 artists = tracks.first.artists
-artists.first.name #=> "Black Sabbath"
-artists.first.uri  #=> "spotify:artist:5M52tdBnJaKSvOpJGz8mfZ"
+artists.first.name #=> "Arctic Monkeys"
+artists.first.href #=> "https://api.spotify.com/v1/artists/7Ln80lUS6He07XvHI8qqHH"
+
+album = tracks.first.album
+album.name   #=> "AM"
+album.images #=> (Image array)
 
 # Find by id
 artist = RSpotify::Artist.find('5K4W6rqBFWDnAN6FQUkS6x')
-artist.genres #=> ["Alternative Rap", "East Coast Rap", "Hardcore Rap", "Hip Hop", "Midwest Rap", "Pop-Rap", "Rap"]
+artist.genres #=> ["Alternative Rap", "East Coast Rap", ...]
 
 album = RSpotify::Album.find('0uZ8zQLHru4BiNTL2PQY91')
 album.album_type #=> "single"
@@ -49,6 +49,7 @@ track.duration_ms #=> 270800
 track.album       #=> (Album object)
 
 user = RSpotify::User.find('wizzler')
+user.uri                      #=> "spotify:user:wizzler"
 user.external_urls["spotify"] #=> "https://open.spotify.com/user/wizzler"
 ```
 
