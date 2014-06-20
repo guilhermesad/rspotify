@@ -24,8 +24,24 @@ describe RSpotify::Album do
       expect(@album.uri)                      .to eq      'spotify:album:5bU1XKYxHhEwukllT20xtk'
     end
 
-    it 'should have correct nested attributes' do
-      #TODO
+    it 'should belong to correct artists' do
+      artists = @album.artists
+      expect(artists)      .to be_an Array
+      expect(artists.size) .to be 1
+  
+      artist = artists.first
+      expect(artist)      .to be_an RSpotify::Artist
+      expect(artist.id)   .to eq '7Ln80lUS6He07XvHI8qqHH'
+      expect(artist.name) .to eq 'Arctic Monkeys'
     end
+
+    it 'should have correct tracks' do
+      tracks = @album.tracks
+      expect(tracks)             .to be_an Array
+      expect(tracks.size)        .to be 12
+      expect(tracks.first)       .to be_an RSpotify::Track
+      expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'R U Mine?', 'Arabella', 'Fireside')
+    end
+
   end
 end
