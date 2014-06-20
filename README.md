@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-This gem is pretty new and authentication has not yet been implemented. So far you can access public data such as albums, tracks and artists:
+Directly access public data such as albums, tracks, artists and users:
 
 ```ruby
 require 'rspotify'
@@ -51,6 +51,25 @@ track.album       #=> (Album object)
 user = RSpotify::User.find('wizzler')
 user.external_urls["spotify"] #=> "https://open.spotify.com/user/wizzler"
 ```
+
+Some data require authentication to be accessed, such as playlists. You can easily get your credentials [here](https://developer.spotify.com/my-applications)
+
+Then just copy and paste them like so:
+
+```ruby
+RSpotify.authenticate("<your_client_id>", "<your_client_secret>")
+
+# Now you can access any public playlist and much more!
+
+playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
+playlist.name               #=> "Movie Soundtrack Masterpieces"
+playlist.description        #=> "Iconic soundtracks featured..."
+playlist.followers['total'] #=> 13
+
+my_user = RSpotify::User.find("my_user")
+my_playlists = my_user.playlists #=> (Playlist array)
+```
+
 More documentation will follow
 
 ## Contributing
