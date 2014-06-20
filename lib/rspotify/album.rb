@@ -2,7 +2,8 @@ module RSpotify
 
   class Album < Base
 
-    attr_accessor :album_type, :images, :name, :tracks
+    attr_accessor :album_type, :artists, :available_markets, :external_ids, :genres, :images,
+                  :name, :popularity, :release_date, :release_date_precision, :tracks
 
     def self.find(id)
       super(id, 'album')
@@ -13,9 +14,16 @@ module RSpotify
     end
 
     def initialize(options = {})
-      @album_type = options['album_type']
-      @images     = options['images']
-      @name       = options['name']
+      @album_type             = options['album_type']
+      @artists                = options['artists'].map { |a| Artist.new a }
+      @available_markets      = options['available_markets']
+      @external_ids           = options['external_ids']
+      @genres                 = options['genres']
+      @images                 = options['images']
+      @name                   = options['name']
+      @popularity             = options['popularity']
+      @release_date           = options['release_date']
+      @release_date_precision = options['release_date_precision']
 
       if options['tracks']
         tracks = options['tracks']['items']
