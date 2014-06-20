@@ -65,6 +65,7 @@ playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
 playlist.name               #=> "Movie Soundtrack Masterpieces"
 playlist.description        #=> "Iconic soundtracks featured..."
 playlist.followers['total'] #=> 13
+playlist.tracks             #=> (Track array)
 
 my_user = RSpotify::User.find("my_user")
 my_playlists = my_user.playlists #=> (Playlist array)
