@@ -23,6 +23,7 @@ module RSpotify
     headers = { 'Authorization' => "Basic #{authorization}" }
     response = RestClient.post(TOKEN_URI, request_body, headers)
     @access_token = JSON.parse(response)['access_token']
+    true
   end
 
   VERBS.each do |verb|
