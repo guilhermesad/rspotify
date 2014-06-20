@@ -14,7 +14,6 @@ module RSpotify
     end
 
     def initialize(options = {})
-      @album             = Album.new options['album'] if options['album']
       @available_markets = options['available_markets']
       @disc_number       = options['disc_number']
       @duration_ms       = options['duration_ms']
@@ -24,6 +23,10 @@ module RSpotify
       @popularity        = options['popularity']
       @preview_url       = options['preview_url']
       @track_number      = options['track_number']
+
+      if options['album']
+        @album = Album.new options['album']
+      end
 
       if options['artists']
         artists = options['artists']
