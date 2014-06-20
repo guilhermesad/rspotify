@@ -18,7 +18,8 @@ module RSpotify
       @name       = options['name']
 
       if options['tracks']
-        @tracks = options['tracks']['items'].map { |t| Track.new (t) }
+        tracks = options['tracks']['items']
+        @tracks = tracks.map { |t| Track.new t }
       end
 
       super(options)
