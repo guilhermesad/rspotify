@@ -1,0 +1,2 @@
+describe RSpotify do
+end
