@@ -21,6 +21,8 @@ Or install it yourself as:
 This gem is pretty new and authentication has not yet been implemented. So far you can access public data such as albums, tracks and artists:
 
 ```ruby
+require 'rspotify'
+
 tracks = RSpotify::Track.search('Paranoid')
 
 tracks.first.name       #=> "Paranoid"
