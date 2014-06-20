@@ -22,7 +22,11 @@ module RSpotify
       @name          = options['name']
       @owner         = options['owner']
       @public        = options['public']
-      @tracks        = options['tracks']
+
+      if options['tracks']
+        tracks = options['tracks']['items']
+        @tracks = tracks.map { |t| Track.new t['track'] }
+      end
 
       super(options)
     end
