@@ -10,11 +10,12 @@ module RSpotify
   TOKEN_URI = 'https://accounts.spotify.com/api/token'
   VERBS     = %w(get post put delete)
 
-  autoload :Album,  'rspotify/album'
-  autoload :Artist, 'rspotify/artist'
-  autoload :Base,   'rspotify/base'
-  autoload :Track,  'rspotify/track'
-  autoload :User,   'rspotify/user'
+  autoload :Album,    'rspotify/album'
+  autoload :Artist,   'rspotify/artist'
+  autoload :Base,     'rspotify/base'
+  autoload :Playlist, 'rspotify/playlist'
+  autoload :Track,    'rspotify/track'
+  autoload :User,     'rspotify/user'
 
   def self.authenticate(client_id, client_secret)
     request_body = { grant_type: 'client_credentials' }
