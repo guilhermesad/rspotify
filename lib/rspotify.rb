@@ -9,9 +9,9 @@ module RSpotify
   TOKEN_URI = 'https://accounts.spotify.com/api/token'
   VERBS     = %w(get post put delete)
 
-  autoload :Base,   'rspotify/base'
-  autoload :Artist, 'rspotify/artist'
   autoload :Album,  'rspotify/album'
+  autoload :Artist, 'rspotify/artist'
+  autoload :Base,   'rspotify/base'
   autoload :Track,  'rspotify/track'
   autoload :User,   'rspotify/user'
 
