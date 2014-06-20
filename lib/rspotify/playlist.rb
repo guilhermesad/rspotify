@@ -20,7 +20,7 @@ module RSpotify
       @followers     = options['followers']
       @images        = options['images']
       @name          = options['name']
-      @owner         = options['owner']
+      @owner         = User.new options['owner'] if options['owner']
       @public        = options['public']
 
       if options['tracks']
