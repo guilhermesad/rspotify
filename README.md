@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-Directly access public data such as albums, tracks, artists and users:
+Directly access Spotify public data such as albums, tracks, artists and users:
 
 ```ruby
 require 'rspotify'
@@ -52,7 +52,7 @@ user = RSpotify::User.find('wizzler')
 user.external_urls["spotify"] #=> "https://open.spotify.com/user/wizzler"
 ```
 
-Some data require authentication to be accessed, such as playlists. You can easily get your credentials [here](https://developer.spotify.com/my-applications)
+Some data require authentication to be accessed, such as playlists. You can easily get your credentials [here](https://developer.spotify.com/my-applications).
 
 Then just copy and paste them like so:
 
