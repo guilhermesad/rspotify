@@ -3,7 +3,7 @@ describe RSpotify::Album do
   describe 'valid album' do
     
     before(:each) do
-      # Get Arctic monkeys's AM album
+      # Get Arctic Monkeys's AM album as a testing sample
       @album = RSpotify::Album.find('5bU1XKYxHhEwukllT20xtk')
     end
 
