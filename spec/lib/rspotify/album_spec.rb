@@ -26,13 +26,10 @@ describe RSpotify::Album do
 
     it 'should find album with correct artists' do
       artists = @album.artists
-      expect(artists)      .to be_an Array
-      expect(artists.size) .to eq 1
-  
-      artist = artists.first
-      expect(artist)      .to be_an RSpotify::Artist
-      expect(artist.id)   .to eq '7Ln80lUS6He07XvHI8qqHH'
-      expect(artist.name) .to eq 'Arctic Monkeys'
+      expect(artists)             .to be_an Array
+      expect(artists.size)        .to eq 1
+      expect(artists.first)       .to be_an RSpotify::Artist
+      expect(artists.map(&:name)) .to include('Arctic Monkeys')
     end
 
     it 'should find album with correct tracks' do
