@@ -24,6 +24,13 @@ describe RSpotify::Track do
       expect(@track.uri)                      .to eq 'spotify:track:3jfr0TF6DQcOLat8gGn7E2'
     end
 
+    it 'should find track with correct album' do
+      album = @track.album
+      expect(album)      .to be_an RSpotify::Album
+      expect(album.id)   .to eq '5bU1XKYxHhEwukllT20xtk'
+      expect(album.name) .to eq 'AM'
+    end
+
     it 'should find track with correct artists' do
       artists = @track.artists
       expect(artists)      .to be_an Array
@@ -33,13 +40,6 @@ describe RSpotify::Track do
       expect(artist)      .to be_an RSpotify::Artist
       expect(artist.id)   .to eq '7Ln80lUS6He07XvHI8qqHH'
       expect(artist.name) .to eq 'Arctic Monkeys'
-    end
-
-    it 'should find track with correct album' do
-      album = @track.album
-      expect(album)      .to be_an RSpotify::Album
-      expect(album.id)   .to eq '5bU1XKYxHhEwukllT20xtk'
-      expect(album.name) .to eq 'AM'
     end
   end
 
