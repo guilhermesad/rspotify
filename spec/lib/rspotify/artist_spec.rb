@@ -1,13 +1,12 @@
 describe RSpotify::Artist do
 
-  describe 'valid artist' do
-    
+  describe 'Artist#find' do
     before(:each) do
       # Get Arctic Monkeys as a testing sample
       @artist = RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
     end
 
-    it 'should have correct attributes' do
+    it 'should return artist with correct attributes' do
       expect(@artist.external_urls['spotify']) .to eq      'https://open.spotify.com/artist/7Ln80lUS6He07XvHI8qqHH'
       expect(@artist.genres)                   .to include 'Alternative Pop/Rock', 'Alternative/Indie Rock', 'Indie', 'Indie Rock', 'Pop/Rock'
       expect(@artist.href)                     .to eq      'https://api.spotify.com/v1/artists/7Ln80lUS6He07XvHI8qqHH'
@@ -18,6 +17,15 @@ describe RSpotify::Artist do
       expect(@artist.type)                     .to eq      'artist'
       expect(@artist.uri)                      .to eq      'spotify:artist:7Ln80lUS6He07XvHI8qqHH'
     end
+  end
 
+  describe 'Artist#search' do
+    it 'should return the right artists' do
+      artists = RSpotify::Artist.search('Arctic')
+      expect(artists)             .to be_an Array
+      expect(artists.size)        .to eq 20
+      expect(artists.first)       .to be_an RSpotify::Artist
+      expect(artists.map(&:name)) .to include('Arctic Monkeys', 'Arctic Moon', 'Arctic', 'Arctic Quest')
+    end
   end
 end
