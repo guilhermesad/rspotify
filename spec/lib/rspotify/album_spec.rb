@@ -1,13 +1,13 @@
 describe RSpotify::Album do
 
-  describe 'valid album' do
+  describe 'Album#find' do
     
     before(:each) do
       # Get Arctic Monkeys's AM album as a testing sample
       @album = RSpotify::Album.find('5bU1XKYxHhEwukllT20xtk')
     end
 
-    it 'should have correct attributes' do
+    it 'should return album with correct attributes' do
       expect(@album.album_type)               .to eq      'album'
       expect(@album.available_markets)        .to include *%w(AD AT BE BG CA EE ES FR GR MC TW US)
       expect(@album.external_ids['upc'])      .to eq      '887828031795'
@@ -24,7 +24,7 @@ describe RSpotify::Album do
       expect(@album.uri)                      .to eq      'spotify:album:5bU1XKYxHhEwukllT20xtk'
     end
 
-    it 'should belong to correct artists' do
+    it 'should return album with correct artists' do
       artists = @album.artists
       expect(artists)      .to be_an Array
       expect(artists.size) .to eq 1
@@ -35,13 +35,22 @@ describe RSpotify::Album do
       expect(artist.name) .to eq 'Arctic Monkeys'
     end
 
-    it 'should have correct tracks' do
+    it 'should return album with correct tracks' do
       tracks = @album.tracks
       expect(tracks)             .to be_an Array
       expect(tracks.size)        .to eq 12
       expect(tracks.first)       .to be_an RSpotify::Track
       expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'R U Mine?', 'Arabella', 'Fireside')
     end
+  end
 
+  describe 'Album#search' do
+    it 'should return the right albums' do
+      albums = RSpotify::Album.search('AM')
+      expect(albums)             .to be_an Array
+      expect(albums.size)        .to eq 20
+      expect(albums.first)       .to be_an RSpotify::Album
+      expect(albums.map(&:name)) .to include('AM', 'Am I Wrong', 'A.M.', 'Melody AM')
+    end
   end
 end
