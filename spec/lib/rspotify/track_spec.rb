@@ -1,13 +1,13 @@
 describe RSpotify::Track do
 
-  describe 'valid track' do
+  describe 'Track#find' do
     
     before(:each) do
       # Get Arctic Monkeys's "Do I Wanna Know?" track as a testing sample
       @track = RSpotify::Track.find('3jfr0TF6DQcOLat8gGn7E2')
     end
 
-    it 'should have correct attributes' do
+    it 'should return track with correct attributes' do
       expect(@track.available_markets)        .to include *%w(AD AT BE BG CA EE ES FR GR MC TW US)
       expect(@track.disc_number)              .to eq 1
       expect(@track.duration_ms)              .to eq 272394
@@ -24,7 +24,7 @@ describe RSpotify::Track do
       expect(@track.uri)                      .to eq 'spotify:track:3jfr0TF6DQcOLat8gGn7E2'
     end
 
-    it 'should belong to correct artists' do
+    it 'should return track with correct artists' do
       artists = @track.artists
       expect(artists)      .to be_an Array
       expect(artists.size) .to eq 1
@@ -35,12 +35,21 @@ describe RSpotify::Track do
       expect(artist.name) .to eq 'Arctic Monkeys'
     end
 
-    it 'should belong to correct album' do
+    it 'should return track with correct album' do
       album = @track.album
       expect(album)      .to be_an RSpotify::Album
       expect(album.id)   .to eq '5bU1XKYxHhEwukllT20xtk'
       expect(album.name) .to eq 'AM'
     end
+  end
 
+  describe 'Track#search' do
+    it 'should return the right tracks' do
+      tracks = RSpotify::Track.search('Wanna Know')
+      expect(tracks)             .to be_an Array
+      expect(tracks.size)        .to eq 20
+      expect(tracks.first)       .to be_an RSpotify::Track
+      expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'Wanna Know', 'Never Wanna Know')
+    end
   end
 end
