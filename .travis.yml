@@ -1,0 +1,12 @@
+language: ruby
+
+notifications:
+  email: false
+
+rvm:
+  - 2.0
+  - 2.1
+  - ruby-head
+
+script:
+  - "bundle exec rspec"
