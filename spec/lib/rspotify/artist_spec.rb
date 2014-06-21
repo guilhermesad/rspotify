@@ -6,7 +6,7 @@ describe RSpotify::Artist do
       @artist = RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
     end
 
-    it 'should return artist with correct attributes' do
+    it 'should find artist with correct attributes' do
       expect(@artist.external_urls['spotify']) .to eq      'https://open.spotify.com/artist/7Ln80lUS6He07XvHI8qqHH'
       expect(@artist.genres)                   .to include 'Alternative Pop/Rock', 'Alternative/Indie Rock', 'Indie', 'Indie Rock', 'Pop/Rock'
       expect(@artist.href)                     .to eq      'https://api.spotify.com/v1/artists/7Ln80lUS6He07XvHI8qqHH'
@@ -20,7 +20,7 @@ describe RSpotify::Artist do
   end
 
   describe 'Artist#search' do
-    it 'should return the right artists' do
+    it 'should search for the right artists' do
       artists = RSpotify::Artist.search('Arctic')
       expect(artists)             .to be_an Array
       expect(artists.size)        .to eq 20

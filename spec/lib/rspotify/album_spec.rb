@@ -7,7 +7,7 @@ describe RSpotify::Album do
       @album = RSpotify::Album.find('5bU1XKYxHhEwukllT20xtk')
     end
 
-    it 'should return album with correct attributes' do
+    it 'should find album with correct attributes' do
       expect(@album.album_type)               .to eq      'album'
       expect(@album.available_markets)        .to include *%w(AD AT BE BG CA EE ES FR GR MC TW US)
       expect(@album.external_ids['upc'])      .to eq      '887828031795'
@@ -24,7 +24,7 @@ describe RSpotify::Album do
       expect(@album.uri)                      .to eq      'spotify:album:5bU1XKYxHhEwukllT20xtk'
     end
 
-    it 'should return album with correct artists' do
+    it 'should find album with correct artists' do
       artists = @album.artists
       expect(artists)      .to be_an Array
       expect(artists.size) .to eq 1
@@ -35,7 +35,7 @@ describe RSpotify::Album do
       expect(artist.name) .to eq 'Arctic Monkeys'
     end
 
-    it 'should return album with correct tracks' do
+    it 'should find album with correct tracks' do
       tracks = @album.tracks
       expect(tracks)             .to be_an Array
       expect(tracks.size)        .to eq 12
@@ -45,7 +45,7 @@ describe RSpotify::Album do
   end
 
   describe 'Album#search' do
-    it 'should return the right albums' do
+    it 'should search for the right albums' do
       albums = RSpotify::Album.search('AM')
       expect(albums)             .to be_an Array
       expect(albums.size)        .to eq 20
