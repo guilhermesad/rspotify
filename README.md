@@ -38,7 +38,8 @@ album.images #=> (Image array)
 
 # Find by id
 artist = RSpotify::Artist.find('5K4W6rqBFWDnAN6FQUkS6x')
-artist.genres #=> ["Alternative Rap", "East Coast Rap", ...]
+artist.genres          #=> ["Alternative Rap", "East Coast Rap", ...]
+artist.top_tracks[:US] #=> (Track array)
 
 album = RSpotify::Album.find('0uZ8zQLHru4BiNTL2PQY91')
 album.album_type #=> "single"
