@@ -48,5 +48,11 @@ module RSpotify
       instance_variable_get attr 
     end
 
+    def respond_to?(method_name)
+      attr = "@#{method_name}".to_sym
+      return true if instance_variables.include? attr
+      super
+    end
+
   end
 end
