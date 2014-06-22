@@ -15,8 +15,9 @@ module RSpotify
     end
 
     def playlists
+      return @playlists unless @playlists.nil?
       playlists = RSpotify.auth_get("users/#{@id}/playlists")['items']
-      playlists.map { |p| Playlist.new p }
+      @playlists = playlists.map { |p| Playlist.new p }
     end
   end
 end
