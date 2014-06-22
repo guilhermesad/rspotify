@@ -36,5 +36,10 @@ module RSpotify
       @uri           = options['uri']
     end
 
+    def complete_object!
+      pluralized_type = "#{type}s"
+      initialize RSpotify.get("#{pluralized_type}/#{@id}")
+    end
+
   end
 end
