@@ -34,7 +34,7 @@ module RSpotify
       @uri           = options['uri']
     end
 
-    def complete_object!
+    def complete!
       pluralized_type = "#{type}s"
       initialize RSpotify.get("#{pluralized_type}/#{@id}")
     end
@@ -46,7 +46,7 @@ module RSpotify
       attr_value = instance_variable_get attr 
       return attr_value unless attr_value.nil?
 
-      complete_object!
+      complete!
       instance_variable_get attr 
     end
 
