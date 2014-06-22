@@ -2,8 +2,6 @@ module RSpotify
 
   class Base
 
-    attr_accessor :external_urls, :href, :id, :type, :uri
-
     def self.find(id, type)
       pluralized_type = "#{type}s"
       type_class = eval type.capitalize
@@ -39,6 +37,15 @@ module RSpotify
     def complete_object!
       pluralized_type = "#{type}s"
       initialize RSpotify.get("#{pluralized_type}/#{@id}")
+    end
+
+    def method_missing(method_name, *args)
+      attr = "@#{method_name}".to_sym
+      super unless instance_variables.include? attr 
+      attr_value = instance_variable_get attr 
+      return attr_value unless attr_value.nil?
+      complete_object!
+      instance_variable_get attr 
     end
 
   end

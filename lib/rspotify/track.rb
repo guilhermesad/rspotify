@@ -2,9 +2,6 @@ module RSpotify
 
   class Track < Base
 
-    attr_accessor :album, :artists, :available_markets, :disc_number, :duration_ms, :explicit,
-                  :external_ids, :name, :popularity, :preview_url, :track_number
-
     def self.find(id)
       super(id, 'track')
     end

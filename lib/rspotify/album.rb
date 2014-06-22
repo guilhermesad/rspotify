@@ -2,9 +2,6 @@ module RSpotify
 
   class Album < Base
 
-    attr_accessor :album_type, :artists, :available_markets, :external_ids, :genres, :images,
-                  :name, :popularity, :release_date, :release_date_precision, :tracks
-
     def self.find(id)
       super(id, 'album')
     end

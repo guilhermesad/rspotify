@@ -2,8 +2,6 @@ module RSpotify
 
   class Artist < Base
 
-    attr_accessor :genres, :images, :name, :popularity
-
     def self.find(id)
       super(id, 'artist')
     end

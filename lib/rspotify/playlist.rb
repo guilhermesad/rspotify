@@ -2,9 +2,6 @@ module RSpotify
 
   class Playlist < Base
 
-    attr_accessor :collaborative, :description, :followers,
-                  :images, :name, :owner, :public, :tracks
-
     def self.find(user_id, id)
       json = RSpotify.auth_get("users/#{user_id}/playlists/#{id}")
       Playlist.new json
