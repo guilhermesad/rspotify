@@ -26,7 +26,7 @@ module RSpotify
         @artists = artists.map { |a| Artist.new a }
       end
 
-      if options['tracks']
+      if options['tracks'] && options['tracks']['items']
         tracks = options['tracks']['items']
         @tracks = tracks.map { |t| Track.new t }
       end
