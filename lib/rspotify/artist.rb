@@ -18,5 +18,10 @@ module RSpotify
 
       super(options)
     end
+
+    def top_tracks(country)
+      json = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
+      json['tracks'].map{ |t| Track.new t }
+    end
   end
 end
