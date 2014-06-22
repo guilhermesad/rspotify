@@ -1,7 +1,7 @@
 describe RSpotify::Album do
 
-  describe 'Album#find' do
-    
+  describe 'Album#find receiving id as a string' do
+
     before(:each) do
       # Get Arctic Monkeys's AM album as a testing sample
       @album = RSpotify::Album.find('5bU1XKYxHhEwukllT20xtk')
@@ -38,6 +38,23 @@ describe RSpotify::Album do
       expect(tracks.size)        .to eq 12
       expect(tracks.first)       .to be_an RSpotify::Track
       expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'R U Mine?', 'Arabella', 'Fireside')
+    end
+  end
+
+  describe 'Album#find receiving array of ids' do
+    it 'should find the right albums' do
+      ids = ['2agWNCZl5Ts9W05mij8EPh']
+      albums = RSpotify::Album.find(ids)
+      expect(albums)            .to be_an Array
+      expect(albums.size)       .to eq 1
+      expect(albums.first.name) .to eq 'The Next Day Extra'
+
+      ids << '3JquYMWj5wrzuZCNAvOYN9'
+      albums = RSpotify::Album.find(ids)
+      expect(albums)            .to be_an Array
+      expect(albums.size)       .to eq 2
+      expect(albums.first.name) .to eq 'The Next Day Extra'
+      expect(albums.last.name)  .to eq 'A Beard Of Stars (Deluxe Edition)'
     end
   end
 

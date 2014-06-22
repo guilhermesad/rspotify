@@ -1,6 +1,7 @@
 describe RSpotify::Artist do
 
-  describe 'Artist#find' do
+  describe 'Artist#find receiving id as a string' do
+
     before(:each) do
       # Get Arctic Monkeys as a testing sample
       @artist = RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
@@ -32,6 +33,23 @@ describe RSpotify::Artist do
       expect(top_tracks.size)        .to eq 10
       expect(top_tracks.first)       .to be_an RSpotify::Track
       expect(top_tracks.map(&:name)) .to include('Do I Wanna Know?', 'R U Mine?', 'Arabella', 'Knee Socks')
+    end
+  end
+
+  describe 'Artist#find receiving array of ids' do
+    it 'should find the right artists' do
+      ids = ['0oSGxfWSnnOXhD2fKuz2Gy']
+      artists = RSpotify::Artist.find(ids)
+      expect(artists)            .to be_an Array
+      expect(artists.size)       .to eq 1
+      expect(artists.first.name) .to eq 'David Bowie'
+
+      ids << '3dBVyJ7JuOMt4GE9607Qin'
+      artists = RSpotify::Artist.find(ids)
+      expect(artists)            .to be_an Array
+      expect(artists.size)       .to eq 2
+      expect(artists.first.name) .to eq 'David Bowie'
+      expect(artists.last.name)  .to eq 'T. Rex'
     end
   end
 

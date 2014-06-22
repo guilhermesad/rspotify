@@ -1,6 +1,6 @@
 describe RSpotify::Track do
 
-  describe 'Track#find' do
+  describe 'Track#find receiving id as a string' do
     
     before(:each) do
       # Get Arctic Monkeys's "Do I Wanna Know?" track as a testing sample
@@ -37,6 +37,23 @@ describe RSpotify::Track do
       expect(artists.size)        .to eq 1
       expect(artists.first)       .to be_an RSpotify::Artist
       expect(artists.map(&:name)) .to include('Arctic Monkeys')
+    end
+  end
+
+  describe 'Track#find receiving array of ids' do
+    it 'should find the right tracks' do
+      ids = ['4oI9kesyxHUr8fqiLd6uO9']
+      tracks = RSpotify::Track.find(ids)
+      expect(tracks)            .to be_an Array
+      expect(tracks.size)       .to eq 1
+      expect(tracks.first.name) .to eq 'The Next Day'
+
+      ids << '7D8BAYkrR9peCB9XSKCADc'
+      tracks = RSpotify::Track.find(ids)
+      expect(tracks)            .to be_an Array
+      expect(tracks.size)       .to eq 2
+      expect(tracks.first.name) .to eq 'The Next Day'
+      expect(tracks.last.name)  .to eq 'Sunday'
     end
   end
 
