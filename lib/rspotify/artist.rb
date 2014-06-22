@@ -20,6 +20,12 @@ module RSpotify
       super(options)
     end
 
+    def albums
+      return @albums unless @albums.nil?
+      json = RSpotify.get("artists/#{@id}/albums")
+      @albums = json['items'].map { |a| Album.new a }
+    end
+
     def top_tracks(country)
       return @top_tracks[country] unless @top_tracks[country].nil?
       json = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
