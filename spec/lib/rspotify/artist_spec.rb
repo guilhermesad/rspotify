@@ -17,6 +17,14 @@ describe RSpotify::Artist do
       expect(@artist.type)                     .to eq      'artist'
       expect(@artist.uri)                      .to eq      'spotify:artist:7Ln80lUS6He07XvHI8qqHH'
     end
+
+    it 'should find artist with correct top tracks' do
+      top_tracks = @artist.top_tracks(:US)
+      expect(top_tracks)             .to be_an Array
+      expect(top_tracks.size)        .to eq 10
+      expect(top_tracks.first)       .to be_an RSpotify::Track
+      expect(top_tracks.map(&:name)) .to include('Do I Wanna Know?', 'R U Mine?', 'Arabella', 'Knee Socks')
+    end
   end
 
   describe 'Artist#search' do
