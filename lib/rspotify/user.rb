@@ -18,6 +18,5 @@ module RSpotify
       playlists = RSpotify.auth_get("users/#{@id}/playlists")['items']
       playlists.map { |p| Playlist.new p }
     end
-
   end
 end

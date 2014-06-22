@@ -18,6 +18,5 @@ module RSpotify
 
       super(options)
     end
-
   end
 end

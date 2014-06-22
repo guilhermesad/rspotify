@@ -34,6 +34,5 @@ module RSpotify
     def complete_object!
       initialize RSpotify.auth_get("users/#{@owner.id}/playlists/#{@id}")
     end
-
   end
 end

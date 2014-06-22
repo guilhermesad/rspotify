@@ -39,6 +39,5 @@ module RSpotify
       params << auth_header
       send(verb, path, *params)
     end
-
   end
 end
