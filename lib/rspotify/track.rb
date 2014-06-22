@@ -21,13 +21,12 @@ module RSpotify
       @preview_url       = options['preview_url']
       @track_number      = options['track_number']
 
-      if options['album']
-        @album = Album.new options['album']
+      @album = if options['album']
+        Album.new options['album']
       end
 
-      if options['artists']
-        artists = options['artists']
-        @artists = artists.map { |a| Artist.new a }
+      @artists = if options['artists']
+        options['artists'].map { |a| Artist.new a }
       end
 
       super(options)

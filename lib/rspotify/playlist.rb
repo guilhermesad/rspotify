@@ -19,13 +19,12 @@ module RSpotify
       @name          = options['name']
       @public        = options['public']
 
-      if options['owner']
-        @owner = User.new options['owner']
+      @owner = if options['owner']
+        User.new options['owner']
       end
 
-      if options['tracks'] && options['tracks']['items']
-        tracks = options['tracks']['items']
-        @tracks = tracks.map { |t| Track.new t['track'] }
+      @tracks = if options['tracks'] && options['tracks']['items']
+        options['tracks']['items'].map { |t| Track.new t['track'] }
       end
 
       super(options)

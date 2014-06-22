@@ -21,14 +21,12 @@ module RSpotify
       @release_date           = options['release_date']
       @release_date_precision = options['release_date_precision']
 
-      if options['artists']
-        artists = options['artists']
-        @artists = artists.map { |a| Artist.new a }
+      @artists = if options['artists']
+        options['artists'].map { |a| Artist.new a }
       end
 
-      if options['tracks'] && options['tracks']['items']
-        tracks = options['tracks']['items']
-        @tracks = tracks.map { |t| Track.new t }
+      @tracks = if options['tracks'] && options['tracks']['items']
+        options['tracks']['items'].map { |t| Track.new t }
       end
 
       super(options)
