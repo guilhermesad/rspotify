@@ -18,6 +18,14 @@ describe RSpotify::Artist do
       expect(@artist.uri)                      .to eq      'spotify:artist:7Ln80lUS6He07XvHI8qqHH'
     end
 
+    it 'should find artist with correct albums' do
+      albums = @artist.albums
+      expect(albums)             .to be_an Array
+      expect(albums.size)        .to eq 20
+      expect(albums.first)       .to be_an RSpotify::Album
+      expect(albums.map(&:name)) .to include('AM', 'Suck It and See', 'Suck It and See Sampler' , 'Humbug')
+    end
+
     it 'should find artist with correct top tracks' do
       top_tracks = @artist.top_tracks(:US)
       expect(top_tracks)             .to be_an Array
