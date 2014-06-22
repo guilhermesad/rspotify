@@ -2,12 +2,22 @@ module RSpotify
 
   class Base
 
-    def self.find(id, type)
+    def self.find(ids, type)
       pluralized_type = "#{type}s"
+      path = pluralized_type.dup
       type_class = eval type.capitalize
 
-      json = RSpotify.get "#{pluralized_type}/#{id}"
-      type_class.new json
+      case ids.class.to_s
+      when 'Array'
+        path << "?ids=#{ids.join ','}"
+        json = RSpotify.get path
+        json[pluralized_type].map { |t| type_class.new t }
+      when 'String'
+        id = ids
+        path << "/#{id}"
+        json = RSpotify.get path
+        type_class.new json
+      end
     end
 
     def self.search(query, type, limit = 20, offset = 0)

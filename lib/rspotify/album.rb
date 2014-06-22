@@ -2,8 +2,8 @@ module RSpotify
 
   class Album < Base
 
-    def self.find(id)
-      super(id, 'album')
+    def self.find(ids)
+      super(ids, 'album')
     end
 
     def self.search(query, limit = 20, offset = 0)

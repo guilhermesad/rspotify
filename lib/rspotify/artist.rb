@@ -2,8 +2,8 @@ module RSpotify
 
   class Artist < Base
 
-    def self.find(id)
-      super(id, 'artist')
+    def self.find(ids)
+      super(ids, 'artist')
     end
 
     def self.search(query, limit = 20, offset = 0)
@@ -29,7 +29,7 @@ module RSpotify
     def top_tracks(country)
       return @top_tracks[country] unless @top_tracks[country].nil?
       json = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
-      @top_tracks[country] = json['tracks'].map{ |t| Track.new t }
+      @top_tracks[country] = json['tracks'].map { |t| Track.new t }
     end
   end
 end

@@ -2,8 +2,8 @@ module RSpotify
 
   class Track < Base
 
-    def self.find(id)
-      super(id, 'track')
+    def self.find(ids)
+      super(ids, 'track')
     end
 
     def self.search(query, limit = 20, offset = 0)
