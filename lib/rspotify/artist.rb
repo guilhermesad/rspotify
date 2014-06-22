@@ -15,13 +15,15 @@ module RSpotify
       @images     = options['images']
       @name       = options['name']
       @popularity = options['popularity']
+      @top_tracks = {}
 
       super(options)
     end
 
     def top_tracks(country)
+      return @top_tracks[country] unless @top_tracks[country].nil?
       json = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
-      json['tracks'].map{ |t| Track.new t }
+      @top_tracks[country] = json['tracks'].map{ |t| Track.new t }
     end
   end
 end
