@@ -2,12 +2,8 @@ module RSpotify
 
   class User < Base
 
-    def self.find(id)
-      if id.is_a? Array
-        warn 'Spotify API does not support finding several users simultaneously'
-        return false
-      end
-      super(id, 'user')
+    def self.find(ids)
+      super(ids, 'user')
     end
 
     def self.search

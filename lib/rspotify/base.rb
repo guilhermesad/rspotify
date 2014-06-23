@@ -9,6 +9,10 @@ module RSpotify
 
       case ids.class.to_s
       when 'Array'
+        if type == 'user'
+          warn 'Spotify API does not support finding several users simultaneously'
+          return false
+        end
         path << "?ids=#{ids.join ','}"
         json = RSpotify.get path
         json[pluralized_type].map { |t| type_class.new t }
