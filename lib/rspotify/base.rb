@@ -4,8 +4,8 @@ module RSpotify
 
     def self.find(ids, type)
       pluralized_type = "#{type}s"
-      path = pluralized_type.dup
-      type_class = eval type.capitalize
+      path            = pluralized_type.dup
+      type_class      = RSpotify.const_get(type.capitalize)
 
       case ids.class.to_s
       when 'Array'
@@ -22,7 +22,7 @@ module RSpotify
 
     def self.search(query, type, limit = 20, offset = 0)
       pluralized_type = "#{type}s"
-      type_class = eval type.capitalize
+      type_class = RSpotify.const_get(type.capitalize)
 
       json = RSpotify.get 'search',
         params: {
