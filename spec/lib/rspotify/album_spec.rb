@@ -1,6 +1,6 @@
 describe RSpotify::Album do
 
-  describe 'Album#find receiving id as a string' do
+  describe 'Album::find receiving id as a string' do
 
     before(:each) do
       # Get Arctic Monkeys's AM album as a testing sample
@@ -41,7 +41,7 @@ describe RSpotify::Album do
     end
   end
 
-  describe 'Album#find receiving array of ids' do
+  describe 'Album::find receiving array of ids' do
     it 'should find the right albums' do
       ids = ['2agWNCZl5Ts9W05mij8EPh']
       albums = RSpotify::Album.find(ids)
@@ -58,7 +58,7 @@ describe RSpotify::Album do
     end
   end
 
-  describe 'Album#search' do
+  describe 'Album::search' do
     it 'should search for the right albums' do
       albums = RSpotify::Album.search('AM')
       expect(albums)             .to be_an Array

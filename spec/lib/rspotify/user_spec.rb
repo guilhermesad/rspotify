@@ -1,6 +1,6 @@
 describe RSpotify::User do
 
-  describe 'User#find' do
+  describe 'User::find' do
 
     before(:each) do
       # Get wizzler user as a testing sample

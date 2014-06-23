@@ -1,6 +1,6 @@
 describe RSpotify::Artist do
 
-  describe 'Artist#find receiving id as a string' do
+  describe 'Artist::find receiving id as a string' do
 
     before(:each) do
       # Get Arctic Monkeys as a testing sample
@@ -36,7 +36,7 @@ describe RSpotify::Artist do
     end
   end
 
-  describe 'Artist#find receiving array of ids' do
+  describe 'Artist::find receiving array of ids' do
     it 'should find the right artists' do
       ids = ['0oSGxfWSnnOXhD2fKuz2Gy']
       artists = RSpotify::Artist.find(ids)
@@ -53,7 +53,7 @@ describe RSpotify::Artist do
     end
   end
 
-  describe 'Artist#search' do
+  describe 'Artist::search' do
     it 'should search for the right artists' do
       artists = RSpotify::Artist.search('Arctic')
       expect(artists)             .to be_an Array

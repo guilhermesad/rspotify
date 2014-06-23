@@ -1,6 +1,6 @@
 describe RSpotify::Playlist do
 
-  describe 'Playlist#find' do
+  describe 'Playlist::find' do
     
     before(:each) do
       # Keys generated specifically for the tests. Should be removed in the future
