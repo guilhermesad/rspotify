@@ -95,7 +95,7 @@ my_playlists = my_user.playlists #=> (Playlist array)
 
 RSpotify focuses on objects behaviour so you can forget the API and worry about your tracks, artists and so on.
 
-It is possible to write things like `playlist.tracks.sort_by(&:popularity).last.album` without having to think what API calls you must do. RSpotify fills the gaps for you.
+It is possible to write things like `playlist.tracks.sort_by(&:popularity).last.album` without having to think what API calls must be done. RSpotify fills the gaps for you.
 
 Full documentation can be found [here](http://rdoc.info/github/guilhermesad/rspotify/master/frames). (Will be complete in the next few days)
 
