@@ -93,7 +93,7 @@ my_user = RSpotify::User.find("my_user")
 my_playlists = my_user.playlists #=> (Playlist array)
 ```
 
-RSpotify focus on objects behaviour so you can forget the API and worry about your tracks, artists and so on.
+RSpotify focuses on objects behaviour so you can forget the API and worry about your tracks, artists and so on.
 
 It is possible to write things like `playlist.tracks.last.album.artists` without having to think what API calls you must do. RSpotify fills the gaps for you.
 
@@ -103,7 +103,7 @@ Full documentation will be available soon.
 
 This gem uses [client credentials](https://developer.spotify.com/web-api/authorization-guide/#client_credentials_flow) to authenticate your access. This means you can get all public data you want, but it's not possible to access private playlists or to create new ones. For that you would want to use [authorization code flow](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow).
 
-RSpotify focus on simplicity of use and straight access to data, so the authorization code flow is not supported at the moment. If you really feel the need to use it, please leave a issue for it to be implemented.
+RSpotify focuses on simplicity of use and straight access to data, so the authorization code flow is not supported at the moment. If you really feel the need to use it, please leave a issue for it to be implemented.
 
 ## Contributing
 
