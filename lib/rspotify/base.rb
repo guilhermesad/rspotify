@@ -3,25 +3,35 @@ module RSpotify
   class Base
 
     def self.find(ids, type)
-      pluralized_type = "#{type}s"
-      path            = pluralized_type.dup
-      type_class      = RSpotify.const_get(type.capitalize)
-
       case ids.class.to_s
       when 'Array'
         if type == 'user'
           warn 'Spotify API does not support finding several users simultaneously'
           return false
         end
-        path << "?ids=#{ids.join ','}"
-        json = RSpotify.get path
-        json[pluralized_type].map { |t| type_class.new t }
+        find_many(ids, type)
       when 'String'
         id = ids
-        path << "/#{id}"
-        json = RSpotify.get path
-        type_class.new json
+        find_one(id, type)
       end
+    end
+
+    def self.find_one(id, type)
+      pluralized_type = "#{type}s"
+      type_class = RSpotify.const_get(type.capitalize)
+
+      path = "#{pluralized_type}/#{id}"
+      json = RSpotify.get path
+      type_class.new json
+    end
+
+    def self.find_many(ids, type)
+      pluralized_type = "#{type}s"
+      type_class = RSpotify.const_get(type.capitalize)
+
+      path = "#{pluralized_type}?ids=#{ids.join ','}"
+      json = RSpotify.get path
+      json[pluralized_type].map { |t| type_class.new t }
     end
 
     def self.search(query, type, limit = 20, offset = 0)
