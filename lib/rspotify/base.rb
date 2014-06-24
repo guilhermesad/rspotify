@@ -140,8 +140,8 @@ module RSpotify
     #           track.popularity #=> 62
     #           track.instance_variable_get("@popularity") #=> 62
     def method_missing(method_name, *args)
-      attr = "@#{method_name}".to_sym
-      super unless instance_variables.include? attr 
+      attr = "@#{method_name}"
+      super unless instance_variable_defined? attr 
 
       attr_value = instance_variable_get attr 
       return attr_value unless attr_value.nil?
@@ -151,8 +151,8 @@ module RSpotify
     end
 
     def respond_to?(method_name)
-      attr = "@#{method_name}".to_sym
-      return true if instance_variables.include? attr
+      attr = "@#{method_name}"
+      return true if instance_variable_defined? attr
       super
     end
   end
