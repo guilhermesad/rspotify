@@ -125,7 +125,7 @@ module RSpotify
     #           track.complete!
     #           track.instance_variable_get("@popularity") #=> 62
     def complete!
-      pluralized_type = "#{type}s"
+      pluralized_type = "#{@type}s"
       initialize RSpotify.get("#{pluralized_type}/#{@id}")
     end
 
