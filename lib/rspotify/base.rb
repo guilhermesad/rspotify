@@ -74,6 +74,22 @@ module RSpotify
       type_class.new json
     end
 
+    # Return array of RSpotify objects matching the query, ordered by popularity
+    #
+    # @param query [String]
+    # @param type [String]
+    # @param limit [Integer]
+    # @param offset [Integer]
+    # @return [Array<Album>, Array<Artist>, Array<Track>]
+    #
+    # @example
+    #           artists = RSpotify::Base.search('Arctic', 'artist')
+    #           artists.size        #=> 20
+    #           artists.first.class #=> RSpotify::Artist
+    #           artists.first.name  #=> "Arctic Monkeys"
+    #
+    #           albums = RSpotify::Base.search('AM', 'album', 10)
+    #           albums.size #=> 10
     def self.search(query, type, limit = 20, offset = 0)
       pluralized_type = "#{type}s"
       type_class = RSpotify.const_get(type.capitalize)
