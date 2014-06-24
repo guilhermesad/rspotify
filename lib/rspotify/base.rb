@@ -114,11 +114,31 @@ module RSpotify
       @uri           = options['uri']
     end
 
+    # When an object is obtained undirectly, Spotify usually returns a simplified version of it.
+    # This method updates it into a full object, with all attributes filled.
+    # 
+    # @note It is seldom necessary to use this method explicitly, since RSpotify takes care of it automatically when needed (see {#method_missing})
+    #
+    # @example
+    #           track = artist.tracks.first
+    #           track.instance_variable_get("@popularity") #=> nil
+    #           track.complete!
+    #           track.instance_variable_get("@popularity") #=> 62
     def complete!
       pluralized_type = "#{type}s"
       initialize RSpotify.get("#{pluralized_type}/#{@id}")
     end
 
+    # Used internally to retrieve an object's instance variable. If instance
+    # variable equals nil, calls {#complete!} on object and retrieve it again.
+    #
+    # @example
+    #           user.id #=> "wizzler"
+    #
+    #           track = artist.tracks.first
+    #           track.instance_variable_get("@popularity") #=> nil
+    #           track.popularity #=> 62
+    #           track.instance_variable_get("@popularity") #=> 62
     def method_missing(method_name, *args)
       attr = "@#{method_name}".to_sym
       super unless instance_variables.include? attr 
