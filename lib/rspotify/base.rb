@@ -150,7 +150,7 @@ module RSpotify
       instance_variable_get attr 
     end
 
-    def respond_to?(method_name)
+    def respond_to?(method_name, include_private_methods = false)
       attr = "@#{method_name}"
       return true if instance_variable_defined? attr
       super
