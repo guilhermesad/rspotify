@@ -2,6 +2,16 @@ module RSpotify
 
   class Playlist < Base
 
+    # Return Playlist object with user_id and id provided
+    #
+    # @param user_id [String]
+    # @param id [String]
+    # @return [Playlist]
+    #
+    # @example
+    #           playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
+    #           playlist.class #=> RSpotify::Playlist
+    #           playlist.name  #=> "Movie Soundtrack Masterpieces"
     def self.find(user_id, id)
       json = RSpotify.auth_get("users/#{user_id}/playlists/#{id}")
       Playlist.new json

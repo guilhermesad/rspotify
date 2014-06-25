@@ -2,6 +2,20 @@ module RSpotify
 
   class Track < Base
 
+    # Return Track object(s) with id(s) provided
+    #
+    # @param ids [String, Array]
+    # @return [Track, Array<Track>]
+    #
+    # @example
+    #           track = RSpotify::Track.find('2UzMpPKPhbcC8RbsmuURAZ')
+    #           track.class #=> RSpotify::Track
+    #           track.name  #=> "Do I Wanna Know?"
+    #           
+    #           ids = %w(2UzMpPKPhbcC8RbsmuURAZ 7Jzsc04YpkRwB1zeyM39wE)
+    #           tracks = RSpotify::Base.find(ids, 'track')
+    #           tracks.class       #=> Array
+    #           tracks.first.class #=> RSpotify::Track
     def self.find(ids)
       super(ids, 'track')
     end

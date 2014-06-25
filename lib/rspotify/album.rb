@@ -2,6 +2,20 @@ module RSpotify
 
   class Album < Base
 
+    # Return Album object(s) with id(s) provided
+    #
+    # @param ids [String, Array]
+    # @return [Album, Array<Album>]
+    #
+    # @example
+    #           album = RSpotify::Album.find('41vPD50kQ7JeamkxQW7Vuy')
+    #           album.class #=> RSpotify::Album
+    #           album.name  #=> "AM"
+    #           
+    #           ids = %w(41vPD50kQ7JeamkxQW7Vuy 4jKGRliQXa5VwxKOsiCbfL)
+    #           albums = RSpotify::Album.find(ids)
+    #           albums.class       #=> Array
+    #           albums.first.class #=> RSpotify::Album
     def self.find(ids)
       super(ids, 'album')
     end

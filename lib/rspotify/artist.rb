@@ -2,6 +2,20 @@ module RSpotify
 
   class Artist < Base
 
+    # Return Artist object(s) with id(s) provided
+    #
+    # @param ids [String, Array]
+    # @return [Artist, Array<Artist>]
+    #
+    # @example
+    #           artist = RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
+    #           artist.class #=> RSpotify::Artist
+    #           artist.name  #=> "Arctic Monkeys"
+    #           
+    #           ids = %w(7Ln80lUS6He07XvHI8qqHH 3dRfiJ2650SZu6GbydcHNb)
+    #           artists = RSpotify::Artist.find(ids)
+    #           artists.class       #=> Array
+    #           artists.first.class #=> RSpotify::Artist
     def self.find(ids)
       super(ids, 'artist')
     end

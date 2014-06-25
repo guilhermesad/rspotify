@@ -2,8 +2,17 @@ module RSpotify
 
   class User < Base
 
-    def self.find(ids)
-      super(ids, 'user')
+    # Return User object with id provided
+    #
+    # @param ids [String]
+    # @return [User]
+    #
+    # @example
+    #           user = RSpotify::User.find('wizzler')
+    #           user.class #=> RSpotify::User
+    #           user.id    #=> "wizzler"
+    def self.find(id)
+      super(id, 'user')
     end
 
     def self.search
