@@ -31,17 +31,6 @@ module RSpotify
       end
     end
 
-    # Return RSpotify objects with ids and type provided (Specialization of Base::find)
-    #
-    # @param ids [Array]
-    # @param type [String]
-    # @return [Array<Album>, Array<Artist>, Array<Track>]
-    #
-    # @example
-    #           ids = %w(2UzMpPKPhbcC8RbsmuURAZ 7Jzsc04YpkRwB1zeyM39wE)
-    #           tracks = RSpotify::Base.find(ids, 'track')
-    #           tracks.class       #=> Array
-    #           tracks.first.class #=> RSpotify::Track
     def self.find_many(ids, type)
       pluralized_type = "#{type}s"
       type_class = RSpotify.const_get(type.capitalize)
@@ -50,21 +39,8 @@ module RSpotify
       json = RSpotify.get path
       json[pluralized_type].map { |t| type_class.new t }
     end
+    private_class_method :find_many
 
-    # Return RSpotify object with id and type provided (Specialization of Base::find)
-    #
-    # @param id [String]
-    # @param type [String]
-    # @return [Album, Artist, Track, User]
-    #
-    # @example
-    #           user = RSpotify::Base.find_one('wizzler', 'user')
-    #           user.class #=> RSpotify::User
-    #           user.id    #=> "wizzler"
-    #
-    #           track = RSpotify::Base.find_one('2UzMpPKPhbcC8RbsmuURAZ', 'track')
-    #           track.class #=> RSpotify::Track
-    #           track.id    #=> "2UzMpPKPhbcC8RbsmuURAZ"
     def self.find_one(id, type)
       pluralized_type = "#{type}s"
       type_class = RSpotify.const_get(type.capitalize)
@@ -73,6 +49,7 @@ module RSpotify
       json = RSpotify.get path
       type_class.new json
     end
+    private_class_method :find_one
 
     # Return array of RSpotify objects matching the query, ordered by popularity
     #
