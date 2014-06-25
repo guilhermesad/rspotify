@@ -2,7 +2,7 @@ module RSpotify
 
   class Track < Base
 
-    # Return Track object(s) with id(s) provided
+    # Returns Track object(s) with id(s) provided
     #
     # @param ids [String, Array]
     # @return [Track, Array<Track>]
@@ -20,7 +20,7 @@ module RSpotify
       super(ids, 'track')
     end
 
-    # Return array of Track objects matching the query, ordered by popularity
+    # Returns array of Track objects matching the query, ordered by popularity
     #
     # @param query [String]
     # @param limit [Integer]

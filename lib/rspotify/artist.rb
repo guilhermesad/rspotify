@@ -2,7 +2,7 @@ module RSpotify
 
   class Artist < Base
 
-    # Return Artist object(s) with id(s) provided
+    # Returns Artist object(s) with id(s) provided
     #
     # @param ids [String, Array]
     # @return [Artist, Array<Artist>]
@@ -20,7 +20,7 @@ module RSpotify
       super(ids, 'artist')
     end
 
-    # Return array of Artist objects matching the query, ordered by popularity
+    # Returns array of Artist objects matching the query, ordered by popularity
     #
     # @param query [String]
     # @param limit [Integer]

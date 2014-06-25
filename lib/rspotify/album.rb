@@ -2,7 +2,7 @@ module RSpotify
 
   class Album < Base
 
-    # Return Album object(s) with id(s) provided
+    # Returns Album object(s) with id(s) provided
     #
     # @param ids [String, Array]
     # @return [Album, Array<Album>]
@@ -20,7 +20,7 @@ module RSpotify
       super(ids, 'album')
     end
 
-    # Return array of Album objects matching the query, ordered by popularity
+    # Returns array of Album objects matching the query, ordered by popularity
     #
     # @param query [String]
     # @param limit [Integer]

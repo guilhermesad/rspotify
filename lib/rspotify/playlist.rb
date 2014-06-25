@@ -2,7 +2,7 @@ module RSpotify
 
   class Playlist < Base
 
-    # Return Playlist object with user_id and id provided
+    # Returns Playlist object with user_id and id provided
     #
     # @param user_id [String]
     # @param id [String]

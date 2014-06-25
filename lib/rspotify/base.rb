@@ -2,7 +2,7 @@ module RSpotify
 
   class Base
 
-    # Return RSpotify object(s) with id(s) and type provided
+    # Returns RSpotify object(s) with id(s) and type provided
     #
     # @param ids [String, Array]
     # @param type [String]
@@ -51,7 +51,7 @@ module RSpotify
     end
     private_class_method :find_one
 
-    # Return array of RSpotify objects matching the query, ordered by popularity
+    # Returns array of RSpotify objects matching the query, ordered by popularity
     #
     # @param query [String]
     # @param type [String]

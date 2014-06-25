@@ -2,7 +2,7 @@ module RSpotify
 
   class User < Base
 
-    # Return User object with id provided
+    # Returns User object with id provided
     #
     # @param ids [String]
     # @return [User]
