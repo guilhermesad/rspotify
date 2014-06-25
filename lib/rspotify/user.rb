@@ -15,8 +15,9 @@ module RSpotify
       super(id, 'user')
     end
 
-    def self.search
-      #TODO
+    def self.search(*args)
+      warn 'Spotify API does not support search for users'
+      false
     end
 
     def initialize(options = {})
