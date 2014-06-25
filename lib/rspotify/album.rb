@@ -20,6 +20,21 @@ module RSpotify
       super(ids, 'album')
     end
 
+    # Return array of Album objects matching the query, ordered by popularity
+    #
+    # @param query [String]
+    # @param limit [Integer]
+    # @param offset [Integer]
+    # @return [Array<Album>]
+    #
+    # @example
+    #           albums = RSpotify::Album.search('AM')
+    #           albums.size        #=> 20
+    #           albums.first.class #=> RSpotify::Album
+    #           albums.first.name  #=> "AM"
+    #
+    #           albums = RSpotify::Base.search('AM', 10)
+    #           albums.size #=> 10
     def self.search(query, limit = 20, offset = 0)
       super(query, 'album', limit, offset)
     end

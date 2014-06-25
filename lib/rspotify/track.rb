@@ -20,6 +20,21 @@ module RSpotify
       super(ids, 'track')
     end
 
+    # Return array of Track objects matching the query, ordered by popularity
+    #
+    # @param query [String]
+    # @param limit [Integer]
+    # @param offset [Integer]
+    # @return [Array<Track>]
+    #
+    # @example
+    #           tracks = RSpotify::Track.search('Thriller')
+    #           tracks.size        #=> 20
+    #           tracks.first.class #=> RSpotify::Track
+    #           tracks.first.name  #=> "Thriller"
+    #
+    #           tracks = RSpotify::Track.search('Thriller', 10)
+    #           tracks.size #=> 10
     def self.search(query, limit = 20, offset = 0)
       super(query, 'track', limit, offset)
     end

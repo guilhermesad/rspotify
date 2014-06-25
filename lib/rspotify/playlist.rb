@@ -17,6 +17,7 @@ module RSpotify
       Playlist.new json
     end
 
+    # Spotify does not support search for playlists. Prints warning and returns false
     def self.search(*args)
       warn 'Spotify API does not support search for playlists'
       false
