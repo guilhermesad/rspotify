@@ -1,5 +1,16 @@
 module RSpotify
 
+  # @attr [Album]         album             The album on which the track appears
+  # @attr [Array<Artist>] artists           The artists who performed the track
+  # @attr [Array<String>] available_markets The markets in which the track can be played: {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country codes}
+  # @attr [Integer]       disc_number       The disc number (usually 1 unless the album consists of more than one disc)
+  # @attr [Integer]       duration_ms       The track length in milliseconds
+  # @attr [Boolean]       explicit          Whether or not the track has explicit lyrics (true = yes it does; false = no it does not OR unknown)
+  # @attr [Hash]          external_ids      Known external IDs for the track
+  # @attr [String]        name              The name of the track
+  # @attr [Integer]       popularity        The popularity of the track - The value will be between 0 and 100, with 100 being the most popular
+  # @attr [String]        preview_url       A link to a 30 second preview (MP3 format) of the track
+  # @attr [Integer]       track_number      The number of the track - If an album has several discs, the track number is the number on the specified disc
   class Track < Base
 
     # Returns Track object(s) with id(s) provided

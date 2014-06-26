@@ -1,5 +1,13 @@
 module RSpotify
 
+  # @attr [Boolean]      collaborative true if the owner allows other users to modify the playlist
+  # @attr [String]       description   The playlist description
+  # @attr [Hash]         followers     Information about the followers of the playlist
+  # @attr [Array<Hash>]  images        The playlist images
+  # @attr [String]       name          The name of the playlist
+  # @attr [User]         owner         The user who owns the playlist
+  # @attr [Boolean]      public        true if the playlist is not marked as secret
+  # @attr [Array<Track>] tracks        The tracks of the playlist
   class Playlist < Base
 
     # Returns Playlist object with user_id and id provided

@@ -1,5 +1,16 @@
 module RSpotify
 
+  # @attr [String]        album_type             The type of the album (album, single, compilation)
+  # @attr [Array<Artist>] artists                The artists of the album
+  # @attr [Array<String>] available_markets      The markets in which the album is available: {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country codes}
+  # @attr [Hash]          external_ids           Known external IDs for the album
+  # @attr [Array<String>] genres                 A list of the genres used to classify the album (If not yet classified, the array is empty)
+  # @attr [Array<Hash>]   images                 The cover art for the album in various sizes, widest first
+  # @attr [String]        name                   The name of the album
+  # @attr [Integer]       popularity             The popularity of the album - The value will be between 0 and 100, with 100 being the most popular
+  # @attr [String]        release_date           The date the album was first released, for example "1981-12-15" - Depending on the precision, it might be shown as "1981" or "1981-12"
+  # @attr [String]        release_date_precision The precision with which release_date value is known: "year", "month", or "day"
+  # @attr [Array<Track>]  tracks                 The tracks of the album.
   class Album < Base
 
     # Returns Album object(s) with id(s) provided

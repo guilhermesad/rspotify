@@ -1,5 +1,9 @@
 module RSpotify
 
+  # @attr [Array<String>] genres     A list of the genres used to classify the album (If not yet classified, the array is empty)
+  # @attr [Array<Hash>]   images     The cover art for the album in various sizes, widest first
+  # @attr [String]        name       The name of the album
+  # @attr [Integer]       popularity The popularity of the album - The value will be between 0 and 100, with 100 being the most popular
   class Artist < Base
 
     # Returns Artist object(s) with id(s) provided

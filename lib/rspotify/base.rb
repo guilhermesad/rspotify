@@ -1,5 +1,10 @@
 module RSpotify
 
+  # @attr [Hash]   external_urls Known external URLs for object
+  # @attr [String] href          A link to the Web API endpoint
+  # @attr [String] id            The {https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids Spotify ID} for the object
+  # @attr [String] type          The object type (artist, album, etc.)
+  # @attr [String] uri           The {https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids Spotify URI} for the object
   class Base
 
     # Returns RSpotify object(s) with id(s) and type provided
