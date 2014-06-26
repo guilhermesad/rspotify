@@ -25,6 +25,15 @@ module RSpotify
       super(options)
     end
 
+    # Returns all playlists from user
+    #
+    # @return [Array<Playlist>]
+    #
+    # @example
+    #           playlists = user.playlists
+    #           playlists.class       #=> Array
+    #           playlists.first.class #=> RSpotify::Playlist
+    #           playlists.first.name  #=> "Movie Soundtrack Masterpieces"
     def playlists
       return @playlists unless @playlists.nil?
       playlists = RSpotify.auth_get("users/#{@id}/playlists")['items']
