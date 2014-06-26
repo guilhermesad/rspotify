@@ -42,6 +42,16 @@ module RSpotify
       super(options)
     end
 
+    # When an object is obtained undirectly, Spotify usually returns a simplified version of it.
+    # This method updates it into a full object, with all attributes filled.
+    # 
+    # @note It is seldom necessary to use this method explicitly, since RSpotify takes care of it automatically when needed (see {Base#method_missing})
+    #
+    # @example
+    #           playlist = user.playlists.first
+    #           playlist.instance_variable_get("@description") #=> nil
+    #           playlist.complete!
+    #           playlist.instance_variable_get("@description") #=> "Iconic soundtracks..."
     def complete!
       initialize RSpotify.auth_get("users/#{@owner.id}/playlists/#{@id}")
     end
