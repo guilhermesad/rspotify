@@ -49,12 +49,31 @@ module RSpotify
       super(options)
     end
 
+    # Returns all albums from artist
+    #
+    # @return [Array<Album>]
+    #
+    # @example
+    #           albums = artist.albums
+    #           albums.class       #=> Array
+    #           albums.first.class #=> RSpotify::Album
+    #           albums.first.name  #=> "AM"
     def albums
       return @albums unless @albums.nil?
       json = RSpotify.get("artists/#{@id}/albums")
       @albums = json['items'].map { |a| Album.new a }
     end
 
+    # Returns artist's 10 top tracks by country.
+    #
+    # @param country [Symbol] an {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}
+    # @return [Array<Track>]
+    #
+    # @example
+    #           top_tracks = artist.top_tracks(:US)
+    #           top_tracks.class       #=> Array
+    #           top_tracks.size        #=> 10
+    #           top_tracks.first.class #=> RSpotify::Track
     def top_tracks(country)
       return @top_tracks[country] unless @top_tracks[country].nil?
       json = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
