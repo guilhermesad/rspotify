@@ -28,7 +28,7 @@ artists = RSpotify::Artist.search('Arctic Monkeys')
 arctic_monkeys = artists.first
 arctic_monkeys.popularity      #=> 74
 arctic_monkeys.genres          #=> ["Alternative Pop/Rock", "Indie", ...]
-arctic_monkeys.top_tracks[:US] #=> (Track array)
+arctic_monkeys.top_tracks(:US) #=> (Track array)
 
 albums = arctic_monkeys.albums
 albums.first.name #=> "AM"
@@ -51,7 +51,7 @@ albums = RSpotify::Album.search('The Wall')
 tracks = RSpotify::Track.search('Thriller')
 ```
 
-If you prefer, you can find them directly by id:
+Find by id:
 
 ```ruby
 arctic_monkeys = RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
@@ -81,7 +81,7 @@ Then just copy and paste them like so:
 ```ruby
 RSpotify.authenticate("<your_client_id>", "<your_client_secret>")
 
-# Now you can access any public playlist and much more!
+# Now you can access any public playlist and much more
 
 playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
 playlist.name               #=> "Movie Soundtrack Masterpieces"
