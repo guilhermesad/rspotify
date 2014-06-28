@@ -27,7 +27,6 @@ module RSpotify
   end
 
   VERBS.each do |verb|
-
     define_singleton_method verb do |path, *params|
       url = API_URI + path
       response = RestClient.send(verb, url, *params)

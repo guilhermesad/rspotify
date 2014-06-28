@@ -10,7 +10,7 @@ describe RSpotify::Track do
     it 'should find track with correct attributes' do
       expect(@track.available_markets)        .to include *%w(AD AT BE BG CA EE ES FR GR MC TW US)
       expect(@track.disc_number)              .to eq 1
-      expect(@track.duration_ms)              .to eq 272394
+      expect(@track.duration_ms)              .to eq 272_394
       expect(@track.explicit)                 .to eq false
       expect(@track.external_ids['isrc'])     .to eq 'GBCEL1300362'
       expect(@track.external_urls['spotify']) .to eq 'https://open.spotify.com/track/3jfr0TF6DQcOLat8gGn7E2'

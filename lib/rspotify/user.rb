@@ -16,7 +16,7 @@ module RSpotify
     end
 
     # Spotify does not support search for users. Prints warning and returns false
-    def self.search(*args)
+    def self.search(*)
       warn 'Spotify API does not support search for users'
       false
     end
