@@ -16,7 +16,7 @@ describe RSpotify::Playlist do
       expect(@playlist.collaborative)            .to eq    false
       expect(@playlist.external_urls['spotify']) .to eq    'http://open.spotify.com/user/wizzler/playlist/00wHcTN0zQiun4xri9pmvX'
       expect(@playlist.description)              .to match /Iconic soundtracks featured in some of the greatest movies/
-      expect(@playlist.followers['total'])       .to eq    12
+      expect(@playlist.followers['total'])       .to be    > 0
       expect(@playlist.href)                     .to eq    'https://api.spotify.com/v1/users/wizzler/playlists/00wHcTN0zQiun4xri9pmvX'
       expect(@playlist.id)                       .to eq    '00wHcTN0zQiun4xri9pmvX'
       expect(@playlist.images.first['url'])      .to match %r{https://dv72vokf4bztv\.cloudfront}
