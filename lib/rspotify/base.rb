@@ -73,6 +73,11 @@ module RSpotify
     #           albums = RSpotify::Base.search('AM', 'album', 10)
     #           albums.size #=> 10
     def self.search(query, type, limit = 20, offset = 0)
+      if limit < 1 || limit > 50
+        warn "Limit must be between 1 and 50"
+        return false
+      end
+
       pluralized_type = "#{type}s"
       type_class = RSpotify.const_get(type.capitalize)
 
