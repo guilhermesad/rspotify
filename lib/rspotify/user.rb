@@ -4,7 +4,7 @@ module RSpotify
 
     # Returns User object with id provided
     #
-    # @param ids [String]
+    # @param id [String]
     # @return [User]
     #
     # @example
