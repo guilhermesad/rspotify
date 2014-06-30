@@ -58,10 +58,10 @@ module RSpotify
 
     # Returns array of RSpotify objects matching the query, ordered by popularity
     #
-    # @param query [String]
-    # @param type [String]
-    # @param limit [Integer]
-    # @param offset [Integer]
+    # @param query  [String]  The search query's keywords.
+    # @param type   [String]  Valid types are: album, artist and track
+    # @param limit  [Integer] Maximum number of objects to return. Minimum: 1. Maximum: 50.
+    # @param offset [Integer] The index of the first object to return. Use with limit to get the next set of objects.
     # @return [Array<Album>, Array<Artist>, Array<Track>]
     #
     # @example
