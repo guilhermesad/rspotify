@@ -29,6 +29,11 @@ module RSpotify
           warn 'Spotify API does not support finding several users simultaneously'
           return false
         end
+        limit = (type == 'album' ? 20 : 50)
+        if ids.size > limit
+          warn "Too many ids requested. Maximum: #{limit} for #{type}"
+          return false
+        end
         find_many(ids, type)
       when 'String'
         id = ids

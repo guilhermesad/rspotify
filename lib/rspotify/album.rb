@@ -15,7 +15,7 @@ module RSpotify
 
     # Returns Album object(s) with id(s) provided
     #
-    # @param ids [String, Array]
+    # @param ids [String, Array] Maximum: 20 IDs
     # @return [Album, Array<Album>]
     #
     # @example
