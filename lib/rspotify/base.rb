@@ -23,8 +23,8 @@ module RSpotify
     #           tracks.class       #=> Array
     #           tracks.first.class #=> RSpotify::Track
     def self.find(ids, type)
-      case ids.class.to_s
-      when 'Array'
+      case ids
+      when Array
         if type == 'user'
           warn 'Spotify API does not support finding several users simultaneously'
           return false
@@ -35,7 +35,7 @@ module RSpotify
           return false
         end
         find_many(ids, type)
-      when 'String'
+      when String
         id = ids
         find_one(id, type)
       end
