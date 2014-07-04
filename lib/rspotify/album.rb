@@ -33,9 +33,9 @@ module RSpotify
 
     # Returns array of Album objects matching the query, ordered by popularity
     #
-    # @param query [String]
-    # @param limit [Integer]
-    # @param offset [Integer]
+    # @param query  [String]  The search query's keywords.
+    # @param limit  [Integer] Maximum number of albums to return. Minimum: 1. Maximum: 50.
+    # @param offset [Integer] The index of the first album to return. Use with limit to get the next set of albums.
     # @return [Array<Album>]
     #
     # @example
