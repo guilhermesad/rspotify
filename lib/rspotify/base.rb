@@ -79,7 +79,7 @@ module RSpotify
     #           albums.size #=> 10
     def self.search(query, type, limit = 20, offset = 0)
       if limit < 1 || limit > 50
-        warn "Limit must be between 1 and 50"
+        warn 'Limit must be between 1 and 50'
         return false
       end
 
