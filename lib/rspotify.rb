@@ -1,14 +1,13 @@
-require 'rspotify/version'
-
 require 'base64'
 require 'json'
 require 'restclient'
 
 module RSpotify
 
-  API_URI   = 'https://api.spotify.com/v1/'
-  TOKEN_URI = 'https://accounts.spotify.com/api/token'
-  VERBS     = %w(get post put delete)
+  API_URI       = 'https://api.spotify.com/v1/'
+  AUTHORIZE_URI = 'https://accounts.spotify.com/authorize'
+  TOKEN_URI     = 'https://accounts.spotify.com/api/token'
+  VERBS         = %w(get post put delete)
 
   autoload :Album,    'rspotify/album'
   autoload :Artist,   'rspotify/artist'
@@ -40,3 +39,6 @@ module RSpotify
     end
   end
 end
+
+require 'rspotify/oauth'
+require 'rspotify/version'
