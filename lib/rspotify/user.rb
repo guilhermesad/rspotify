@@ -34,6 +34,16 @@ module RSpotify
       super(options)
     end
 
+    def create_playlist(name, public: true)
+      headers  = { 
+        'Authorization' => "Bearer #{@credentials['token']}",
+        'Content-Type'  => 'application/json'
+      }
+      request_data = %Q({"name":"#{name}", "public":#{public}})
+
+      RSpotify.post("users/#{@id}/playlists", request_data, headers)
+    end
+
     # Returns all playlists from user
     #
     # @return [Array<Playlist>]
