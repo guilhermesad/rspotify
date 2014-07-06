@@ -22,6 +22,15 @@ module RSpotify
     end
 
     def initialize(options = {})
+      @credentials ||= options['credentials']
+      options = options['info'] if options['info']
+
+      @country      ||= options['country']
+      @display_name ||= options['display_name']
+      @email        ||= options['email']
+      @images       ||= options['images']
+      @product      ||= options['product']
+
       super(options)
     end
 
