@@ -153,6 +153,10 @@ end
 
 **Note**: You might also like to add `RSpotify::authenticate("<your_client_id>", "<your_client_secret>")` to your `config/application.rb`. This will allow extra calls to be made.
 
+## Notes
+
+If you'd like to use OAuth outside rails, have a look [here](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow) for the requests that need to be made. You should be able to pass the response to RSpotify::User.new just as well, and from there easily create playlists and more for your user.
+
 ## Contributing
 
 1. Fork it ( https://github.com/guilhermesad/rspotify/fork )
