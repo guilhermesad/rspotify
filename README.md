@@ -145,8 +145,15 @@ class UsersController < ApplicationController
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
     # Now you can create playlists for the user and much more!
 
-    spotify_user.create_playlist!('my-awesome-playlist') 
-    # Directly creates playlist in user's Spotify account
+    playlist = spotify_user.create_playlist!('my-awesome-playlist')
+    # Directly creates playlist in user's Spotify account and returns it
+
+    tracks = RSpotify::Track.search('Know')
+
+    playlist.add_tracks!(tracks)
+    # user's Spotify account now has a playlist with songs containing "Know" in the name
+
+    playlist.tracks.first.name #=> "Somebody That I Used To Know"
   end
 end
 ```
