@@ -50,6 +50,21 @@ module RSpotify
       super(options)
     end
 
+    #TODO doc
+    def add_tracks!(tracks, position: nil)
+      if tracks.size > 100
+        warn 'Too many tracks requested. Maximum: 100'
+        return false
+      end
+
+      track_uris = tracks.map(&:uri).join(',')
+      url = "users/#{@owner.id}/playlists/#{@id}/tracks?uris=#{track_uris}"
+      url << "&position=#{position}" if position
+      
+      RSpotify.post(url, {}, User.send(:oauth_headers, @owner.id))
+      @tracks = nil
+    end
+
     # When an object is obtained undirectly, Spotify usually returns a simplified version of it.
     # This method updates it into a full object, with all attributes filled.
     # 
