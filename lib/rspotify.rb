@@ -29,7 +29,7 @@ module RSpotify
     define_singleton_method verb do |path, *params|
       url = API_URI + path
       response = RestClient.send(verb, url, *params)
-      JSON.parse response
+      JSON.parse response unless response.empty?
     end
 
     define_singleton_method "auth_#{verb}" do |path, *params|
