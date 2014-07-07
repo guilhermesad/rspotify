@@ -2,6 +2,12 @@
 
 This is a ruby wrapper for the [new Spotify Web API](https://developer.spotify.com/web-api), released in June 17, 2014.
 
+## Features
+
+* [Full documentation](http://rdoc.info/github/guilhermesad/rspotify/master/frames)
+* Full API Endpoint coverage
+* OAuth and other authorization flows
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -97,13 +103,55 @@ RSpotify focuses on objects behaviour so you can forget the API and worry about 
 
 It is possible to write things like `playlist.tracks.sort_by(&:popularity).last.album` without having to think what API calls must be done. RSpotify fills the gaps for you.
 
-Full documentation can be found [here](http://rdoc.info/github/guilhermesad/rspotify/master/frames).
+Check the [documentation](http://rdoc.info/github/guilhermesad/rspotify/master/frames) for all attributes and methods of albums, artists, etc.
 
-## Notes
+## Rails + OAuth
 
-This gem uses [client credentials](https://developer.spotify.com/web-api/authorization-guide/#client_credentials_flow) to authenticate your access. This means you can get all public data you want, but it's not possible to access private playlists or to create new ones. For that you would want to use [authorization code flow](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow).
+You'll may want your application to access an user's Spotify account.
 
-RSpotify focuses on simplicity of use and straight access to data, so the authorization code flow is not supported at the moment. If you really feel the need to use it, please leave a issue for it to be implemented.
+For instance, suppose you want your app to create playlists for the user based on his taste, or to add a feature that syncs user's playlists with some external app.
+
+If so, just add the following to `config/initializers/omniauth.rb` (Remember to [get your credentials](https://developer.spotify.com/my-applications))
+
+```ruby
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :spotify, "<your_client_id>", "<your_client_secret>", scope: 'user-read-email playlist-modify'
+end
+```
+
+You should replace the scope values for the ones your own app will require from the user. You can see the list of available scopes in [here](https://developer.spotify.com/web-api/using-scopes).
+
+Then just make a link so the user can log in with his Spotify account:
+
+```ruby
+<%= link_to 'Sign in with Spotify', '/auth/spotify' %>
+```
+
+And create a route to receive the callback:
+
+```ruby
+# config/routes.rb
+
+get '/auth/spotify/callback', to: 'users#spotify'
+```
+
+Remember you need to tell Spotify this address is white-listed. You can do this by adding it to the Redirect URIs list in your [application page](https://developer.spotify.com/my-applications). An example of Redirect URI would be http://localhost:3000/auth/spotify/callback.
+
+Finally, create a new RSpotify User with the token received:
+
+```ruby
+class UsersController < ApplicationController
+  def spotify
+    spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
+    # Now you can create playlists for the user and much more!
+
+    spotify_user.create_playlist!('my-awesome-playlist') 
+    # Directly creates playlist in user's Spotify account
+  end
+end
+```
+
+**Note**: You might also like to add `RSpotify::authenticate("<your_client_id>", "<your_client_secret>")` to your `config/application.rb`. This will allow extra calls to be made.
 
 ## Contributing
 
