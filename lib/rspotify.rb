@@ -7,7 +7,7 @@ module RSpotify
   API_URI       = 'https://api.spotify.com/v1/'
   AUTHORIZE_URI = 'https://accounts.spotify.com/authorize'
   TOKEN_URI     = 'https://accounts.spotify.com/api/token'
-  VERBS         = %w(get post put delete)
+  VERBS         = %w(get post)
 
   autoload :Album,    'rspotify/album'
   autoload :Artist,   'rspotify/artist'
