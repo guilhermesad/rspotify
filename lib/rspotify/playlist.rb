@@ -76,7 +76,15 @@ module RSpotify
     #           playlist.complete!
     #           playlist.instance_variable_get("@description") #=> "Iconic soundtracks..."
     def complete!
-      initialize RSpotify.auth_get("users/#{@owner.id}/playlists/#{@id}")
+      url = "users/#{@owner.id}/playlists/#{@id}"
+      credentials_defined = User.class_variable_defined?('@@users_credentials')
+      credentials = (credentials_defined ? User.class_variable_get('@@users_credentials') : nil)
+
+      if credentials && credentials[@owner.id]
+        initialize RSpotify.get(url, User.send(:oauth_headers, @owner.id))
+      else
+        initialize RSpotify.auth_get(url)
+      end
     end
   end
 end
