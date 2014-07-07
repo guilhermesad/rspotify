@@ -34,7 +34,7 @@ module RSpotify
       super(options)
     end
 
-    def create_playlist(name, public: true)
+    def create_playlist!(name, public: true)
       headers  = { 
         'Authorization' => "Bearer #{@credentials['token']}",
         'Content-Type'  => 'application/json'
@@ -54,9 +54,8 @@ module RSpotify
     #           playlists.first.class #=> RSpotify::Playlist
     #           playlists.first.name  #=> "Movie Soundtrack Masterpieces"
     def playlists
-      return @playlists unless @playlists.nil?
       playlists = RSpotify.auth_get("users/#{@id}/playlists")['items']
-      @playlists = playlists.map { |p| Playlist.new p }
+      playlists.map { |p| Playlist.new p }
     end
   end
 end
