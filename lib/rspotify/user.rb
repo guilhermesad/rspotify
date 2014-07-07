@@ -21,9 +21,17 @@ module RSpotify
       false
     end
 
+    def self.oauth_headers(user_id)
+      { 
+        'Authorization' => "Bearer #{@@users_credentials[user_id]['token']}",
+        'Content-Type'  => 'application/json'
+      }
+    end
+    private_class_method :oauth_headers
+
     def initialize(options = {})
-      @credentials ||= options['credentials']
-      options = options['info'] if options['info']
+      credentials = options['credentials']
+      options     = options['info'] if options['info']
 
       @country      ||= options['country']
       @display_name ||= options['display_name']
@@ -32,16 +40,18 @@ module RSpotify
       @product      ||= options['product']
 
       super(options)
+
+      if credentials
+        @@users_credentials ||= {}
+        @@users_credentials[@id] = credentials
+      end
     end
 
+    #TODO doc
     def create_playlist!(name, public: true)
-      headers  = { 
-        'Authorization' => "Bearer #{@credentials['token']}",
-        'Content-Type'  => 'application/json'
-      }
+      url = "users/#{@id}/playlists"
       request_data = %Q({"name":"#{name}", "public":#{public}})
-
-      RSpotify.post("users/#{@id}/playlists", request_data, headers)
+      Playlist.new RSpotify.post(url, request_data, User.send(:oauth_headers, @id))
     end
 
     # Returns all playlists from user
