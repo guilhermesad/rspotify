@@ -21,7 +21,7 @@ module RSpotify
     authorization = Base64.strict_encode64 "#{client_id}:#{client_secret}"
     headers = { 'Authorization' => "Basic #{authorization}" }
     response = RestClient.post(TOKEN_URI, request_body, headers)
-    @access_token = JSON.parse(response)['access_token']
+    @client_token = JSON.parse(response)['access_token']
     true
   end
 
@@ -33,7 +33,7 @@ module RSpotify
     end
 
     define_singleton_method "auth_#{verb}" do |path, *params|
-      auth_header = { 'Authorization' => "Bearer #{@access_token}" }
+      auth_header = { 'Authorization' => "Bearer #{@client_token}" }
       params << auth_header
       send(verb, path, *params)
     end
