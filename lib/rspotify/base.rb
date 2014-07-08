@@ -64,10 +64,10 @@ module RSpotify
     # Returns array of RSpotify objects matching the query, ordered by popularity
     #
     # @param query  [String]  The search query's keywords.
-    # @param type   [String]  Valid types are: album, artist and track
+    # @param type   [String]  Valid types are: album, artist and track. Seperate multiple types with commas.
     # @param limit  [Integer] Maximum number of objects to return. Minimum: 1. Maximum: 50.
     # @param offset [Integer] The index of the first object to return. Use with limit to get the next set of objects.
-    # @return [Array<Album>, Array<Artist>, Array<Track>]
+    # @return [Array<Base>]
     #
     # @example
     #           artists = RSpotify::Base.search('Arctic', 'artist')
@@ -77,25 +77,26 @@ module RSpotify
     #
     #           albums = RSpotify::Base.search('AM', 'album', 10)
     #           albums.size #=> 10
-    def self.search(query, type, limit = 20, offset = 0)
+    def self.search(query, types, limit = 20, offset = 0)
       if limit < 1 || limit > 50
         warn 'Limit must be between 1 and 50'
         return false
       end
 
-      pluralized_type = "#{type}s"
-      type_class = RSpotify.const_get(type.capitalize)
+      types.gsub!(/\s+/, '')
 
       json = RSpotify.get 'search',
         params: {
           q:      query,
-          type:   type,
+          type:   types,
           limit:  limit,
           offset: offset
         }
 
-      items = json[pluralized_type]['items']
-      items.map { |item| type_class.new item }
+      types.split(',').flat_map do |type|
+        type_class = RSpotify.const_get(type.capitalize)
+        json["#{type}s"]['items'].map { |item| type_class.new item }
+      end
     end
 
     def initialize(options = {})
