@@ -42,20 +42,18 @@ module RSpotify
     end
 
     def self.find_many(ids, type)
-      pluralized_type = "#{type}s"
       type_class = RSpotify.const_get(type.capitalize)
 
-      path = "#{pluralized_type}?ids=#{ids.join ','}"
+      path = "#{type}s?ids=#{ids.join ','}"
       json = RSpotify.get path
-      json[pluralized_type].map { |t| type_class.new t }
+      json["#{type}s"].map { |t| type_class.new t }
     end
     private_class_method :find_many
 
     def self.find_one(id, type)
-      pluralized_type = "#{type}s"
       type_class = RSpotify.const_get(type.capitalize)
 
-      path = "#{pluralized_type}/#{id}"
+      path = "#{type}s/#{id}"
       json = RSpotify.get path
       type_class.new json
     end
@@ -118,8 +116,7 @@ module RSpotify
     #           track.complete!
     #           track.instance_variable_get("@popularity") #=> 62
     def complete!
-      pluralized_type = "#{@type}s"
-      initialize RSpotify.get("#{pluralized_type}/#{@id}")
+      initialize RSpotify.get("#{type}s/#{@id}")
     end
 
     # Used internally to retrieve an object's instance variable. If instance
