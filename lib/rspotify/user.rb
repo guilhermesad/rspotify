@@ -47,7 +47,21 @@ module RSpotify
       end
     end
 
-    #TODO doc
+    # Creates a playlist in user's Spotify account. This method is only available when the current user
+    # has granted access to the *playlist-modify* and *playlist-modify-private* scopes.
+    #
+    # @param name [String] The name for the new playlist
+    # @param public [Boolean] Whether the playlist is public or private. Default: true
+    # @return [Playlist]
+    #
+    # @example
+    #           user.create_playlist!('my-first-playlist')
+    #           user.playlists.last.name   #=> "my-first-playlist"
+    #           user.playlists.last.public #=> true
+    #
+    #           playlist = user.create_playlist!('my-second-playlist', public: false)
+    #           playlist.name   #=> "my-second-playlist"
+    #           playlist.public #=> false
     def create_playlist!(name, public: true)
       url = "users/#{@id}/playlists"
       request_data = %Q({"name":"#{name}", "public":#{public}})
