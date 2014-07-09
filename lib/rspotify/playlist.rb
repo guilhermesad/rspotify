@@ -50,7 +50,23 @@ module RSpotify
       super(options)
     end
 
-    #TODO doc
+    # Adds one or more tracks to a playlist in user's Spotify account. This method is only available when
+    # the current user has granted access to the *playlist-modify* and *playlist-modify-private* scopes.
+    # 
+    # @param tracks [Array<Track>] Tracks to be added. Maximum: 100 per request
+    # @param position [Integer, NilClass] The position to insert the tracks, a zero-based index. Default: tracks are appended to the playlist
+    # @return [NilClass]
+    #
+    # @example
+    #           tracks = RSpotify::Track.search('Know', 30)
+    #           playlist = user.create_playlist!('my-awesome-playlist')
+    #
+    #           playlist.add_tracks!(tracks)
+    #           playlist.tracks.size       #=> 30
+    #           playlist.tracks.first.name #=> "Somebody That I Used To Know"
+    #
+    #           playlist.add_tracks!(tracks, position: 20)
+    #           playlist.tracks[20].name #=> "Somebody That I Used To Know"
     def add_tracks!(tracks, position: nil)
       if tracks.size > 100
         warn 'Too many tracks requested. Maximum: 100'
