@@ -33,7 +33,7 @@ module RSpotify
 
     # Returns array of Track objects matching the query, ordered by popularity
     #
-    # @param query  [String]  The search query's keywords.
+    # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
     # @param limit  [Integer] Maximum number of tracks to return. Minimum: 1. Maximum: 50.
     # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of tracks.
     # @return [Array<Track>]
