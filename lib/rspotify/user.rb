@@ -1,5 +1,10 @@
 module RSpotify
 
+  # @attr [String] country      The country of the user, as set in the user's account profile. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. This field is only available when the current user has granted access to the *user-read-private* scope.
+  # @attr [String] display_name The name displayed on the user's profile. This field is only available when the current user has granted access to the *user-read-private* scope.
+  # @attr [String] email        The user's email address. This field is only available when the current user has granted access to the *user-read-email* scope.
+  # @attr [Array]  images       The user's profile image. This field is only available when the current user has granted access to the *user-read-private* scope.
+  # @attr [String] product      The user's Spotify subscription level: "premium", "free", etc. This field is only available when the current user has granted access to the *user-read-private* scope.
   class User < Base
 
     # Returns User object with id provided
