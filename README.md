@@ -137,7 +137,7 @@ get '/auth/spotify/callback', to: 'users#spotify'
 
 Remember you need to tell Spotify this address is white-listed. You can do this by adding it to the Redirect URIs list in your [application page](https://developer.spotify.com/my-applications). An example of Redirect URI would be http://localhost:3000/auth/spotify/callback.
 
-Finally, create a new RSpotify User with the token received:
+Finally, create a new RSpotify User with the response received:
 
 ```ruby
 class UsersController < ApplicationController
