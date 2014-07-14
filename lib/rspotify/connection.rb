@@ -24,12 +24,14 @@ module RSpotify
   end
 
   VERBS.each do |verb|
+    # RSpotify::{get,post}
     define_singleton_method verb do |path, *params|
       url = API_URI + path
       response = RestClient.send(verb, url, *params)
       JSON.parse response unless response.empty?
     end
 
+    # RSpotify::auth_{get,post}
     define_singleton_method "auth_#{verb}" do |path, *params|
       auth_header = { 'Authorization' => "Bearer #{@client_token}" }
       params << auth_header
