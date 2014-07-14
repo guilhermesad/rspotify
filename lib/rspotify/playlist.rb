@@ -77,7 +77,7 @@ module RSpotify
       url = "users/#{@owner.id}/playlists/#{@id}/tracks?uris=#{track_uris}"
       url << "&position=#{position}" if position
       
-      RSpotify.post(url, {}, User.send(:oauth_headers, @owner.id))
+      RSpotify.post(url, {}, User.send(:oauth_header, @owner.id))
       @tracks = nil
     end
 
@@ -97,7 +97,7 @@ module RSpotify
       credentials = (credentials_defined ? User.class_variable_get('@@users_credentials') : nil)
 
       if credentials && credentials[@owner.id]
-        initialize RSpotify.get(url, User.send(:oauth_headers, @owner.id))
+        initialize RSpotify.get(url, User.send(:oauth_header, @owner.id))
       else
         initialize RSpotify.auth_get(url)
       end

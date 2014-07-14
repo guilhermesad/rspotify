@@ -19,8 +19,8 @@ module RSpotify
   def self.authenticate(client_id, client_secret)
     request_body = { grant_type: 'client_credentials' }
     authorization = Base64.strict_encode64 "#{client_id}:#{client_secret}"
-    headers = { 'Authorization' => "Basic #{authorization}" }
-    response = RestClient.post(TOKEN_URI, request_body, headers)
+    header = { 'Authorization' => "Basic #{authorization}" }
+    response = RestClient.post(TOKEN_URI, request_body, header)
     @client_token = JSON.parse(response)['access_token']
     true
   end
