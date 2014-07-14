@@ -111,9 +111,17 @@ You'll may want your application to access an user's Spotify account.
 
 For instance, suppose you want your app to create playlists for the user based on his taste, or to add a feature that syncs user's playlists with some external app.
 
-If so, just add the following to `config/initializers/omniauth.rb` (Remember to [get your credentials](https://developer.spotify.com/my-applications))
+If so, add the following lines to your application (Remember to [get your credentials](https://developer.spotify.com/my-applications))
 
 ```ruby
+# config/application.rb
+
+RSpotify::authenticate("<your_client_id>", "<your_client_secret>")
+```
+
+```ruby
+# config/initializers/omniauth.rb
+
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :spotify, "<your_client_id>", "<your_client_secret>", scope: 'user-read-email playlist-modify'
 end
@@ -121,7 +129,7 @@ end
 
 You should replace the scope values for the ones your own app will require from the user. You can see the list of available scopes in [here](https://developer.spotify.com/web-api/using-scopes).
 
-Then just make a link so the user can log in with his Spotify account:
+Next, make a link so the user can log in with his Spotify account:
 
 ```ruby
 <%= link_to 'Sign in with Spotify', '/auth/spotify' %>
@@ -160,7 +168,20 @@ class UsersController < ApplicationController
 end
 ```
 
-**Note**: You might also like to add `RSpotify::authenticate("<your_client_id>", "<your_client_secret>")` to your `config/application.rb`. This will allow extra calls to be made.
+The user's access token is automatically refreshed by RSpotify when needed. This is specially useful if you persist the user data on a database: this way he only needs to log in to Spotify once in his entire use of your application.
+
+RSpotify provides a way to easy persistance:
+
+```ruby
+hash = spotify_user.to_hash
+# hash containing all user attributes, including access tokens
+
+# Use the hash to persist the data the way you prefer...
+
+# Then recover the Spotify user whenever you like
+spotify_user = RSpotify::User.new(hash)
+spotify_user.create_playlist!('my_awesome_playlist') # automatically refreshes token
+```
 
 ## Notes
 
