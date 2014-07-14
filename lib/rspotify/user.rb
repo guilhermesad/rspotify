@@ -27,6 +27,17 @@ module RSpotify
       false
     end
 
+    def self.refresh_token(user_id)
+      request_body = {
+        grant_type: 'refresh_token',
+        refresh_token: @@users_credentials[user_id]['refresh_token']
+      }
+      response = RestClient.post(TOKEN_URI, request_body, RSpotify.send(:auth_header))
+      json = JSON.parse(response)
+      @@users_credentials[user_id]['token'] = json['access_token']
+    end
+    private_class_method :refresh_token
+
     def self.oauth_header(user_id)
       { 
         'Authorization' => "Bearer #{@@users_credentials[user_id]['token']}",
