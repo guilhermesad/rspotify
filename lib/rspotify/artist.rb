@@ -27,8 +27,8 @@ module RSpotify
     # Returns array of Artist objects matching the query, ordered by popularity
     #
     # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
-    # @param limit  [Integer] Maximum number of artists to return. Minimum: 1. Maximum: 50.
-    # @param offset [Integer] The index of the first artist to return. Use with limit to get the next set of artists.
+    # @param limit  [Integer] Maximum number of artists to return. Minimum: 1. Maximum: 50. Default: 20.
+    # @param offset [Integer] The index of the first artist to return. Use with limit to get the next set of artists. Default: 0.
     # @return [Array<Artist>]
     #
     # @example
@@ -37,10 +37,10 @@ module RSpotify
     #           artists.first.class #=> RSpotify::Artist
     #           artists.first.name  #=> "Arctic Monkeys"
     #
-    #           artists = RSpotify::Artist.search('Arctic', 10)
+    #           artists = RSpotify::Artist.search('Arctic', limit: 10)
     #           artists.size #=> 10
-    def self.search(query, limit = 20, offset = 0)
-      super(query, 'artist', limit, offset)
+    def self.search(query, limit: 20, offset: 0)
+      super(query, 'artist', limit: limit, offset: offset)
     end
 
     def initialize(options = {})

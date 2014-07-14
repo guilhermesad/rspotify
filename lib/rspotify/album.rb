@@ -34,8 +34,8 @@ module RSpotify
     # Returns array of Album objects matching the query, ordered by popularity
     #
     # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
-    # @param limit  [Integer] Maximum number of albums to return. Minimum: 1. Maximum: 50.
-    # @param offset [Integer] The index of the first album to return. Use with limit to get the next set of albums.
+    # @param limit  [Integer] Maximum number of albums to return. Minimum: 1. Maximum: 50. Default: 20.
+    # @param offset [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
     # @return [Array<Album>]
     #
     # @example
@@ -44,10 +44,10 @@ module RSpotify
     #           albums.first.class #=> RSpotify::Album
     #           albums.first.name  #=> "AM"
     #
-    #           albums = RSpotify::Base.search('AM', 10)
+    #           albums = RSpotify::Base.search('AM', limit: 10)
     #           albums.size #=> 10
-    def self.search(query, limit = 20, offset = 0)
-      super(query, 'album', limit, offset)
+    def self.search(query, limit: 20, offset: 0)
+      super(query, 'album', limit: limit, offset: offset)
     end
 
     def initialize(options = {})

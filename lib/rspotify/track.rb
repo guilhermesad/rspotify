@@ -34,8 +34,8 @@ module RSpotify
     # Returns array of Track objects matching the query, ordered by popularity
     #
     # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
-    # @param limit  [Integer] Maximum number of tracks to return. Minimum: 1. Maximum: 50.
-    # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of tracks.
+    # @param limit  [Integer] Maximum number of tracks to return. Minimum: 1. Maximum: 50. Default: 20.
+    # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of tracks. Default: 0.
     # @return [Array<Track>]
     #
     # @example
@@ -44,10 +44,10 @@ module RSpotify
     #           tracks.first.class #=> RSpotify::Track
     #           tracks.first.name  #=> "Thriller"
     #
-    #           tracks = RSpotify::Track.search('Thriller', 10)
+    #           tracks = RSpotify::Track.search('Thriller', limit: 10)
     #           tracks.size #=> 10
-    def self.search(query, limit = 20, offset = 0)
-      super(query, 'track', limit, offset)
+    def self.search(query, limit: 20, offset: 0)
+      super(query, 'track', limit: limit, offset: offset)
     end
 
     def initialize(options = {})

@@ -63,8 +63,8 @@ module RSpotify
     #
     # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
     # @param type   [String]  Valid types are: album, artist and track. Separate multiple types with commas.
-    # @param limit  [Integer] Maximum number of objects to return. Minimum: 1. Maximum: 50.
-    # @param offset [Integer] The index of the first object to return. Use with limit to get the next set of objects.
+    # @param limit  [Integer] Maximum number of objects to return. Minimum: 1. Maximum: 50. Default: 20.
+    # @param offset [Integer] The index of the first object to return. Use with limit to get the next set of objects. Default: 0.
     # @return [Array<Base>]
     #
     # @example
@@ -73,9 +73,9 @@ module RSpotify
     #           artists.first.class #=> RSpotify::Artist
     #           artists.first.name  #=> "Arctic Monkeys"
     #
-    #           albums = RSpotify::Base.search('AM', 'album', 10)
+    #           albums = RSpotify::Base.search('AM', 'album', limit: 10)
     #           albums.size #=> 10
-    def self.search(query, types, limit = 20, offset = 0)
+    def self.search(query, types, limit: 20, offset: 0)
       if limit < 1 || limit > 50
         warn 'Limit must be between 1 and 50'
         return false
