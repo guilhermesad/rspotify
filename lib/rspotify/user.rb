@@ -39,10 +39,20 @@ module RSpotify
     private_class_method :refresh_token
 
     def self.oauth_header(user_id)
-      { 
+      {
         'Authorization' => "Bearer #{@@users_credentials[user_id]['token']}",
         'Content-Type'  => 'application/json'
       }
+    end
+    private_class_method :oauth_header
+
+    def self.oauth_send(user_id, verb, path, *params)
+      RSpotify.send(verb, path, *params)
+    rescue RestClient::Unauthorized => e
+      raise e if e.response !~ /access token expired/
+      refresh_token(user_id)
+      params[-1] = oauth_header(user_id)
+      RSpotify.send(verb, path, *params)
     end
     private_class_method :oauth_header
 
@@ -50,7 +60,7 @@ module RSpotify
     RSpotify::VERBS.each do |verb|
       define_singleton_method "oauth_#{verb}" do |user_id, path, *params|
         params << oauth_header(user_id)
-        RSpotify.send(verb, path, *params)
+        oauth_send(user_id, verb, path, *params)
       end
     end
 
