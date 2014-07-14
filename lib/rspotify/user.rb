@@ -35,6 +35,14 @@ module RSpotify
     end
     private_class_method :oauth_header
 
+    # User::oauth_{get,post}
+    RSpotify::VERBS.each do |verb|
+      define_singleton_method "oauth_#{verb}" do |user_id, path, *params|
+        params << oauth_header(user_id)
+        RSpotify.send(verb, path, *params)
+      end
+    end
+
     def initialize(options = {})
       credentials = options['credentials']
       options     = options['info'] if options['info']
@@ -72,7 +80,7 @@ module RSpotify
     def create_playlist!(name, public: true)
       url = "users/#{@id}/playlists"
       request_data = %Q({"name":"#{name}", "public":#{public}})
-      Playlist.new RSpotify.post(url, request_data, User.send(:oauth_header, @id))
+      Playlist.new User.oauth_post(@id, url, request_data)
     end
 
     # Returns all playlists from user
