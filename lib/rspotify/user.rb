@@ -88,5 +88,14 @@ module RSpotify
       playlists = RSpotify.auth_get("users/#{@id}/playlists")['items']
       playlists.map { |p| Playlist.new p }
     end
+
+    # Returns a hash containing all user attributes
+    def to_hash
+      hash = {}
+      instance_variables.each do |var|
+        hash[var.to_s.delete('@')] = instance_variable_get(var)
+      end
+      hash
+    end
   end
 end
