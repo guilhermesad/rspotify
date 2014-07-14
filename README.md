@@ -111,7 +111,7 @@ You'll may want your application to access an user's Spotify account.
 
 For instance, suppose you want your app to create playlists for the user based on his taste, or to add a feature that syncs user's playlists with some external app.
 
-If so, add the following lines to your application (Remember to [get your credentials](https://developer.spotify.com/my-applications))
+If so, add the following to your application (Remember to [get your credentials](https://developer.spotify.com/my-applications))
 
 ```ruby
 # config/application.rb
@@ -170,7 +170,7 @@ end
 
 The user's access token is automatically refreshed by RSpotify when needed. This is specially useful if you persist the user data on a database: this way he only needs to log in to Spotify once in his entire use of your application.
 
-RSpotify provides a way to easy persistance:
+RSpotify provides a way to facilitate persistence:
 
 ```ruby
 hash = spotify_user.to_hash
