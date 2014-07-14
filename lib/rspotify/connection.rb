@@ -9,11 +9,16 @@ module RSpotify
   TOKEN_URI     = 'https://accounts.spotify.com/api/token'
   VERBS         = %w(get post)
 
+  def self.auth_header
+    authorization = Base64.strict_encode64 "#{@client_id}:#{@client_secret}"
+    { 'Authorization' => "Basic #{authorization}" }
+  end
+  private_class_method :auth_header
+
   def self.authenticate(client_id, client_secret)
+    @client_id, @client_secret = client_id, client_secret
     request_body = { grant_type: 'client_credentials' }
-    authorization = Base64.strict_encode64 "#{client_id}:#{client_secret}"
-    header = { 'Authorization' => "Basic #{authorization}" }
-    response = RestClient.post(TOKEN_URI, request_body, header)
+    response = RestClient.post(TOKEN_URI, request_body, auth_header)
     @client_token = JSON.parse(response)['access_token']
     true
   end
