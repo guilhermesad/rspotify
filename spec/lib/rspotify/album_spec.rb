@@ -66,5 +66,19 @@ describe RSpotify::Album do
       expect(albums.first)       .to be_an RSpotify::Album
       expect(albums.map(&:name)) .to include('AM', 'Am I Wrong', 'A.M.', 'Melody AM')
     end
+
+    it 'should accept additional options' do
+      albums = RSpotify::Album.search('AM', limit: 10)
+      expect(albums.size)        .to eq 10
+      expect(albums.map(&:name)) .to include('AM', 'Am I Wrong')
+
+      albums = RSpotify::Album.search('AM', offset: 10)
+      expect(albums.size)        .to eq 20
+      expect(albums.map(&:name)) .to include('Melody AM', 'I Am...')
+
+      albums = RSpotify::Album.search('AM', limit: 10, offset: 10)
+      expect(albums.size)        .to eq 10
+      expect(albums.map(&:name)) .to include('Melody AM')
+    end
   end
 end

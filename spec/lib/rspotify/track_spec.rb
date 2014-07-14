@@ -63,7 +63,21 @@ describe RSpotify::Track do
       expect(tracks)             .to be_an Array
       expect(tracks.size)        .to eq 20
       expect(tracks.first)       .to be_an RSpotify::Track
-      expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'Wanna Know', 'Never Wanna Know')
+      expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'I Wanna Know', 'Never Wanna Know')
+    end
+
+    it 'should accept additional options' do
+      tracks = RSpotify::Track.search('Wanna Know', limit: 10)
+      expect(tracks.size)        .to eq 10
+      expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'I Wanna Know')
+
+      tracks = RSpotify::Track.search('Wanna Know', offset: 10)
+      expect(tracks.size)        .to eq 20
+      expect(tracks.map(&:name)) .to include('They Wanna Know', 'Say I Wanna Know')
+
+      tracks = RSpotify::Track.search('Wanna Know', limit: 10, offset: 10)
+      expect(tracks.size)        .to eq 10
+      expect(tracks.map(&:name)) .to include('They Wanna Know')
     end
   end
 end

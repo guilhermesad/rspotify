@@ -59,7 +59,21 @@ describe RSpotify::Artist do
       expect(artists)             .to be_an Array
       expect(artists.size)        .to eq 20
       expect(artists.first)       .to be_an RSpotify::Artist
-      expect(artists.map(&:name)) .to include('Arctic Monkeys', 'Arctic Moon', 'Arctic', 'Arctic Quest')
+      expect(artists.map(&:name)) .to include('Arctic Monkeys', 'Arctic', 'Arctic Warbler', 'Arctic Express')
+    end
+
+    it 'should accept additional options' do
+      artists = RSpotify::Artist.search('Arctic', limit: 10)
+      expect(artists.size)        .to eq 10
+      expect(artists.map(&:name)) .to include('Arctic Monkeys', 'Arctic')
+
+      artists = RSpotify::Artist.search('Arctic', offset: 10)
+      expect(artists.size)        .to eq 20
+      expect(artists.map(&:name)) .to include('Arctic Flame', 'James Arctic')
+
+      artists = RSpotify::Artist.search('Arctic', limit: 10, offset: 10)
+      expect(artists.size)        .to eq 10
+      expect(artists.map(&:name)) .to include('Arctic Flame')
     end
   end
 end
