@@ -34,6 +34,14 @@ describe RSpotify::Artist do
       expect(top_tracks.first)       .to be_an RSpotify::Track
       expect(top_tracks.map(&:name)) .to include('Do I Wanna Know?', 'R U Mine?', 'Arabella', 'Knee Socks')
     end
+
+    it 'should find artist with correct related artists' do
+      related_artists = @artist.related_artists
+      expect(related_artists)             .to be_an Array
+      expect(related_artists.size)        .to eq 20
+      expect(related_artists.first)       .to be_an RSpotify::Artist
+      expect(related_artists.map(&:name)) .to include('Miles Kane', 'We Are Scientists', 'Razorlight')
+    end
   end
 
   describe 'Artist::find receiving array of ids' do
