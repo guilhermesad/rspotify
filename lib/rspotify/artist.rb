@@ -70,7 +70,7 @@ module RSpotify
 
     # Returns artist's 10 top tracks by country.
     #
-    # @param country [Symbol] an {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}
+    # @param country [Symbol] An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}
     # @return [Array<Track>]
     #
     # @example
