@@ -61,7 +61,7 @@ Find by id:
 
 ```ruby
 arctic_monkeys = RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
-arctic_monkeys.external_urls['spotify'] #=> "https://open.spotify.com/artist/<id>"
+arctic_monkeys.related_artists #=> (Artist array)
 
 am = RSpotify::Album.find('41vPD50kQ7JeamkxQW7Vuy')
 am.album_type #=> "single"
