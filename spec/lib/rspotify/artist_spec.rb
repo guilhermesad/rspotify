@@ -77,11 +77,11 @@ describe RSpotify::Artist do
 
       artists = RSpotify::Artist.search('Arctic', offset: 10)
       expect(artists.size)        .to eq 20
-      expect(artists.map(&:name)) .to include('Arctic Flame', 'James Arctic')
+      expect(artists.map(&:name)) .to include('Arctic Light', 'Arctic Night')
 
       artists = RSpotify::Artist.search('Arctic', limit: 10, offset: 10)
       expect(artists.size)        .to eq 10
-      expect(artists.map(&:name)) .to include('Arctic Flame')
+      expect(artists.map(&:name)) .to include('Arctic Light')
     end
   end
 end

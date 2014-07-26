@@ -74,7 +74,7 @@ describe RSpotify::Album do
 
       albums = RSpotify::Album.search('AM', offset: 10)
       expect(albums.size)        .to eq 20
-      expect(albums.map(&:name)) .to include('Melody AM', 'I Am...')
+      expect(albums.map(&:name)) .to include('Melody AM', 'I Am')
 
       albums = RSpotify::Album.search('AM', limit: 10, offset: 10)
       expect(albums.size)        .to eq 10
