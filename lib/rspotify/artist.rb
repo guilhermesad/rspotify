@@ -68,6 +68,16 @@ module RSpotify
       @albums = json['items'].map { |a| Album.new a }
     end
 
+    # Returns array of similar artists. Similarity is based on analysis of the Spotify community’s {http://news.spotify.com/se/2010/02/03/related-artists listening history}.
+    #
+    # @return [Array<Artist>]
+    #
+    # @example
+    #           artist.name #=> "Arctic Monkeys"
+    #           related_artists = artist.related_artists
+    #
+    #           related_artists.size       #=> 20
+    #           related_artists.first.name #=> "Miles Kane"
     def related_artists
       return @related_artists unless @related_artists.nil?
       json = RSpotify.get("artists/#{@id}/related-artists")
