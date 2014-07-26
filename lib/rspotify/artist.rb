@@ -68,6 +68,12 @@ module RSpotify
       @albums = json['items'].map { |a| Album.new a }
     end
 
+    def related_artists
+      return @related_artists unless @related_artists.nil?
+      json = RSpotify.get("artists/#{@id}/related-artists")
+      @related_artists = json['artists'].map { |a| Artist.new a }
+    end
+
     # Returns artist's 10 top tracks by country.
     #
     # @param country [Symbol] An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}
