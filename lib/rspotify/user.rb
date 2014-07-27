@@ -117,6 +117,17 @@ module RSpotify
       playlists.map { |p| Playlist.new p }
     end
 
+    # Remove tracks from the user’s “Your Music” library.
+    #
+    # @param tracks [Array<Track>] The tracks to remove. Maximum: 50.
+    # @return [Array<Track>] The tracks removed.
+    #
+    # @example
+    #           tracks = user.saved_tracks
+    #
+    #           user.saved_tracks.size #=> 20
+    #           user.remove_tracks!(tracks)
+    #           user.saved_tracks.size #=> 0
     def remove_tracks!(tracks)
       tracks_ids = tracks.map(&:id)
       url = "me/tracks?ids=#{tracks_ids.join ','}"
@@ -124,6 +135,17 @@ module RSpotify
       tracks
     end
 
+    # Save tracks to the user’s “Your Music” library.
+    #
+    # @param tracks [Array<Track>] The tracks to save. Maximum: 100.
+    # @return [Array<Track>] The tracks saved.
+    #
+    # @example
+    #           tracks = RSpotify::Track.search('Know')
+    #
+    #           user.saved_tracks.size #=> 0
+    #           user.save_tracks!(tracks)
+    #           user.saved_tracks.size #=> 20
     def save_tracks!(tracks)
       tracks_ids = tracks.map(&:id)
       url = "me/tracks"
@@ -132,12 +154,30 @@ module RSpotify
       tracks
     end
 
+    # Returns the tracks saved in the Spotify user’s “Your Music” library
+    #
+    # @param limit  [Integer] Maximum number of tracks to return. Minimum: 1. Maximum: 50. Default: 20.
+    # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of tracks. Default: 0.
+    # @return [Array<Track>]
+    #
+    # @example
+    #           tracks = user.saved_tracks
+    #           tracks.size       #=> 20
+    #           tracks.first.name #=> "Do I Wanna Know?"
     def saved_tracks(limit: 20, offset: 0)
       url = "me/tracks?limit=#{limit}&offset=#{offset}"
       json = User.oauth_get(@id, url)
       json['items'].map { |t| Track.new t['track'] }
     end
 
+    # Check if tracks are already saved in the Spotify user’s “Your Music” library
+    #
+    # @param tracks [Array<Track>] The tracks to check. Maximum: 50.
+    # @return [Array<Boolean>] Array of booleans, in the same order in which the tracks were specified.
+    #
+    # @example
+    #           tracks = RSpotify::Track.search('Know')
+    #           user.saved_tracks?(tracks) #=> [true, false, true...]
     def saved_tracks?(tracks)
       tracks_ids = tracks.map(&:id)
       url = "me/tracks/contains?ids=#{tracks_ids.join ','}"
