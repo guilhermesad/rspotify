@@ -123,7 +123,7 @@ RSpotify::authenticate("<your_client_id>", "<your_client_secret>")
 # config/initializers/omniauth.rb
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :spotify, "<your_client_id>", "<your_client_secret>", scope: 'user-read-email playlist-modify-public'
+  provider :spotify, "<your_client_id>", "<your_client_secret>", scope: 'user-read-email playlist-modify-public user-library-read user-library-modify'
 end
 ```
 
@@ -153,7 +153,7 @@ class UsersController < ApplicationController
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
     # Now you can access user's private data, create playlists and much more
 
-    # Access private data (Check doc for all attributes)
+    # Access private data
     spotify_user.country #=> "US"
     spotify_user.email   #=> "example@email.com"
 
@@ -164,6 +164,13 @@ class UsersController < ApplicationController
     tracks = RSpotify::Track.search('Know')
     playlist.add_tracks!(tracks)
     playlist.tracks.first.name #=> "Somebody That I Used To Know"
+
+    # Access and modify user's music library
+    spotify_user.save_tracks!(tracks)
+    spotify_user.saved_tracks.size #=> 20
+    spotify_user.remove_tracks!(tracks)
+
+    # Check doc for more
   end
 end
 ```
