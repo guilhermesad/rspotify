@@ -56,7 +56,6 @@ module RSpotify
     end
     private_class_method :oauth_header
 
-    # User::oauth_{get,post}
     RSpotify::VERBS.each do |verb|
       define_singleton_method "oauth_#{verb}" do |user_id, path, *params|
         params << oauth_header(user_id)
@@ -116,6 +115,33 @@ module RSpotify
     def playlists
       playlists = RSpotify.auth_get("users/#{@id}/playlists")['items']
       playlists.map { |p| Playlist.new p }
+    end
+
+    def remove_tracks!(tracks)
+      tracks_ids = tracks.map(&:id)
+      url = "me/tracks?ids=#{tracks_ids.join ','}"
+      User.oauth_delete(@id, url)
+      tracks
+    end
+
+    def save_tracks!(tracks)
+      tracks_ids = tracks.map(&:id)
+      url = "me/tracks"
+      request_body = tracks_ids.inspect
+      User.oauth_put(@id, url, request_body)
+      tracks
+    end
+
+    def saved_tracks(limit: 20, offset: 0)
+      url = "me/tracks?limit=#{limit}&offset=#{offset}"
+      json = User.oauth_get(@id, url)
+      json['items'].map { |t| Track.new t['track'] }
+    end
+
+    def saved_tracks?(tracks)
+      tracks_ids = tracks.map(&:id)
+      url = "me/tracks/contains?ids=#{tracks_ids.join ','}"
+      User.oauth_get(@id, url)
     end
 
     # Returns a hash containing all user attributes
