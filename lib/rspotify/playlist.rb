@@ -55,7 +55,7 @@ module RSpotify
     # 
     # @param tracks [Array<Track>] Tracks to be added. Maximum: 100 per request
     # @param position [Integer, NilClass] The position to insert the tracks, a zero-based index. Default: tracks are appended to the playlist
-    # @return [NilClass]
+    # @return [Array<Track>] The tracks added
     #
     # @example
     #           tracks = RSpotify::Track.search('Know', 30)
@@ -79,6 +79,7 @@ module RSpotify
       
       User.oauth_post(@owner.id, url, {})
       @tracks = nil
+      tracks
     end
 
     # When an object is obtained undirectly, Spotify usually returns a simplified version of it.

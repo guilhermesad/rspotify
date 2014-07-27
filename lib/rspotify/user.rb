@@ -113,8 +113,8 @@ module RSpotify
     #           playlists.first.class #=> RSpotify::Playlist
     #           playlists.first.name  #=> "Movie Soundtrack Masterpieces"
     def playlists
-      playlists = RSpotify.auth_get("users/#{@id}/playlists")['items']
-      playlists.map { |p| Playlist.new p }
+      json = RSpotify.auth_get("users/#{@id}/playlists")
+      json['items'].map { |p| Playlist.new p }
     end
 
     # Remove tracks from the user’s “Your Music” library.
