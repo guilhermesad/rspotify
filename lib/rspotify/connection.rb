@@ -15,6 +15,16 @@ module RSpotify
   end
   private_class_method :auth_header
 
+  # Authenticates access to restricted data. Requires {https://developer.spotify.com/my-applications user credentials}
+  #
+  # @param client_id [String]
+  # @param client_secret [String]
+  #
+  # @example
+  #           RSpotify.authenticate("<your_client_id>", "<your_client_secret>")
+  #
+  #           playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
+  #           playlist.name #=> "Movie Soundtrack Masterpieces"
   def self.authenticate(client_id, client_secret)
     @client_id, @client_secret = client_id, client_secret
     request_body = { grant_type: 'client_credentials' }
