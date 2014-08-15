@@ -4,7 +4,9 @@ describe RSpotify::User do
 
     before(:each) do
       # Get wizzler user as a testing sample
-      @user = RSpotify::User.find('wizzler')
+      @user = VCR.use_cassette('user:find:wizzler') do
+        RSpotify::User.find('wizzler')
+     end
     end
 
     it 'should find user with correct attributes' do
@@ -19,13 +21,18 @@ describe RSpotify::User do
       # Keys generated specifically for the tests. Should be removed in the future
       client_id     = '5ac1cda2ad354aeaa1ad2693d33bb98c'
       client_secret = '155fc038a85840679b55a1822ef36b9b'
-      RSpotify.authenticate(client_id, client_secret)
+      VCR.use_cassette('authenticate:5ac1cda2ad354aeaa1ad2693d33bb98c') do 
+        RSpotify.authenticate(client_id, client_secret)
+      end
 
-      playlists = @user.playlists
+
+      playlists = VCR.use_cassette('user:wizzler:playlists') do 
+        @user.playlists
+      end
       expect(playlists)             .to be_an Array
-      expect(playlists.size)        .to eq 7
+      expect(playlists.size)        .to eq 6
       expect(playlists.first)       .to be_an RSpotify::Playlist
-      expect(playlists.map(&:name)) .to include('Movie Soundtrack Masterpieces', 'Blue Mountain State', 'Starred')
+      expect(playlists.map(&:name)) .to include('Movie Soundtrack Masterpieces', 'Blue Mountain State', 'Video Game Masterpieces')
     end
   end
 end

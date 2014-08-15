@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://5ac1cda2ad354aeaa1ad2693d33bb98c:155fc038a85840679b55a1822ef36b9b@accounts.spotify.com/api/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=client_credentials
+    headers:
+      accept:
+      - '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Basic NWFjMWNkYTJhZDM1NGFlYWExYWQyNjkzZDMzYmI5OGM6MTU1ZmMwMzhhODU4NDA2NzliNTVhMTgyMmVmMzZiOWI=
+      content-length:
+      - '29'
+      content-type:
+      - application/x-www-form-urlencoded
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 15 Aug 2014 19:54:58 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=10
+      vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      x-frame-options:
+      - deny
+      content-security-policy:
+      - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
+        https://www.google-analytics.com; img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
+        https://i.imgur.com https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net
+        https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
+        font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net; style-src ''self''
+        ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net; frame-src ''self''
+        https://www.spotify.com;'
+      cache-control:
+      - ': no-cache, no-store, must-revalidate'
+      pragma:
+      - ': no-cache'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAx3NwQqCMBgA4HfZuUDSIrupmVG6GjUXXobaH41is81sEr17
+        1vW7fG9U1jUYw1t1A4kWKCSB1819Vuy2ZOofN6Hr+U6i7HKNryd7V8Kje2Ef
+        kOocGJZu/Mqi5MzJKr9ElKQTW4inLfvDuIrzjuGayipTARqhf8DbvoHfAqUG
+        PSjYRmgwXAy3O3OczxdTRxmMkQAAAA==
+    http_version: '1.1'
+  recorded_at: Fri, 15 Aug 2014 19:54:58 GMT
+recorded_with: VCR 2.8.0

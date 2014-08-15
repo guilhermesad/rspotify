@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/artists/7Ln80lUS6He07XvHI8qqHH
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 15 Aug 2014 19:41:48 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      vary:
+      - Accept-Encoding
+      cache-control:
+      - public, max-age=7200
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - '*'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA41T22rbQBB9z1cIPYdoL9qL/ZY3BxoILYFAKGUvs9YSWVKk
+        tVsT8u9ZreQWYVz8uGdmzjkzs/Nxk2U5/AnQN6r+te/rIc/W2UdEIz50bfDu
+        OCJ5FUI3rIui7aC5mwN3pt0Vqg9+CIX41khUP//gG0Di5bB5kO/vm00eiT5v
+        R40tND0k8tcsv6+TYPAHyJ7arvjemrf8doEXD431kJ0i6TWmLOG/xdnPpFL1
+        4BZ2VecXbg94Njxccpx4vE0sF5qaUnZqe2ponlcFfluFsRJTSsesSBVnunAU
+        /RjbxNEVfmQonCKwMgorIviKKRBOoljOkF0pRgFjywgFE5uf+H57G6qkgRBK
+        4z2t65+8ZNeqCxBSMEPBAmjquHHEMoclpUYbkBhKjrVT9kydl5fECRdXts60
+        RlpyipgqFTUYnLYWkDaGSCw4I1haJ5k7Eyf/6fxabVAaBCCOeImjCY0s4wSi
+        EUWkE4gKt9IlyDNtXo5Dn/9bo3aQtnvfm+BN9tg2b3AcUlHetd2+Vr0P6YJE
+        mcBw7KaK6W6mzH3vE8t8V+sptr7w/W4+vwBZCPNbtgMAAA==
+    http_version: '1.1'
+  recorded_at: Fri, 15 Aug 2014 19:41:48 GMT
+recorded_with: VCR 2.8.0
