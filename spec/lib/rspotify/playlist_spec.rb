@@ -3,16 +3,9 @@ describe RSpotify::Playlist do
   describe 'Playlist::find' do
     
     before(:each) do
-      # Keys generated specifically for the tests. Should be removed in the future
-      client_id     = '5ac1cda2ad354aeaa1ad2693d33bb98c'
-      client_secret = '155fc038a85840679b55a1822ef36b9b'
-
-      VCR.use_cassette('authenticate:5ac1cda2ad354aeaa1ad2693d33bb98c') do 
-        RSpotify.authenticate(client_id, client_secret)
-      end
+      stubbed_authenticate_test_account
 
       # Get wizzler's "Movie Soundtrack Masterpieces" playlist as a testing sample
-      # binding.pry
       @playlist = VCR.use_cassette('playlist:find:wizzler:00wHcTN0zQiun4xri9pmvX') do 
         RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
       end

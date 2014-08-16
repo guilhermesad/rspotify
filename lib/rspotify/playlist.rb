@@ -7,7 +7,7 @@ module RSpotify
   # @attr [String]       name          The name of the playlist
   # @attr [User]         owner         The user who owns the playlist
   # @attr [Boolean]      public        true if the playlist is not marked as secret
-  # @attr [Array<Track>] tracks        The tracks of the playlist
+  # @attr [ResponsePage<Track>] tracks        The tracks of the playlist
   class Playlist < Base
 
     # Returns Playlist object with user_id and id provided
@@ -43,7 +43,10 @@ module RSpotify
         User.new options['owner']
       end
 
-      @tracks = ResponsePage.new(options['tracks'], Track)
+     
+      if tracks = options['tracks']
+        @tracks = ResponsePage.new(tracks, Track)
+      end
       
       super(options)
     end

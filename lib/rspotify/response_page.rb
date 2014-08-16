@@ -1,7 +1,17 @@
 module RSpotify
+  # ResponsePage represent one page of items returned from the API.  It has metadata about the entire set 
+  # that allows for easy pagination from page to page.  Example usage:
+  # 
+  # track_page = user.playlist.tracks
+  # while track_page
+  #  track_page.each do |track|
+  #    puts "#{track.inspect}"
+  #  end 
+  #  track_page = track_page.next_page
+  # end
 
-  # @attr [Class]        item_klass    The type of each item in the items array
-  # @attr [Array]        items         The array of type item_klass items
+  # @attr [Class]        item_class    The type of each item in the items array
+  # @attr [Array]        items         The array of type item_class items
   # @attr [Integer]      limit         The effective page size (usually 100)
   # @attr [Integer]      offset        How many items were skipped
   # @attr [Integer]      total         Total number of items that exist for paging through
@@ -10,29 +20,56 @@ module RSpotify
   class ResponsePage < Base
     include Enumerable
 
-
     # TODO: maybe move this to each klass? Kinda nice though to have all pagination stuff in one file though
-    KLASS_ITEM_NAMES = {
+    CLASS_ITEM_NAMES = {
       Track => 'track'
     }
 
+    def initialize(page_response, item_class, opts={})
+      @page_response = page_response
+      @item_class = item_class
+      @limit = page_response['limit']
+      @offset = page_response['offset']
+      @total = page_response['total']
+      
+      if @next = page_response['next'] || false
+        @next = RSpotify.normalize_api_path(@next)
+      end
 
-    def initialize(response, item_klass)
-      @item_klass = item_klass
-      @limit = response['limit']
-      @offset = response['offset']
-      @total = response['total']
-      @next = response['next']
-      @previous = response['previous']
-      @items = if items = response['items']
-        name = KLASS_ITEM_NAMES[item_klass]
+      if @previous = page_response['previous'] || false
+        @previous = RSpotify.normalize_api_path(@previous)
+      end
+
+      # for caching when we already have a page of data
+      @previous_page = opts[:previous_page]
+      @next_page = opts[:next_page]
+
+      @items = if items = page_response['items']
+        name = CLASS_ITEM_NAMES[item_class]
         items.map do |item|
-          item_klass.new item[name]
+          item_class.new item[name]
         end
       else
         []
       end
     end
+
+    # Fetches previous ResponsePage if one exists
+    def previous_page
+      @previous_page ||= if @previous
+        response = RSpotify.auth_get @next
+        ResponsePage.new(response, @item_class, next_page: self)
+      end
+    end
+
+    # Fetches next ResponsePage if one exists
+    def next_page
+      @next_page ||= if @next
+        response = RSpotify.auth_get @next
+        ResponsePage.new(response, @item_class, previous_page: self)
+      end
+    end
+
 
     # Called by Enumerable
     def each(&block)
@@ -41,9 +78,12 @@ module RSpotify
       end
     end
 
-
     # backwards compatability with former tracks array
     def size
+      @items.length
+    end
+    # backwards compatability with former tracks array
+    def length
       @items.length
     end
 

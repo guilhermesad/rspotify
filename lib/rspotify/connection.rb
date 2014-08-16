@@ -46,4 +46,8 @@ module RSpotify
       send(verb, path, *params)
     end
   end
+
+  def self.normalize_api_path(url)
+    url.sub(API_URI, '')
+  end
 end
