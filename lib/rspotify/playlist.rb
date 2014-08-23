@@ -43,9 +43,10 @@ module RSpotify
         User.new options['owner']
       end
 
-     
-      if tracks = options['tracks']
-        @tracks = ResponsePage.new(tracks, Track)
+      # The default playlist request returns first 100 tracks 
+      # we store those so we don't have to re-fetch them
+      if first_tracks = options['tracks']
+        @first_tracks_page = ResponsePage.new(first_tracks, Track, 'track')
       end
       
       super(options)
@@ -104,5 +105,35 @@ module RSpotify
         initialize RSpotify.auth_get(url)
       end
     end
+
+    # Lazy load all the tracks for a playlist if they pass no params
+    # If they pass params, make the specific page request
+    def tracks(opts={})
+      if opts.empty?
+        @tracks ||= get_all_tracks
+      else
+        get_tracks_page(opts).items
+      end
+    end
+
+    private
+
+    def get_tracks_page(limit: 100, offset: 0)
+      url = "users/#{@owner.id}/playlists/#{@id}/tracks?limit=#{limit}&offset=#{offset}"
+      response = RSpotify.auth_get(url)
+      ResponsePage.new(response, Track, 'track')
+    end
+
+    def get_all_tracks
+      @first_tracks_page ||= get_first_tracks_page
+      all_tracks = []
+      track_page = @first_tracks_page
+      while track_page
+       all_tracks += track_page.items
+       track_page = track_page.next_page
+      end
+      all_tracks
+    end
+
   end
 end

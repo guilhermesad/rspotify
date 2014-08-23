@@ -20,14 +20,10 @@ module RSpotify
   class ResponsePage < Base
     include Enumerable
 
-    # TODO: maybe move this to each klass? Kinda nice though to have all pagination stuff in one file though
-    CLASS_ITEM_NAMES = {
-      Track => 'track'
-    }
-
-    def initialize(page_response, item_class, opts={})
+    def initialize(page_response, item_class, item_name, opts={})
       @page_response = page_response
       @item_class = item_class
+      @item_name = item_name
       @limit = page_response['limit']
       @offset = page_response['offset']
       @total = page_response['total']
@@ -45,9 +41,8 @@ module RSpotify
       @next_page = opts[:next_page]
 
       @items = if items = page_response['items']
-        name = CLASS_ITEM_NAMES[item_class]
         items.map do |item|
-          item_class.new item[name]
+          item_class.new item[item_name]
         end
       else
         []
