@@ -53,7 +53,7 @@ module RSpotify
     def previous_page
       @previous_page ||= if @previous
         response = RSpotify.auth_get @next
-        ResponsePage.new(response, @item_class, next_page: self)
+        ResponsePage.new(response, @item_class, @item_name, next_page: self)
       end
     end
 
@@ -61,7 +61,7 @@ module RSpotify
     def next_page
       @next_page ||= if @next
         response = RSpotify.auth_get @next
-        ResponsePage.new(response, @item_class, previous_page: self)
+        ResponsePage.new(response, @item_class, @item_name, previous_page: self)
       end
     end
 
