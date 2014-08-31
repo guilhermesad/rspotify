@@ -43,9 +43,10 @@ module RSpotify
         User.new options['owner']
       end
 
-      # The default playlist request returns first 100 tracks 
+      # Playlists may return first 100 tracks 
       # we store those so we don't have to re-fetch them
-      if first_tracks = options['tracks']
+      first_tracks = options['tracks']
+      if first_tracks && first_tracks['items'] && first_tracks['items'].length > 0
         @first_tracks_page = ResponsePage.new(first_tracks, Track, 'track')
       end
       
@@ -125,7 +126,7 @@ module RSpotify
     end
 
     def get_all_tracks
-      @first_tracks_page ||= get_first_tracks_page
+      @first_tracks_page ||= get_tracks_page
       all_tracks = []
       track_page = @first_tracks_page
       while track_page
