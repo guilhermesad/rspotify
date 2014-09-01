@@ -1,4 +1,10 @@
 require 'rspotify'
+require 'vcr'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/vcr_cassettes'
+  c.hook_into :fakeweb
+end
 
 RSpec.configure do |config|
 
@@ -23,5 +29,20 @@ RSpec.configure do |config|
     mocks.syntax = :expect
 
     mocks.verify_partial_doubles = true
+  end
+end
+
+
+
+def authenticate_test_account
+  # Keys generated specifically for the tests. Should be removed in the future
+  client_id     = '5ac1cda2ad354aeaa1ad2693d33bb98c'
+  client_secret = '155fc038a85840679b55a1822ef36b9b'
+  RSpotify.authenticate(client_id, client_secret)
+end
+
+def stubbed_authenticate_test_account
+  VCR.use_cassette('authenticate:5ac1cda2ad354aeaa1ad2693d33bb98c') do 
+    authenticate_test_account
   end
 end

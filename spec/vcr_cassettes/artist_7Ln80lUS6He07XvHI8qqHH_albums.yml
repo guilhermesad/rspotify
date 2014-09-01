@@ -1,0 +1,133 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/artists/7Ln80lUS6He07XvHI8qqHH/albums
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 15 Aug 2014 19:47:57 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      vary:
+      - Accept-Encoding
+      cache-control:
+      - public, max-age=7200
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - '*'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA+1c2VIbSRZ9768geOgnx5D74oiOCXYwizE7TEx05AoyQoAk
+        Fruj/31OpfB0y64CLBU9noh+SeMiyUqV8txz77n31m8/zczMnvdTnp15ix+G
+        w+vB27k5d935x+D6atjJn/4Rri7n7uic6w87g+FgTm/2DOke7Km1RPTx3dq6
+        ublZW5tzXX97OfjnVc6DNPyF/NztXHaGvzDyc/nFr8NP1+mXQad31k1vypU3
+        WPa603XDzlXvjbu+Tq4/+PWqN/um2k9nmC4H1Yb+NfMb/o8rf6xS9ln+W+ZW
+        v7tzWMh306+Xrn+Rho9/OTu/O/tmZnbhfRnLz4ubZSxXFsuVpfLz8mI1ru5X
+        49p2NW4dV+P2ejXuzJdxuYwn1bh3WI0HJ7Mz/37cQ3oYpn7PdX+97XfL/Uf7
+        xu4eH+PY4726Tr2x51s+z5ygdztLklx80O+Su7x4+HCkD28/zZZP+fvjjV70
+        VZXvomm5x4U6sWyp4Z5fJl26szT2TVSnJXXOzofVXytBRhNxFR987DPiAIXY
+        w+mZ61SLzMUQktLW00xZjpyZkK1zkilqjDKBKqvxTzKP3ypWvO/E4fnjbR6f
+        wR+P9Y9NcPLyTUhBs6RKJ+cslTETaq0LyQkXdGSRaKO4iT7XbAK3eWITSrz4
+        QSQRE8M2FLWcMpkcocxx652OEo8Cj4ORiEdRswclRlv477HructUnvr81hc0
+        VEj7FiO3/U65+Hga35YD97bhy8dNfn8zFfKWKnzMFzwtFNwsrFbjYkHS4loZ
+        C5IWT6txqcxZ2qjG5fLz8l41rhT8rRSkri6Usfy8VmauHVTjepm/Xuavlztu
+        lr/aHP1c5mwWvG4VlG+V61vl7tvFHmwXG7BTdrVTruyUObvl+l5Zf6/sf6+s
+        vFfuPrIB+2U/+0fVeLDXsj2Q/oAeb5w8rJ0v399edLv7jDwMLya2Bw3LjduD
+        Zya1Zw9EtClQoRJ3TGpPieK45ATlKasQeEycSUJe1x5YqZhVQiiqpfdOhBBz
+        VCnCDgVtEqfROOtirMFia/ZARZOJN0YbLqkMlKocvU+WBRWlSDrjIteB1eyh
+        bXvQ8OVPbw8KCrdPW8aHUkKurZ7r0/enewf71zdHtnOyuTsxPhqWG8fHM5Pa
+        w0d2iQtigouZS2WpD8KwFHJyMvIkdYpcxshV7bF4iqq+hy8pj0JwFmN2XDAp
+        XfTBK5YpIU5rRWIkJMpakLaGDycJU+BIYxVPigrpXCKOKBMz/AWlfGQGO5S1
+        D6Jdvmz48qfFR6tOJD8615/04v3H/XW7Z27uby5XjDyaGBQNy42D4plJ7YFC
+        CiKzFJoqRzPjMIySCkcjczno7DJzKVqeXO1ZaAsUcNloVN5o4aO0EXTlfbYE
+        m5DG0WSpk8lwqms20RoocpRJ06g1ESmEjLtay5lWTKrMCQuZAyfW0Jo9NJPG
+        3m24mFkfzrhenNlLaWbPXV53U38Sz7LhREyLlEcPchSdte5v6Q15KDfuVz+c
+        H7NbttTTbuXq7GRi6DQsNw6dZya1Bx0bpU9BCYtwJzBLfIano2ICxygXhY6W
+        EulVXeiDMO+J0Od7+ERKJcBlGoGO5kQlkkXgiQdFaSDeySyMEZbU2fLWoEOp
+        DRSgIZ4Ap4j5cg54Ft566XApK6V90mQq6EwCmYaTMDVk5kfBWAlUvg3JxuSR
+        UWD2jUjSFKr9WTx5Sdj2KLCMgrcis7QQwpWQbCyQ+7Nc801QNxJwvju0a1vq
+        0fc38u78pu8uD3c+f5zvdy/7mkwe2jUs95Wpqb9n+1LP36bmUfP6YU1N/UmY
+        2tSM9J1XYmeyY1Y+7KXzjZP7k6XD/cujPNQLvYnZuWG5ccg8M6k9dubKeUZd
+        dpowB282h5i0idwJoqlUBJEHhAFdT0qtsbNhLkRCCaNJcJUkvFjhTMpekEyD
+        kYZgZ6pOiWiNnW0MuEdCVMng58PZZ0IIbRFjwtfWNjpqMNY61y92bCdh54aT
+        MDVk/mbnP0uuPwg7q7Qz2Pu4Gc9PTVjxD+F0+WH+vjuxqWlY7ithqf6e7bPz
+        36bmkZ1/VFPTcFymNzUlBHg6H/qjZELvDjbebx92duO6PNnZWXowl73Pk4tY
+        on65cQA+M6k9rg9CC/C5iYLEFHOCl2iDtQwiJhJ/0Ucdo0YWsFa7aYvrI9fI
+        OtJgpaHaiJR1cBSabpAa8bfK2UNic6HO4WiN66k0wUdiGPMKTk70zMLxqfIt
+        JEJXkxaKMyWe1z6IJmX3i4g1PxKxJuH6hpMwLQBblXnF0unW9vX16s7Cu3dM
+        bW2QGzHgdxNTVMNyXyGk/p7tUxQcXVa5msIRSUTUlEM2ykFkqaODW4ozo6sr
+        tQejLYSkHJFi0CkZJT1BrsHzSGy2yEN4C5wk4hHo2jqtuTWECOh12SoA0SIr
+        6ZOgIdLENac50JwUUqQoYPD1puI5hDzKvBMhpP4kTIuQ2flXShQuba8cndFN
+        efRwev3JDe531O5Bf2KwqPrlvvLnnp7UHp0wF6swKRAWeUhISzCQiLIiEGO8
+        lo4zp3Sg5FXB4sEjSgvOrYhBJ+QKYbuVRfo8BM2hNiNHQYyoM+WtgYUg85GR
+        FGREBpaSS4kSoZ0jzngXVHCMcWpovdV4DixT0EnDcZkWLK3SiTZUDFSPDPTG
+        g+/cJnLlhmeT00nDcuMIeWZSewhBgYdxHCKC1dmj4oxbBtcCabpoYdWdg1l3
+        1KfXRQjJ2ckqcY8ki5HKK+A0RZ1oFLhAMku+SkKkGpi2hpCcpZeZGA+wGqAE
+        BSbJWYaEfuY+pMyCMRBZ6tIvzeLK2u2lvz2bhEUaDsC0wPhSZlbCnVGO4unS
+        zsdyzrbLt1i+OaKL/XBzc0sfBo4dXT0sn6WJWadhuXFMPTOpPUwxhAvCKe6R
+        ZHYMpSkaVj9a2N2QqErec4aCT1JfxdiWi6YFPLNEELBESzJxKCkjSqKgUgdj
+        aUBtqVWZ8lcNYkAxBOWsiRENkRTwClnyILNBdlVk4aHnwnEl9XU6TawzOaYa
+        DsC0mGqVbOTn0/mHwy36Ub5Xp/sX4eagR/dvJwZGw3LjwHhmUnvASChvrsR8
+        xkWi8IOihXeGmj4hUavEIwR+uEaW+Ro7316e3TuVkpYKpKcjkGG45RDVlUKc
+        D79IUIliFfiMNZtojWxYZtqgLobBNdWgGm9cldAgztHq8yv4Yojl2F8FjIYD
+        MC0wXtRl8IOoanr1Ydg9vqPnxz0/WPxwd3DybnV5ckJqWO4rJ6/+nu1rBgbS
+        APx+gI0bJNFQIeapo+AGhs4C7uBh2SxDrA+VWyMkzyXISInIDYWKhdoSB5mZ
+        8ozojEhOvZewCOI1cadF9hTChGAok6QO8oUCQRNTbQwVLikmQ8GJddh/FSev
+        /gBMj7vXkQrYw+b6RvK2e3Rzf8nW3n3a+jS8Pp+YmxqW+8ppq79n+xjhAZXu
+        DBXEXjDoaQG8FBWqCL1E8ZeDUhC8QD1tXeVie9yEmnZCs00MYRCF4ovULgE4
+        4ToptL/EHJJN2b6uVMCz14EETYXWstLbHRCqocGjrBhZ7iRAndyb+ojwFZy2
+        +gMwPUamKf1q6s8pXTQvKfdq6tKZsD9n1H83UUHXWJdO26VclG195O9vz4+2
+        7s/3brt0Y2X1IkxeytWw3LjFeGZSe96squr/hYOYhvrm4K0wBFkbEr3IBq0x
+        RllmEOnUKwZtsapHDKd8Rr+ehekKklmhwPbGZhKUg8SnPBICuo7aW/NmnVCo
+        R1HwIxKiXbgYClkrG4lPVPrsg9MyoXWwbg+vwaoNB2BqizGq4Gq9slr1Bx96
+        9+7q3drD8bvdxaWFnYuF3fuJWbVhuXGMPDOpPYwYUVpHGbPJcx0VsVAEPE0e
+        ogCq8DnSvchZNThcbWEkVG5fBZKQo/OBQPEMzCPaUyojmYx8KuHG1lY1t4YR
+        ECm43QGdCcGlRgWZQOcQBbmCVKHBMgbUosGtxvttxsiKu7tC9+owzRxd9QfD
+        me2q+RiN3l+E0tnvaXhtOBNTw+YlreY/ShA4XF9e1IsH22di56z7WfcXb95Z
+        PjEUdf1yXwWBT09qD4qWCSuc5QSDF+h2yAz1guifcxnnP2lRVf67/LoObhVq
+        CYoaRRz5RAQ6dACBBAKFSeAorKAKGToI8TUwaA+KwsGHNU5WH1mhVQ99DQRc
+        qdDegKjUIXuOvj33P4Riw8GZHopNvedPdp0/tjL8f/aet/wWio8bq7vdzodj
+        Jw/vHzbeDzqLPm9ObCBE/XLjBuKZSU8bCGnYaLUXvIXCe12xNJppqUkyIzfu
+        oxNorzY5Vb9Bc6n1RNUHfk9xNejuxZuotBkkHwUaoVwKHC/ESHgvRtXs7gP0
+        KispXkZBQl3r+9MGQpoX7wFZCaM9QRcWTFVCJicYxTiKrTwVwXIYSabhyNQZ
+        qb+IqxvORGUgRgd+trxjpnqtBStvAJnt4S0sY+8gmfY1Nnh9zVTvsRm9Dafa
+        0miD1/1017m6LS9U6d12u2XXw6uhK69OocL89Pt/ADHw3vKQRwAA
+    http_version: '1.1'
+  recorded_at: Fri, 15 Aug 2014 19:47:57 GMT
+recorded_with: VCR 2.8.0

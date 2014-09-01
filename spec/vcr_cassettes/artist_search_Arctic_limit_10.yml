@@ -1,0 +1,96 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/search?q=Arctic&type=artist&limit=10&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 15 Aug 2014 19:46:09 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      vary:
+      - Accept-Encoding
+      cache-control:
+      - public, max-age=7200
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - '*'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version: '1.1'
+  recorded_at: Fri, 15 Aug 2014 19:46:08 GMT
+recorded_with: VCR 2.8.0

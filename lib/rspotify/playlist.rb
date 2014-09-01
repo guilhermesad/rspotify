@@ -7,7 +7,6 @@ module RSpotify
   # @attr [String]       name          The name of the playlist
   # @attr [User]         owner         The user who owns the playlist
   # @attr [Boolean]      public        true if the playlist is not marked as secret
-  # @attr [Array<Track>] tracks        The tracks of the playlist
   class Playlist < Base
 
     # Returns Playlist object with user_id and id provided
@@ -43,10 +42,14 @@ module RSpotify
         User.new options['owner']
       end
 
-      @tracks = if options['tracks'] && options['tracks']['items']
-        options['tracks']['items'].map { |t| Track.new t['track'] }
+      # Playlists may return first 100 tracks 
+      # we store those so we don't have to re-fetch them
+      first_tracks = options['tracks']
+      if first_tracks && first_tracks['items'] && first_tracks['items'].length > 0
+        # binding.pry
+        @first_tracks_page = ResponsePage.new(first_tracks, 'track')
       end
-
+      
       super(options)
     end
 
@@ -103,5 +106,35 @@ module RSpotify
         initialize RSpotify.auth_get(url)
       end
     end
+
+    # Loads the first page of tracks for a playlist.  Spotify allows a max of 100 items to be requested at a time.
+    # If you need a specific page of results, you can specify a limit and offset.
+    #
+    # @example
+    #
+    #           playlist = user.playlists.first
+    #           tracks_page = playlist.tracks
+    #           while tracks_page
+    #             tracks_page.items.each do |track|
+    #               puts "#{track.name}"
+    #             end
+    #             tracks_page = tracks_page.next_page
+    #           end
+    def tracks(opts={})
+      if opts.empty?
+        @first_tracks_page ||= get_tracks_page
+      else
+        get_tracks_page(opts)
+      end
+    end
+
+    private
+
+    def get_tracks_page(limit: 100, offset: 0)
+      url = "users/#{@owner.id}/playlists/#{@id}/tracks?limit=#{limit}&offset=#{offset}"
+      response = RSpotify.auth_get(url)
+      ResponsePage.new(response, 'track')
+    end
+
   end
 end

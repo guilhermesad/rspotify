@@ -1,0 +1,77 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/users/wizzler/playlists
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQA4v89WZOKQ59TJB3490GoxDHNhXxloi4UPixqeLrVeWNn3EwMCGd_QFVfCUQL2xZiuxayS-bEVvWNcUnbMoA
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 15 Aug 2014 19:59:36 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      vary:
+      - Accept-Encoding
+      cache-control:
+      - public, max-age=0
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - '*'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA+2YW2/aMBSA3/srrLzspWrCZbTjbbSCjpZ1HS10nabJJI4w
+        c+zMccKl4r/PDiEoaYw0msILb7F9cq7+cqLzcgKAMebINUBTPgjhB03ThD4+
+        C3wmsDs/s5lnRhUzDBAPzCleLAjipk/gnOBABMapUoAF8gKl4Sd4kWu5YzNC
+        4IhxKHCE1IkLSYCUsDxEM4E4heR3yEn82uoleZIYTZ2RvjAf0YwzypNXjpi1
+        dtepVibD6HLSubydnaMbLs0YscFlYvcNcer0J5qxE7uscSIRotCLU2EMsIMY
+        6Mgl6MFA5sLHyEarXMoksClFPJMWbcJ2SNkqJWlSdil/XPS4kkncybXY7Iu5
+        vwpVFWuzHXIcJyApc1OdNtcvZ0rlhyOCbSUseLi+N4JD+0/2wpRfUjOxksYo
+        mIBEeVKrZ1xMY1zDkMRpbIuyuRZuau6KNLE8PRhFDXtoTybPZDC6eOwMK8+4
+        d+PWSHkUafRnKdoulFL0HQnOJECOpIg58oOyzv+RH2Dsg5/iOun5qVtl8lNs
+        XV3VA/JjWdNr++GrtbjHIa3POP7ke9FTefxo9Gf52S6U8tNjEUagz0LqxJ+8
+        Yy86YC8qrpmepY+lslRs/cAsNbpd6uDudfvhtsXE+Bw+8uihxD86jf5cLyp2
+        Iv9H1yKh6kIhFRBT0BdQoGM32vx476UbFVZKT1DjvNRuVGj9wARVb59/fFm0
+        2OXTZ2d2MQqH3uP0HpXXjTT6swRtF0q7UQtyiuYfAtBBAnwL5vYYOaCHZ0eM
+        9otRcbn0GFUqZWJUbH2/GHmQC0zPHEgxIgGj6bDDrF7j9l/n6ap2M3Db/XoH
+        3XX6VmNXnrR2Ap2hHFjF3uRb0xWCYgwGkBA0B1WrUntnovJhrdKz27zhla5V
+        cJvBg17gfyYQr7S88ygib28zTtNUXo9f9S1dLO/HZjihv+lL8EsVwSDYw0JN
+        RRrxkqphm1zRkJB4g7lugOItK177HEWYhfH0JhVKRyuNk+U/oZjeC4oUAAA=
+    http_version: '1.1'
+  recorded_at: Fri, 15 Aug 2014 19:59:36 GMT
+recorded_with: VCR 2.8.0

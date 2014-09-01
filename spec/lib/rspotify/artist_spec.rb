@@ -4,7 +4,9 @@ describe RSpotify::Artist do
 
     before(:each) do
       # Get Arctic Monkeys as a testing sample
-      @artist = RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
+      @artist = VCR.use_cassette('artist:find:7Ln80lUS6He07XvHI8qqHH') do 
+        RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
+      end
     end
 
     it 'should find artist with correct attributes' do
@@ -20,7 +22,9 @@ describe RSpotify::Artist do
     end
 
     it 'should find artist with correct albums' do
-      albums = @artist.albums
+      albums = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:albums') do 
+        @artist.albums
+      end
       expect(albums)             .to be_an Array
       expect(albums.size)        .to eq 20
       expect(albums.first)       .to be_an RSpotify::Album
@@ -28,7 +32,9 @@ describe RSpotify::Artist do
     end
 
     it 'should find artist with correct top tracks' do
-      top_tracks = @artist.top_tracks(:US)
+      top_tracks = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:top_tracks:US') do 
+        @artist.top_tracks(:US)
+      end
       expect(top_tracks)             .to be_an Array
       expect(top_tracks.size)        .to eq 10
       expect(top_tracks.first)       .to be_an RSpotify::Track
@@ -36,7 +42,9 @@ describe RSpotify::Artist do
     end
 
     it 'should find artist with correct related artists' do
-      related_artists = @artist.related_artists
+      related_artists = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:related_artists') do 
+        @artist.related_artists
+      end
       expect(related_artists)             .to be_an Array
       expect(related_artists.size)        .to eq 20
       expect(related_artists.first)       .to be_an RSpotify::Artist
@@ -47,13 +55,17 @@ describe RSpotify::Artist do
   describe 'Artist::find receiving array of ids' do
     it 'should find the right artists' do
       ids = ['0oSGxfWSnnOXhD2fKuz2Gy']
-      artists = RSpotify::Artist.find(ids)
+      artists = VCR.use_cassette('artist:find:0oSGxfWSnnOXhD2fKuz2Gy') do 
+        RSpotify::Artist.find(ids)
+      end
       expect(artists)            .to be_an Array
       expect(artists.size)       .to eq 1
       expect(artists.first.name) .to eq 'David Bowie'
 
       ids << '3dBVyJ7JuOMt4GE9607Qin'
-      artists = RSpotify::Artist.find(ids)
+      artists = VCR.use_cassette('artist:find:3dBVyJ7JuOMt4GE9607Qin') do 
+        RSpotify::Artist.find(ids)
+      end
       expect(artists)            .to be_an Array
       expect(artists.size)       .to eq 2
       expect(artists.first.name) .to eq 'David Bowie'
@@ -63,7 +75,9 @@ describe RSpotify::Artist do
 
   describe 'Artist::search' do
     it 'should search for the right artists' do
-      artists = RSpotify::Artist.search('Arctic')
+      artists = VCR.use_cassette('artist:search:Arctic') do 
+        RSpotify::Artist.search('Arctic')
+      end
       expect(artists)             .to be_an Array
       expect(artists.size)        .to eq 20
       expect(artists.first)       .to be_an RSpotify::Artist
@@ -71,17 +85,23 @@ describe RSpotify::Artist do
     end
 
     it 'should accept additional options' do
-      artists = RSpotify::Artist.search('Arctic', limit: 10)
+      artists = VCR.use_cassette('artist:search:Arctic:limit:10') do 
+        RSpotify::Artist.search('Arctic', limit: 10)
+      end
       expect(artists.size)        .to eq 10
       expect(artists.map(&:name)) .to include('Arctic Monkeys', 'Arctic')
 
-      artists = RSpotify::Artist.search('Arctic', offset: 10)
+      artists = VCR.use_cassette('artist:search:Arctic:offset:10') do 
+        RSpotify::Artist.search('Arctic', offset: 10)
+      end
       expect(artists.size)        .to eq 20
-      expect(artists.map(&:name)) .to include('Arctic Light', 'Arctic Night')
+      expect(artists.map(&:name)) .to include('Arctic Flame', 'Arctic Night')
 
-      artists = RSpotify::Artist.search('Arctic', limit: 10, offset: 10)
+      artists = VCR.use_cassette('artist:search:Arctic:offset:10:limit:10') do 
+        RSpotify::Artist.search('Arctic', limit: 10, offset: 10)
+      end
       expect(artists.size)        .to eq 10
-      expect(artists.map(&:name)) .to include('Arctic Light')
+      expect(artists.map(&:name)) .to include('Arctic Flame')
     end
   end
 end

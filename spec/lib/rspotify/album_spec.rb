@@ -4,7 +4,9 @@ describe RSpotify::Album do
 
     before(:each) do
       # Get Arctic Monkeys's AM album as a testing sample
-      @album = RSpotify::Album.find('5bU1XKYxHhEwukllT20xtk')
+      @album = VCR.use_cassette('album:find:5bU1XKYxHhEwukllT20xtk') do
+        RSpotify::Album.find('5bU1XKYxHhEwukllT20xtk')
+      end
     end
 
     it 'should find album with correct attributes' do
@@ -44,13 +46,17 @@ describe RSpotify::Album do
   describe 'Album::find receiving array of ids' do
     it 'should find the right albums' do
       ids = ['2agWNCZl5Ts9W05mij8EPh']
-      albums = RSpotify::Album.find(ids)
+      albums = VCR.use_cassette('album:find:2agWNCZl5Ts9W05mij8EPh') do 
+        RSpotify::Album.find(ids)
+      end
       expect(albums)            .to be_an Array
       expect(albums.size)       .to eq 1
       expect(albums.first.name) .to eq 'The Next Day Extra'
 
       ids << '3JquYMWj5wrzuZCNAvOYN9'
-      albums = RSpotify::Album.find(ids)
+      albums = VCR.use_cassette('album:find:3JquYMWj5wrzuZCNAvOYN9') do 
+        RSpotify::Album.find(ids)
+      end
       expect(albums)            .to be_an Array
       expect(albums.size)       .to eq 2
       expect(albums.first.name) .to eq 'The Next Day Extra'
@@ -60,7 +66,9 @@ describe RSpotify::Album do
 
   describe 'Album::search' do
     it 'should search for the right albums' do
-      albums = RSpotify::Album.search('AM')
+      albums = VCR.use_cassette('album:search:AM') do 
+        RSpotify::Album.search('AM')
+      end
       expect(albums)             .to be_an Array
       expect(albums.size)        .to eq 20
       expect(albums.first)       .to be_an RSpotify::Album
@@ -68,15 +76,21 @@ describe RSpotify::Album do
     end
 
     it 'should accept additional options' do
-      albums = RSpotify::Album.search('AM', limit: 10)
+      albums = VCR.use_cassette('album:search:AM:limit:10') do 
+        RSpotify::Album.search('AM', limit: 10)
+      end
       expect(albums.size)        .to eq 10
       expect(albums.map(&:name)) .to include('AM', 'Am I Wrong')
 
-      albums = RSpotify::Album.search('AM', offset: 10)
+      albums = VCR.use_cassette('album:search:AM:offset:10') do 
+        RSpotify::Album.search('AM', offset: 10)
+      end
       expect(albums.size)        .to eq 20
       expect(albums.map(&:name)) .to include('Melody AM', 'I Am')
 
-      albums = RSpotify::Album.search('AM', limit: 10, offset: 10)
+      albums = VCR.use_cassette('album:search:AM:offset:10:limit:10') do 
+        RSpotify::Album.search('AM', limit: 10, offset: 10)
+      end
       expect(albums.size)        .to eq 10
       expect(albums.map(&:name)) .to include('Melody AM')
     end
