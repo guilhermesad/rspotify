@@ -33,10 +33,13 @@ describe RSpotify::Playlist do
 
     it 'should find playlist with correct tracks' do
       tracks = @playlist.tracks
-      expect(tracks)             .to be_an Array
-      expect(tracks.size)        .to eq 50
-      expect(tracks.first)       .to be_an RSpotify::Track
-      expect(tracks.map(&:name)) .to include('Waking Up', 'Honor Him', 'Circle of Life', 'Time')
+      expect(tracks)              .to be_an RSpotify::ResponsePage
+      expect(tracks.total)        .to eq 50
+
+      items = tracks.items
+      expect(items.length)        .to be 50
+      expect(items.first)         .to be_an RSpotify::Track
+      expect(items.map(&:name))   .to include('Waking Up', 'Honor Him', 'Circle of Life', 'Time')
     end
   end
 
@@ -50,9 +53,13 @@ describe RSpotify::Playlist do
       end
     end
 
-    it 'should have fetched all the pages of tracks into an array' do 
-      expect(@tracks.length)   .to eq    102
-      expect(@tracks.first)    .to be_an RSpotify::Track
+    it 'should have fetched first page of tracks' do 
+      expect(@tracks)               .to be_an RSpotify::ResponsePage
+      expect(@tracks.total)         .to eq    102
+      expect(@tracks.items.length)  .to eq    100
+      expect(@tracks.items.first)   .to be_an RSpotify::Track
+      expect(@tracks.previous_page) .to be nil
+      expect(@tracks.next)          .to eq 'users/spilliton/playlists/71LUUNEsUJTmF36U077MJ7/tracks?offset=100&limit=100'
     end
 
     it 'should fetch a specific range of tracks' do 
@@ -61,10 +68,11 @@ describe RSpotify::Playlist do
         @tracks = @playlist.tracks(limit: 5, offset: 10)
       end
 
-      expect(@tracks.length)            .to eq    5
-      expect(@tracks)                   .to be_an Array
+      expect(@tracks.items.length)      .to eq    5
+      expect(@tracks.total)             .to eq    102
+      expect(@tracks)                   .to be_an RSpotify::ResponsePage
 
-      track = @tracks.first
+      track = @tracks.items.first
       expect(track)                     .to be_an RSpotify::Track
       expect(track.name)                .to eq    'Sodom, South Georgia'
       expect(track.artists.first.name)  .to eq    'Iron & Wine'

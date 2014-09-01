@@ -14,16 +14,16 @@ module RSpotify
   # @attr [Array]        items         The array of type item_class items
   # @attr [Integer]      limit         The effective page size (usually 100)
   # @attr [Integer]      offset        How many items were skipped
-  # @attr [Integer]      total         Total number of items that exist for paging through
+  # @attr [Integer]      total         Total number of items that exist in the playlist ()
   # @attr [String]       next          Url to the next page of results
   # @attr [String]       previous      Url to the previous page of results
   class ResponsePage < Base
     include Enumerable
 
-    def initialize(page_response, item_class, item_name, opts={})
+    def initialize(page_response, item_name, opts={})
       @page_response = page_response
-      @item_class = item_class
       @item_name = item_name
+      @item_class = RSpotify.const_get(item_name.capitalize)
       @limit = page_response['limit']
       @offset = page_response['offset']
       @total = page_response['total']
@@ -53,7 +53,7 @@ module RSpotify
     def previous_page
       @previous_page ||= if @previous
         response = RSpotify.auth_get @next
-        ResponsePage.new(response, @item_class, @item_name, next_page: self)
+        ResponsePage.new(response, @item_name, next_page: self)
       end
     end
 
@@ -61,25 +61,8 @@ module RSpotify
     def next_page
       @next_page ||= if @next
         response = RSpotify.auth_get @next
-        ResponsePage.new(response, @item_class, @item_name, previous_page: self)
+        ResponsePage.new(response, @item_name, previous_page: self)
       end
-    end
-
-
-    # Called by Enumerable
-    def each(&block)
-      @items.each do |item|
-        block.call(item)
-      end
-    end
-
-    # backwards compatability with former tracks array
-    def size
-      @items.length
-    end
-    # backwards compatability with former tracks array
-    def length
-      @items.length
     end
 
   end
