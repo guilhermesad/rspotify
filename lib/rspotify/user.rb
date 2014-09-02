@@ -63,7 +63,8 @@ module RSpotify
       end
     end
 
-    # Returns instance of User with the credentials provided
+    # Returns an instance of User with the credentials provided. This method is useful when used in combination
+    # with RSpotify.exchange_code
     # 
     # @param credentials [Hash]
     # @return [User]
