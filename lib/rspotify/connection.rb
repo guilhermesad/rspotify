@@ -33,20 +33,20 @@ module RSpotify
     true
   end
 
-  # Exchanges a code for a set of client credentials
+  # Exchanges the authorization code from the {https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow Authorization Code Flow} to access and refresh tokens
   # 
-  # @param code [String] The code Spotify sends to our app
-  # @param redirect_uri [String] The URI we asked Spotify to return the user to
+  # @param code [String] The Spotify authorization code that can be exchanged for an access token.
+  # @param redirect_uri [String] The URI Spotify redirected the user to after the permission grant
   # @param credentials [Hash] An optional set of credentials, unless RSpotify.authenticate was used previously
   # 
-  # @return [Hash]
+  # @return [Hash] a set of credentials 
   # 
   # @example
-  #           RSpotify.authenticate("<your_client_id>", "<your_client_secret>")
-  #           credentials = RSpotify.get_credentials(params['code'], 'http://foo.com/spotify/login')
+  #           # Whenever Spotify redirects the user to our application after granting permissions, we get a GET param in the form of ?code=NApCCg(...)BkWtQ
+  #           credentials = RSpotify.exchange_code(params['code'], 'http://foo.com/spotify/login')
   #           user = RSpotify::User.from_credentials(credentials)
-  #           puts user.name
-  def self.get_credentials(code, redirect_uri, credentials={})
+  #           user.name #=> "John Doe"
+  def self.exchange_code(code, redirect_uri, credentials={})
     @client_id = credentials['client_id'] if credentials['client_id']
     @client_secret = credentials['client_secret'] if credentials['client_secret']
 
