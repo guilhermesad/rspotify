@@ -27,6 +27,26 @@ module RSpotify
       false
     end
 
+    # Returns an instance of User with the credentials provided. This method is useful when used in combination
+    # with {RSpotify.exchange_code}
+    # 
+    # @param credentials [Hash]
+    # @return [User]
+    # 
+    # @example
+    #           user = RSpotify::User.from_credentials({access_token: '...', refresh_token: '...'})
+    def self.from_credentials(credentials)
+      header = {
+        'Authorization' => "Bearer #{credentials[:access_token]}",
+        'Content-Type' => 'application/json'
+      }
+      response = RSpotify.get('me', header)
+      RSpotify::User.new({
+        'info' => response,
+        'credentials' => credentials   
+      })
+    end
+
     def self.refresh_token(user_id)
       request_body = {
         grant_type: 'refresh_token',
@@ -61,26 +81,6 @@ module RSpotify
         params << oauth_header(user_id)
         oauth_send(user_id, verb, path, *params)
       end
-    end
-
-    # Returns an instance of User with the credentials provided. This method is useful when used in combination
-    # with RSpotify.exchange_code
-    # 
-    # @param credentials [Hash]
-    # @return [User]
-    # 
-    # @example
-    #           user = RSpotify::User.from_credentials({'access_token'=>'...', 'refresh_token'=>'...'})
-    def self.from_credentials(credentials)
-      headers = {
-        'Authorization' => "Bearer #{credentials['access_token']}",
-        'Content-Type' => 'application/json'
-      }
-      data = RSpotify.send(:get, "me", headers)
-      RSpotify::User.new({
-        'info' => data,
-        'credentials' => credentials   
-      })
     end
 
     def initialize(options = {})

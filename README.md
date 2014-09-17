@@ -80,7 +80,7 @@ my_tracks = RSpotify::Track.find(ids)
 my_tracks.size #=> 2
 ```
 
-Some endpoints require authentication to be accessed, such as playlists. You can easily get your credentials [here](https://developer.spotify.com/my-applications).
+Some data require authentication to be accessed, such as playlists. You can easily get your credentials [here](https://developer.spotify.com/my-applications).
 
 Then just copy and paste them like so:
 
@@ -109,7 +109,7 @@ Check the [documentation](http://rdoc.info/github/guilhermesad/rspotify/master/f
 
 You may want your application to access an user's Spotify account.
 
-For instance, suppose you want your app to create playlists for the user based on their taste, or to add a feature that syncs the user playlists' with some external app.
+For instance, suppose you want your app to create playlists for the user based on his taste, or to add a feature that syncs user's playlists with some external app.
 
 If so, add the following to your application (Remember to [get your credentials](https://developer.spotify.com/my-applications))
 
@@ -143,7 +143,7 @@ And create a route to receive the callback:
 get '/auth/spotify/callback', to: 'users#spotify'
 ```
 
-Remember you need to white-list this callback URI with Spotify. You can do this by adding it to the Redirect URIs list in your [application page](https://developer.spotify.com/my-applications). An example of Redirect URI would be http://localhost:3000/auth/spotify/callback.
+Remember you need to tell Spotify this address is white-listed. You can do this by adding it to the Redirect URIs list in your [application page](https://developer.spotify.com/my-applications). An example of Redirect URI would be http://localhost:3000/auth/spotify/callback.
 
 Finally, create a new RSpotify User with the response received:
 
@@ -192,7 +192,7 @@ spotify_user.create_playlist!('my_awesome_playlist') # automatically refreshes t
 
 ## Notes
 
-If you'd like to use OAuth outside rails, have a look at the [Sinatra Example](/guilhermesad/rspotify/examples/siantra-example.rb) for a use case for consuming the [Web API Authorization Code Flow](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow) directly. You can pass the response to RSpotify::User.from_credentials just as well, and from there easily create playlists and more for your user.
+If you'd like to use OAuth outside rails, have a look at the [Sinatra Example](/guilhermesad/rspotify/examples/siantra-example.rb) for a use case of consuming the [Web API Authorization Code Flow](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow) directly. You can pass the response to RSpotify::User.from_credentials just as well, and from there easily create playlists and more.
 
 ## Contributing
 
