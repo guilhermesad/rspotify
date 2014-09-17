@@ -192,7 +192,7 @@ spotify_user.create_playlist!('my_awesome_playlist') # automatically refreshes t
 
 ## Notes
 
-If you'd like to use OAuth outside rails, have a look at the [Sinatra Example](/guilhermesad/rspotify/examples/siantra-example.rb) for a use case of consuming the [Web API Authorization Code Flow](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow) directly. You can pass the response to RSpotify::User.from_credentials just as well, and from there easily create playlists and more.
+If you'd like to use OAuth outside rails, have a look at the [Sinatra Example](/guilhermesad/rspotify/examples/sinatra-example.rb) for a use case of consuming the [Web API Authorization Code Flow](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow) directly. You can pass the response to RSpotify::User.from_credentials just as well, and from there easily create playlists and more.
 
 ## Contributing
 
