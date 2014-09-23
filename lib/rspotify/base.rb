@@ -39,7 +39,6 @@ module RSpotify
 
     def self.find_many(ids, type)
       type_class = RSpotify.const_get(type.capitalize)
-
       path = "#{type}s?ids=#{ids.join ','}"
       json = RSpotify.get path
       json["#{type}s"].map { |t| type_class.new t }
@@ -48,7 +47,6 @@ module RSpotify
 
     def self.find_one(id, type)
       type_class = RSpotify.const_get(type.capitalize)
-
       path = "#{type}s/#{id}"
       json = RSpotify.get path
       type_class.new json
