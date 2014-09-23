@@ -43,7 +43,9 @@ module RSpotify
         User.new options['owner']
       end
 
-      @tracks = ResponsePage.new(options['tracks'], Track)
+      @tracks = if options['tracks'] && options['tracks']['items']
+        options['tracks']['items'].map { |t| Track.new t['track'] }
+      end
       
       super(options)
     end

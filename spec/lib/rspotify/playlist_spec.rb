@@ -12,7 +12,6 @@ describe RSpotify::Playlist do
       end
 
       # Get wizzler's "Movie Soundtrack Masterpieces" playlist as a testing sample
-      # binding.pry
       @playlist = VCR.use_cassette('playlist:find:wizzler:00wHcTN0zQiun4xri9pmvX') do 
         RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
       end
@@ -40,7 +39,7 @@ describe RSpotify::Playlist do
 
     it 'should find playlist with correct tracks' do
       tracks = @playlist.tracks
-      expect(tracks)             .to be_an RSpotify::ResponsePage
+      expect(tracks)             .to be_an Array
       expect(tracks.size)        .to eq 50
       expect(tracks.first)       .to be_an RSpotify::Track
       expect(tracks.map(&:name)) .to include('Waking Up', 'Honor Him', 'Circle of Life', 'Time')
