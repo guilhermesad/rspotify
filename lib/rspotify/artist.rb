@@ -27,7 +27,7 @@ module RSpotify
     # Returns array of Artist objects matching the query, ordered by popularity
     #
     # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
-    # @param limit  [Integer] Maximum number of artists to return. Minimum: 1. Maximum: 50. Default: 20.
+    # @param limit  [Integer] Maximum number of artists to return. Maximum: 50. Default: 20.
     # @param offset [Integer] The index of the first artist to return. Use with limit to get the next set of artists. Default: 0.
     # @return [Array<Artist>]
     #
@@ -65,7 +65,7 @@ module RSpotify
     def albums
       return @albums unless @albums.nil?
       json = RSpotify.get("artists/#{@id}/albums")
-      @albums = json['items'].map { |a| Album.new a }
+      @albums = json['items'].map { |i| Album.new i }
     end
 
     # Returns array of similar artists. Similarity is based on analysis of the Spotify community’s {http://news.spotify.com/se/2010/02/03/related-artists listening history}.

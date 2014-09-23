@@ -57,7 +57,7 @@ module RSpotify
     #
     # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
     # @param type   [String]  Valid types are: album, artist and track. Separate multiple types with commas.
-    # @param limit  [Integer] Maximum number of objects to return. Minimum: 1. Maximum: 50. Default: 20.
+    # @param limit  [Integer] Maximum number of objects to return. Maximum: 50. Default: 20.
     # @param offset [Integer] The index of the first object to return. Use with limit to get the next set of objects. Default: 0.
     # @return [Array<Base>]
     #
@@ -82,7 +82,7 @@ module RSpotify
 
       types.split(',').flat_map do |type|
         type_class = RSpotify.const_get(type.capitalize)
-        json["#{type}s"]['items'].map { |item| type_class.new item }
+        json["#{type}s"]['items'].map { |i| type_class.new i }
       end
     end
 

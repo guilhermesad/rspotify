@@ -10,7 +10,6 @@ module RSpotify
   # @attr [Integer]       popularity             The popularity of the album. The value will be between 0 and 100, with 100 being the most popular
   # @attr [String]        release_date           The date the album was first released, for example "1981-12-15". Depending on the precision, it might be shown as "1981" or "1981-12"
   # @attr [String]        release_date_precision The precision with which release_date value is known: "year", "month", or "day"
-  # @attr [Array<Track>]  tracks                 The tracks of the album.
   class Album < Base
 
     # Returns Album object(s) with id(s) provided
@@ -34,7 +33,7 @@ module RSpotify
     # Returns array of Album objects matching the query, ordered by popularity
     #
     # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
-    # @param limit  [Integer] Maximum number of albums to return. Minimum: 1. Maximum: 50. Default: 20.
+    # @param limit  [Integer] Maximum number of albums to return. Maximum: 50. Default: 20.
     # @param offset [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
     # @return [Array<Album>]
     #
@@ -65,11 +64,33 @@ module RSpotify
         options['artists'].map { |a| Artist.new a }
       end
 
-      @tracks = if options['tracks'] && options['tracks']['items']
-        options['tracks']['items'].map { |t| Track.new t }
+      @tracks_cache = if options['tracks'] && options['tracks']['items']
+        options['tracks']['items'].map { |i| Track.new i }
       end
 
       super(options)
+    end
+
+    # Returns array of tracks from the album
+    #
+    # @param limit  [Integer] Maximum number of tracks to return. Maximum: 50. Default: 50.
+    # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of objects. Default: 0.
+    # @return [Array<Track>]
+    #
+    # @example
+    #           album = RSpotify::Album.find('41vPD50kQ7JeamkxQW7Vuy')
+    #           album.tracks.first.name #=> "Do I Wanna Know?"
+    def tracks(limit: 50, offset: 0)
+      last_track = offset + limit - 1
+      if @tracks_cache && last_track < 50
+        return @tracks_cache[offset..last_track]
+      end
+
+      url = "albums/#{@id}/tracks?limit=#{limit}&offset=#{offset}"
+      json = RSpotify.get(url)
+      tracks = json['items'].map { |i| Track.new i }
+      @tracks_cache = tracks if limit == 50 && offset == 0
+      tracks
     end
   end
 end
