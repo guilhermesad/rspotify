@@ -68,11 +68,6 @@ module RSpotify
     #           playlist.add_tracks!(tracks, position: 20)
     #           playlist.tracks[20].name #=> "Somebody That I Used To Know"
     def add_tracks!(tracks, position: nil)
-      if tracks.size > 100
-        warn 'Too many tracks requested. Maximum: 100'
-        return false
-      end
-
       track_uris = tracks.map(&:uri).join(',')
       url = "users/#{@owner.id}/playlists/#{@id}/tracks?uris=#{track_uris}"
       url << "&position=#{position}" if position

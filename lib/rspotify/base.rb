@@ -30,10 +30,6 @@ module RSpotify
           return false
         end
         limit = (type == 'album' ? 20 : 50)
-        if ids.size > limit
-          warn "Too many ids requested. Maximum: #{limit} for #{type}"
-          return false
-        end
         find_many(ids, type)
       when String
         id = ids
@@ -76,11 +72,6 @@ module RSpotify
     #           albums = RSpotify::Base.search('AM', 'album', limit: 10)
     #           albums.size #=> 10
     def self.search(query, types, limit: 20, offset: 0)
-      if limit < 1 || limit > 50
-        warn 'Limit must be between 1 and 50'
-        return false
-      end
-
       types.gsub!(/\s+/, '')
 
       json = RSpotify.get 'search',
