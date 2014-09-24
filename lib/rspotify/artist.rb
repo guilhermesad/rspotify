@@ -53,19 +53,26 @@ module RSpotify
       super(options)
     end
 
-    # Returns all albums from artist
+    # Returns array of albums from artist
     #
+    # @param limit      [Integer] Maximum number of albums to return. Maximum: 50. Default: 20.
+    # @param offset     [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
+    # @param album_type [String]  A comma-separated list of keywords that will be used to filter the response. If not supplied, all album types will be returned. Valid values are: album; single; appears_on; compilation.
+    # @param market     [String]  (synonym: country). An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Supply this parameter to limit the response to one particular geographical market. If not supplied, results will be returned for all markets. Note if you do not provide this field, you are likely to get duplicate results per album, one for each market in which the album is available.
     # @return [Array<Album>]
     #
     # @example
-    #           albums = artist.albums
-    #           albums.class       #=> Array
-    #           albums.first.class #=> RSpotify::Album
-    #           albums.first.name  #=> "AM"
-    def albums
-      return @albums unless @albums.nil?
-      json = RSpotify.get("artists/#{@id}/albums")
-      @albums = json['items'].map { |i| Album.new i }
+    #           artist.albums
+    #           artist.albums(album_type: 'single,compilation')
+    #           artist.albums(limit: 50, country: 'US')
+    def albums(limit: 20, offset: 0, **filters)
+      url = "artists/#{@id}/albums?limit=#{limit}&offset=#{offset}"
+      filters.each do |filter_name, filter_value|
+        url << "&#{filter_name}=#{filter_value}"
+      end
+
+      json = RSpotify.get(url)
+      json['items'].map { |i| Album.new i }
     end
 
     # Returns array of similar artists. Similarity is based on analysis of the Spotify community’s {http://news.spotify.com/se/2010/02/03/related-artists listening history}.

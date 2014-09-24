@@ -22,7 +22,7 @@ describe RSpotify::Artist do
     end
 
     it 'should find artist with correct albums' do
-      albums = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:albums') do 
+      albums = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:albums:limit:20:offset:0') do 
         @artist.albums
       end
       expect(albums)             .to be_an Array
