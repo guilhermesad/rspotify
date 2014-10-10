@@ -120,7 +120,8 @@ module RSpotify
         RSpotify.auth_get(url)
       end
 
-      tracks = json['items'].map { |i| Track.new i['track'] }
+      # Tracks removed from Spotify have 'track' key set to null
+      tracks = json['items'].map { |i| Track.new i['track'] unless i['track'].nil? }.compact
       @tracks_cache = tracks if limit == 100 && offset == 0
       tracks
     end
