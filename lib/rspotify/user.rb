@@ -116,7 +116,12 @@ module RSpotify
     #           playlists.first.class #=> RSpotify::Playlist
     #           playlists.first.name  #=> "Movie Soundtrack Masterpieces"
     def playlists(limit: 20, offset: 0)
-      json = RSpotify.auth_get("users/#{@id}/playlists?limit=#{limit}&offset=#{offset}")
+      url = "users/#{@id}/playlists?limit=#{limit}&offset=#{offset}"
+      if @credentials.present?
+        json = User.oauth_get(@id, url)
+      else
+        json = RSpotify.auth_get(url)
+      end
       json['items'].map { |i| Playlist.new i }
     end
 
