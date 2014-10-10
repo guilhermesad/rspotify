@@ -105,15 +105,23 @@ module RSpotify
 
     # Returns all playlists from user
     #
+    # @param limit  [Integer] Maximum number of playlists to return. Maximum: 50. Default: 20.
+    # @param offset [Integer] The index of the first playlist to return. Use with limit to get the next set of playlists. Default: 0.
     # @return [Array<Playlist>]
     #
     # @example
     #           playlists = user.playlists
     #           playlists.class       #=> Array
+    #           playlists.size        #=> 20
     #           playlists.first.class #=> RSpotify::Playlist
     #           playlists.first.name  #=> "Movie Soundtrack Masterpieces"
-    def playlists
-      json = RSpotify.auth_get("users/#{@id}/playlists")
+    def playlists(limit: 20, offset: 0)
+      url = "users/#{@id}/playlists?limit=#{limit}&offset=#{offset}"
+      if @credentials.nil?
+        json = RSpotify.auth_get(url)
+      else
+        json = User.oauth_get(@id, url)
+      end
       json['items'].map { |i| Playlist.new i }
     end
 
