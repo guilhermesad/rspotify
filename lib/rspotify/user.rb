@@ -99,7 +99,7 @@ module RSpotify
     #           playlist.public #=> false
     def create_playlist!(name, public: true)
       url = "users/#{@id}/playlists"
-      request_data = %Q({"name":"#{name}", "public":#{public}})
+      request_data = { name: name, public: public }.to_json
       Playlist.new User.oauth_post(@id, url, request_data)
     end
 

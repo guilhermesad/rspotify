@@ -92,14 +92,7 @@ module RSpotify
     #           playlist.public #=> false
     def change_details!(**data)
       url = "users/#{@owner.id}/playlists/#{@id}"
-
-      request_data = '{'
-      request_data << %Q("name":"#{data[:name]}") if !data[:name].nil?
-      request_data << ',' if !data[:name].nil? && !data[:public].nil?
-      request_data << %Q("public":#{data[:public]}) if !data[:public].nil?
-      request_data << '}'
-
-      User.oauth_put(@owner.id, url, request_data)
+      User.oauth_put(@owner.id, url, data.to_json)
       data.each do |field, value|
         instance_variable_set("@#{field}", value)
       end
