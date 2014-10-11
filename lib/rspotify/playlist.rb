@@ -72,7 +72,7 @@ module RSpotify
       url << "&position=#{position}" if position
       
       User.oauth_post(@owner.id, url, {})
-      @tracks = nil
+      @tracks_cache = nil
       tracks
     end
 
