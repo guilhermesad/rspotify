@@ -151,6 +151,24 @@ module RSpotify
       tracks
     end
 
+    # Replace all the tracks in a playlist, overwriting its existing tracks.
+    # 
+    # @param tracks [Array<Track>] The tracks that will replace the existing ones. Maximum: 100 per request
+    # @return [Array<Track>] The tracks that were added.
+    #
+    # @example
+    #           playlist.tracks.map(&:name) #=> ["All of Me", "Wasted Love", "Love Runs Out"]
+    #           tracks = RSpotify::Track.search('Know', limit: 2)
+    #           playlist.replace_tracks!(tracks)
+    #           playlist.tracks.map(&:name) #=> ["Somebody That I Used To Know", "Do I Wanna Know?"]
+    def replace_tracks!(tracks)
+      track_uris = tracks.map(&:uri).join(',')
+      url = "users/#{@owner.id}/playlists/#{@id}/tracks?uris=#{track_uris}"
+      User.oauth_put(@owner.id, url, {})
+      @tracks_cache = nil
+      tracks
+    end
+
     private
 
     def users_credentials
