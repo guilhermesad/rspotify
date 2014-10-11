@@ -76,6 +76,36 @@ module RSpotify
       tracks
     end
 
+    # Change name and public/private state of playlist in user's Spotify account.
+    # 
+    # @param name   [String]  Optional. The new name for the playlist.
+    # @param public [Boolean] Optional. If true the playlist will be public, if false it will be private.
+    # @return [Playlist]
+    #
+    # @example
+    #           playlist.name   #=> "Movie Soundtrack Masterpieces"
+    #           playlist.public #=> true
+    #
+    #           playlist.change_details!(name: 'Movie Tracks', public: false)
+    #
+    #           playlist.name   #=> "Movie Tracks"
+    #           playlist.public #=> false
+    def change_details!(**data)
+      url = "users/#{@owner.id}/playlists/#{@id}"
+
+      request_data = '{'
+      request_data << %Q("name":"#{data[:name]}") if !data[:name].nil?
+      request_data << ',' if !data[:name].nil? && !data[:public].nil?
+      request_data << %Q("public":#{data[:public]}) if !data[:public].nil?
+      request_data << '}'
+
+      User.oauth_put(@owner.id, url, request_data)
+      data.each do |field, value|
+        instance_variable_set("@#{field}", value)
+      end
+      self
+    end
+
     # When an object is obtained undirectly, Spotify usually returns a simplified version of it.
     # This method updates it into a full object, with all attributes filled.
     # 
