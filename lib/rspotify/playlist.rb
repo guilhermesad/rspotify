@@ -76,7 +76,8 @@ module RSpotify
       tracks
     end
 
-    # Change name and public/private state of playlist in user's Spotify account.
+    # Change name and public/private state of playlist in user's Spotify account. Changing a public playlist
+    # requires the *playlist-modify* scope; changing a private playlist requires the *playlist-modify-private* scope.
     # 
     # @param name   [String]  Optional. The new name for the playlist.
     # @param public [Boolean] Optional. If true the playlist will be public, if false it will be private.
@@ -151,7 +152,8 @@ module RSpotify
       tracks
     end
 
-    # Replace all the tracks in a playlist, overwriting its existing tracks.
+    # Replace all the tracks in a playlist, overwriting its existing tracks. Changing a public playlist
+    # requires the *playlist-modify* scope; changing a private playlist requires the *playlist-modify-private* scope.
     # 
     # @param tracks [Array<Track>] The tracks that will replace the existing ones. Maximum: 100 per request
     # @return [Array<Track>] The tracks that were added.
