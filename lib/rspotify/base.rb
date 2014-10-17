@@ -123,7 +123,7 @@ module RSpotify
       super unless instance_variable_defined? attr
 
       attr_value = instance_variable_get attr
-      return attr_value unless attr_value.nil?
+      return attr_value if !attr_value.nil? || @id.nil?
 
       complete!
       instance_variable_get attr
