@@ -45,8 +45,8 @@ module RSpotify
     #
     #           albums = RSpotify::Base.search('AM', limit: 10)
     #           albums.size #=> 10
-    def self.search(query, limit: 20, offset: 0)
-      super(query, 'album', limit: limit, offset: offset)
+    def self.search(query, limit: 20, offset: 0, market: nil)
+      super(query, 'album', limit: limit, offset: offset, market: market)
     end
 
     def initialize(options = {})
