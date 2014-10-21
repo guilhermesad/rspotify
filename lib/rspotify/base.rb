@@ -69,16 +69,22 @@ module RSpotify
     #
     #           albums = RSpotify::Base.search('AM', 'album', limit: 10)
     #           albums.size #=> 10
-    def self.search(query, types, limit: 20, offset: 0)
+    def self.search(query, types, limit: 20, offset: 0, market: nil)
       types.gsub!(/\s+/, '')
 
+      params = {
+        q:      query,
+        type:   types,
+        limit:  limit,
+        offset: offset
+      }
+
+      if market
+        params[:market] = market
+      end
+
       json = RSpotify.get 'search',
-        params: {
-          q:      query,
-          type:   types,
-          limit:  limit,
-          offset: offset
-        }
+        params: params
 
       types.split(',').flat_map do |type|
         type_class = RSpotify.const_get(type.capitalize)
