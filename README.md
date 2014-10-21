@@ -1,5 +1,7 @@
 # RSpotify
 
+[![Gem Version](https://badge.fury.io/rb/rspotify.svg)](http://badge.fury.io/rb/rspotify)
+
 This is a ruby wrapper for the [new Spotify Web API](https://developer.spotify.com/web-api), released in June 17, 2014.
 
 ## Features
