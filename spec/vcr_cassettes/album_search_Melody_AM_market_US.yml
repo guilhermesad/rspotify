@@ -1,0 +1,178 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/search?q=Melody+AM&type=album&limit=20&offset=0&market=US
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 21 Oct 2014 17:01:06 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      vary:
+      - Accept-Encoding
+      cache-control:
+      - public, max-age=7200
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - '*'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA+2YW2/bNhTH3/spBD0EG5bVJEVSUoBgcC6t3cauG+eytBgC
+        XmO1tuTIcrK0yHcfdeQ4F1h1k/hlW14OZPHwnL+kw58P+f2V5/liKKejie9t
+        eN/dT3djkBtb/vQHRTGebDQaYpy8noyzIrFXr1U2alzgxsSIXA3+OJ+a/Gqz
+        Y4aZvvqt2VnLrJ2YYhOtDZNRUmwStFZcjc0mpFgbifyrGzzs++tVoqQwVeLP
+        s9Q3ak7LWSABZs78y9ELkQyFHJrTKhjI/uz5zR1/3dl9sAdgD0u7tQv2LdgP
+        YMFnuwm2BXYPLIxuV6MncP2ptDsQYec9WPDZ3QYL93fds3j+mzZYmPu2sqCh
+        BbNaXbCgpw3+bRjdg1l71TWM7h2VtgPxO3C/8ydY0NMF/y6o7YKSLijswbP0
+        QE8PnqgHPj2I0IO5++DfB58+vI0+ROuDwj7kPQDlB8elLb+Rsye+91f1rdy7
+        N38XJk/F8HSaD++UC5TMrDruVU02Num9soFv2cDHLdkbfOltbw2+ZDTeGb+/
+        OJF7PlSE513P0/1MFValWxdyHirRIKwm863bSJyZWUVVS6FaDiY5GxRlBE7R
+        jbN7Zvca7j2vWyNKp26BNJIyUMMITuIQE2NwEEYqFkIhZU0siECxNUgrHlvL
+        g3l1u5iXiS4Gs1TzNzJfHOXanIsJ0GPEoFhzbHjMEQ0M1URIw0WgY4SI0Thk
+        kjEVyiheKMalWiKG00e8GEx5aLlmmlAuOCcM69AwoY1WMQ6Ek8GkG7MLtXB6
+        I+VOaaZiVOGiIpHX7Nwiow4l0zyBzzcr3Q2opY2aGoGc1+v/IUxtlQt8CawA
+        Fy/IagTBx+RNe1uYS/lp69zSD19557j1LGTVhHyIrKVuq0WWZVTLMLIhF8oG
+        1BqmhKERZziMCUNEYsMiHeKalbmMEo9DFiEqdOwMJY0l19hqS7HgEYkcuASl
+        FmkShhaphWJWjCyNmApEzEikDeEkZEQpJiUnUmMZa4s1ddIkXajlx8ginhh5
+        4kwk6VOZVVMky5g1SdKzoblN+i/orV6gVXXhP9Nnoctv3eC4ea4/HvTPW1uH
+        7Ty2+e6zoFUT8iG0lrqtFlrEIMotRtKI0BJJdBBhYaRWrrNhjGEbECo00jVr
+        c8XQMoyHLqmITMAFiRSKhBNhGVYyiCPKXd+jkJULxawaWsR1mMRhkigtHNFl
+        GNAQc6KIdp1gTB1DCePsKdBqe82RdzAwXifLU8eRp6KrplRe0PW/3iLSb/TM
+        JqMw0XGL21F/fzeZaP0sdNWEfIiupW6rRRcSOHKAEKHrIEKhNA3cVoxxqw2O
+        ZUA5dX1XyFm0kBZuN7pkV/a4fitSzBotsQqYRJRpriOrFSPM7V0NIyIghIU0
+        XoyLFaOLl81UhI0wDDmmc6QiHnGOEZcSsShQjrAC2cVaftxvvctynaRef+xO
+        oybe7x6g7DgbidT75ShTYujNNpFHJp8kWfrrU9lWU0sV2242rz4clJX/52S2
+        nfdTd9BS3kinw2FVn351rFbevHEa5+YiyaZwWnHHscgKAacS5S75+tX1P4Tx
+        BeXhEwAA
+    http_version: '1.1'
+  recorded_at: Tue, 21 Oct 2014 17:01:06 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/search?q=Melody+AM&type=album&limit=20&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 21 Oct 2014 17:03:06 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      vary:
+      - Accept-Encoding
+      cache-control:
+      - public, max-age=7200
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - '*'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        AA==
+    http_version: '1.1'
+  recorded_at: Tue, 21 Oct 2014 17:03:06 GMT
+recorded_with: VCR 2.9.3
