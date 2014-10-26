@@ -63,6 +63,26 @@ module RSpotify
       end
     end
 
+    # Returns an instance of User with the credentials provided. This method is useful when used in combination
+    # with RSpotify.exchange_code
+    # 
+    # @param credentials [Hash]
+    # @return [User]
+    # 
+    # @example
+    #           user = RSpotify::User.from_credentials({'access_token'=>'...', 'refresh_token'=>'...'})
+    def self.from_credentials(credentials)
+      headers = {
+        'Authorization' => "Bearer #{credentials['access_token']}",
+        'Content-Type' => 'application/json'
+      }
+      data = RSpotify.send(:get, "me", headers)
+      RSpotify::User.new({
+        'info' => data,
+        'credentials' => credentials   
+      })
+    end
+
     def initialize(options = {})
       credentials = options['credentials']
       options     = options['info'] if options['info']

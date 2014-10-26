@@ -33,6 +33,36 @@ module RSpotify
     true
   end
 
+  # Exchanges the authorization code from the {https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow Authorization Code Flow} to access and refresh tokens
+  # 
+  # @param code [String] The Spotify authorization code that can be exchanged for an access token.
+  # @param redirect_uri [String] The URI Spotify redirected the user to after the permission grant
+  # @param credentials [Hash] An optional set of credentials, unless RSpotify.authenticate was used previously
+  # 
+  # @return [Hash] a set of credentials 
+  # 
+  # @example
+  #           # Whenever Spotify redirects the user to our application after granting permissions, we get a GET param in the form of ?code=NApCCg(...)BkWtQ
+  #           credentials = RSpotify.exchange_code(params['code'], 'http://foo.com/spotify/login')
+  #           user = RSpotify::User.from_credentials(credentials)
+  #           user.name #=> "John Doe"
+  def self.exchange_code(code, redirect_uri, credentials={})
+    @client_id = credentials['client_id'] if credentials['client_id']
+    @client_secret = credentials['client_secret'] if credentials['client_secret']
+
+    request_body = {
+      grant_type: 'authorization_code',
+      code: code,
+      redirect_uri: redirect_uri,
+      client_id: @client_id,
+      client_secret: @client_secret
+    }
+
+    response = RestClient.post(TOKEN_URI, request_body, {'Content-Type' => 'application/json'})
+    return JSON.parse(response)
+  end
+
+
   VERBS.each do |verb|
     define_singleton_method verb do |path, *params|
       url = API_URI + path

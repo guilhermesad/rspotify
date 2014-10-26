@@ -83,7 +83,7 @@ my_tracks = RSpotify::Track.find(ids)
 my_tracks.size #=> 2
 ```
 
-Some data require authentication to be accessed, such as playlists. You can easily get your credentials [here](https://developer.spotify.com/my-applications).
+Some endpoints require authentication to be accessed, such as playlists. You can easily get your credentials [here](https://developer.spotify.com/my-applications).
 
 Then just copy and paste them like so:
 
@@ -110,9 +110,9 @@ Check the [documentation](http://rdoc.info/github/guilhermesad/rspotify/master/f
 
 ## Rails + OAuth
 
-You'll may want your application to access an user's Spotify account.
+You may want your application to access an user's Spotify account.
 
-For instance, suppose you want your app to create playlists for the user based on his taste, or to add a feature that syncs user's playlists with some external app.
+For instance, suppose you want your app to create playlists for the user based on their taste, or to add a feature that syncs the user playlists' with some external app.
 
 If so, add the following to your application (Remember to [get your credentials](https://developer.spotify.com/my-applications))
 
@@ -134,7 +134,7 @@ You should replace the scope values for the ones your own app will require from 
 
 Next, make a link so the user can log in with his Spotify account:
 
-```ruby
+```erb
 <%= link_to 'Sign in with Spotify', '/auth/spotify' %>
 ```
 
@@ -146,7 +146,7 @@ And create a route to receive the callback:
 get '/auth/spotify/callback', to: 'users#spotify'
 ```
 
-Remember you need to tell Spotify this address is white-listed. You can do this by adding it to the Redirect URIs list in your [application page](https://developer.spotify.com/my-applications). An example of Redirect URI would be http://localhost:3000/auth/spotify/callback.
+Remember you need to white-list this callback URI with Spotify. You can do this by adding it to the Redirect URIs list in your [application page](https://developer.spotify.com/my-applications). An example of Redirect URI would be http://localhost:3000/auth/spotify/callback.
 
 Finally, create a new RSpotify User with the response received:
 
@@ -178,7 +178,7 @@ class UsersController < ApplicationController
 end
 ```
 
-The user's access token is automatically refreshed by RSpotify when needed. This is specially useful if you persist the user data on a database: this way he only needs to log in to Spotify once in his entire use of your application.
+The user's access token is automatically refreshed by RSpotify when needed. This is specially useful if you persist the user data to a database: this way the user only needs to log in to Spotify once when using your application.
 
 RSpotify provides a way to facilitate persistence:
 
@@ -195,7 +195,7 @@ spotify_user.create_playlist!('my_awesome_playlist') # automatically refreshes t
 
 ## Notes
 
-If you'd like to use OAuth outside rails, have a look [here](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow) for the requests that need to be made. You should be able to pass the response to RSpotify::User.new just as well, and from there easily create playlists and more for your user.
+If you'd like to use OAuth outside rails, have a look at the [Sinatra Example](/guilhermesad/rspotify/examples/siantra-example.rb) for a use case for consuming the [Web API Authorization Code Flow](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow) directly. You can pass the response to RSpotify::User.from_credentials just as well, and from there easily create playlists and more for your user.
 
 ## Contributing
 
