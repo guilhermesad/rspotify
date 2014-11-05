@@ -116,12 +116,10 @@ module RSpotify
     #           playlist.complete!
     #           playlist.instance_variable_get("@description") #=> "Iconic soundtracks..."
     def complete!
-      url = "users/#{@owner.id}/playlists/#{@id}"
-
       if users_credentials && users_credentials[@owner.id]
-        initialize User.oauth_get(@owner.id, url)
+        initialize User.oauth_get(@owner.id, href)
       else
-        initialize RSpotify.auth_get(url)
+        initialize RSpotify.auth_get(href)
       end
     end
 
@@ -140,8 +138,7 @@ module RSpotify
         return @tracks_cache[offset..last_track]
       end
 
-      url = "users/#{@owner.id}/playlists/#{@id}/tracks" \
-            "?limit=#{limit}&offset=#{offset}"
+      url = href + "/tracks?limit=#{limit}&offset=#{offset}"
 
       json = if users_credentials && users_credentials[@owner.id]
         User.oauth_get(@owner.id, url)
