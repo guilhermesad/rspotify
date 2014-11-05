@@ -33,10 +33,13 @@ module RSpotify
     true
   end
 
+  def self.api_url(path)
+    path.start_with?("http") ? path : API_URI + path
+  end
+
   VERBS.each do |verb|
     define_singleton_method verb do |path, *params|
-      url = API_URI + path
-      response = RestClient.send(verb, url, *params)
+      response = RestClient.send(verb, api_url(path), *params)
       JSON.parse response unless response.empty?
     end
 
