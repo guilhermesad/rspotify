@@ -20,7 +20,12 @@ module RSpotify
     #           playlist.class #=> RSpotify::Playlist
     #           playlist.name  #=> "Movie Soundtrack Masterpieces"
     def self.find(user_id, id)
-      json = RSpotify.auth_get("users/#{user_id}/playlists/#{id}")
+      url = if id == "starred"
+        "users/#{user_id}/starred"
+      else
+        "users/#{user_id}/playlists/#{id}"
+      end
+      json = RSpotify.auth_get(url)
       Playlist.new json
     end
 
@@ -45,13 +50,13 @@ module RSpotify
       @tracks_cache = if options['tracks'] && options['tracks']['items']
         options['tracks']['items'].map { |i| Track.new i['track'] }
       end
-      
+
       super(options)
     end
 
     # Adds one or more tracks to a playlist in user's Spotify account. This method is only available when
     # the current user has granted access to the *playlist-modify* and *playlist-modify-private* scopes.
-    # 
+    #
     # @param tracks [Array<Track>] Tracks to be added. Maximum: 100 per request
     # @param position [Integer, NilClass] The position to insert the tracks, a zero-based index. Default: tracks are appended to the playlist
     # @return [Array<Track>] The tracks added
@@ -70,7 +75,7 @@ module RSpotify
       track_uris = tracks.map(&:uri).join(',')
       url = "users/#{@owner.id}/playlists/#{@id}/tracks?uris=#{track_uris}"
       url << "&position=#{position}" if position
-      
+
       User.oauth_post(@owner.id, url, {})
       @tracks_cache = nil
       tracks
@@ -78,7 +83,7 @@ module RSpotify
 
     # Change name and public/private state of playlist in user's Spotify account. Changing a public playlist
     # requires the *playlist-modify* scope; changing a private playlist requires the *playlist-modify-private* scope.
-    # 
+    #
     # @param name   [String]  Optional. The new name for the playlist.
     # @param public [Boolean] Optional. If true the playlist will be public, if false it will be private.
     # @return [Playlist]
@@ -102,7 +107,7 @@ module RSpotify
 
     # When an object is obtained undirectly, Spotify usually returns a simplified version of it.
     # This method updates it into a full object, with all attributes filled.
-    # 
+    #
     # @note It is seldom necessary to use this method explicitly, since RSpotify takes care of it automatically when needed (see {Base#method_missing})
     #
     # @example
@@ -154,7 +159,7 @@ module RSpotify
 
     # Replace all the tracks in a playlist, overwriting its existing tracks. Changing a public playlist
     # requires the *playlist-modify* scope; changing a private playlist requires the *playlist-modify-private* scope.
-    # 
+    #
     # @param tracks [Array<Track>] The tracks that will replace the existing ones. Maximum: 100 per request
     # @return [Array<Track>] The tracks that were added.
     #
