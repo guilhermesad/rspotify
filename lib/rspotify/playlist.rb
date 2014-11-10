@@ -73,7 +73,7 @@ module RSpotify
     #           playlist.tracks[20].name #=> "Somebody That I Used To Know"
     def add_tracks!(tracks, position: nil)
       track_uris = tracks.map(&:uri).join(',')
-      url = "users/#{@owner.id}/playlists/#{@id}/tracks?uris=#{track_uris}"
+      url = @href + "/tracks?uris=#{track_uris}"
       url << "&position=#{position}" if position
 
       User.oauth_post(@owner.id, url, {})
@@ -97,8 +97,7 @@ module RSpotify
     #           playlist.name   #=> "Movie Tracks"
     #           playlist.public #=> false
     def change_details!(**data)
-      url = "users/#{@owner.id}/playlists/#{@id}"
-      User.oauth_put(@owner.id, url, data.to_json)
+      User.oauth_put(@owner.id, @href, data.to_json)
       data.each do |field, value|
         instance_variable_set("@#{field}", value)
       end
@@ -117,9 +116,9 @@ module RSpotify
     #           playlist.instance_variable_get("@description") #=> "Iconic soundtracks..."
     def complete!
       if users_credentials && users_credentials[@owner.id]
-        initialize User.oauth_get(@owner.id, href)
+        initialize User.oauth_get(@owner.id, @href)
       else
-        initialize RSpotify.auth_get(href)
+        initialize RSpotify.auth_get(@href)
       end
     end
 
@@ -138,8 +137,7 @@ module RSpotify
         return @tracks_cache[offset..last_track]
       end
 
-      url = href + "/tracks?limit=#{limit}&offset=#{offset}"
-
+      url = @href + "/tracks?limit=#{limit}&offset=#{offset}"
       json = if users_credentials && users_credentials[@owner.id]
         User.oauth_get(@owner.id, url)
       else
@@ -167,7 +165,7 @@ module RSpotify
     #           playlist.tracks.map(&:name) #=> ["Somebody That I Used To Know", "Do I Wanna Know?"]
     def replace_tracks!(tracks)
       track_uris = tracks.map(&:uri).join(',')
-      url = "users/#{@owner.id}/playlists/#{@id}/tracks?uris=#{track_uris}"
+      url = @href + "/tracks?uris=#{track_uris}"
       User.oauth_put(@owner.id, url, {})
       @tracks_cache = nil
       tracks
