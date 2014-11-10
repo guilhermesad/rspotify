@@ -25,7 +25,7 @@ module RSpotify
       else
         "users/#{user_id}/playlists/#{id}"
       end
-      json = RSpotify.auth_get(url)
+      json = RSpotify.resolve_auth_request(user_id, url)
       Playlist.new json
     end
 
