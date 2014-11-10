@@ -9,7 +9,7 @@ module RSpotify
   # @attr [Boolean]      public        true if the playlist is not marked as secret
   class Playlist < Base
 
-    # Returns Playlist object with user_id and id provided
+    # Returns Playlist object with user_id and id provided. If id is "starred", returns starred playlist from user.
     #
     # @param user_id [String]
     # @param id [String]
