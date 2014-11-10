@@ -73,7 +73,7 @@ describe RSpotify::Playlist do
 
   describe 'Playlist#complete!' do
     let(:href) { 'https://api.spotify.com/v1/users/wizzler/playlists/00wHcTN0zQiun4xri9pmvX' }
-    let(:playlist) { RSpotify::Playlist.new('href' => href) }
+    let(:playlist) { RSpotify::Playlist.new('href' => href, 'owner' => {'id' => 'wizzler'}) }
 
     it 'should fetch the complete information correctly' do
       VCR.use_cassette('playlist:find:wizzler:00wHcTN0zQiun4xri9pmvX') do
