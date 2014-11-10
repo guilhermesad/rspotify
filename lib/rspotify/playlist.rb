@@ -115,11 +115,7 @@ module RSpotify
     #           playlist.complete!
     #           playlist.instance_variable_get("@description") #=> "Iconic soundtracks..."
     def complete!
-      if users_credentials && users_credentials[@owner.id]
-        initialize User.oauth_get(@owner.id, @href)
-      else
-        initialize RSpotify.auth_get(@href)
-      end
+      initialize RSpotify.resolve_auth_request(@owner.id, @href)
     end
 
     # Returns array of tracks from the playlist
@@ -138,11 +134,7 @@ module RSpotify
       end
 
       url = @href + "/tracks?limit=#{limit}&offset=#{offset}"
-      json = if users_credentials && users_credentials[@owner.id]
-        User.oauth_get(@owner.id, url)
-      else
-        RSpotify.auth_get(url)
-      end
+      json = RSpotify.resolve_auth_request(@owner.id, url)
 
       tracks = json['items'].map do |i|
         Track.new i['track'] unless i['track'].nil?
@@ -169,13 +161,6 @@ module RSpotify
       User.oauth_put(@owner.id, url, {})
       @tracks_cache = nil
       tracks
-    end
-
-    private
-
-    def users_credentials
-      credentials_defined = User.class_variable_defined?('@@users_credentials')
-      User.class_variable_get('@@users_credentials') if credentials_defined
     end
   end
 end
