@@ -36,6 +36,7 @@ module RSpotify
   def self.api_url(path)
     path.start_with?("http") ? path : API_URI + path
   end
+  private_class_method :api_url
 
   VERBS.each do |verb|
     define_singleton_method verb do |path, *params|
