@@ -60,6 +60,38 @@ describe RSpotify::Playlist do
     end
   end
 
+  describe 'Playlist::search' do
+    it 'should search for the right playlists' do
+      playlists = VCR.use_cassette('playlist:search:Indie') do 
+        RSpotify::Playlist.search('Indie')
+      end
+      expect(playlists)             .to be_an Array
+      expect(playlists.size)        .to eq 20
+      expect(playlists.first)       .to be_an RSpotify::Playlist
+      expect(playlists.map(&:name)) .to include('The Indie Mix', 'Indie Folk', 'Alt/Indie')
+    end
+
+    it 'should accept additional options' do
+      playlists = VCR.use_cassette('playlist:search:Indie:limit:10') do 
+        RSpotify::Playlist.search('Indie', limit: 10)
+      end
+      expect(playlists.size)        .to eq 10
+      expect(playlists.map(&:name)) .to include('The Indie Mix', 'Indie Folk')
+
+      playlists = VCR.use_cassette('playlist:search:Indie:offset:10') do 
+        RSpotify::Playlist.search('Indie', offset: 10)
+      end
+      expect(playlists.size)        .to eq 20
+      expect(playlists.map(&:name)) .to include('Indie Workout', 'Indie Brunch')
+
+      playlists = VCR.use_cassette('playlist:search:Indie:offset:10:limit:10') do 
+        RSpotify::Playlist.search('Indie', limit: 10, offset: 10)
+      end
+      expect(playlists.size)        .to eq 10
+      expect(playlists.map(&:name)) .to include('Infinite Indie')
+    end
+  end
+
   describe 'Playlist#tracks' do
     it 'should fetch more tracks correctly' do
       tracks = VCR.use_cassette('playlist:tracks:118430647:starred') do

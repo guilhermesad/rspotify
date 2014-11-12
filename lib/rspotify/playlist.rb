@@ -29,10 +29,23 @@ module RSpotify
       Playlist.new json
     end
 
-    # Spotify does not support search for playlists. Prints warning and returns false
-    def self.search(*)
-      warn 'Spotify API does not support search for playlists'
-      false
+    # Returns array of Playlist objects matching the query
+    #
+    # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
+    # @param limit  [Integer] Maximum number of playlists to return. Maximum: 50. Default: 20.
+    # @param offset [Integer] The index of the first playlist to return. Use with limit to get the next set of playlists. Default: 0.
+    # @return [Array<Playlist>]
+    #
+    # @example
+    #           playlists = RSpotify::Playlist.search('Indie')
+    #           playlists.size        #=> 20
+    #           playlists.first.class #=> RSpotify::Playlist
+    #           playlists.first.name  #=> "The Indie Mix"
+    #
+    #           playlists = RSpotify::Playlist.search('Indie', limit: 10)
+    #           playlists.size #=> 10
+    def self.search(query, limit: 20, offset: 0)
+      super(query, 'playlist', limit: limit, offset: offset)
     end
 
     def initialize(options = {})

@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/search?q=Indie&type=playlist&limit=10&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 12 Nov 2014 21:45:01 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      vary:
+      - Accept-Encoding
+      cache-control:
+      - public, max-age=7200
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version: '1.1'
+  recorded_at: Wed, 12 Nov 2014 21:45:02 GMT
+recorded_with: VCR 2.9.3

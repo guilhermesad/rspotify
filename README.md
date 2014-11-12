@@ -27,7 +27,7 @@ Or install it yourself as:
 
 ## Usage
 
-Directly access Spotify public data such as albums, tracks, artists and users:
+Directly access Spotify public data such as albums, tracks, artists, playlists and users:
 
 ```ruby
 require 'rspotify'
@@ -54,6 +54,9 @@ do_i_wanna_know = tracks.first
 do_i_wanna_know.duration_ms  #=> 272386
 do_i_wanna_know.track_number #=> 1
 do_i_wanna_know.preview_url  #=> "https://p.scdn.co/mp3-preview/<id>"
+
+playlists = RSpotify::Playlist.search('Indie')
+playlists.first.name #=> "The Indie Mix"
 
 # You can search within other types too
 albums = RSpotify::Album.search('The Wall')
@@ -83,14 +86,14 @@ my_tracks = RSpotify::Track.find(ids)
 my_tracks.size #=> 2
 ```
 
-Some data require authentication to be accessed, such as playlists. You can easily get your credentials [here](https://developer.spotify.com/my-applications).
+Some data require authentication to be accessed, such as playlists' details. You can easily get your credentials [here](https://developer.spotify.com/my-applications).
 
 Then just copy and paste them like so:
 
 ```ruby
 RSpotify.authenticate("<your_client_id>", "<your_client_secret>")
 
-# Now you can access any public playlist and much more
+# Now you can access any public playlist in detail and much more
 
 playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
 playlist.name               #=> "Movie Soundtrack Masterpieces"
