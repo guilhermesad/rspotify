@@ -93,6 +93,11 @@ describe RSpotify::Album do
       end
       expect(albums.size)        .to eq 10
       expect(albums.map(&:name)) .to include('Melody AM')
+
+      albums = VCR.use_cassette("album:search:Melody AM:market:US") do
+        RSpotify::Album.search("Melody AM", market: "US")
+      end
+      expect(albums.select { |album| album.available_markets.include?("US") }.length) .to eq(albums.length)
     end
   end
 end

@@ -92,6 +92,11 @@ describe RSpotify::Track do
       end
       expect(tracks.size)        .to eq 10
       expect(tracks.map(&:name)) .to include('They Wanna Know')
+
+      tracks = VCR.use_cassette("track:search:mogwai i'm jim morrison i'm dead:market:US") do
+        RSpotify::Track.search("mogwai i'm jim morrison i'm dead", market: "US")
+      end
+      expect(tracks.select { |track| track.available_markets.include?("US") }.length) .to eq(tracks.length)
     end
   end
 end

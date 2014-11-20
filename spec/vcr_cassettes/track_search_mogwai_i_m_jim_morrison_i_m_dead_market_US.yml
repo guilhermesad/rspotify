@@ -1,0 +1,176 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/search?q=mogwai+i%27m+jim+morrison+i%27m+dead&type=track&limit=20&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 21 Oct 2014 07:44:01 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      vary:
+      - Accept-Encoding
+      cache-control:
+      - public, max-age=7200
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - '*'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version: '1.1'
+  recorded_at: Tue, 21 Oct 2014 07:44:01 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/search?q=mogwai+i%27m+jim+morrison+i%27m+dead&type=track&limit=20&offset=0&market=US
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 21 Oct 2014 07:46:34 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      vary:
+      - Accept-Encoding
+      cache-control:
+      - public, max-age=7200
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - '*'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA+1WWW/bOBB+768QCGz6kGx1WpINBIscTuz4qBE76bEoDEqk
+        bDa6KlFx0yL/veRIluWkKlLsPuzD+uGDTA5nvhnOwe+vFAXxDPt3OVJ6ynfx
+        VyysMxrIv2jNeZr3VBWn7E2eJpwFD2/8JFLvdTWnOPPXf30paPZwHCWrDWaH
+        7A/DiQ4/s+gwSrKM5UlcLRGKyUESBDnlx9pByCLGjw3tgD+k9BisH0Q4uxOb
+        N3N0VHJgnEbA6e+KleCFQ6+IdjyBK6wtpSZgXIqUOsr9e8xC7IV0WZqodKKT
+        c3SkoJNrwAXgjcTTPuAl4FtAkDk7ARwAjgFh96zc/QDfHyWeg4bzESDI9M8A
+        Yb0vPFTQxRAQzl6eApbfwGQAZwdTQGA1hLNDODsEmTFoGJffIDO+lTgBWxNY
+        n7wHBG5TkJ8C8ymwmgLbGfg1A/0z8G4GMjPQMIOz1yA/B5k5RGYO2ubAcw52
+        F8B/8U6ivEWBH5DyqXET9CunWYzDZZGFjWyTtyTusUqvvbRLUhrv5R3crmoU
+        s7M5e+/x+H56GlLv48jBtwWCvJG/x4bRl6QyaM3b1DaUMQL0Wuw3BSO8ok+y
+        F7xcU7Zac6nF1rTdAbEjgrLnuyg4n8Si2lQmlaldYlGCPWI6uh9g4tmBpxsd
+        YtoG7XgYu5ZuGCb23Kp+ykigDSN8XZlrxKcuqSekzN8k5RsuDXxH73ge8S3H
+        wA71/K6tu5Zn69glPrUDp2PpLaSEuReQsq3fChR2acc2XaeLseMYIizUpUTz
+        gsByTB9jwzYtwdpwWjjZ1o7SXvrGOCpbzGJNlQHe3CnDXBkkm5DFq4Yu1N6K
+        iozBFVep3oO867VkU8WizmWEM85y/iyp0L9RVqBaNa2b9exu7PGL0fUXM46C
+        ixX9fPkP6qpk3Kb3eWG1EGgI1pcwgYnz87iD2ebWs8CDRK/F3Dbyu9tH+P8h
+        8l8YIoiw3F/GReTRTFaSvs0MRIoMc5bEy/LNYGmW5db9VZRIGjKfQd8NcJjT
+        +lxdPIw8GUmI5ZkP5Xp52p+ONVfTtK62LYZdWf6i/F420+D9o5pxYq2TfjZI
+        whEZ3X67ene18FfPzb1knpXvuTaVte/VNGuxXIvVJTd8HSlXLFIm1dvuSJEr
+        5+JpV9caSpO0CHHG+IMMXWd3BWlG7xndyNm/N+bSesxFqflnJaXahDiGKxq5
+        0SWOZnQ7pINNLyC+RlzNEntEt0hXbxgGn3+aGnU/BpEd1adNAbZ7LdGAnvC4
+        7QgIXrDSD6PyEMUiD+RCXIRhGTpUvnfl4lYI3EsKyLSGIE84hqjowszjq8cf
+        UOaB25ULAAA=
+    http_version: '1.1'
+  recorded_at: Tue, 21 Oct 2014 07:46:34 GMT
+recorded_with: VCR 2.9.3
