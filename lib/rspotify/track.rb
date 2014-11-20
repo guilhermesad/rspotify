@@ -46,8 +46,8 @@ module RSpotify
     #
     #           tracks = RSpotify::Track.search('Thriller', limit: 10)
     #           tracks.size #=> 10
-    def self.search(query, limit: 20, offset: 0)
-      super(query, 'track', limit: limit, offset: offset)
+    def self.search(query, limit: 20, offset: 0, market: nil)
+      super(query, 'track', limit: limit, offset: offset, market: market)
     end
 
     def initialize(options = {})
