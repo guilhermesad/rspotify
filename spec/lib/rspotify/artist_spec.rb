@@ -4,7 +4,7 @@ describe RSpotify::Artist do
 
     before(:each) do
       # Get Arctic Monkeys as a testing sample
-      @artist = VCR.use_cassette('artist:find:7Ln80lUS6He07XvHI8qqHH') do 
+      @artist = VCR.use_cassette('artist:find:7Ln80lUS6He07XvHI8qqHH') do
         RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
       end
     end
@@ -22,7 +22,7 @@ describe RSpotify::Artist do
     end
 
     it 'should find artist with correct albums' do
-      albums = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:albums:limit:20:offset:0') do 
+      albums = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:albums:limit:20:offset:0') do
         @artist.albums
       end
       expect(albums)             .to be_an Array
@@ -32,7 +32,7 @@ describe RSpotify::Artist do
     end
 
     it 'should find artist with correct top tracks' do
-      top_tracks = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:top_tracks:US') do 
+      top_tracks = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:top_tracks:US') do
         @artist.top_tracks(:US)
       end
       expect(top_tracks)             .to be_an Array
@@ -42,7 +42,7 @@ describe RSpotify::Artist do
     end
 
     it 'should find artist with correct related artists' do
-      related_artists = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:related_artists') do 
+      related_artists = VCR.use_cassette('artist:7Ln80lUS6He07XvHI8qqHH:related_artists') do
         @artist.related_artists
       end
       expect(related_artists)             .to be_an Array
@@ -55,7 +55,7 @@ describe RSpotify::Artist do
   describe 'Artist::find receiving array of ids' do
     it 'should find the right artists' do
       ids = ['0oSGxfWSnnOXhD2fKuz2Gy']
-      artists = VCR.use_cassette('artist:find:0oSGxfWSnnOXhD2fKuz2Gy') do 
+      artists = VCR.use_cassette('artist:find:0oSGxfWSnnOXhD2fKuz2Gy') do
         RSpotify::Artist.find(ids)
       end
       expect(artists)            .to be_an Array
@@ -63,7 +63,7 @@ describe RSpotify::Artist do
       expect(artists.first.name) .to eq 'David Bowie'
 
       ids << '3dBVyJ7JuOMt4GE9607Qin'
-      artists = VCR.use_cassette('artist:find:3dBVyJ7JuOMt4GE9607Qin') do 
+      artists = VCR.use_cassette('artist:find:3dBVyJ7JuOMt4GE9607Qin') do
         RSpotify::Artist.find(ids)
       end
       expect(artists)            .to be_an Array
@@ -75,7 +75,7 @@ describe RSpotify::Artist do
 
   describe 'Artist::search' do
     it 'should search for the right artists' do
-      artists = VCR.use_cassette('artist:search:Arctic') do 
+      artists = VCR.use_cassette('artist:search:Arctic') do
         RSpotify::Artist.search('Arctic')
       end
       expect(artists)             .to be_an Array
@@ -85,23 +85,29 @@ describe RSpotify::Artist do
     end
 
     it 'should accept additional options' do
-      artists = VCR.use_cassette('artist:search:Arctic:limit:10') do 
+      artists = VCR.use_cassette('artist:search:Arctic:limit:10') do
         RSpotify::Artist.search('Arctic', limit: 10)
       end
       expect(artists.size)        .to eq 10
       expect(artists.map(&:name)) .to include('Arctic Monkeys', 'Arctic')
 
-      artists = VCR.use_cassette('artist:search:Arctic:offset:10') do 
+      artists = VCR.use_cassette('artist:search:Arctic:offset:10') do
         RSpotify::Artist.search('Arctic', offset: 10)
       end
       expect(artists.size)        .to eq 20
       expect(artists.map(&:name)) .to include('Arctic Flame', 'Arctic Night')
 
-      artists = VCR.use_cassette('artist:search:Arctic:offset:10:limit:10') do 
+      artists = VCR.use_cassette('artist:search:Arctic:offset:10:limit:10') do
         RSpotify::Artist.search('Arctic', limit: 10, offset: 10)
       end
       expect(artists.size)        .to eq 10
       expect(artists.map(&:name)) .to include('Arctic Flame')
+
+      artists = VCR.use_cassette("artist:search:Arctic:market:US") do
+        RSpotify::Artist.search("Arctic", market: "US")
+      end
+      # No country code info provided in response
+      expect(artists) .to eq(artists)
     end
   end
 end
