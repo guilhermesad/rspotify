@@ -39,8 +39,8 @@ module RSpotify
     #
     #           artists = RSpotify::Artist.search('Arctic', limit: 10)
     #           artists.size #=> 10
-    def self.search(query, limit: 20, offset: 0)
-      super(query, 'artist', limit: limit, offset: offset)
+    def self.search(query, limit: 20, offset: 0, market: nil)
+      super(query, 'artist', limit: limit, offset: offset, market: market)
     end
 
     def initialize(options = {})
