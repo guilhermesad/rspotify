@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.spotify.com/v1/search?q=Wanna+Know&type=track&limit=20&offset=0
+    uri: https://api.spotify.com/v1/search?q=Wanna%20Know&type=track&limit=20&offset=0
     body:
       encoding: US-ASCII
       string: ''
