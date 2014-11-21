@@ -70,21 +70,19 @@ module RSpotify
     #           albums = RSpotify::Base.search('AM', 'album', limit: 10)
     #           albums.size #=> 10
     def self.search(query, types, limit: 20, offset: 0, market: nil)
+      query = URI::encode query
       types.gsub!(/\s+/, '')
 
-      params = {
-        q:      query,
-        type:   types,
-        limit:  limit,
-        offset: offset
-      }
+      url = "search?q=#{query}&type=#{types}"\
+            "&limit=#{limit}&offset=#{offset}"
 
-      if market
-        params[:market] = market
+      json = if market.is_a? Hash
+        url << '&market=from_token'
+        User.oauth_get(market[:from].id, url)
+      else
+        url << "&market=#{market}" if market
+        RSpotify.get(url)
       end
-
-      json = RSpotify.get 'search',
-        params: params
 
       types.split(',').flat_map do |type|
         type_class = RSpotify.const_get(type.capitalize)
