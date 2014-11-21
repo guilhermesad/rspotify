@@ -32,19 +32,16 @@ module RSpotify
 
     # Returns array of Album objects matching the query, ordered by popularity
     #
-    # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
-    # @param limit  [Integer] Maximum number of albums to return. Maximum: 50. Default: 20.
-    # @param offset [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
+    # @param query  [String]       The search query's keywords. For details access {https://developer.spotify.com/web-api/search-item here} and look for the q parameter description.
+    # @param limit  [Integer]      Maximum number of albums to return. Maximum: 50. Default: 20.
+    # @param offset [Integer]      The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
+    # @param market [String, Hash] Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code} or the hash { from: user }, where user is a RSpotify user authenticated using OAuth with scope *user-read-private*. This will take the user's country as the market value. For details access {https://developer.spotify.com/web-api/search-item here} and look for the market parameter description.
     # @return [Array<Album>]
     #
     # @example
     #           albums = RSpotify::Album.search('AM')
-    #           albums.size        #=> 20
-    #           albums.first.class #=> RSpotify::Album
-    #           albums.first.name  #=> "AM"
-    #
-    #           albums = RSpotify::Base.search('AM', limit: 10)
-    #           albums.size #=> 10
+    #           albums = RSpotify::Album.search('AM', limit: 10, market: 'US')
+    #           albums = RSpotify::Album.search('AM', market: { from: user })
     def self.search(query, limit: 20, offset: 0, market: nil)
       super(query, 'album', limit: limit, offset: offset, market: market)
     end

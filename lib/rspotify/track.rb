@@ -33,19 +33,16 @@ module RSpotify
 
     # Returns array of Track objects matching the query, ordered by popularity
     #
-    # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
-    # @param limit  [Integer] Maximum number of tracks to return. Maximum: 50. Default: 20.
-    # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of tracks. Default: 0.
+    # @param query  [String]       The search query's keywords. For details access {https://developer.spotify.com/web-api/search-item here} and look for the q parameter description.
+    # @param limit  [Integer]      Maximum number of tracks to return. Maximum: 50. Default: 20.
+    # @param offset [Integer]      The index of the first track to return. Use with limit to get the next set of tracks. Default: 0.
+    # @param market [String, Hash] Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code} or the hash { from: user }, where user is a RSpotify user authenticated using OAuth with scope *user-read-private*. This will take the user's country as the market value. For details access {https://developer.spotify.com/web-api/search-item here} and look for the market parameter description.
     # @return [Array<Track>]
     #
     # @example
-    #           tracks = RSpotify::Track.search('Thriller')
-    #           tracks.size        #=> 20
-    #           tracks.first.class #=> RSpotify::Track
-    #           tracks.first.name  #=> "Thriller"
-    #
-    #           tracks = RSpotify::Track.search('Thriller', limit: 10)
-    #           tracks.size #=> 10
+    #           tracks = RSpotify::Track.search('Wanna Know')
+    #           tracks = RSpotify::Track.search('Wanna Know', limit: 10, market: 'US')
+    #           tracks = RSpotify::Track.search('Wanna Know', market: { from: user })
     def self.search(query, limit: 20, offset: 0, market: nil)
       super(query, 'track', limit: limit, offset: offset, market: market)
     end

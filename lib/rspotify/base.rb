@@ -55,20 +55,18 @@ module RSpotify
 
     # Returns array of RSpotify objects matching the query, ordered by popularity
     #
-    # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
-    # @param types  [String]  Valid types are: album, artist, track and playlist. Separate multiple types with commas.
-    # @param limit  [Integer] Maximum number of objects to return. Maximum: 50. Default: 20.
-    # @param offset [Integer] The index of the first object to return. Use with limit to get the next set of objects. Default: 0.
-    # @return [Array<Album>, Array<Artist>, Array<Track>, Array<Playlist>]
+    # @param query  [String]       The search query's keywords. For details access {https://developer.spotify.com/web-api/search-item here} and look for the q parameter description.
+    # @param types  [String]       Valid types are: album, artist, track and playlist. Separate multiple types with commas.
+    # @param limit  [Integer]      Maximum number of objects to return. Maximum: 50. Default: 20.
+    # @param offset [Integer]      The index of the first object to return. Use with limit to get the next set of objects. Default: 0.
+    # @param market [String, Hash] Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code} or the hash { from: user }, where user is a RSpotify user authenticated using OAuth with scope *user-read-private*. This will take the user's country as the market value. (Playlist results are not affected by the market parameter.) For details access {https://developer.spotify.com/web-api/search-item here} and look for the market parameter description.
+    # @return [Array<Album>, Array<Artist>, Array<Track>, Array<Playlist>, Array<Base>]
     #
     # @example
     #           artists = RSpotify::Base.search('Arctic', 'artist')
-    #           artists.size        #=> 20
-    #           artists.first.class #=> RSpotify::Artist
-    #           artists.first.name  #=> "Arctic Monkeys"
-    #
-    #           albums = RSpotify::Base.search('AM', 'album', limit: 10)
-    #           albums.size #=> 10
+    #           albums  = RSpotify::Base.search('AM', 'album', limit: 10, market: 'US')
+    #           mixed   = RSpotify::Base.search('Arctic', 'artist, album, track')
+    #           albums  = RSpotify::Base.search('AM', 'album', market: { from: user })
     def self.search(query, types, limit: 20, offset: 0, market: nil)
       query = URI::encode query
       types.gsub!(/\s+/, '')
