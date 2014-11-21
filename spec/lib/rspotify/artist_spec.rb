@@ -103,11 +103,11 @@ describe RSpotify::Artist do
       expect(artists.size)        .to eq 10
       expect(artists.map(&:name)) .to include('Arctic Flame')
 
-      artists = VCR.use_cassette("artist:search:Arctic:market:US") do
-        RSpotify::Artist.search("Arctic", market: "US")
+      artists = VCR.use_cassette('artist:search:Arctic:market:ES') do
+        RSpotify::Artist.search('Arctic', market: 'ES')
       end
-      # No country code info provided in response
-      expect(artists) .to eq(artists)
+      expect(artists.size)        .to eq 20
+      expect(artists.map(&:name)) .to include('Arctic Queen', 'Arctic Sleep')
     end
   end
 end
