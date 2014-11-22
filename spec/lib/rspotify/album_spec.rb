@@ -64,6 +64,40 @@ describe RSpotify::Album do
     end
   end
 
+  describe 'Album::new_releases' do
+    # Keys generated specifically for the tests. Should be removed in the future
+    let(:client_id) { '5ac1cda2ad354aeaa1ad2693d33bb98c' }
+    let(:client_secret) { '155fc038a85840679b55a1822ef36b9b' }
+
+    before(:each) do
+    VCR.use_cassette('authenticate:client') do
+        RSpotify.authenticate(client_id, client_secret)
+      end
+    end
+
+    it 'should find the appropriate new releases' do
+      albums = VCR.use_cassette('album:new_releases') do 
+        RSpotify::Album.new_releases
+      end
+      expect(albums.size)        .to eq 20
+      expect(albums.map(&:name)) .to include('A13', 'Singles', 'Magic')
+    end
+
+    it 'should accept additional options' do
+      albums = VCR.use_cassette('album:new_releases:limit:10:offset:10') do 
+        RSpotify::Album.new_releases(limit: 10, offset: 10)
+      end
+      expect(albums.size)        .to eq 10
+      expect(albums.map(&:name)) .to include('Recess', 'Atlas', 'Magic')
+
+      albums = VCR.use_cassette('album:new_releases:country:ES') do 
+        RSpotify::Album.new_releases(country: 'ES')
+      end
+      expect(albums.size)        .to eq 20
+      expect(albums.map(&:name)) .to include('Me Olvide de Vivir', 'Amor Futuro')
+    end
+  end
+
   describe 'Album::search' do
     it 'should search for the right albums' do
       albums = VCR.use_cassette('album:search:AM') do 

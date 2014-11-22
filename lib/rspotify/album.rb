@@ -30,6 +30,23 @@ module RSpotify
       super(ids, 'album')
     end
 
+    # Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
+    #
+    # @param limit   [Integer] Maximum number of albums to return. Maximum: 50. Default: 20.
+    # @param offset  [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
+    # @param country [String]  Optional. A country: an {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want the list of returned albums to be relevant to a particular country. If omitted, the returned albums will be relevant to all countries.
+    # @return [Array<Album>]
+    #
+    # @example
+    #           albums = RSpotify::Album.new_releases
+    #           albums = RSpotify::Album.new_releases(country: 'US', limit: 10)
+    def self.new_releases(limit: 20, offset: 0, country: nil)
+      url = "browse/new-releases?limit=#{limit}&offset=#{offset}"
+      url << "&country=#{country}" if country
+      json = RSpotify.auth_get(url)
+      json['albums']['items'].map { |i| Album.new i }
+    end
+
     # Returns array of Album objects matching the query, ordered by popularity
     #
     # @param query  [String]       The search query's keywords. For details access {https://developer.spotify.com/web-api/search-item here} and look for the q parameter description.
