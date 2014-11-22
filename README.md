@@ -101,8 +101,13 @@ playlist.description        #=> "Iconic soundtracks featured..."
 playlist.followers['total'] #=> 13
 playlist.tracks             #=> (Track array)
 
+# Get user's playlist
 my_user = RSpotify::User.find("my_user")
 my_playlists = my_user.playlists #=> (Playlist array)
+
+# Access featured content from Spotify's Browse tab
+featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
+new_releases = RSpotify::Album.new_releases(country: 'ES')
 ```
 
 RSpotify focuses on objects behaviour so you can forget the API and worry about your tracks, artists and so on.
