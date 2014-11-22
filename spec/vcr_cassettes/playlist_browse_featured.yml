@@ -1,0 +1,98 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/browse/featured-playlists?limit=20&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQCXC1A5_dYyPER__Z_Ow0oqWTLV3cGeipaHUyQEVPgRMIenGpkKsUcmOf6eG_Uth_eDXKvI-9v-NdL7judXOg
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sat, 22 Nov 2014 01:16:06 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      vary:
+      - Accept-Encoding
+      cache-control:
+      - private, max-age=0
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+      content-encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        y1+vINZpqjMAAA==
+    http_version: '1.1'
+  recorded_at: Sat, 22 Nov 2014 01:16:06 GMT
+recorded_with: VCR 2.9.3

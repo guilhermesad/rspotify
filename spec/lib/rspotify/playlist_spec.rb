@@ -15,6 +15,36 @@ describe RSpotify::Playlist do
     end
   end
 
+  describe 'Playlist::browse_featured' do
+    it 'should find the appropriate featured playlists' do
+      playlists = VCR.use_cassette('playlist:browse_featured') do 
+        RSpotify::Playlist.browse_featured
+      end
+      expect(playlists.size)        .to eq 13
+      expect(playlists.map(&:name)) .to include('Dance Mega Mix', 'Peaceful Piano', 'Sleep')
+    end
+
+    it 'should accept additional options' do
+      playlists = VCR.use_cassette('playlist:browse_featured:limit:10:offset:10') do 
+        RSpotify::Playlist.browse_featured(limit: 10, offset: 10)
+      end
+      expect(playlists.size)        .to eq 3
+      expect(playlists.map(&:name)) .to include('Sleep', 'Late Night R&B')
+
+      playlists = VCR.use_cassette('playlist:browse_featured:locale:es_MX') do 
+        RSpotify::Playlist.browse_featured(locale: 'es_MX')
+      end
+      expect(playlists.size)        .to eq 13
+      expect(playlists.map(&:name)) .to include('Dance Mega Mix', 'Peaceful Piano', 'Sleep')
+
+      playlists = VCR.use_cassette('playlist:browse_featured:country:ES:timestamp:2014-10-23T09:00:00') do 
+        RSpotify::Playlist.browse_featured(country: 'ES', timestamp: '2014-10-23T09:00:00')
+      end
+      expect(playlists.size)        .to eq 17
+      expect(playlists.map(&:name)) .to include('En el trabajo', 'En las Nubes')
+    end
+  end
+
   describe 'Playlist::find' do
 
     let(:playlist) do

@@ -9,6 +9,28 @@ module RSpotify
   # @attr [Boolean]      public        true if the playlist is not marked as secret
   class Playlist < Base
 
+    # Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s “Browse” tab).
+    #
+    # @param limit    [Integer] Maximum number of playlists to return. Maximum: 50. Default: 20.
+    # @param offset   [Integer] The index of the first playlist to return. Use with limit to get the next set of playlists. Default: 0.
+    # @param locale    [String] Optional. The desired language, consisting of a lowercase {http://en.wikipedia.org/wiki/ISO_639 ISO 639 language code} and an uppercase {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}, joined by an underscore. For details access {https://developer.spotify.com/web-api/get-list-featured-playlists/ here} and look for the locale parameter description.
+    # @param country   [String] Optional. A country: an {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want the list of returned playlists to be relevant to a particular country. If omitted, the returned playlists will be relevant to all countries.
+    # @param timestamp [String] Optional. A timestamp in {http://en.wikipedia.org/wiki/ISO_8601 ISO 8601} format: yyyy-MM-ddTHH:mm:ss. Use this parameter to specify the user's local time to get results tailored for that specific date and time in the day. If not provided, the response defaults to the current UTC time. Example: "2014-10-23T09:00:00" for a user whose local time is 9AM.
+    # @return [Array<Playlist>]
+    #
+    # @example
+    #           playlists = RSpotify::Playlist.browse_featured
+    #           playlists = RSpotify::Playlist.browse_featured(locale: 'es_MX', limit: 10)
+    #           playlists = RSpotify::Playlist.browse_featured(country: 'US', timestamp: '2014-10-23T09:00:00')
+    def self.browse_featured(limit: 20, offset: 0, **options)
+      url = "browse/featured-playlists?limit=#{limit}&offset=#{offset}"
+      options.each do |option, value|
+        url << "&#{option}=#{value}"
+      end
+      json = RSpotify.auth_get(url)
+      json['playlists']['items'].map { |i| Playlist.new i }
+    end
+
     # Returns Playlist object with user_id and id provided. If id is "starred", returns starred playlist from user.
     #
     # @param user_id [String]
