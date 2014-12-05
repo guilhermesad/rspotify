@@ -96,9 +96,9 @@ module RSpotify
       end
 
       @added_by = if tracks
-        tracks.select! { |t| t['added_by'] }
         tracks.map do |t|
-          [t['track']['id'], t['added_by']['id']]
+          added_by = User.new t['added_by'] if t['added_by']
+          [t['track']['id'], added_by]
         end.to_h
       end
 
