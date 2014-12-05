@@ -86,6 +86,14 @@ module RSpotify
         options['tracks']['items'].map { |i| Track.new i['track'] }
       end
 
+      @added_times = if options['tracks'] && options['tracks']['items']
+        Hash[options['tracks']['items'].map { |i| [i['track']['id'], Time.parse(i['added_at'])] }]
+      end
+
+      @added_by = if options['tracks'] && options['tracks']['items']
+        Hash[options['tracks']['items'].select { |i| i['added_by'] }.map { |i| [i['track']['id'], i['added_by']['id']] }]
+      end
+
       super(options)
     end
 
