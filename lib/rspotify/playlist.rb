@@ -1,12 +1,14 @@
 module RSpotify
 
-  # @attr [Boolean]      collaborative true if the owner allows other users to modify the playlist
-  # @attr [String]       description   The playlist description
-  # @attr [Hash]         followers     Information about the followers of the playlist
-  # @attr [Array<Hash>]  images        The playlist images
-  # @attr [String]       name          The name of the playlist
-  # @attr [User]         owner         The user who owns the playlist
-  # @attr [Boolean]      public        true if the playlist is not marked as secret
+  # @attr [Boolean]     collaborative   true if the owner allows other users to modify the playlist
+  # @attr [String]      description     The playlist description
+  # @attr [Hash]        followers       Information about the followers of the playlist
+  # @attr [Array<Hash>] images          The playlist images
+  # @attr [String]      name            The name of the playlist
+  # @attr [User]        owner           The user who owns the playlist
+  # @attr [Boolean]     public          true if the playlist is not marked as secret
+  # @attr [Hash]        tracks_added_at A hash containing the date and time each track was added to the playlist
+  # @attr [Hash]        tracks_added_by A hash containing the user that added each track to the playlist
   class Playlist < Base
 
     # Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s “Browse” tab).
