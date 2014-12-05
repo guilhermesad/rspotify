@@ -90,7 +90,8 @@ module RSpotify
 
       @added_times = if tracks
         tracks.map do |t|
-          [t['track']['id'], Time.parse(t['added_at'])]
+          added_at = Time.parse t['added_at'] if t['added_at']
+          [t['track']['id'], added_at]
         end.to_h
       end
 
