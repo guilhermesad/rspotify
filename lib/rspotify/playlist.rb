@@ -82,16 +82,18 @@ module RSpotify
         User.new options['owner']
       end
 
-      @tracks_cache = if options['tracks'] && options['tracks']['items']
-        options['tracks']['items'].map { |i| Track.new i['track'] }
+      tracks = options['tracks']['items'] if options['tracks']
+
+      @tracks_cache = if tracks
+        tracks.map { |t| Track.new t['track'] }
       end
 
-      @added_times = if options['tracks'] && options['tracks']['items']
-        Hash[options['tracks']['items'].map { |i| [i['track']['id'], Time.parse(i['added_at'])] }]
+      @added_times = if tracks
+        Hash[tracks.map { |t| [t['track']['id'], Time.parse(t['added_at'])] }]
       end
 
-      @added_by = if options['tracks'] && options['tracks']['items']
-        Hash[options['tracks']['items'].select { |i| i['added_by'] }.map { |i| [i['track']['id'], i['added_by']['id']] }]
+      @added_by = if tracks
+        Hash[tracks.select { |t| t['added_by'] }.map { |t| [t['track']['id'], t['added_by']['id']] }]
       end
 
       super(options)
