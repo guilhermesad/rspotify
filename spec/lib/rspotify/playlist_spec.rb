@@ -61,7 +61,7 @@ describe RSpotify::Playlist do
       expect(playlist.followers['total'])       .to be    > 0
       expect(playlist.href)                     .to eq    'https://api.spotify.com/v1/users/wizzler/playlists/00wHcTN0zQiun4xri9pmvX'
       expect(playlist.id)                       .to eq    '00wHcTN0zQiun4xri9pmvX'
-      expect(playlist.images.first['url'])      .to match %r{https://dv72vokf4bztv\.cloudfront}
+      expect(playlist.images.first['url'])      .to match %r{https://i\.scdn\.co/image/418ce596327dc3a0f4d377db80421bffb3b94a9a}
       expect(playlist.name)                     .to eq    'Movie Soundtrack Masterpieces'
       expect(playlist.public)                   .to eq    true
       expect(playlist.type)                     .to eq    'playlist'
@@ -77,9 +77,9 @@ describe RSpotify::Playlist do
     it 'should find playlist with correct tracks' do
       tracks = playlist.tracks
       expect(tracks)             .to be_an Array
-      expect(tracks.size)        .to eq 50
+      expect(tracks.size)        .to eq 53
       expect(tracks.first)       .to be_an RSpotify::Track
-      expect(tracks.map(&:name)) .to include('Waking Up', 'Honor Him', 'Circle of Life', 'Time')
+      expect(tracks.map(&:name)) .to include('Waking Up', 'Honor Him', 'Circle Of Life - From "The Lion King"', 'Time')
     end
 
     context 'starred playlist' do
@@ -128,8 +128,24 @@ describe RSpotify::Playlist do
         starred_playlist.tracks(offset: 100, limit: 100)
       end
       expect(tracks)           .to be_an Array
-      expect(tracks.size)      .to eq 83
-      expect(tracks.last.name) .to eq 'Blowfish - Lake People Remix'
+      expect(tracks.size)      .to eq 85
+      expect(tracks.last.name) .to eq 'On The Streets - Kollectiv Turmstrasse Let Freedom Ring Remix'
+    end
+
+    it 'should have time that track was added' do
+      tracks = VCR.use_cassette('playlist:tracks:118430647:starred') do
+        starred_playlist.tracks(offset: 0, limit: 100)
+      end
+      expected_time = Time.parse('2012-08-05T16:28:24Z')
+      expect(starred_playlist.added_times[tracks.first.id]) .to eq(expected_time)
+    end
+
+    it 'should have information about user that added the track' do
+      tracks = VCR.use_cassette('playlist:tracks:118430647:starred') do
+        starred_playlist.tracks(offset: 0, limit: 100)
+      end
+      index_with_added_by_data = 97
+      expect(starred_playlist.added_by[tracks[index_with_added_by_data].id]) .to eq('118430647')
     end
   end
 
