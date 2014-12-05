@@ -25,6 +25,10 @@ Or install it yourself as:
 
     $ gem install rspotify
 
+## Running Tests
+
+    $ bundle exec rspec
+
 ## Usage
 
 Directly access Spotify public data such as albums, tracks, artists, playlists and users:
