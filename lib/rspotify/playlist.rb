@@ -88,18 +88,12 @@ module RSpotify
         tracks.map { |t| Track.new t['track'] }
       end
 
-      @added_times = if tracks
-        tracks.map do |t|
-          added_at = Time.parse t['added_at'] if t['added_at']
-          [t['track']['id'], added_at]
-        end.to_h
+      @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
+        Time.parse added_at
       end
 
-      @added_by = if tracks
-        tracks.map do |t|
-          added_by = User.new t['added_by'] if t['added_by']
-          [t['track']['id'], added_by]
-        end.to_h
+      @tracks_added_by = hash_for(tracks, 'added_by') do |added_by|
+        User.new added_by
       end
 
       super(options)
@@ -212,6 +206,16 @@ module RSpotify
       User.oauth_put(@owner.id, url, {})
       @tracks_cache = nil
       tracks
+    end
+
+    private
+
+    def hash_for(tracks, field)
+      tracks.map do |track|
+        key = track['track']['id']
+        value = yield track[field] if track[field]
+        [key, value]
+      end.to_h if tracks
     end
   end
 end
