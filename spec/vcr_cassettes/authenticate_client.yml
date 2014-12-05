@@ -8,7 +8,7 @@ http_interactions:
       string: grant_type=client_credentials
     headers:
       accept:
-      - "*/*; q=0.5, application/xml"
+      - '*/*; q=0.5, application/xml'
       accept-encoding:
       - gzip, deflate
       authorization:
@@ -27,7 +27,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Sat, 22 Nov 2014 00:55:48 GMT
+      - Fri, 05 Dec 2014 05:30:40 GMT
       content-type:
       - application/json
       transfer-encoding:
@@ -39,6 +39,8 @@ http_interactions:
       vary:
       - Accept-Encoding
       - Accept-Encoding
+      x-ua-compatible:
+      - IE=edge
       x-frame-options:
       - deny
       content-security-policy:
@@ -50,9 +52,9 @@ http_interactions:
         ''self'' https://d2d1dxiu3v1f2i.cloudfront.net; style-src ''self'' ''unsafe-inline''
         https://d2d1dxiu3v1f2i.cloudfront.net; frame-src ''self'' https://www.spotify.com;'
       cache-control:
-      - ": no-cache, no-store, must-revalidate"
+      - ': no-cache, no-store, must-revalidate'
       pragma:
-      - ": no-cache"
+      - ': no-cache'
       x-content-type-options:
       - nosniff
       strict-transport-security:
@@ -62,10 +64,10 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAAx3NwQqCMBgA4HfZOcGQjLqViYnWVNKsy8+Yf7YkXc6sEb17
-        5vW7fB/COEeloGsqrMmSrGMnd6arGRQnHbkJwBnoy2wex0OYWdxDIdk21bGb
-        RWWy87H2ZBWolN/pxUYP0u4KuMmD3jcWvbEvwvntWeS0JBMyBtBpif8FWYvt
-        oPiWokUFYrgt2zS/P++J3puRAAAA
+        H4sIAAAAAAAAAx3NTQuCMBgA4P+yc8GYy6KbSVCW+BF+0GWovZEUbeydOov+
+        e9b1uTxvUjUNIAoj7/Aka7JJ/JdXIoAjQs7leb+6xceMhf7SY4VM862RneWQ
+        B+jow+AzGqnaFpculuVYu5ip4XoKIr5gRTqnaYJVv+sfHpmRfyDMqOC3QKVB
+        TwpWtRpQtNPtuJR+voT3CLuRAAAA
     http_version: '1.1'
-  recorded_at: Sat, 22 Nov 2014 00:55:48 GMT
+  recorded_at: Fri, 05 Dec 2014 05:30:42 GMT
 recorded_with: VCR 2.9.3
