@@ -82,10 +82,29 @@ describe RSpotify::Playlist do
       expect(tracks.map(&:name)) .to include('Waking Up', 'Honor Him', 'Circle Of Life - From "The Lion King"', 'Time')
     end
 
+    it 'should find playlist with correct times each track was added' do
+      tracks_added_at = playlist.tracks_added_at
+      expect(tracks_added_at.size).to eq 53
+
+      track_id = '2o660Ri2wTg7Rv6cKbFBCe'
+      expected_time = Time.parse('2014-04-20T20:52:42Z')
+      expect(tracks_added_at[track_id]).to eq expected_time
+    end
+
+    it 'should find playlist with correct users that added each track' do
+      tracks_added_by = playlist.tracks_added_by
+      expect(tracks_added_by.size).to eq 53
+
+      track_id = '2o660Ri2wTg7Rv6cKbFBCe'
+      expected_user_id = 'wizzler'
+      expect(tracks_added_by[track_id].class).to eq RSpotify::User
+      expect(tracks_added_by[track_id].id).to eq expected_user_id
+    end
+
     context 'starred playlist' do
       it "should support starred playlists" do
-        expect(starred_playlist.name).to  eq "Starred"
-        expect(starred_playlist.href).to   eq "https://api.spotify.com/v1/users/118430647/starred"
+        expect(starred_playlist.name).to eq 'Starred'
+        expect(starred_playlist.href).to eq 'https://api.spotify.com/v1/users/118430647/starred'
       end
     end
   end
@@ -130,22 +149,6 @@ describe RSpotify::Playlist do
       expect(tracks)           .to be_an Array
       expect(tracks.size)      .to eq 85
       expect(tracks.last.name) .to eq 'On The Streets - Kollectiv Turmstrasse Let Freedom Ring Remix'
-    end
-
-    it 'should have time that track was added' do
-      tracks = VCR.use_cassette('playlist:tracks:118430647:starred') do
-        starred_playlist.tracks(offset: 0, limit: 100)
-      end
-      expected_time = Time.parse('2012-08-05T16:28:24Z')
-      expect(starred_playlist.added_times[tracks.first.id]) .to eq(expected_time)
-    end
-
-    it 'should have information about user that added the track' do
-      tracks = VCR.use_cassette('playlist:tracks:118430647:starred') do
-        starred_playlist.tracks(offset: 0, limit: 100)
-      end
-      index_with_added_by_data = 97
-      expect(starred_playlist.added_by[tracks[index_with_added_by_data].id]) .to eq('118430647')
     end
   end
 
