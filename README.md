@@ -25,10 +25,6 @@ Or install it yourself as:
 
     $ gem install rspotify
 
-## Running Tests
-
-    $ bundle exec rspec
-
 ## Usage
 
 Directly access Spotify public data such as albums, tracks, artists, playlists and users:
@@ -213,6 +209,7 @@ If you'd like to use OAuth outside rails, have a look [here](https://developer.s
 
 1. Fork it ( https://github.com/guilhermesad/rspotify/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+3. Test your changes (`bundle exec rspec`)
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create a new Pull Request
