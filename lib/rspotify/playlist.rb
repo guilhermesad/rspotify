@@ -89,11 +89,16 @@ module RSpotify
       end
 
       @added_times = if tracks
-        Hash[tracks.map { |t| [t['track']['id'], Time.parse(t['added_at'])] }]
+        tracks.map do |t|
+          [t['track']['id'], Time.parse(t['added_at'])]
+        end.to_h
       end
 
       @added_by = if tracks
-        Hash[tracks.select { |t| t['added_by'] }.map { |t| [t['track']['id'], t['added_by']['id']] }]
+        tracks.select! { |t| t['added_by'] }
+        tracks.map do |t|
+          [t['track']['id'], t['added_by']['id']]
+        end.to_h
       end
 
       super(options)
