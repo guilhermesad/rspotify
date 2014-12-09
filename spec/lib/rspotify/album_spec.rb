@@ -12,6 +12,7 @@ describe RSpotify::Album do
     it 'should find album with correct attributes' do
       expect(@album.album_type)               .to eq      'album'
       expect(@album.available_markets)        .to include *%w(AD AT BE BG CA EE ES FR GR MC TW US)
+      expect(@album.copyrights)               .to include ({'text' => '2013 Domino Recording Co Ltd', 'type' => 'C'})
       expect(@album.external_ids['upc'])      .to eq      '887828031795'
       expect(@album.external_urls['spotify']) .to eq      'https://open.spotify.com/album/5bU1XKYxHhEwukllT20xtk'
       expect(@album.genres)                   .to be_an   Array 
@@ -24,7 +25,6 @@ describe RSpotify::Album do
       expect(@album.release_date_precision)   .to eq      'day'
       expect(@album.type)                     .to eq      'album'
       expect(@album.uri)                      .to eq      'spotify:album:5bU1XKYxHhEwukllT20xtk'
-      expect(@album.copyrights)               .to include ({'text' => '2013 Domino Recording Co Ltd', 'type' => 'C'})
     end
 
     it 'should find album with correct artists' do
