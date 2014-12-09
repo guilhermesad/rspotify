@@ -64,6 +64,7 @@ describe RSpotify::Playlist do
       expect(playlist.images.first['url'])      .to match %r{https://i\.scdn\.co/image/418ce596327dc3a0f4d377db80421bffb3b94a9a}
       expect(playlist.name)                     .to eq    'Movie Soundtrack Masterpieces'
       expect(playlist.public)                   .to eq    true
+      expect(playlist.snapshot_id)              .to eq    'ViCZCcnhRtzkGq09wO4OPxvC/UBP/ZqMjrmTYoNurZ706SIXyMJiKb/zj27NYjiP'
       expect(playlist.type)                     .to eq    'playlist'
       expect(playlist.uri)                      .to eq    'spotify:user:wizzler:playlist:00wHcTN0zQiun4xri9pmvX'
     end

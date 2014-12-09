@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       accept:
-      - '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       accept-encoding:
       - gzip, deflate
       user-agent:
@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 15 Aug 2014 19:41:48 GMT
+      - Tue, 09 Dec 2014 03:37:39 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -37,7 +37,7 @@ http_interactions:
       access-control-allow-headers:
       - Accept, Authorization, Origin, Content-Type
       access-control-allow-origin:
-      - '*'
+      - "*"
       access-control-max-age:
       - '604800'
       access-control-allow-methods:
@@ -53,16 +53,16 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA41T22rbQBB9z1cIPYdoL9qL/ZY3BxoILYFAKGUvs9YSWVKk
-        tVsT8u9ZreQWYVz8uGdmzjkzs/Nxk2U5/AnQN6r+te/rIc/W2UdEIz50bfDu
-        OCJ5FUI3rIui7aC5mwN3pt0Vqg9+CIX41khUP//gG0Di5bB5kO/vm00eiT5v
-        R40tND0k8tcsv6+TYPAHyJ7arvjemrf8doEXD431kJ0i6TWmLOG/xdnPpFL1
-        4BZ2VecXbg94Njxccpx4vE0sF5qaUnZqe2ponlcFfluFsRJTSsesSBVnunAU
-        /RjbxNEVfmQonCKwMgorIviKKRBOoljOkF0pRgFjywgFE5uf+H57G6qkgRBK
-        4z2t65+8ZNeqCxBSMEPBAmjquHHEMoclpUYbkBhKjrVT9kydl5fECRdXts60
-        RlpyipgqFTUYnLYWkDaGSCw4I1haJ5k7Eyf/6fxabVAaBCCOeImjCY0s4wSi
-        EUWkE4gKt9IlyDNtXo5Dn/9bo3aQtnvfm+BN9tg2b3AcUlHetd2+Vr0P6YJE
-        mcBw7KaK6W6mzH3vE8t8V+sptr7w/W4+vwBZCPNbtgMAAA==
+        H4sIAAAAAAAAA41TyW7bMBC95ysEnYuIi7jIt95coDkFAQoURcFlaBGlJUWi
+        kxhB/r0UJacJDBe+Duct84bzelMUJbxEGDsVfh/GMJXFpnhN1VSfhj56d5wr
+        ZRvjMG2qqh+gu10fbk2/r9QY/RQr8b2TKDzc8y0g8eNp+00+Pm63ZSJ6+zJr
+        uD6E/hnGj/ztCG4m7w4hzE2pLfZRhbmGa95Qyd/xO+hGyOCfxa/MeEK/W1OD
+        /+TsCa/mpkvuMo+3ecALAywte7U7ia/ZtOB3bcxOKaWr+5Tfp7CSH2O7FFPl
+        Z4bKKQKNUVgRwRumQDiJEpwh2yhGAWPLCAUD5cr37G1sswZCKEdxWs0/ecmu
+        VRcgpGCGggXQ1HHjiGUOS0qNNiAx1Bxrp+yZOq8viRMurhydaY205BQxVStq
+        MDhtLSBtDJFYcEawtE4ydyZO/jP5tdqgNAhAHPEaJxMaWcYJJCOKSCcQFa7R
+        NcgzbV7Poa//rVN7yNv9OproTXHXd3/gOGVQOfTDIajRx3wtIq+kjMdhQSw3
+        snQeRp9Z1hvaLG+bC9/v5u0veWVR1KIDAAA=
     http_version: '1.1'
-  recorded_at: Fri, 15 Aug 2014 19:41:48 GMT
-recorded_with: VCR 2.8.0
+  recorded_at: Tue, 09 Dec 2014 03:37:36 GMT
+recorded_with: VCR 2.9.3

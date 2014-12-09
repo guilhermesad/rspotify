@@ -7,6 +7,7 @@ module RSpotify
   # @attr [String]      name            The name of the playlist
   # @attr [User]        owner           The user who owns the playlist
   # @attr [Boolean]     public          true if the playlist is not marked as secret
+  # @attr [String]      snapshot_id     The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version
   # @attr [Hash]        tracks_added_at A hash containing the date and time each track was added to the playlist
   # @attr [Hash]        tracks_added_by A hash containing the user that added each track to the playlist
   class Playlist < Base
@@ -79,6 +80,7 @@ module RSpotify
       @images        = options['images']
       @name          = options['name']
       @public        = options['public']
+      @snapshot_id   = options['snapshot_id']
 
       @owner = if options['owner']
         User.new options['owner']

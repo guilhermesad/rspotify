@@ -8,11 +8,11 @@ http_interactions:
       string: ''
     headers:
       accept:
-      - '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       accept-encoding:
       - gzip, deflate
       authorization:
-      - Bearer BQCzAXsee3_M44oZI8hPLU2MC7A2WoRVEtoux4eVJs3rKwC20OpbxWduPoXyb6sUpwfSJO452WR-0RQsavHvlA
+      - Bearer BQAWCK7KIbEWJ_be5H5oBh1TziB8r-ScMZNZ639nkz2aMr1a0W8_O9cEzWN7VY6Eh2zdqSdrRh92aTj_UYuCSA
       user-agent:
       - Ruby
   response:
@@ -23,7 +23,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 05 Dec 2014 05:30:41 GMT
+      - Tue, 09 Dec 2014 03:56:00 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -39,7 +39,7 @@ http_interactions:
       access-control-allow-headers:
       - Accept, Authorization, Origin, Content-Type
       access-control-allow-origin:
-      - '*'
+      - "*"
       access-control-max-age:
       - '604800'
       access-control-allow-methods:
@@ -63,7 +63,7 @@ http_interactions:
         qmy3ccFaIxpCoVlR0bVwnfpdO7pgo64LzarsVSvtzl8r8ZD1S0e36rL6d7dV
         bUeD/i98F99vN9FH2It/jftOp7m2utpo6vpfb9//SzVqq922bq0+V15fq/j7
         Z7+rhDzvqvMj8npS6datl1bFa9aerlfQ7b/iK4aYv8azbiWvdt/SYXSperda
-        jRqhWafRkdXoe5R6g3/7s108pDbGJJuVoSE90XhU7ZFhtU3jisdUCeJf1DD0
+        jRqhWafRkdXoe5S5g3/7s108pDbGJJuVoSE90XhU7ZFhtU3jisdUCeJf1DD0
         fpOavNPxmP/z5xxhygbzEw0GQ1FBHVOzWokar1rUVdr2BGdOoLgkoRVwxwl8
         l1iM+mHoc9+zpCfjuSn8r/gydVmLH6qVUvQcFM4Gj06hJNu4Vc2KVhhG3Lbx
         XNetxD0z3Msp7mY0orf7hX+de9bj4b1P69sj8vO7nV6z/ytGd+rnN7utSvxr
@@ -525,7 +525,7 @@ http_interactions:
         hj+9a8d7KYMsCEfhI0PGPrQcGF8mjwfi6o+/690aapii81I2Q6RhmI7hSONn
         DdNKtVKrxNqK9Ke24kodT0b0nXq3Wu2PY6URhm0df/MtHl6JKzoa3VgBLtGw
         0+jIavQ9m+OC8WbxTp5sVmWvCuG9+Ddf+Vh+1W3r1tpz5fW1ir9/Nl0j5HlX
-        nR+R15NKt269tCpes/Z0vfLf/vX/Azqa+yujnAIA
+        nR+R15NKt269tCpes/Z0vfLf/vX/A+c6PfujnAIA
     http_version: '1.1'
-  recorded_at: Fri, 05 Dec 2014 05:30:43 GMT
+  recorded_at: Tue, 09 Dec 2014 03:55:57 GMT
 recorded_with: VCR 2.9.3

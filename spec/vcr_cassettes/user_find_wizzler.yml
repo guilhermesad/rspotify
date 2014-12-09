@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       accept:
-      - '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       accept-encoding:
       - gzip, deflate
       user-agent:
@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 15 Aug 2014 19:59:35 GMT
+      - Tue, 09 Dec 2014 03:48:47 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -37,7 +37,7 @@ http_interactions:
       access-control-allow-headers:
       - Accept, Authorization, Origin, Content-Type
       access-control-allow-origin:
-      - '*'
+      - "*"
       access-control-max-age:
       - '604800'
       access-control-allow-methods:
@@ -53,10 +53,11 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA1WOQQrDMAwE732F0bnE9OrPlNAqxODGQpLbJiF/ry3SQK6z
-        O8uuF+cAv4o89eleOAm44NZKKxfKGoe5ERhVSYL3mXDq9qB75Jcvguw/cVkS
-        MlRvu7bJkXE4eT3Fk/a+mSmHalp8mvSfM6YzodHWB0OFo5H9R2hJOD5sP++v
-        a1jVAAAA
+        H4sIAAAAAAAAA1VQSw6CMBDde4qma0MlcWF6CuPWGNLIIE0G2vQjAuHutgUa
+        3b5535kPhNBaWo1irHrRASWc0JvqBdbkqjot6DFS4OPABLDyBm3kzAENuNXK
+        yWZMqtY5bTljSkNfbIfiqTrmLRg2yGlCMDTolmTZKEQ1gPm1aw000av3iJEU
+        aE45gRE7n8pLFu/EHCq0/Mt8lynW5tyUKevUdO+yYp14QSpxJ4+EuFGvf4gO
+        635vZFJus3i88Dxp+QIkQWV6RwEAAA==
     http_version: '1.1'
-  recorded_at: Fri, 15 Aug 2014 19:59:35 GMT
-recorded_with: VCR 2.8.0
+  recorded_at: Tue, 09 Dec 2014 03:48:44 GMT
+recorded_with: VCR 2.9.3

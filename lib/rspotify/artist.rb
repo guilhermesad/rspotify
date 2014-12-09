@@ -1,5 +1,6 @@
 module RSpotify
 
+  # @attr [Hash]          followers  Information about the followers of the artist
   # @attr [Array<String>] genres     A list of the genres the artist is associated with. If not yet classified, the array is empty
   # @attr [Array<Hash>]   images     Images of the artist in various sizes, widest first
   # @attr [String]        name       The name of the artist
@@ -41,6 +42,7 @@ module RSpotify
     end
 
     def initialize(options = {})
+      @followers  = options['followers']
       @genres     = options['genres']
       @images     = options['images']
       @name       = options['name']
