@@ -107,7 +107,7 @@ module RSpotify
 
     # Returns all playlists from user
     #
-    # @param limit  [Integer] Maximum number of playlists to return. Maximum: 50. Default: 20.
+    # @param limit  [Integer] Maximum number of playlists to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param offset [Integer] The index of the first playlist to return. Use with limit to get the next set of playlists. Default: 0.
     # @return [Array<Playlist>]
     #
@@ -161,7 +161,7 @@ module RSpotify
 
     # Returns the tracks saved in the Spotify user’s “Your Music” library
     #
-    # @param limit  [Integer] Maximum number of tracks to return. Maximum: 50. Default: 20.
+    # @param limit  [Integer] Maximum number of tracks to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of tracks. Default: 0.
     # @return [Array<Track>]
     #
