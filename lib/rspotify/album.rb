@@ -3,6 +3,7 @@ module RSpotify
   # @attr [String]        album_type             The type of the album (album, single, compilation)
   # @attr [Array<Artist>] artists                The artists of the album
   # @attr [Array<String>] available_markets      The markets in which the album is available. See {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country codes}
+  # @attr [Array<Hash>]   copyrights             The copyright statements of the album
   # @attr [Hash]          external_ids           Known external IDs for the album
   # @attr [Array<String>] genres                 A list of the genres used to classify the album. If not yet classified, the array is empty
   # @attr [Array<Hash>]   images                 The cover art for the album in various sizes, widest first
@@ -66,6 +67,7 @@ module RSpotify
     def initialize(options = {})
       @album_type             = options['album_type']
       @available_markets      = options['available_markets']
+      @copyrights             = options['copyrights']
       @external_ids           = options['external_ids']
       @genres                 = options['genres']
       @images                 = options['images']
