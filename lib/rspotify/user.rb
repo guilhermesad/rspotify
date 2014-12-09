@@ -189,9 +189,10 @@ module RSpotify
 
     # Returns a hash containing all user attributes
     def to_hash
-      instance_variables.map do |var|
+      pairs = instance_variables.map do |var|
         [var.to_s.delete('@'), instance_variable_get(var)]
-      end.to_h
+      end
+      Hash[pairs]
     end
   end
 end

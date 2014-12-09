@@ -213,11 +213,13 @@ module RSpotify
     private
 
     def hash_for(tracks, field)
-      tracks.map do |track|
+      return nil unless tracks
+      pairs = tracks.map do |track|
         key = track['track']['id']
         value = yield track[field] if track[field]
         [key, value]
-      end.to_h if tracks
+      end
+      Hash[pairs]
     end
   end
 end
