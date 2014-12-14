@@ -7,7 +7,7 @@ This is a ruby wrapper for the [new Spotify Web API](https://developer.spotify.c
 
 ## Features
 
-* [Full documentation](http://rdoc.info/github/guilhermesad/rspotify/master/frames)
+* [Full documentation](http://www.rubydoc.info/gems/rspotify/1.9.0)
 * Full API Endpoint coverage
 * OAuth and other authorization flows
 
