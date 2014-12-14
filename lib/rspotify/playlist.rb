@@ -87,6 +87,7 @@ module RSpotify
       end
 
       tracks = options['tracks']['items'] if options['tracks']
+      tracks.select! { |t| t['track'] } if tracks
 
       @tracks_cache = if tracks
         tracks.map { |t| Track.new t['track'] }
