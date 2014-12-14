@@ -86,7 +86,7 @@ module RSpotify
         User.new options['owner']
       end
 
-      tracks = options['tracks']['items'] if options['tracks']
+      tracks = options['tracks']['items'].select {|item| item['track'] } if options['tracks']
 
       @tracks_cache = if tracks
         tracks.map { |t| Track.new t['track'] }
