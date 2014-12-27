@@ -11,6 +11,7 @@ module RSpotify
   # @attr [Hash]        tracks_added_at A hash containing the date and time each track was added to the playlist. Note: whenever {#tracks} is used the hash is updated with the correspondent tracks' values.
   # @attr [Hash]        tracks_added_by A hash containing the user that added each track to the playlist. Note: whenever {#tracks} is used the hash is updated with the correspondent tracks' values.
   class Playlist < Base
+    include HashFor
 
     # Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s “Browse” tab).
     #
@@ -217,18 +218,6 @@ module RSpotify
       User.oauth_put(@owner.id, url, {})
       @tracks_cache = nil
       tracks
-    end
-
-    private
-
-    def hash_for(tracks, field)
-      return nil unless tracks
-      pairs = tracks.map do |track|
-        key = track['track']['id']
-        value = yield track[field] if track[field]
-        [key, value]
-      end
-      Hash[pairs]
     end
   end
 end

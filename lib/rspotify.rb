@@ -1,6 +1,7 @@
 require 'rspotify/connection'
 require 'rspotify/oauth'
 require 'rspotify/version'
+require 'rspotify/hash_for'
 
 module RSpotify
   autoload :Album,    'rspotify/album'
