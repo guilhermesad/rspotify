@@ -17,7 +17,7 @@ describe RSpotify::Playlist do
 
   describe 'Playlist::browse_featured' do
     it 'should find the appropriate featured playlists' do
-      playlists = VCR.use_cassette('playlist:browse_featured') do 
+      playlists = VCR.use_cassette('playlist:browse_featured') do
         RSpotify::Playlist.browse_featured
       end
       expect(playlists.size)        .to eq 13
@@ -25,19 +25,19 @@ describe RSpotify::Playlist do
     end
 
     it 'should accept additional options' do
-      playlists = VCR.use_cassette('playlist:browse_featured:limit:10:offset:10') do 
+      playlists = VCR.use_cassette('playlist:browse_featured:limit:10:offset:10') do
         RSpotify::Playlist.browse_featured(limit: 10, offset: 10)
       end
       expect(playlists.size)        .to eq 3
       expect(playlists.map(&:name)) .to include('Sleep', 'Late Night R&B')
 
-      playlists = VCR.use_cassette('playlist:browse_featured:locale:es_MX') do 
+      playlists = VCR.use_cassette('playlist:browse_featured:locale:es_MX') do
         RSpotify::Playlist.browse_featured(locale: 'es_MX')
       end
       expect(playlists.size)        .to eq 13
       expect(playlists.map(&:name)) .to include('Dance Mega Mix', 'Peaceful Piano', 'Sleep')
 
-      playlists = VCR.use_cassette('playlist:browse_featured:country:ES:timestamp:2014-10-23T09:00:00') do 
+      playlists = VCR.use_cassette('playlist:browse_featured:country:ES:timestamp:2014-10-23T09:00:00') do
         RSpotify::Playlist.browse_featured(country: 'ES', timestamp: '2014-10-23T09:00:00')
       end
       expect(playlists.size)        .to eq 17
@@ -112,7 +112,7 @@ describe RSpotify::Playlist do
 
   describe 'Playlist::search' do
     it 'should search for the right playlists' do
-      playlists = VCR.use_cassette('playlist:search:Indie') do 
+      playlists = VCR.use_cassette('playlist:search:Indie') do
         RSpotify::Playlist.search('Indie')
       end
       expect(playlists)             .to be_an Array
@@ -122,19 +122,19 @@ describe RSpotify::Playlist do
     end
 
     it 'should accept additional options' do
-      playlists = VCR.use_cassette('playlist:search:Indie:limit:10') do 
+      playlists = VCR.use_cassette('playlist:search:Indie:limit:10') do
         RSpotify::Playlist.search('Indie', limit: 10)
       end
       expect(playlists.size)        .to eq 10
       expect(playlists.map(&:name)) .to include('The Indie Mix', 'Indie Folk')
 
-      playlists = VCR.use_cassette('playlist:search:Indie:offset:10') do 
+      playlists = VCR.use_cassette('playlist:search:Indie:offset:10') do
         RSpotify::Playlist.search('Indie', offset: 10)
       end
       expect(playlists.size)        .to eq 20
       expect(playlists.map(&:name)) .to include('Indie Workout', 'Indie Brunch')
 
-      playlists = VCR.use_cassette('playlist:search:Indie:offset:10:limit:10') do 
+      playlists = VCR.use_cassette('playlist:search:Indie:offset:10:limit:10') do
         RSpotify::Playlist.search('Indie', limit: 10, offset: 10)
       end
       expect(playlists.size)        .to eq 10
@@ -143,13 +143,18 @@ describe RSpotify::Playlist do
   end
 
   describe 'Playlist#tracks' do
+    use_vcr_cassette 'playlist:tracks:118430647:starred'
+
+    before { @tracks = starred_playlist.tracks(offset: 100, limit: 100) }
+
     it 'should fetch more tracks correctly' do
-      tracks = VCR.use_cassette('playlist:tracks:118430647:starred') do
-        starred_playlist.tracks(offset: 100, limit: 100)
-      end
-      expect(tracks)           .to be_an Array
-      expect(tracks.size)      .to eq 85
-      expect(tracks.last.name) .to eq 'On The Streets - Kollectiv Turmstrasse Let Freedom Ring Remix'
+      expect(@tracks)           .to be_an Array
+      expect(@tracks.size)      .to eq 85
+      expect(@tracks.last.name) .to eq 'On The Streets - Kollectiv Turmstrasse Let Freedom Ring Remix'
+    end
+
+    it 'sets the total number of tracks' do
+      expect(starred_playlist.total).to eq 185
     end
   end
 
