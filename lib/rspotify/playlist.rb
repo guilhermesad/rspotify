@@ -8,8 +8,8 @@ module RSpotify
   # @attr [User]        owner           The user who owns the playlist
   # @attr [Boolean]     public          true if the playlist is not marked as secret
   # @attr [String]      snapshot_id     The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version
-  # @attr [Hash]        tracks_added_at A hash containing the date and time each track was added to the playlist
-  # @attr [Hash]        tracks_added_by A hash containing the user that added each track to the playlist
+  # @attr [Hash]        tracks_added_at A hash containing the date and time each track was added to the playlist. Note: whenever {#tracks} is used the hash is updated with the correspondent tracks' values.
+  # @attr [Hash]        tracks_added_by A hash containing the user that added each track to the playlist. Note: whenever {#tracks} is used the hash is updated with the correspondent tracks' values.
   class Playlist < Base
 
     # Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s “Browse” tab).
@@ -87,6 +87,7 @@ module RSpotify
       end
 
       tracks = options['tracks']['items'] if options['tracks']
+      tracks.select! { |t| t['track'] } if tracks
 
       @tracks_cache = if tracks
         tracks.map { |t| Track.new t['track'] }
@@ -184,11 +185,17 @@ module RSpotify
 
       url = @href + "/tracks?limit=#{limit}&offset=#{offset}"
       json = RSpotify.resolve_auth_request(@owner.id, url)
+      tracks = json['items'].select { |i| i['track'] }
 
-      tracks = json['items'].map do |i|
-        Track.new i['track'] unless i['track'].nil?
-      end.compact
+      @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
+        Time.parse added_at
+      end
 
+      @tracks_added_by = hash_for(tracks, 'added_by') do |added_by|
+        User.new added_by
+      end
+
+      tracks.map! { |t| Track.new t['track'] }
       @tracks_cache = tracks if limit == 100 && offset == 0
       tracks
     end
