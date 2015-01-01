@@ -172,7 +172,14 @@ module RSpotify
     def saved_tracks(limit: 20, offset: 0)
       url = "me/tracks?limit=#{limit}&offset=#{offset}"
       json = User.oauth_get(@id, url)
-      json['items'].map { |i| Track.new i['track'] }
+      
+      tracks = json['items'].select { |i| i['track'] }
+      @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
+        Time.parse added_at
+      end
+
+      tracks.map! { |t| Track.new t['track'] }
+      tracks
     end
 
     # Check if tracks are already saved in the Spotify user’s “Your Music” library
