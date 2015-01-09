@@ -8,9 +8,9 @@ module RSpotify
   # @attr [User]        owner           The user who owns the playlist
   # @attr [Boolean]     public          true if the playlist is not marked as secret
   # @attr [String]      snapshot_id     The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version
+  # @attr [Integer]     total           The total number of tracks in the playlist
   # @attr [Hash]        tracks_added_at A hash containing the date and time each track was added to the playlist. Note: whenever {#tracks} is used the hash is updated with the correspondent tracks' values.
   # @attr [Hash]        tracks_added_by A hash containing the user that added each track to the playlist. Note: whenever {#tracks} is used the hash is updated with the correspondent tracks' values.
-  # @attr [Integer]     total           The total number of tracks in the playlist
   class Playlist < Base
 
     # Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s “Browse” tab).
@@ -82,7 +82,7 @@ module RSpotify
       @name          = options['name']
       @public        = options['public']
       @snapshot_id   = options['snapshot_id']
-      @total         = options['tracks']['total'] if options['tracks']
+      @total         = options['tracks']['total']
 
       @owner = if options['owner']
         User.new options['owner']
@@ -189,8 +189,6 @@ module RSpotify
       json = RSpotify.resolve_auth_request(@owner.id, url)
       tracks = json['items'].select { |i| i['track'] }
 
-      @total = json['total']
-      
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
         Time.parse added_at
       end

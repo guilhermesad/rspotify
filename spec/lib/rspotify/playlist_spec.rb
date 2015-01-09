@@ -65,6 +65,7 @@ describe RSpotify::Playlist do
       expect(playlist.name)                     .to eq    'Movie Soundtrack Masterpieces'
       expect(playlist.public)                   .to eq    true
       expect(playlist.snapshot_id)              .to eq    'ViCZCcnhRtzkGq09wO4OPxvC/UBP/ZqMjrmTYoNurZ706SIXyMJiKb/zj27NYjiP'
+      expect(playlist.total)                    .to eq    53
       expect(playlist.type)                     .to eq    'playlist'
       expect(playlist.uri)                      .to eq    'spotify:user:wizzler:playlist:00wHcTN0zQiun4xri9pmvX'
     end
@@ -104,8 +105,9 @@ describe RSpotify::Playlist do
 
     context 'starred playlist' do
       it "should support starred playlists" do
-        expect(starred_playlist.name).to eq 'Starred'
-        expect(starred_playlist.href).to eq 'https://api.spotify.com/v1/users/118430647/starred'
+        expect(starred_playlist.name) .to eq 'Starred'
+        expect(starred_playlist.href) .to eq 'https://api.spotify.com/v1/users/118430647/starred'
+        expect(starred_playlist.total).to eq 185
       end
     end
   end
@@ -152,15 +154,18 @@ describe RSpotify::Playlist do
       expect(@tracks.size)      .to eq 85
       expect(@tracks.last.name) .to eq 'On The Streets - Kollectiv Turmstrasse Let Freedom Ring Remix'
     end
-
-    it 'sets the total number of tracks' do
-      expect(starred_playlist.total).to eq 185
-    end
   end
 
   describe 'Playlist#complete!' do
     let(:href) { 'https://api.spotify.com/v1/users/wizzler/playlists/00wHcTN0zQiun4xri9pmvX' }
-    let(:playlist) { RSpotify::Playlist.new('href' => href, 'owner' => {'id' => 'wizzler'}) }
+    let(:playlist) do
+      min_attrs = {
+        'href'   => href,
+        'owner'  => {'id' => 'wizzler'},
+        'tracks' => {'total' => 53 }
+      }
+      RSpotify::Playlist.new(min_attrs)
+    end
 
     it 'should fetch the complete information correctly' do
       VCR.use_cassette('playlist:find:wizzler:00wHcTN0zQiun4xri9pmvX') do
