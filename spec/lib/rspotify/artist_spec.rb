@@ -81,6 +81,7 @@ describe RSpotify::Artist do
       end
       expect(artists)             .to be_an Array
       expect(artists.size)        .to eq 20
+      expect(artists.total)       .to eq 81
       expect(artists.first)       .to be_an RSpotify::Artist
       expect(artists.map(&:name)) .to include('Arctic Monkeys', 'Arctic', 'Arctic Warbler', 'Arctic Express')
     end

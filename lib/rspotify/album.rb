@@ -48,7 +48,7 @@ module RSpotify
       json['albums']['items'].map { |i| Album.new i }
     end
 
-    # Returns array of Album objects matching the query, ordered by popularity
+    # Returns array of Album objects matching the query, ordered by popularity. It's also possible to find the total number of search results for the query
     #
     # @param query  [String]       The search query's keywords. For details access {https://developer.spotify.com/web-api/search-item here} and look for the q parameter description.
     # @param limit  [Integer]      Maximum number of albums to return. Maximum: 50. Default: 20.
@@ -60,6 +60,8 @@ module RSpotify
     #           albums = RSpotify::Album.search('AM')
     #           albums = RSpotify::Album.search('AM', limit: 10, market: 'US')
     #           albums = RSpotify::Album.search('AM', market: { from: user })
+    #
+    #           RSpotify::Album.search('AM').total #=> 9374
     def self.search(query, limit: 20, offset: 0, market: nil)
       super(query, 'album', limit: limit, offset: offset, market: market)
     end

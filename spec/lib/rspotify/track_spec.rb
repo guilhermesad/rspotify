@@ -70,6 +70,7 @@ describe RSpotify::Track do
       end
       expect(tracks)             .to be_an Array
       expect(tracks.size)        .to eq 20
+      expect(tracks.total)       .to eq 3565
       expect(tracks.first)       .to be_an RSpotify::Track
       expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'I Wanna Know', 'Never Wanna Know')
     end

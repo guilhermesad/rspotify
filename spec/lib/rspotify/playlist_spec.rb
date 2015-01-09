@@ -119,6 +119,7 @@ describe RSpotify::Playlist do
       end
       expect(playlists)             .to be_an Array
       expect(playlists.size)        .to eq 20
+      expect(playlists.total)       .to eq 14027
       expect(playlists.first)       .to be_an RSpotify::Playlist
       expect(playlists.map(&:name)) .to include('The Indie Mix', 'Indie Folk', 'Alt/Indie')
     end

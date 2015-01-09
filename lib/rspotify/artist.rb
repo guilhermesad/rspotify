@@ -25,7 +25,7 @@ module RSpotify
       super(ids, 'artist')
     end
 
-    # Returns array of Artist objects matching the query, ordered by popularity
+    # Returns array of Artist objects matching the query, ordered by popularity. It's also possible to find the total number of search results for the query
     #
     # @param query  [String]       The search query's keywords. For details access {https://developer.spotify.com/web-api/search-item here} and look for the q parameter description.
     # @param limit  [Integer]      Maximum number of artists to return. Maximum: 50. Default: 20.
@@ -37,6 +37,8 @@ module RSpotify
     #           artists = RSpotify::Artist.search('Arctic')
     #           artists = RSpotify::Artist.search('Arctic', limit: 10, market: 'US')
     #           artists = RSpotify::Artist.search('Arctic', market: { from: user })
+    #
+    #           RSpotify::Artist.search('Arctic').total #=> 86
     def self.search(query, limit: 20, offset: 0, market: nil)
       super(query, 'artist', limit: limit, offset: offset, market: market)
     end

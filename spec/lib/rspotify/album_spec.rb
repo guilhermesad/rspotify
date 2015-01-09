@@ -106,6 +106,7 @@ describe RSpotify::Album do
       end
       expect(albums)             .to be_an Array
       expect(albums.size)        .to eq 20
+      expect(albums.total)       .to eq 8672
       expect(albums.first)       .to be_an RSpotify::Album
       expect(albums.map(&:name)) .to include('AM', 'Am I Wrong', 'A.M.', 'Melody AM')
     end

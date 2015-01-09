@@ -53,7 +53,20 @@ module RSpotify
     end
     private_class_method :find_one
 
-    # Returns array of RSpotify objects matching the query, ordered by popularity
+    def self.insert_total(result, types, json)
+      result.instance_eval do
+        @total = types.map do |type|
+          json["#{type}s"]['total']
+        end.reduce(:+)
+
+        define_singleton_method :total do
+          @total
+        end
+      end
+    end
+    private_class_method :insert_total
+
+    # Returns array of RSpotify objects matching the query, ordered by popularity. It's also possible to find the total number of search results for the query
     #
     # @param query  [String]       The search query's keywords. For details access {https://developer.spotify.com/web-api/search-item here} and look for the q parameter description.
     # @param types  [String]       Valid types are: album, artist, track and playlist. Separate multiple types with commas.
@@ -67,6 +80,8 @@ module RSpotify
     #           albums  = RSpotify::Base.search('AM', 'album', limit: 10, market: 'US')
     #           mixed   = RSpotify::Base.search('Arctic', 'artist, album, track')
     #           albums  = RSpotify::Base.search('AM', 'album', market: { from: user })
+    #
+    #           RSpotify::Base.search('Arctic', 'album,artist,playlist').total #=> 2142
     def self.search(query, types, limit: 20, offset: 0, market: nil)
       query = URI::encode query
       types.gsub!(/\s+/, '')
@@ -82,10 +97,14 @@ module RSpotify
         RSpotify.get(url)
       end
 
-      types.split(',').flat_map do |type|
+      types = types.split(',')
+      result = types.flat_map do |type|
         type_class = RSpotify.const_get(type.capitalize)
         json["#{type}s"]['items'].map { |i| type_class.new i }
       end
+
+      insert_total(result, types, json)
+      result
     end
 
     def initialize(options = {})

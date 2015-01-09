@@ -31,7 +31,7 @@ module RSpotify
       super(ids, 'track')
     end
 
-    # Returns array of Track objects matching the query, ordered by popularity
+    # Returns array of Track objects matching the query, ordered by popularity. It's also possible to find the total number of search results for the query
     #
     # @param query  [String]       The search query's keywords. For details access {https://developer.spotify.com/web-api/search-item here} and look for the q parameter description.
     # @param limit  [Integer]      Maximum number of tracks to return. Maximum: 50. Default: 20.
@@ -43,6 +43,8 @@ module RSpotify
     #           tracks = RSpotify::Track.search('Wanna Know')
     #           tracks = RSpotify::Track.search('Wanna Know', limit: 10, market: 'US')
     #           tracks = RSpotify::Track.search('Wanna Know', market: { from: user })
+    #
+    #           RSpotify::Track.search('Wanna Know').total #=> 3686
     def self.search(query, limit: 20, offset: 0, market: nil)
       super(query, 'track', limit: limit, offset: offset, market: market)
     end
