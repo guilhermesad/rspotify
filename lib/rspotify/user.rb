@@ -106,6 +106,41 @@ module RSpotify
       Playlist.new User.oauth_post(@id, url, request_data)
     end
 
+    # Add the current user as a follower of one or more artists or other Spotify users. This method
+    # is only available when the current user has granted access to the *user-follow-modify* scope.
+    #
+    # @param followed [Array<User>, Array<Artist>] The users or artists to follow
+    # @return [Array<User>, Array<Artist>]
+    #
+    # @example
+    #           artists = RSpotify::Artist.search('John')
+    #           user.follow(artists)
+    def follow(followed)
+      type = followed.first.type
+      ids  = followed.map(&:id).join(',')
+      url = "me/following?type=#{type}&ids=#{ids}"
+
+      User.oauth_put(@id, url, {})
+      followed
+    end
+
+    # Check to see if the current user is following one or more artists or other Spotify users. This method
+    # is only available when the current user has granted access to the *user-follow-read* scope.
+    #
+    # @param followed [Array<User>, Array<Artist>] The users or artists to check
+    # @return [Array<Boolean>]
+    #
+    # @example
+    #           artists = RSpotify::Artist.search('John')
+    #           user.follows?(artists) #=> [true, false, true...]
+    def follows?(followed)
+      type = followed.first.type
+      ids  = followed.map(&:id).join(',')
+      url = "me/following/contains?type=#{type}&ids=#{ids}"
+
+      User.oauth_get(@id, url)
+    end
+
     # Returns all playlists from user
     #
     # @param limit  [Integer] Maximum number of playlists to return. Maximum: 50. Minimum: 1. Default: 20.
@@ -202,6 +237,24 @@ module RSpotify
         [var.to_s.delete('@'), instance_variable_get(var)]
       end
       Hash[pairs]
+    end
+
+    # Remove the current user as a follower of one or more artists or other Spotify users. This method
+    # is only available when the current user has granted access to the *user-follow-modify* scope.
+    #
+    # @param followed [Array<User>, Array<Artist>] The users or artists to unfollow
+    # @return [Array<User>, Array<Artist>]
+    #
+    # @example
+    #           artists = RSpotify::Artist.search('John')
+    #           user.unfollow(artists)
+    def unfollow(unfollowed)
+      type = unfollowed.first.type
+      ids  = unfollowed.map(&:id).join(',')
+      url = "me/following?type=#{type}&ids=#{ids}"
+
+      User.oauth_delete(@id, url)
+      unfollowed
     end
   end
 end
