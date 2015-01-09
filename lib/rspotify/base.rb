@@ -168,6 +168,5 @@ module RSpotify
       end
       Hash[pairs]
     end
-    
   end
 end
