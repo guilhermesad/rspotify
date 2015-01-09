@@ -126,7 +126,9 @@ module RSpotify
       url << "&position=#{position}" if position
 
       User.oauth_post(@owner.id, url, {})
+      @total += tracks.size
       @tracks_cache = nil
+
       tracks
     end
 
@@ -213,8 +215,11 @@ module RSpotify
     def replace_tracks!(tracks)
       track_uris = tracks.map(&:uri).join(',')
       url = @href + "/tracks?uris=#{track_uris}"
+
       User.oauth_put(@owner.id, url, {})
+      @total = tracks.size
       @tracks_cache = nil
+
       tracks
     end
 
