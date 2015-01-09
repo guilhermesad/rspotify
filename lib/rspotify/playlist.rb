@@ -9,8 +9,8 @@ module RSpotify
   # @attr [Boolean]     public          true if the playlist is not marked as secret
   # @attr [String]      snapshot_id     The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version
   # @attr [Integer]     total           The total number of tracks in the playlist
-  # @attr [Hash]        tracks_added_at A hash containing the date and time each track was added to the playlist. Note: whenever {#tracks} is used the hash is updated with the correspondent tracks' values.
-  # @attr [Hash]        tracks_added_by A hash containing the user that added each track to the playlist. Note: whenever {#tracks} is used the hash is updated with the correspondent tracks' values.
+  # @attr [Hash]        tracks_added_at A hash containing the date and time each track was added to the playlist. Note: the hash is updated only when {#tracks} is used.
+  # @attr [Hash]        tracks_added_by A hash containing the user that added each track to the playlist. Note: the hash is updated only when {#tracks} is used.
   class Playlist < Base
 
     # Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s “Browse” tab).
