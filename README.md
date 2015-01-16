@@ -181,8 +181,9 @@ class UsersController < ApplicationController
     spotify_user.saved_tracks.size #=> 20
     spotify_user.remove_tracks!(tracks)
 
-    # Follow artists and other Spotify users
-    spotify_user.follow(artists)
+    # Use Spotify Follow features
+    spotify_user.follow(playlist)
+    spotify_user.follows?(artists)
     spotify_user.unfollow(users)
 
     # Check doc for more

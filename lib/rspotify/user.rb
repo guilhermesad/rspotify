@@ -106,38 +106,61 @@ module RSpotify
       Playlist.new User.oauth_post(@id, url, request_data)
     end
 
-    # Add the current user as a follower of one or more artists or other Spotify users. This method
-    # is only available when the current user has granted access to the *user-follow-modify* scope.
+    # Add the current user as a follower of one or more artists, other Spotify users or a playlist. Following artists or users require the *user-follow-modify*
+    # scope. Following a playlist publicly requires the *playlist-modify-public* scope; following it privately requires the *playlist-modify-private* scope.
+    # 
+    # @note Scopes you provide for playlists determine only whether the current user can themselves follow the playlist publicly or privately (i.e. show others what they are following), not whether the playlist itself is public or private.
     #
-    # @param followed [Array<User>, Array<Artist>] The users or artists to follow
-    # @return [Array<User>, Array<Artist>]
+    # @param followed [Artist, Array<Artist>, User, Array<User>, Playlist] The artists, users or playlist to follow
+    # @param public [Boolean] If true the playlist will be included in user's public playlists, if false it will remain private.
+    # @return [Artist, Array<Artist>, User, Array<User>, Playlist]
     #
     # @example
     #           artists = RSpotify::Artist.search('John')
     #           user.follow(artists)
-    def follow(followed)
-      type = followed.first.type
-      ids  = followed.map(&:id).join(',')
-      url = "me/following?type=#{type}&ids=#{ids}"
+    #
+    #           playlist = RSpotify::Playlist.search('Movie').first
+    #           user.follow(playlist, public: false)
+    def follow(followed, public: true)
+      if followed.is_a? Array
+        ids = followed.map(&:id).join(',')
+        type = followed.first.type
+      else
+        ids = followed.id
+        type = followed.type
+      end
 
-      User.oauth_put(@id, url, {})
+      if type == 'playlist'
+        request_body = { public: public }
+        url = "users/#{followed.owner.id}/playlists/#{followed.id}/followers"
+      else
+        request_body = {}
+        url = "me/following?type=#{type}&ids=#{ids}"
+      end
+
+      User.oauth_put(@id, url, request_body.to_json)
       followed
     end
 
     # Check to see if the current user is following one or more artists or other Spotify users. This method
     # is only available when the current user has granted access to the *user-follow-read* scope.
     #
-    # @param followed [Array<User>, Array<Artist>] The users or artists to check
+    # @param followed [Artist, Array<Artist>, User, Array<User>] The users or artists to check
     # @return [Array<Boolean>]
     #
     # @example
     #           artists = RSpotify::Artist.search('John')
     #           user.follows?(artists) #=> [true, false, true...]
     def follows?(followed)
-      type = followed.first.type
-      ids  = followed.map(&:id).join(',')
-      url = "me/following/contains?type=#{type}&ids=#{ids}"
+      if followed.is_a? Array
+        ids = followed.map(&:id).join(',')
+        type = followed.first.type
+      else
+        ids = followed.id
+        type = followed.type
+      end
 
+      url = "me/following/contains?type=#{type}&ids=#{ids}"
       User.oauth_get(@id, url)
     end
 
@@ -239,19 +262,34 @@ module RSpotify
       Hash[pairs]
     end
 
-    # Remove the current user as a follower of one or more artists or other Spotify users. This method
-    # is only available when the current user has granted access to the *user-follow-modify* scope.
+    # Remove the current user as a follower of one or more artists, other Spotify users or a playlist. Unfollowing artists or users require the *user-follow-modify* scope.
+    # Unfollowing a publicly followed playlist requires the *playlist-modify-public* scope; unfollowing a privately followed playlist requires the *playlist-modify-private* scope.
+    # 
+    # @note Note that the scopes you provide for playlists relate only to whether the current user is following the playlist publicly or privately (i.e. showing others what they are following), not whether the playlist itself is public or private.
     #
-    # @param followed [Array<User>, Array<Artist>] The users or artists to unfollow
-    # @return [Array<User>, Array<Artist>]
+    # @param unfollowed [Artist, Array<Artist>, User, Array<User>, Playlist] The artists, users or playlist to unfollow
+    # @return [Artist, Array<Artist>, User, Array<User>, Playlist]
     #
     # @example
     #           artists = RSpotify::Artist.search('John')
     #           user.unfollow(artists)
+    #
+    #           playlist = RSpotify::Playlist.search('Movie').first
+    #           user.unfollow(playlist)
     def unfollow(unfollowed)
-      type = unfollowed.first.type
-      ids  = unfollowed.map(&:id).join(',')
-      url = "me/following?type=#{type}&ids=#{ids}"
+      if unfollowed.is_a? Array
+        ids = unfollowed.map(&:id).join(',')
+        type = unfollowed.first.type
+      else
+        ids = unfollowed.id
+        type = unfollowed.type
+      end
+
+      url = if type == 'playlist'
+        "users/#{unfollowed.owner.id}/playlists/#{unfollowed.id}/followers"
+      else
+        "me/following?type=#{type}&ids=#{ids}"
+      end
 
       User.oauth_delete(@id, url)
       unfollowed
