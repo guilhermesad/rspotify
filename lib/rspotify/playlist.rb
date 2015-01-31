@@ -3,7 +3,7 @@ module RSpotify
   # @attr [Boolean]     collaborative   true if the owner allows other users to modify the playlist
   # @attr [String]      description     The playlist description
   # @attr [Hash]        followers       Information about the followers of the playlist
-  # @attr [Array<Hash>] images          The playlist images
+  # @attr [Array<Hash>] images          Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. If returned, the source URL for the image is temporary and will expire in less than one day.
   # @attr [String]      name            The name of the playlist
   # @attr [User]        owner           The user who owns the playlist
   # @attr [Boolean]     public          true if the playlist is not marked as secret
