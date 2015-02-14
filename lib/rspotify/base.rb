@@ -83,7 +83,7 @@ module RSpotify
     #
     #           RSpotify::Base.search('Arctic', 'album,artist,playlist').total #=> 2142
     def self.search(query, types, limit: 20, offset: 0, market: nil)
-      query = URI::encode query
+      query = CGI.escape query
       types.gsub!(/\s+/, '')
 
       url = "search?q=#{query}&type=#{types}"\
