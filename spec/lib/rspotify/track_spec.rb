@@ -70,7 +70,7 @@ describe RSpotify::Track do
       end
       expect(tracks)             .to be_an Array
       expect(tracks.size)        .to eq 20
-      expect(tracks.total)       .to eq 3565
+      expect(tracks.total)       .to eq 3647
       expect(tracks.first)       .to be_an RSpotify::Track
       expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'I Wanna Know', 'Never Wanna Know')
     end
@@ -86,13 +86,13 @@ describe RSpotify::Track do
         RSpotify::Track.search('Wanna Know', offset: 10)
       end
       expect(tracks.size)        .to eq 20
-      expect(tracks.map(&:name)) .to include('They Wanna Know', 'Say I Wanna Know')
+      expect(tracks.map(&:name)) .to include('They Wanna Know', 'You Wanna Know')
 
       tracks = VCR.use_cassette('track:search:Wanna Know:limit:10:offset:10') do 
         RSpotify::Track.search('Wanna Know', limit: 10, offset: 10)
       end
       expect(tracks.size)        .to eq 10
-      expect(tracks.map(&:name)) .to include('They Wanna Know')
+      expect(tracks.map(&:name)) .to include('You Wanna Know')
 
       tracks = VCR.use_cassette('track:search:Wanna Know:market:ES') do
         RSpotify::Track.search('Wanna Know', market: 'ES')
