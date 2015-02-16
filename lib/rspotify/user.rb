@@ -24,7 +24,7 @@ module RSpotify
       super(id, 'user')
     end
 
-    # Spotify does not support search for users. Prints warning and returns false
+    # Spotify does not support search for users.
     def self.search(*)
       warn 'Spotify API does not support search for users'
       false
@@ -78,13 +78,13 @@ module RSpotify
       @images       ||= options['images']
       @product      ||= options['product']
 
+      super(options)
+
       if credentials
         @@users_credentials ||= {}
         @@users_credentials[@id] = credentials
         @credentials = @@users_credentials[@id]
       end
-
-      super(options)
     end
 
     # Creates a playlist in user's Spotify account. This method is only available when the current user
