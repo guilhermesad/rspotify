@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/browse/categories/party?country=BR
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQAZNHzH_x3pHOISyXRF0LUn9MpDRXoXhYwISe5wlkgnYLQTSCRUDL3rlbwnpFehqlRgZOFIkNil9D8bzYu8ZQ
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 13 Feb 2015 20:56:58 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      cache-control:
+      - private, max-age=0
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      content-encoding:
+      - gzip
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAFSP3W7CMAyF73mKqNeQ9GcilKfY/TShNHbbTDTJEkNBiHcn
+        abnYZFmyP1nnHD82jBVjwL5gxzQQ+XgUQnnDo3dk+jvXbhLXSnTBzRGFVoSD
+        Cwaj8CrQvdhmAaOdjVnhiz3SniXRDCNlVMuP7cou4fzPBRRFe/utwmzBcn12
+        F+iDs8QtkpgQjBKAwVwRVq9dkrqlPskGqraUSjay0k3XtXtVHw5NW6p2j1jL
+        U5kqH6bmP34o3gFmAzS+MyXyZN9relhi/fnHqgkX9rmwzfMFAAD//wMAvTrQ
+        3icBAAA=
+    http_version: '1.1'
+  recorded_at: Fri, 13 Feb 2015 20:56:58 GMT
+recorded_with: VCR 2.9.3

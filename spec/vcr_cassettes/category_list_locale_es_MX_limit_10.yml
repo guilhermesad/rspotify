@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/browse/categories?limit=10&offset=0&locale=es_MX
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQAZNHzH_x3pHOISyXRF0LUn9MpDRXoXhYwISe5wlkgnYLQTSCRUDL3rlbwnpFehqlRgZOFIkNil9D8bzYu8ZQ
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 13 Feb 2015 20:56:59 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      cache-control:
+      - private, max-age=0
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      content-encoding:
+      - gzip
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAMSXX2vUTBTG7/splr3oVbuZyfwXioj6wgsWRAQFkTCZObM7
+        ms3EZLatSL+7k5hmbatC3WBZcpHnbM6T88uZM8y3o8ViaXSEdWg9dMvFk8W3
+        JCVx04Lrb5ebGJvuSZbpxq+6JkTvvq5M2GYXOCvbcNlBtn/+aRWMruAMuuL8
+        /XFwroN4ho4rv/XxDKPlyY/cPsJ28Powuv2tXxZDU/kudmPmPrcJ9Z3cfXbw
+        603s5Vywk72+a6tbplbHrr76gtvL2tYrU4WddW2o46qGmG3Bep1ZaP0F2Mm6
+        wBhzxJQCrhHVhlnukolwjGEshHQFSr+k9NfqU7Ne/uR/6W3cjK81qteLj/ti
+        7PB296us9RaG0NvQLF4NsSF0fXIo0W0I9iE06WE0k+na17oafE9Tuqt0FUpw
+        JbkmWBtpqBKKmtIakVPuLNNWFOMf/4CT/h7n7RInlOe9PBPFRrfx6z/EeNOU
+        g++EURCLFRJaEIENKUvFdS4lUUgrDpCLsTNp8dco79Q5sXw96HPBDM1joAzN
+        BJJSgankVHHJEFaOQa4R0USBkKVm+Qwgf65xjzGpM0G8DO3nsIuPMChH50Iy
+        ziQ22DDKNCOIAVWaGCtLkGlwosPn5L0aJ5DvxshMMF0wuwftOXNNyTXULZz6
+        rV5Dd9p92el0d9OkDBiyIi8l5Ror6YzNjVYl0eCYQ0YeNjTvlDyR/W/QZ+La
+        BvP5EZZ6b1soA0IB0hScQrgsLUZUUcdKyZglxhy+xm9XNxF8k+TF8eJNqKq5
+        OPraeih09aDlPhPMwXtqSm0tYWVeCi6cE45IJXKeayu5RKq05eFUf1HrhPb/
+        PpY9qyK0tY7p9eYCDHZbWF0beATAyXvCi8BxnHNEc5Q2dYOpUoySXClKGdPc
+        Ho73F5VOeF++OM9eDLGZsJqNT4vg3yMdfPe7vaGcCOoQEhITmwZBSQRIK13f
+        y3SGnr1T5wT0+aAf3XpqOZye+jBGo1LDVZznbIbvH85+RPr0N3ZNCxc+7IYv
+        Ue+qapRjiHogTnASro+uvwMAAP//AwDtKrKoTQ4AAA==
+    http_version: '1.1'
+  recorded_at: Fri, 13 Feb 2015 20:57:00 GMT
+recorded_with: VCR 2.9.3

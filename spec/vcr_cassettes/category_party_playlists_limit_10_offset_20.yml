@@ -1,0 +1,100 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/browse/categories/party/playlists?limit=10&offset=20
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQAZNHzH_x3pHOISyXRF0LUn9MpDRXoXhYwISe5wlkgnYLQTSCRUDL3rlbwnpFehqlRgZOFIkNil9D8bzYu8ZQ
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 13 Feb 2015 20:57:03 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      cache-control:
+      - private, max-age=0
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      content-encoding:
+      - gzip
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version: '1.1'
+  recorded_at: Fri, 13 Feb 2015 20:57:03 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,86 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/browse/categories?limit=20&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQAZNHzH_x3pHOISyXRF0LUn9MpDRXoXhYwISe5wlkgnYLQTSCRUDL3rlbwnpFehqlRgZOFIkNil9D8bzYu8ZQ
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 13 Feb 2015 20:56:59 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      cache-control:
+      - private, max-age=0
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      content-encoding:
+      - gzip
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAMSZXW/bNhSG7/srjFz0qon5/VGgGLplQweswNAN2MUwCIfk
+        YaxVllxZTlIU+e+jFEVKnHZAaiJO4Asf2nz1PiDPOaS/vFgsTjx0eNG0JW5P
+        Fq8XX1IoBVctxv7tyarrNtvXyyVsyrPtpunK+PnMN+vlJV26trna4nL+/g9N
+        jFvs3pCXVbkuuzeMnLy6na7scD1M//co8L0Sy67ZVOW2244z93P7pt6bu58d
+        y4tV14eZlq/m+K6tHogG6Lb19SfaXtWhPvNVswuxberurMZuucZQwjJgW15i
+        mKQLSqki0lpUQAR4GVRMIjpKSanWJhYk/adI/zr7d3Nxck//qgzdanysMXqz
+        +Gc2E4ane+yyhjUOQ382m8Vvw9gwdPPqUKLrpglPoSkOo5lEL8oaqkH3NE13
+        nV6F1coaBZyCN15YbYV3wWsmVAwSgi7GD/4PTvFtnA8tTijf9+FMFDfQdp+f
+        EePdohx0J4yaB2qJBs019dw5q4AZwy0BqxCZHlemKL4b5Z7PieXvQzwXzGZz
+        DJTNZgIphKbCKGGVkYTaKJEB4cAtauNAsgwg73ucMaZoJohXTfux2XVHSJSj
+        cmGkkoZ66qWQIDmRKCxwH4xDkxInOTxPPvI4gfxrHMkEMzZ+96SakytLXmDd
+        4mm5hgvcnm4/7SC9u1ukEiUJmjkjFFBrog/Mg3UcMMpIvDksae5Znsj+MsQz
+        cW0b//EIW72XLaxHbZGAwGgJdS5QIqyI0hkpA/f+8D3+0N1E8EMKL14uPjRV
+        lYtjWYcSC6ietN0zwRy0p0UJIXDpmNNKx6gjN1YzxSAYZYh1wR1O9SteJ7S/
+        9mPLt1WHbQ1derxcgDGsiwC1xyMATtoTXoJRUaaIYCQVdU+FtVJwZq0QUoIK
+        h+P9itMJ78/n75fnw1gmrH5Vpk3w/EgH3bnae6G4FpEQbSgPKRE4rtEEE/u1
+        LDKs2T2fE9CfhngmmKGsa2yPUaVulQvqlCQKnAPSN0mp7qMKykpvpKaJ7WEF
+        ad/eBPH8diATxW2FeIz2c9Cd93kQ0XAF0URw2kVOJVOpGyWao0rN/eFLcs/n
+        RPOPIZ4J5qrcrJ61mZ+WZFI+HUCCUtRIERRFZhE8yoiKR82FlagOXJP7/iaK
+        78rN4l2+Zr6t3THaJDeXdYIaqNExFRobgtaMIQ3BJayWRmEyNEv3Lc69Uv1j
+        tlrT7OquPcYhfVQ+jU31sej7I7ScpT+fqgxoqRgHqY0ByiyXGYrNvtG53Iwj
+        2U5FyU+auy091HAEsP0DnPZqBVWGpZMPR2ldOmRKykRKlClzstQu2ZihhH/L
+        7L2DUdW39W+nj2SivMYOnrNHmm/oeuEEzFtGheAxEJAOrHTUMc8AlRSp0T/w
+        au6huflubojnKunN7hhNZi87JVCmlPOWpM5ShgDGSsUN8TF6zUEEk6OgP3A5
+        1/M+nAlk18IlHgPlrfAEk6KxPqTWnPloXGAxtUlexLTZI0MrM+TQfafz/fvt
+        QK6WHT0EfM6bpTuio3Jh09EchTRMMMfAG0eN6O9FIufKixwoH3mcG/dx5MWD
+        b54Mvx4N05IxUuN192S4dz9Hsce/R92O9DPeKWxavCyb3YC+3lXVGO6aPg2l
+        GKcpcPPi5j8AAAD//wMA2XzxYDMbAAA=
+    http_version: '1.1'
+  recorded_at: Fri, 13 Feb 2015 20:56:59 GMT
+recorded_with: VCR 2.9.3

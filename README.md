@@ -97,17 +97,22 @@ Then just copy and paste them like so:
 ```ruby
 RSpotify.authenticate("<your_client_id>", "<your_client_secret>")
 
-# Now you can access public playlists in detail, browse featured content and more
+# Now you can access playlists in detail, browse featured content and more
 
+wizzler = RSpotify::User.find('wizzler')
+wizzler.playlists #=> (Playlist array)
+
+# Find by id
 playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
 playlist.name               #=> "Movie Soundtrack Masterpieces"
 playlist.description        #=> "Iconic soundtracks featured..."
 playlist.followers['total'] #=> 13
 playlist.tracks             #=> (Track array)
 
-# Get user's playlist
-my_user = RSpotify::User.find("my_user")
-my_playlists = my_user.playlists #=> (Playlist array)
+# Search by category
+party = RSpotify::Category.find('party')
+party.playlists #=> (Playlist array)
+categories = RSpotify::Category.list # See all available categories
 
 # Access featured content from Spotify's Browse tab
 featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
