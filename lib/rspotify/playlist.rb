@@ -108,8 +108,8 @@ module RSpotify
       super(options)
     end
 
-    # Adds one or more tracks to a playlist in user's Spotify account. This method is only available when
-    # the current user has granted access to the *playlist-modify* and *playlist-modify-private* scopes.
+    # Adds one or more tracks to a playlist in user's Spotify account. This method is only available when the
+    # current user has granted access to the *playlist-modify-public* and *playlist-modify-private* scopes.
     #
     # @param tracks [Array<Track>] Tracks to be added. Maximum: 100 per request
     # @param position [Integer, NilClass] The position to insert the tracks, a zero-based index. Default: tracks are appended to the playlist
@@ -137,8 +137,8 @@ module RSpotify
       tracks
     end
 
-    # Change name and public/private state of playlist in user's Spotify account. Changing a public playlist
-    # requires the *playlist-modify* scope; changing a private playlist requires the *playlist-modify-private* scope.
+    # Change name and public/private state of playlist in user's Spotify account. Changing a public playlist requires
+    # the *playlist-modify-public* scope; changing a private playlist requires the *playlist-modify-private* scope.
     #
     # @param name   [String]  Optional. The new name for the playlist.
     # @param public [Boolean] Optional. If true the playlist will be public, if false it will be private.
@@ -238,8 +238,8 @@ module RSpotify
       self
     end
 
-    # Replace all the tracks in a playlist, overwriting its existing tracks. Changing a public playlist
-    # requires the *playlist-modify* scope; changing a private playlist requires the *playlist-modify-private* scope.
+    # Replace all the tracks in a playlist, overwriting its existing tracks. Changing a public playlist requires
+    # the *playlist-modify-public* scope; changing a private playlist requires the *playlist-modify-private* scope.
     #
     # @param tracks [Array<Track>] The tracks that will replace the existing ones. Maximum: 100 per request
     # @return [Array<Track>] The tracks that were added.

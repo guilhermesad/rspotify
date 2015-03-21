@@ -87,8 +87,8 @@ module RSpotify
       end
     end
 
-    # Creates a playlist in user's Spotify account. This method is only available when the current user
-    # has granted access to the *playlist-modify* and *playlist-modify-private* scopes.
+    # Creates a playlist in user's Spotify account. This method is only available when the current
+    # user has granted access to the *playlist-modify-public* and *playlist-modify-private* scopes.
     #
     # @param name [String] The name for the new playlist
     # @param public [Boolean] Whether the playlist is public or private. Default: true
