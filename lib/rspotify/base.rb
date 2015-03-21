@@ -163,7 +163,7 @@ module RSpotify
       return nil unless tracks
       pairs = tracks.map do |track|
         key = track['track']['id']
-        value = yield track[field] if track[field]
+        value = yield track[field] unless track[field].nil?
         [key, value]
       end
       Hash[pairs]

@@ -8,7 +8,7 @@ http_interactions:
       string: grant_type=client_credentials
     headers:
       accept:
-      - '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       accept-encoding:
       - gzip, deflate
       authorization:
@@ -27,7 +27,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 05 Dec 2014 05:30:40 GMT
+      - Sat, 21 Mar 2015 21:32:09 GMT
       content-type:
       - application/json
       transfer-encoding:
@@ -37,7 +37,6 @@ http_interactions:
       keep-alive:
       - timeout=10
       vary:
-      - Accept-Encoding
       - Accept-Encoding
       x-ua-compatible:
       - IE=edge
@@ -49,25 +48,35 @@ http_interactions:
         https://i.imgur.com https://d2mv8tnci56s9d.cloudfront.net https://aci.scdn.co
         https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://www.google-analytics.com
         https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net; font-src
-        ''self'' https://d2d1dxiu3v1f2i.cloudfront.net; style-src ''self'' ''unsafe-inline''
+        ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://d3nkxvtkt5c8vi.cloudfront.net
+        https://sp-bootstrap.global.ssl.fastly.net; style-src ''self'' ''unsafe-inline''
+        https://d2d1dxiu3v1f2i.cloudfront.net; frame-src ''self'' https://www.spotify.com;'
+      x-content-security-policy:
+      - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
+        https://www.google-analytics.com; img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
+        https://i.imgur.com https://d2mv8tnci56s9d.cloudfront.net https://aci.scdn.co
+        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://www.google-analytics.com
+        https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net; font-src
+        ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://d3nkxvtkt5c8vi.cloudfront.net
+        https://sp-bootstrap.global.ssl.fastly.net; style-src ''self'' ''unsafe-inline''
         https://d2d1dxiu3v1f2i.cloudfront.net; frame-src ''self'' https://www.spotify.com;'
       cache-control:
-      - ': no-cache, no-store, must-revalidate'
+      - ": no-cache, no-store, must-revalidate"
       pragma:
-      - ': no-cache'
+      - ": no-cache"
+      content-encoding:
+      - gzip
       x-content-type-options:
       - nosniff
       strict-transport-security:
       - max-age=31536000;
-      content-encoding:
-      - gzip
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAAx3NTQuCMBgA4P+yc8GYy6KbSVCW+BF+0GWovZEUbeydOov+
-        e9b1uTxvUjUNIAoj7/Aka7JJ/JdXIoAjQs7leb+6xceMhf7SY4VM862RneWQ
-        B+jow+AzGqnaFpculuVYu5ip4XoKIr5gRTqnaYJVv+sfHpmRfyDMqOC3QKVB
-        TwpWtRpQtNPtuJR+voT3CLuRAAAA
+        H4sIAAAAAAAAAx3NMQ6CMBQA0Lt0dgAqHdxsJSQERDQgYWlK/VZEAVtAjPHu
+        outb3hsJKcEY3rc1NGiFaMIE2TmueuBRa7/L9ze1EcxxB1Lbuo3o6CdFMKi4
+        zzjNGc29M15f4ru8Hmy2jZZliNPQI6YpTvSYpCWeApk90QL9A96/OvgtIDTo
+        WWHqKg2GV/ONiWV9vn6cn8CRAAAA
     http_version: '1.1'
-  recorded_at: Fri, 05 Dec 2014 05:30:42 GMT
+  recorded_at: Sat, 21 Mar 2015 21:32:09 GMT
 recorded_with: VCR 2.9.3

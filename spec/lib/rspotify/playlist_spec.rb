@@ -64,8 +64,8 @@ describe RSpotify::Playlist do
       expect(playlist.images.first['url'])      .to match %r{https://i\.scdn\.co/image/418ce596327dc3a0f4d377db80421bffb3b94a9a}
       expect(playlist.name)                     .to eq    'Movie Soundtrack Masterpieces'
       expect(playlist.public)                   .to eq    true
-      expect(playlist.snapshot_id)              .to eq    'ViCZCcnhRtzkGq09wO4OPxvC/UBP/ZqMjrmTYoNurZ706SIXyMJiKb/zj27NYjiP'
-      expect(playlist.total)                    .to eq    53
+      expect(playlist.snapshot_id)              .to eq    'fJBjh16iZclZtApl/xyzPNjOp38sPqefUQkEhP94N4mf/+4F6MbRjwR+PSP/Cnys'
+      expect(playlist.total)                    .to eq    54
       expect(playlist.type)                     .to eq    'playlist'
       expect(playlist.uri)                      .to eq    'spotify:user:wizzler:playlist:00wHcTN0zQiun4xri9pmvX'
     end
@@ -79,14 +79,14 @@ describe RSpotify::Playlist do
     it 'should find playlist with correct tracks' do
       tracks = playlist.tracks
       expect(tracks)             .to be_an Array
-      expect(tracks.size)        .to eq 53
+      expect(tracks.size)        .to eq 54
       expect(tracks.first)       .to be_an RSpotify::Track
       expect(tracks.map(&:name)) .to include('Waking Up', 'Honor Him', 'Circle Of Life - From "The Lion King"', 'Time')
     end
 
     it 'should find playlist with correct times each track was added' do
       tracks_added_at = playlist.tracks_added_at
-      expect(tracks_added_at.size).to eq 53
+      expect(tracks_added_at.size).to eq 54
 
       track_id = '2o660Ri2wTg7Rv6cKbFBCe'
       expected_time = Time.parse('2014-04-20T20:52:42Z')
@@ -95,12 +95,20 @@ describe RSpotify::Playlist do
 
     it 'should find playlist with correct users that added each track' do
       tracks_added_by = playlist.tracks_added_by
-      expect(tracks_added_by.size).to eq 53
+      expect(tracks_added_by.size).to eq 54
 
       track_id = '2o660Ri2wTg7Rv6cKbFBCe'
       expected_user_id = 'wizzler'
       expect(tracks_added_by[track_id].class).to eq RSpotify::User
       expect(tracks_added_by[track_id].id).to eq expected_user_id
+    end
+
+    it 'should find playlist showing correctly which track is local or not' do
+      tracks_is_local = playlist.tracks_is_local
+      expect(tracks_is_local.size).to eq 54
+
+      track_id = '2o660Ri2wTg7Rv6cKbFBCe'
+      expect(tracks_is_local[track_id]).to eq false
     end
 
     context 'starred playlist' do

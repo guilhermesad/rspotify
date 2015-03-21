@@ -11,6 +11,7 @@ module RSpotify
   # @attr [Integer]     total           The total number of tracks in the playlist
   # @attr [Hash]        tracks_added_at A hash containing the date and time each track was added to the playlist. Note: the hash is updated only when {#tracks} is used.
   # @attr [Hash]        tracks_added_by A hash containing the user that added each track to the playlist. Note: the hash is updated only when {#tracks} is used.
+  # @attr [Hash]        tracks_is_local A hash showing whether each track is local or not. Note: the hash is updated only when {#tracks} is used.
   class Playlist < Base
 
     # Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s “Browse” tab).
@@ -98,6 +99,10 @@ module RSpotify
 
       @tracks_added_by = hash_for(tracks, 'added_by') do |added_by|
         User.new added_by
+      end
+
+      @tracks_is_local = hash_for(tracks, 'is_local') do |is_local|
+        is_local
       end
 
       super(options)
@@ -194,6 +199,10 @@ module RSpotify
 
       @tracks_added_by = hash_for(tracks, 'added_by') do |added_by|
         User.new added_by
+      end
+
+      @tracks_is_local = hash_for(tracks, 'is_local') do |is_local|
+        is_local
       end
 
       tracks.map! { |t| Track.new t['track'] }
