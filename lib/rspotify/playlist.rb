@@ -201,6 +201,34 @@ module RSpotify
       tracks
     end
 
+    # Reorder a track or a group of tracks in a playlist. Changing a public playlist requires the
+    # *playlist-modify-public* scope; changing a private playlist requires the *playlist-modify-private* scope.
+    #
+    # @param range_start   [Integer] The position of the first track to be reordered.
+    # @param insert_before [Integer] The position where the tracks should be inserted. To reorder the tracks to the end of the playlist, simply set insert_before to the position after the last track.
+    # @param range_length  [Integer] Optional. The amount of tracks to be reordered. Default: 1.
+    # @param snapshot_id   [String]  Optional. The playlist's snapshot ID against which you want to make the changes.
+    # @return [Playlist]
+    #
+    # @example
+    #           range_start = 10
+    #           insert_before = 0
+    #           # Move the tracks at index 10-14 to the start of the playlist
+    #           playlist.reorder_tracks!(range_start, insert_before, range_length: 5)
+    def reorder_tracks!(range_start, insert_before, **options)
+      url = "#{@href}/tracks"
+      data = {
+        range_start: range_start,
+        insert_before: insert_before
+      }.merge options
+
+      response = User.oauth_put(@owner.id, url, data.to_json)
+      @snapshot_id = response['snapshot_id']
+      @tracks_cache = nil
+
+      self
+    end
+
     # Replace all the tracks in a playlist, overwriting its existing tracks. Changing a public playlist
     # requires the *playlist-modify* scope; changing a private playlist requires the *playlist-modify-private* scope.
     #
