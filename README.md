@@ -121,7 +121,7 @@ new_releases = RSpotify::Album.new_releases(country: 'ES')
 
 ## Rails + OAuth
 
-You'll may want your application to access an user's Spotify account.
+You might want your application to access a user's Spotify account.
 
 For instance, suppose you want your app to create playlists for the user based on his taste, or to add a feature that syncs user's playlists with some external app.
 
@@ -135,6 +135,8 @@ RSpotify::authenticate("<your_client_id>", "<your_client_secret>")
 
 ```ruby
 # config/initializers/omniauth.rb
+
+require 'rspotify/oauth'
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :spotify, "<your_client_id>", "<your_client_secret>", scope: 'user-read-email playlist-modify-public user-library-read user-library-modify'

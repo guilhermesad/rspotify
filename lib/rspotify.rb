@@ -1,5 +1,4 @@
 require 'rspotify/connection'
-require 'rspotify/oauth'
 require 'rspotify/version'
 
 module RSpotify
