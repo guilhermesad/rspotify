@@ -22,7 +22,7 @@ module RSpotify
     #           album = RSpotify::Album.find('41vPD50kQ7JeamkxQW7Vuy')
     #           album.class #=> RSpotify::Album
     #           album.name  #=> "AM"
-    #           
+    #
     #           ids = %w(41vPD50kQ7JeamkxQW7Vuy 4jKGRliQXa5VwxKOsiCbfL)
     #           albums = RSpotify::Album.find(ids)
     #           albums.class       #=> Array
@@ -44,7 +44,7 @@ module RSpotify
     def self.new_releases(limit: 20, offset: 0, country: nil)
       url = "browse/new-releases?limit=#{limit}&offset=#{offset}"
       url << "&country=#{country}" if country
-      json = RSpotify.auth_get(url)
+      json = RSpotify.get(url)
       json['albums']['items'].map { |i| Album.new i }
     end
 

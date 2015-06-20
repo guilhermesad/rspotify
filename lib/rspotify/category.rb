@@ -29,7 +29,7 @@ module RSpotify
         url << '&' unless index == options.size-1
       end
 
-      json = RSpotify.auth_get(url)
+      json = RSpotify.get(url)
       Category.new json
     end
 
@@ -50,7 +50,7 @@ module RSpotify
       options.each do |option, value|
         url << "&#{option}=#{value}"
       end
-      json = RSpotify.auth_get(url)
+      json = RSpotify.get(url)
       json['categories']['items'].map { |i| Category.new i }
     end
 
@@ -69,7 +69,7 @@ module RSpotify
 
     # See {Base#complete!}
     def complete!
-      initialize RSpotify.auth_get("browse/categories/#{@id}")
+      initialize RSpotify.get("browse/categories/#{@id}")
     end
 
     # Get a list of Spotify playlists tagged with a particular category.
@@ -91,7 +91,7 @@ module RSpotify
         url << "&#{option}=#{value}"
       end
 
-      json = RSpotify.auth_get(url)
+      json = RSpotify.get(url)
       json['playlists']['items'].map { |i| Playlist.new i }
     end
   end

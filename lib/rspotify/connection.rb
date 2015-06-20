@@ -31,14 +31,9 @@ module RSpotify
 
     VERBS.each do |verb|
       define_method verb do |path, *params|
+        params << { 'Authorization' => "Bearer #{@client_token}" } if @client_token
         response = RestClient.send(verb, api_url(path), *params)
         JSON.parse response unless response.empty?
-      end
-
-      define_method "auth_#{verb}" do |path, *params|
-        auth_header = { 'Authorization' => "Bearer #{@client_token}" }
-        params << auth_header
-        send(verb, path, *params)
       end
     end
 
@@ -50,7 +45,7 @@ module RSpotify
       if users_credentials && users_credentials[user_id]
         User.oauth_get(user_id, url)
       else
-        auth_get(url)
+        get(url)
       end
     end
 

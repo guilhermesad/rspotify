@@ -32,7 +32,7 @@ module RSpotify
       options.each do |option, value|
         url << "&#{option}=#{value}"
       end
-      json = RSpotify.auth_get(url)
+      json = RSpotify.get(url)
       json['playlists']['items'].map { |i| Playlist.new i }
     end
 
