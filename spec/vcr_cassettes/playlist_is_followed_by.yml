@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/users/spotify/playlists/4LO89Y0ydu8li9Phq2iwKT/followers/contains?ids=spotify,wizzler
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQAURpqTjos-SbAWyiXyLd-tzsJUWOYsZg8mR_enxDjLTVPwigdHfyIvWY8t9xC0_qm8Sj0LL1IxhJhqt6YONA
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sun, 21 Jun 2015 01:35:39 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      cache-control:
+      - private, max-age=0
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      content-encoding:
+      - gzip
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAIpWKCkqTdVRSEvMKU5ViAUAAAD//wMA0CIqHQ8AAAA=
+    http_version: '1.1'
+  recorded_at: Sun, 21 Jun 2015 01:35:39 GMT
+recorded_with: VCR 2.9.3

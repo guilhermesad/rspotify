@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/users/spotify
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQAURpqTjos-SbAWyiXyLd-tzsJUWOYsZg8mR_enxDjLTVPwigdHfyIvWY8t9xC0_qm8Sj0LL1IxhJhqt6YONA
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sun, 21 Jun 2015 01:31:22 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      cache-control:
+      - public, max-age=14400
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - '604800'
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      content-encoding:
+      - gzip
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAFyR0Y6DIBBF3/crjM/dUhu16G/0cbNpxjJUEhQCuF3T9N8X
+        UEm7j3Nn7pw78PjIspwJqyXMlxEGzLM2y89aOcHnfBe6+OvQjCAvk5E2tB9e
+        9bpdh4Khd07blhClcdyvjf1VDWSyaMg26X3PuJIrKdUdzeu63iAP5ThJuVsk
+        pxzIoFXH5tTQMvm32cQFLd6wP0Uk24SONsGi6V0b4IYxx1dKguLWu39Z/PGJ
+        6IHaKC4kfi72vb2y0YMJGCess4Qhh0k6UjS067qK06KDkh2AF/RY1Vj6ojmw
+        GqEugdJTk6+Uu2Cu38jh3Ow7pnSzXn4mXLUEn4x4vaYNnTa99PMPAAD//wMA
+        RFsKfNkBAAA=
+    http_version: '1.1'
+  recorded_at: Sun, 21 Jun 2015 01:31:21 GMT
+recorded_with: VCR 2.9.3

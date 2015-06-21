@@ -127,7 +127,7 @@ module RSpotify
     #           playlist.tracks[20].name #=> "Somebody That I Used To Know"
     def add_tracks!(tracks, position: nil)
       track_uris = tracks.map(&:uri).join(',')
-      url = @href + "/tracks?uris=#{track_uris}"
+      url = "#{@href}/tracks?uris=#{track_uris}"
       url << "&position=#{position}" if position
 
       User.oauth_post(@owner.id, url, {})
@@ -174,6 +174,38 @@ module RSpotify
       initialize RSpotify.resolve_auth_request(@owner.id, @href)
     end
 
+    # Check if one or more Spotify users are following a specified playlist. Checking if the user is privately
+    # following a playlist is only possible if he/she has granted access to the *playlist-read-private* scope.
+    #
+    # @param users [Array<User>] The users to check. Maximum: 5.
+    # @return [Array<Boolean>]
+    #
+    # @example
+    #           user1 = RSpotify::User.find('<some-id>')
+    #           user2 = RSpotify::User.find('<some-other-id>')
+    #           playlist.is_followed_by?([user1, user2]) #=> [true, true] (Users publicly following playlist)
+    #
+    #           oauth-user = RSpotify::User.new(request.env['omniauth.auth']) # (See OAuth section in readme)
+    #           playlist.is_followed_by?([oauth-user]) #=> [true] (User publicly or privately following playlist)
+    def is_followed_by?(users)
+      user_ids = users.map(&:id).join(',')
+      url = "#{@href}/followers/contains?ids=#{user_ids}"
+
+      users_credentials = if User.class_variable_defined?('@@users_credentials')
+        User.class_variable_get('@@users_credentials')
+      end
+
+      auth_users = users.select do |user|
+        users_credentials[user.id]
+      end if users_credentials
+
+      if auth_users && auth_users.any?
+        User.oauth_get(auth_users.first.id, url)
+      else
+        RSpotify.get(url)
+      end
+    end
+
     # Returns array of tracks from the playlist
     #
     # @param limit  [Integer] Maximum number of tracks to return. Maximum: 100. Default: 100.
@@ -189,7 +221,7 @@ module RSpotify
         return @tracks_cache[offset..last_track]
       end
 
-      url = @href + "/tracks?limit=#{limit}&offset=#{offset}"
+      url = "#{@href}/tracks?limit=#{limit}&offset=#{offset}"
       json = RSpotify.resolve_auth_request(@owner.id, url)
       tracks = json['items'].select { |i| i['track'] }
 
@@ -234,7 +266,6 @@ module RSpotify
       response = User.oauth_put(@owner.id, url, data.to_json)
       @snapshot_id = response['snapshot_id']
       @tracks_cache = nil
-
       self
     end
 
@@ -251,7 +282,7 @@ module RSpotify
     #           playlist.tracks.map(&:name) #=> ["Somebody That I Used To Know", "Do I Wanna Know?"]
     def replace_tracks!(tracks)
       track_uris = tracks.map(&:uri).join(',')
-      url = @href + "/tracks?uris=#{track_uris}"
+      url = "#{@href}/tracks?uris=#{track_uris}"
 
       User.oauth_put(@owner.id, url, {})
       @total = tracks.size

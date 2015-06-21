@@ -183,4 +183,31 @@ describe RSpotify::Playlist do
       expect(playlist.name).to eq 'Movie Soundtrack Masterpieces'
     end
   end
+
+  describe 'Playlist#is_followed_by?' do
+    let(:playlist) do
+      VCR.use_cassette('playlist:find:spotify:4LO89Y0ydu8li9Phq2iwKT') do
+        RSpotify::Playlist.find('spotify', '4LO89Y0ydu8li9Phq2iwKT')
+      end
+    end
+
+    let(:spotify) do
+      VCR.use_cassette('user:find:spotify') do
+        RSpotify::User.find('spotify')
+      end
+    end
+
+    let(:wizzler) do
+      VCR.use_cassette('user:find:wizzler') do
+        RSpotify::User.find('wizzler')
+      end
+    end
+
+    it "should say if it's followed by the specified users" do
+      response = VCR.use_cassette('playlist:is_followed_by') do
+        playlist.is_followed_by? [spotify, wizzler]
+      end
+      expect(response).to eq [true, false]
+    end
+  end
 end
