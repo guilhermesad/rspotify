@@ -50,12 +50,12 @@ module RSpotify
     private_class_method :oauth_header
 
     def self.oauth_send(user_id, verb, path, *params)
-      RSpotify.send(verb, path, *params)
+      RSpotify.send(:send_request, verb, path, *params)
     rescue RestClient::Unauthorized => e
       raise e if e.response !~ /access token expired/
       refresh_token(user_id)
       params[-1] = oauth_header(user_id)
-      RSpotify.send(verb, path, *params)
+      RSpotify.send(:send_request, verb, path, *params)
     end
     private_class_method :oauth_header
 
@@ -110,7 +110,7 @@ module RSpotify
 
     # Add the current user as a follower of one or more artists, other Spotify users or a playlist. Following artists or users require the *user-follow-modify*
     # scope. Following a playlist publicly requires the *playlist-modify-public* scope; following it privately requires the *playlist-modify-private* scope.
-    # 
+    #
     # @note Scopes you provide for playlists determine only whether the current user can themselves follow the playlist publicly or privately (i.e. show others what they are following), not whether the playlist itself is public or private.
     #
     # @param followed [Artist, Array<Artist>, User, Array<User>, Playlist] The artists, users or playlist to follow
@@ -144,7 +144,7 @@ module RSpotify
       followed
     end
 
-    # Check to see if the current user is following one or more artists or other Spotify users. This method
+    # Check if the current user is following one or more artists or other Spotify users. This method
     # is only available when the current user has granted access to the *user-follow-read* scope.
     #
     # @param followed [Artist, Array<Artist>, User, Array<User>] The users or artists to check
@@ -233,7 +233,7 @@ module RSpotify
     def saved_tracks(limit: 20, offset: 0)
       url = "me/tracks?limit=#{limit}&offset=#{offset}"
       json = User.oauth_get(@id, url)
-      
+
       tracks = json['items'].select { |i| i['track'] }
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
         Time.parse added_at
@@ -266,7 +266,7 @@ module RSpotify
 
     # Remove the current user as a follower of one or more artists, other Spotify users or a playlist. Unfollowing artists or users require the *user-follow-modify* scope.
     # Unfollowing a publicly followed playlist requires the *playlist-modify-public* scope; unfollowing a privately followed playlist requires the *playlist-modify-private* scope.
-    # 
+    #
     # @note Note that the scopes you provide for playlists relate only to whether the current user is following the playlist publicly or privately (i.e. showing others what they are following), not whether the playlist itself is public or private.
     #
     # @param unfollowed [Artist, Array<Artist>, User, Array<User>, Playlist] The artists, users or playlist to unfollow

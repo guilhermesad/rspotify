@@ -32,8 +32,7 @@ module RSpotify
     VERBS.each do |verb|
       define_method verb do |path, *params|
         params << { 'Authorization' => "Bearer #{@client_token}" } if @client_token
-        response = RestClient.send(verb, api_url(path), *params)
-        JSON.parse response unless response.empty?
+        send_request(verb, path, *params)
       end
     end
 
@@ -51,8 +50,10 @@ module RSpotify
 
     private
 
-    def api_url(path)
-      path.start_with?("http") ? path : API_URI + path
+    def send_request(verb, path, *params)
+      url = path.start_with?("http") ? path : API_URI + path
+      response = RestClient.send(verb, url, *params)
+      JSON.parse response unless response.empty?
     end
 
     def auth_header
