@@ -52,13 +52,10 @@ module RSpotify
 
     def send_request(verb, path, *params)
       url = path.start_with?("http") ? path : API_URI + path
-      response = nil
       begin
         response = RestClient.send(verb, url, *params)
-
-      #Catch the fact that our token expired, renew it and replay the transaction
       rescue RestClient::Unauthorized
-        if @client_token then
+        if @client_token
           authenticate(@client_id, @client_secret)
           response = RestClient.send(verb, url, *params)
         end
