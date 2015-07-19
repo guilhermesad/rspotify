@@ -242,6 +242,52 @@ module RSpotify
       tracks
     end
 
+    # Remove one or more tracks from a user’s playlist. Removing from a public playlist requires the
+    # *playlist-modify-public* scope; removing from a private playlist requires the *playlist-modify-private* scope.
+    #
+    # @param tracks [Array<Track,Hash>, Array<Integer>] Tracks to be removed. Maximum: 100 per request
+    # @param snapshot_id [String] Optional. The playlist's snapshot ID against which you want to make the changes.
+    # @return [Playlist]
+    #
+    # @example
+    #           # Remove all occurrences of one or more tracks
+    #           love_tracks = RSpotify::Track.search('Love')
+    #           playlist.remove_tracks!(love_tracks)
+    #
+    #           # Remove specific occurrences of one or more tracks
+    #           track = RSpotify::Track.find('tR3oH...')
+    #           playlist.remove_tracks!([{track: track, positions: [0,3]}, other_track])
+    #
+    #           # Remove tracks based only on their positions (requires snapshot id)
+    #           positions = [0,3,8]
+    #           playlist.remove_tracks!(positions, snapshot_id: '0ZvtH...')
+    def remove_tracks!(tracks, snapshot_id: nil)
+      positions = tracks if tracks.first.is_a? Fixnum
+
+      tracks = tracks.map do |track|
+        next { uri: track.uri } if track.is_a? Track
+        {
+          uri: track[:track].uri,
+          positions: track[:positions]
+        }
+      end unless positions
+
+      params = {
+        method: :delete,
+        url: "#{@href}/tracks",
+        headers: User.send(:oauth_header, @owner.id),
+        payload: positions ? { positions: positions } : { tracks: tracks }
+      }
+
+      params[:payload][:snapshot_id] = snapshot_id if snapshot_id
+      params[:payload] = params[:payload].to_json
+      response = RestClient::Request.execute(params)
+
+      @snapshot_id = JSON.parse(response)['snapshot_id']
+      @tracks_cache = nil
+      self
+    end
+
     # Reorder a track or a group of tracks in a playlist. Changing a public playlist requires the
     # *playlist-modify-public* scope; changing a private playlist requires the *playlist-modify-private* scope.
     #
