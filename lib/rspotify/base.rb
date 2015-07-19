@@ -17,7 +17,7 @@ module RSpotify
     #           user = RSpotify::Base.find('wizzler', 'user')
     #           user.class #=> RSpotify::User
     #           user.id    #=> "wizzler"
-    #           
+    #
     #           ids = %w(2UzMpPKPhbcC8RbsmuURAZ 7Jzsc04YpkRwB1zeyM39wE)
     #           tracks = RSpotify::Base.find(ids, 'track')
     #           tracks.class       #=> Array
@@ -40,23 +40,23 @@ module RSpotify
     def self.find_many(ids, type)
       type_class = RSpotify.const_get(type.capitalize)
       path = "#{type}s?ids=#{ids.join ','}"
-      json = RSpotify.get path
-      json["#{type}s"].map { |t| type_class.new t }
+      response = RSpotify.get path
+      response["#{type}s"].map { |t| type_class.new t }
     end
     private_class_method :find_many
 
     def self.find_one(id, type)
       type_class = RSpotify.const_get(type.capitalize)
       path = "#{type}s/#{id}"
-      json = RSpotify.get path
-      type_class.new json
+      response = RSpotify.get path
+      type_class.new response
     end
     private_class_method :find_one
 
-    def self.insert_total(result, types, json)
+    def self.insert_total(result, types, response)
       result.instance_eval do
         @total = types.map do |type|
-          json["#{type}s"]['total']
+          response["#{type}s"]['total']
         end.reduce(:+)
 
         define_singleton_method :total do
@@ -89,7 +89,7 @@ module RSpotify
       url = "search?q=#{query}&type=#{types}"\
             "&limit=#{limit}&offset=#{offset}"
 
-      json = if market.is_a? Hash
+      response = if market.is_a? Hash
         url << '&market=from_token'
         User.oauth_get(market[:from].id, url)
       else
@@ -100,10 +100,10 @@ module RSpotify
       types = types.split(',')
       result = types.flat_map do |type|
         type_class = RSpotify.const_get(type.capitalize)
-        json["#{type}s"]['items'].map { |i| type_class.new i }
+        response["#{type}s"]['items'].map { |i| type_class.new i }
       end
 
-      insert_total(result, types, json)
+      insert_total(result, types, response)
       result
     end
 
@@ -117,7 +117,7 @@ module RSpotify
 
     # When an object is obtained undirectly, Spotify usually returns a simplified version of it.
     # This method updates it into a full object, with all attributes filled.
-    # 
+    #
     # @note It is seldom necessary to use this method explicitly, since RSpotify takes care of it automatically when needed (see {#method_missing})
     #
     # @example
@@ -156,9 +156,9 @@ module RSpotify
       return true if instance_variable_defined? attr
       super
     end
-    
+
     protected
-    
+
     def hash_for(tracks, field)
       return nil unless tracks
       pairs = tracks.map do |track|

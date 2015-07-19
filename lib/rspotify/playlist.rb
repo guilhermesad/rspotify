@@ -32,8 +32,8 @@ module RSpotify
       options.each do |option, value|
         url << "&#{option}=#{value}"
       end
-      json = RSpotify.get(url)
-      json['playlists']['items'].map { |i| Playlist.new i }
+      response = RSpotify.get(url)
+      response['playlists']['items'].map { |i| Playlist.new i }
     end
 
     # Returns Playlist object with user_id and id provided. If id is "starred", returns starred playlist from user.
@@ -52,8 +52,8 @@ module RSpotify
       else
         "users/#{user_id}/playlists/#{id}"
       end
-      json = RSpotify.resolve_auth_request(user_id, url)
-      Playlist.new json
+      response = RSpotify.resolve_auth_request(user_id, url)
+      Playlist.new response
     end
 
     # Returns array of Playlist objects matching the query. It's also possible to find the total number of search results for the query
@@ -222,8 +222,8 @@ module RSpotify
       end
 
       url = "#{@href}/tracks?limit=#{limit}&offset=#{offset}"
-      json = RSpotify.resolve_auth_request(@owner.id, url)
-      tracks = json['items'].select { |i| i['track'] }
+      response = RSpotify.resolve_auth_request(@owner.id, url)
+      tracks = response['items'].select { |i| i['track'] }
 
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
         Time.parse added_at

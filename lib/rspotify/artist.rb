@@ -16,7 +16,7 @@ module RSpotify
     #           artist = RSpotify::Artist.find('7Ln80lUS6He07XvHI8qqHH')
     #           artist.class #=> RSpotify::Artist
     #           artist.name  #=> "Arctic Monkeys"
-    #           
+    #
     #           ids = %w(7Ln80lUS6He07XvHI8qqHH 3dRfiJ2650SZu6GbydcHNb)
     #           artists = RSpotify::Artist.find(ids)
     #           artists.class       #=> Array
@@ -72,8 +72,8 @@ module RSpotify
         url << "&#{filter_name}=#{filter_value}"
       end
 
-      json = RSpotify.get(url)
-      json['items'].map { |i| Album.new i }
+      response = RSpotify.get(url)
+      response['items'].map { |i| Album.new i }
     end
 
     # Returns array of similar artists. Similarity is based on analysis of the Spotify community’s {http://news.spotify.com/se/2010/02/03/related-artists listening history}.
@@ -88,8 +88,8 @@ module RSpotify
     #           related_artists.first.name #=> "Miles Kane"
     def related_artists
       return @related_artists unless @related_artists.nil?
-      json = RSpotify.get("artists/#{@id}/related-artists")
-      @related_artists = json['artists'].map { |a| Artist.new a }
+      response = RSpotify.get("artists/#{@id}/related-artists")
+      @related_artists = response['artists'].map { |a| Artist.new a }
     end
 
     # Returns artist's 10 top tracks by country.
@@ -104,8 +104,8 @@ module RSpotify
     #           top_tracks.first.class #=> RSpotify::Track
     def top_tracks(country)
       return @top_tracks[country] unless @top_tracks[country].nil?
-      json = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
-      @top_tracks[country] = json['tracks'].map { |t| Track.new t }
+      response = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
+      @top_tracks[country] = response['tracks'].map { |t| Track.new t }
     end
   end
 end

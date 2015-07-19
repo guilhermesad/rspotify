@@ -36,8 +36,8 @@ module RSpotify
         refresh_token: @@users_credentials[user_id]['refresh_token']
       }
       response = RestClient.post(TOKEN_URI, request_body, RSpotify.send(:auth_header))
-      json = JSON.parse(response)
-      @@users_credentials[user_id]['token'] = json['access_token']
+      response = JSON.parse(response)
+      @@users_credentials[user_id]['token'] = response['access_token']
     end
     private_class_method :refresh_token
 
@@ -202,8 +202,8 @@ module RSpotify
     #           playlists.first.name  #=> "Movie Soundtrack Masterpieces"
     def playlists(limit: 20, offset: 0)
       url = "users/#{@id}/playlists?limit=#{limit}&offset=#{offset}"
-      json = RSpotify.resolve_auth_request(@id, url)
-      json['items'].map { |i| Playlist.new i }
+      response = RSpotify.resolve_auth_request(@id, url)
+      response['items'].map { |i| Playlist.new i }
     end
 
     # Remove tracks from the user’s “Your Music” library.
@@ -255,9 +255,9 @@ module RSpotify
     #           tracks.first.name #=> "Do I Wanna Know?"
     def saved_tracks(limit: 20, offset: 0)
       url = "me/tracks?limit=#{limit}&offset=#{offset}"
-      json = User.oauth_get(@id, url)
+      response = User.oauth_get(@id, url)
 
-      tracks = json['items'].select { |i| i['track'] }
+      tracks = response['items'].select { |i| i['track'] }
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
         Time.parse added_at
       end

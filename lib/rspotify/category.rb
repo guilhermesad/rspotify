@@ -29,8 +29,8 @@ module RSpotify
         url << '&' unless index == options.size-1
       end
 
-      json = RSpotify.get(url)
-      Category.new json
+      response = RSpotify.get(url)
+      Category.new response
     end
 
     # Get a list of categories used to tag items in Spotify
@@ -50,8 +50,8 @@ module RSpotify
       options.each do |option, value|
         url << "&#{option}=#{value}"
       end
-      json = RSpotify.get(url)
-      json['categories']['items'].map { |i| Category.new i }
+      response = RSpotify.get(url)
+      response['categories']['items'].map { |i| Category.new i }
     end
 
     # Spotify does not support search for categories.
@@ -91,8 +91,8 @@ module RSpotify
         url << "&#{option}=#{value}"
       end
 
-      json = RSpotify.get(url)
-      json['playlists']['items'].map { |i| Playlist.new i }
+      response = RSpotify.get(url)
+      response['playlists']['items'].map { |i| Playlist.new i }
     end
   end
 end

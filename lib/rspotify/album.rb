@@ -44,8 +44,8 @@ module RSpotify
     def self.new_releases(limit: 20, offset: 0, country: nil)
       url = "browse/new-releases?limit=#{limit}&offset=#{offset}"
       url << "&country=#{country}" if country
-      json = RSpotify.get(url)
-      json['albums']['items'].map { |i| Album.new i }
+      response = RSpotify.get(url)
+      response['albums']['items'].map { |i| Album.new i }
     end
 
     # Returns array of Album objects matching the query, ordered by popularity. It's also possible to find the total number of search results for the query
@@ -105,8 +105,8 @@ module RSpotify
       end
 
       url = "albums/#{@id}/tracks?limit=#{limit}&offset=#{offset}"
-      json = RSpotify.get(url)
-      tracks = json['items'].map { |i| Track.new i }
+      response = RSpotify.get(url)
+      tracks = response['items'].map { |i| Track.new i }
       @tracks_cache = tracks if limit == 50 && offset == 0
       tracks
     end
