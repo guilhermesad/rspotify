@@ -144,6 +144,29 @@ module RSpotify
       followed
     end
 
+    # Get the current user’s followed artists or users. Requires the *user-follow-read* scope.
+    #
+    # @note The current Spotify API implementation only supports getting followed *artists*
+    #
+    # @param type  [String]  The ID type: currently only "artist" is supported
+    # @param limit [Integer] Maximum number of items to return. Maximum: 50. Minimum: 1. Default: 20.
+    # @param after [String]  Optional. The last artist ID retrieved from the previous request.
+    # @return [Array<Artist>]
+    #
+    # @example
+    #           followed_artists = user.following(type: 'artist')
+    #           followed_artists.first.class #=> RSpotify::Artist
+    #
+    #           followed_artists = user.following(type: 'artist', limit: 50)
+    def following(type: nil, limit: 20, after: nil)
+      type_class = RSpotify.const_get(type.capitalize)
+      url = "me/following?type=#{type}&limit=#{limit}"
+      url << "&after=#{after}" if after
+
+      response = User.oauth_get(@id, url)
+      response["#{type}s"]['items'].map { |i| type_class.new i }
+    end
+
     # Check if the current user is following one or more artists or other Spotify users. This method
     # is only available when the current user has granted access to the *user-follow-read* scope.
     #
