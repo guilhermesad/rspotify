@@ -7,7 +7,7 @@ module RSpotify
   # @attr [String]      name            The name of the playlist
   # @attr [User]        owner           The user who owns the playlist
   # @attr [Boolean]     public          true if the playlist is not marked as secret
-  # @attr [String]      snapshot_id     The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version
+  # @attr [String]      snapshot_id     The version identifier for the current playlist. This attribute gets updated every time the playlist changes and can be supplied in other requests to target a specific playlist version
   # @attr [Integer]     total           The total number of tracks in the playlist
   # @attr [Hash]        tracks_added_at A hash containing the date and time each track was added to the playlist. Note: the hash is updated only when {#tracks} is used.
   # @attr [Hash]        tracks_added_by A hash containing the user that added each track to the playlist. Note: the hash is updated only when {#tracks} is used.
@@ -130,10 +130,11 @@ module RSpotify
       url = "#{@href}/tracks?uris=#{track_uris}"
       url << "&position=#{position}" if position
 
-      User.oauth_post(@owner.id, url, {})
+      response = User.oauth_post(@owner.id, url, {})
+      @snapshot_id = response['snapshot_id']
+
       @total += tracks.size
       @tracks_cache = nil
-
       tracks
     end
 
@@ -157,6 +158,7 @@ module RSpotify
       data.each do |field, value|
         instance_variable_set("@#{field}", value)
       end
+      @snapshot_id = nil
       self
     end
 
@@ -329,11 +331,11 @@ module RSpotify
     def replace_tracks!(tracks)
       track_uris = tracks.map(&:uri).join(',')
       url = "#{@href}/tracks?uris=#{track_uris}"
-
       User.oauth_put(@owner.id, url, {})
+
       @total = tracks.size
       @tracks_cache = nil
-
+      @snapshot_id = nil
       tracks
     end
 
