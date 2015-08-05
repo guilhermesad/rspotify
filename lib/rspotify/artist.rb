@@ -1,3 +1,4 @@
+require('json')
 module RSpotify
 
   # @attr [Hash]          followers  Information about the followers of the artist
@@ -6,7 +7,6 @@ module RSpotify
   # @attr [String]        name       The name of the artist
   # @attr [Integer]       popularity The popularity of the artist. The value will be between 0 and 100, with 100 being the most popular
   class Artist < Base
-    require('json')
     # Returns Artist object(s) with id(s) provided
     #
     # @param ids [String, Array] Maximum: 50 IDs

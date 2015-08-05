@@ -178,17 +178,9 @@ describe RSpotify::Artist do
       expect(reload_twice.uri)                      .to eq      'spotify:artist:7Ln80lUS6He07XvHI8qqHH'
     end
 
-    it 'should convert blank artists'
-    empty_artist = RSpotify::Artist.new.to_json
-    expect(empty_artist.external_urls)            .to be_nil
-    expect(empty_artist.followers)                .to be_nil
-    expect(empty_artist.genres)                   .to be_nil
-    expect(empty_artist.href)                     .to be_nil
-    expect(empty_artist.id)                       .to be_nil
-    expect(empty_artist.images)                   .to be_nil
-    expect(empty_artist.name)                     .to be_nil
-    expect(empty_artist.popularity)               .to be_nil
-    expect(empty_artist.type)                     .to be_nil
-    expect(empty_artist.uri)                      .to be_nil
+    it 'should convert blank artists' do
+      empty_artist = RSpotify::Artist.new.to_json
+      expect(empty_artist).to eq '{"external_urls":null,"followers":null,"genres":null,"href":null,"id":null,"images":null,"name":null,"popularity":null,"type":null,"uri":null}'
+    end
   end
 end
