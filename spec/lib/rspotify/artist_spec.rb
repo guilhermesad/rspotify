@@ -164,18 +164,18 @@ describe RSpotify::Artist do
     end
 
     it 'should convert correctly to and from json' do
-      reload_once = RSpotify::Artist.from_json(@artist.to_json)
-      reload_twice = RSpotify::Artist.from_json(reload_once.to_json)
-      expect(reload_twice.external_urls['spotify']) .to eq      'https://open.spotify.com/artist/7Ln80lUS6He07XvHI8qqHH'
-      expect(reload_twice.followers['total'])       .to be      > 0
-      expect(reload_twice.genres)                   .to be_an   Array
-      expect(reload_twice.href)                     .to eq      'https://api.spotify.com/v1/artists/7Ln80lUS6He07XvHI8qqHH'
-      expect(reload_twice.id)                       .to eq      '7Ln80lUS6He07XvHI8qqHH'
-      expect(reload_twice.images)                   .to include ({'height' => 1333, 'width' => 1000, 'url' => 'https://i.scdn.co/image/fa2e9ca1a27695ae7f8013350d9a53e11d523ece'})
-      expect(reload_twice.name)                     .to eq      'Arctic Monkeys'
-      expect(reload_twice.popularity)               .to be      > 0
-      expect(reload_twice.type)                     .to eq      'artist'
-      expect(reload_twice.uri)                      .to eq      'spotify:artist:7Ln80lUS6He07XvHI8qqHH'
+      require('json')
+      json_hash = JSON.parse(@artist.to_json)
+      expect(json_hash['external_urls']['spotify']).to eq('https://open.spotify.com/artist/7Ln80lUS6He07XvHI8qqHH')
+      expect(json_hash['followers']['total'])      .to be > 0
+      expect(json_hash['genres'])                  .to be_an(Array)
+      expect(json_hash['href'])                    .to eq('https://api.spotify.com/v1/artists/7Ln80lUS6He07XvHI8qqHH')
+      expect(json_hash['id'])                      .to eq('7Ln80lUS6He07XvHI8qqHH')
+      expect(json_hash['images'])                  .to include ({'height' => 1333, 'width' => 1000, 'url' => 'https://i.scdn.co/image/fa2e9ca1a27695ae7f8013350d9a53e11d523ece'})
+      expect(json_hash['name'])                    .to eq('Arctic Monkeys')
+      expect(json_hash['popularity'])              .to be > 0
+      expect(json_hash['type'])                    .to eq('artist')
+      expect(json_hash['uri'])                     .to eq('spotify:artist:7Ln80lUS6He07XvHI8qqHH')
     end
 
     it 'should convert blank artists' do
