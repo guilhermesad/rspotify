@@ -6,7 +6,7 @@ module RSpotify
   # @attr [String]        name       The name of the artist
   # @attr [Integer]       popularity The popularity of the artist. The value will be between 0 and 100, with 100 being the most popular
   class Artist < Base
-
+    require('json')
     # Returns Artist object(s) with id(s) provided
     #
     # @param ids [String, Array] Maximum: 50 IDs
@@ -106,6 +106,42 @@ module RSpotify
       return @top_tracks[country] unless @top_tracks[country].nil?
       response = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
       @top_tracks[country] = response['tracks'].map { |t| Track.new t }
+    end
+
+    def to_json
+      {
+        'external_urls' => @external_urls,
+        'followers' => @followers,
+        'genres' => @genres,
+        'href' => @href,
+        'id' => @id,
+        'images' => @images,
+        'name' => @name,
+        'popularity' => @popularity,
+        'type' => @type,
+        'uri' => @uri
+      }.to_json
+    end
+
+    def self.from_json(string)
+      loaded_json = JSON.parse(string)
+      json_sanity_check(loaded_json)
+      puts loaded_json
+      self.new(loaded_json)
+    end
+
+    private
+    def self.json_sanity_check(json)
+      json_clone = json.clone
+      fields = %w(external_urls followers genres href id images name popularity type uri)
+      fields.each do |field|
+        has_key = json_clone.has_key?(field)
+        raise(ArgumentError, "JSON input string is missing #{field}") unless has_key
+        json_clone.delete(field)
+      end
+      unless json_clone.size == 0
+        raise(ArgumentError, 'Invalid JSON field detected')
+      end
     end
   end
 end
