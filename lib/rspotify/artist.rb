@@ -126,7 +126,6 @@ module RSpotify
     def self.from_json(string)
       loaded_json = JSON.parse(string)
       json_sanity_check(loaded_json)
-      puts loaded_json
       self.new(loaded_json)
     end
 
