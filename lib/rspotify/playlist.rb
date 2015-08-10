@@ -32,7 +32,9 @@ module RSpotify
       options.each do |option, value|
         url << "&#{option}=#{value}"
       end
+
       response = RSpotify.get(url)
+      return response if RSpotify.raw_response
       response['playlists']['items'].map { |i| Playlist.new i }
     end
 
@@ -52,7 +54,9 @@ module RSpotify
       else
         "users/#{user_id}/playlists/#{id}"
       end
+
       response = RSpotify.resolve_auth_request(user_id, url)
+      return response if RSpotify.raw_response
       Playlist.new response
     end
 
@@ -131,10 +135,15 @@ module RSpotify
       url << "&position=#{position}" if position
 
       response = User.oauth_post(@owner.id, url, {})
-      @snapshot_id = response['snapshot_id']
-
       @total += tracks.size
       @tracks_cache = nil
+
+      if RSpotify::raw_response
+        @snapshot_id = JSON.parse(response)['snapshot_id']
+        return response
+      end
+
+      @snapshot_id = json['snapshot_id']
       tracks
     end
 
@@ -219,13 +228,15 @@ module RSpotify
     #           playlist.tracks.first.name #=> "Main Theme from Star Wars - Instrumental"
     def tracks(limit: 100, offset: 0)
       last_track = offset + limit - 1
-      if @tracks_cache && last_track < 100
+      if @tracks_cache && last_track < 100 && !RSpotify.raw_response
         return @tracks_cache[offset..last_track]
       end
 
       url = "#{@href}/tracks?limit=#{limit}&offset=#{offset}"
       response = RSpotify.resolve_auth_request(@owner.id, url)
-      tracks = response['items'].select { |i| i['track'] }
+
+      json = RSpotify.raw_response ? JSON.parse(response) : response
+      tracks = json['items'].select { |i| i['track'] }
 
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
         Time.parse added_at
@@ -241,6 +252,7 @@ module RSpotify
 
       tracks.map! { |t| Track.new t['track'] }
       @tracks_cache = tracks if limit == 100 && offset == 0
+      return response if RSpotify.raw_response
       tracks
     end
 
@@ -312,7 +324,9 @@ module RSpotify
       }.merge options
 
       response = User.oauth_put(@owner.id, url, data.to_json)
-      @snapshot_id = response['snapshot_id']
+      json = RSpotify.raw_response ? JSON.parse(response) : response
+
+      @snapshot_id = json['snapshot_id']
       @tracks_cache = nil
       self
     end

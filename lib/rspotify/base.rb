@@ -40,7 +40,9 @@ module RSpotify
     def self.find_many(ids, type)
       type_class = RSpotify.const_get(type.capitalize)
       path = "#{type}s?ids=#{ids.join ','}"
+
       response = RSpotify.get path
+      return response if RSpotify.raw_response
       response["#{type}s"].map { |t| type_class.new t }
     end
     private_class_method :find_many
@@ -48,7 +50,9 @@ module RSpotify
     def self.find_one(id, type)
       type_class = RSpotify.const_get(type.capitalize)
       path = "#{type}s/#{id}"
+
       response = RSpotify.get path
+      return response if RSpotify.raw_response
       type_class.new response
     end
     private_class_method :find_one
@@ -96,6 +100,8 @@ module RSpotify
         url << "&market=#{market}" if market
         RSpotify.get(url)
       end
+
+      return response if RSpotify.raw_response
 
       types = types.split(',')
       result = types.flat_map do |type|

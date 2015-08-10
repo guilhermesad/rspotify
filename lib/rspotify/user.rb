@@ -105,7 +105,10 @@ module RSpotify
     def create_playlist!(name, public: true)
       url = "users/#{@id}/playlists"
       request_data = { name: name, public: public }.to_json
-      Playlist.new User.oauth_post(@id, url, request_data)
+
+      response = User.oauth_post(@id, url, request_data)
+      return response if RSpotify.raw_response
+      Playlist.new response
     end
 
     # Add the current user as a follower of one or more artists, other Spotify users or a playlist. Following artists or users require the *user-follow-modify*
@@ -164,6 +167,7 @@ module RSpotify
       url << "&after=#{after}" if after
 
       response = User.oauth_get(@id, url)
+      return response if RSpotify.raw_response
       response["#{type}s"]['items'].map { |i| type_class.new i }
     end
 
@@ -203,6 +207,7 @@ module RSpotify
     def playlists(limit: 20, offset: 0)
       url = "users/#{@id}/playlists?limit=#{limit}&offset=#{offset}"
       response = RSpotify.resolve_auth_request(@id, url)
+      return response if RSpotify.raw_response
       response['items'].map { |i| Playlist.new i }
     end
 
@@ -256,12 +261,14 @@ module RSpotify
     def saved_tracks(limit: 20, offset: 0)
       url = "me/tracks?limit=#{limit}&offset=#{offset}"
       response = User.oauth_get(@id, url)
+      json = RSpotify.raw_response ? JSON.parse(response) : response
 
-      tracks = response['items'].select { |i| i['track'] }
+      tracks = json['items'].select { |i| i['track'] }
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
         Time.parse added_at
       end
 
+      return response if RSpotify.raw_response
       tracks.map { |t| Track.new t['track'] }
     end
 

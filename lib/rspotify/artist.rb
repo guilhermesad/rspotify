@@ -73,6 +73,7 @@ module RSpotify
       end
 
       response = RSpotify.get(url)
+      return response if RSpotify.raw_response
       response['items'].map { |i| Album.new i }
     end
 
@@ -87,8 +88,10 @@ module RSpotify
     #           related_artists.size       #=> 20
     #           related_artists.first.name #=> "Miles Kane"
     def related_artists
-      return @related_artists unless @related_artists.nil?
+      return @related_artists unless @related_artists.nil? || RSpotify.raw_response
       response = RSpotify.get("artists/#{@id}/related-artists")
+
+      return response if RSpotify.raw_response
       @related_artists = response['artists'].map { |a| Artist.new a }
     end
 
@@ -103,8 +106,10 @@ module RSpotify
     #           top_tracks.size        #=> 10
     #           top_tracks.first.class #=> RSpotify::Track
     def top_tracks(country)
-      return @top_tracks[country] unless @top_tracks[country].nil?
+      return @top_tracks[country] unless @top_tracks[country].nil? || RSpotify.raw_response
       response = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
+
+      return response if RSpotify.raw_response
       @top_tracks[country] = response['tracks'].map { |t| Track.new t }
     end
   end

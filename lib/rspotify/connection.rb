@@ -10,6 +10,7 @@ module RSpotify
   VERBS         = %w(get post put delete)
 
   class << self
+    attr_accessor :raw_response
 
     # Authenticates access to restricted data. Requires {https://developer.spotify.com/my-applications user credentials}
     #
@@ -52,6 +53,7 @@ module RSpotify
 
     def send_request(verb, path, *params)
       url = path.start_with?("http") ? path : API_URI + path
+
       begin
         response = RestClient.send(verb, url, *params)
       rescue RestClient::Unauthorized
@@ -60,6 +62,8 @@ module RSpotify
           response = RestClient.send(verb, url, *params)
         end
       end
+
+      return response if raw_response
       JSON.parse response unless response.empty?
     end
 

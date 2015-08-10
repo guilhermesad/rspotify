@@ -30,6 +30,7 @@ module RSpotify
       end
 
       response = RSpotify.get(url)
+      return response if RSpotify.raw_response
       Category.new response
     end
 
@@ -50,7 +51,9 @@ module RSpotify
       options.each do |option, value|
         url << "&#{option}=#{value}"
       end
+
       response = RSpotify.get(url)
+      return response if RSpotify.raw_response
       response['categories']['items'].map { |i| Category.new i }
     end
 
@@ -92,6 +95,7 @@ module RSpotify
       end
 
       response = RSpotify.get(url)
+      return response if RSpotify.raw_response
       response['playlists']['items'].map { |i| Playlist.new i }
     end
   end
