@@ -53,6 +53,7 @@ module RSpotify
 
     def send_request(verb, path, *params)
       url = path.start_with?("http") ? path : API_URI + path
+      url = URI::encode(url)
 
       begin
         response = RestClient.send(verb, url, *params)

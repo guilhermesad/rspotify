@@ -288,7 +288,7 @@ module RSpotify
 
       params = {
         method: :delete,
-        url: "#{@href}/tracks",
+        url: URI::encode("#{@href}/tracks"),
         headers: User.send(:oauth_header, @owner.id),
         payload: positions ? { positions: positions } : { tracks: tracks }
       }
