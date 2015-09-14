@@ -137,13 +137,8 @@ module RSpotify
       response = User.oauth_post(@owner.id, url, {})
       @total += tracks.size
       @tracks_cache = nil
+      @snapshot_id = nil
 
-      if RSpotify::raw_response
-        @snapshot_id = JSON.parse(response)['snapshot_id']
-        return response
-      end
-
-      @snapshot_id = json['snapshot_id']
       tracks
     end
 
