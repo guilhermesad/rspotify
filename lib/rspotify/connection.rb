@@ -52,8 +52,11 @@ module RSpotify
     private
 
     def send_request(verb, path, *params)
-      url = path.start_with?("http") ? path : API_URI + path
+      url = path.start_with?('http') ? path : API_URI + path
+
+      url, query = *url.split('?')
       url = URI::encode(url)
+      url << "?#{query}" if query
 
       begin
         response = RestClient.send(verb, url, *params)
