@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/rspotify.svg)](http://badge.fury.io/rb/rspotify)
 [![Build Status](https://travis-ci.org/guilhermesad/rspotify.svg?branch=master)](https://travis-ci.org/guilhermesad/rspotify)
 
-This is a ruby wrapper for the [new Spotify Web API](https://developer.spotify.com/web-api), released in June 17, 2014.
+This is a ruby wrapper for the [Spotify Web API](https://developer.spotify.com/web-api).
 
 ## Features
 
@@ -29,7 +29,7 @@ Or install it yourself as:
 
 RSpotify was designed with usability as its primary goal, so that you can forget the API and intuitively interact with your playlists, favorite artists, users and so on.
 
-You can write things like `playlist.tracks.sort_by(&:popularity).last.album` without having to think which API calls must be done. RSpotify fills the gaps for you.
+You can write things like `my_playlist.tracks.sort_by(&:popularity).last.album` without having to think which API calls must be done. RSpotify fills the gaps for you.
 
 Below are some basic usage examples. Check the [documentation](http://rdoc.info/github/guilhermesad/rspotify/master/frames) for the complete reference.
 
