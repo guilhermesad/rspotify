@@ -169,6 +169,7 @@ describe RSpotify::Playlist do
     let(:href) { 'https://api.spotify.com/v1/users/wizzler/playlists/00wHcTN0zQiun4xri9pmvX' }
     let(:playlist) do
       min_attrs = {
+        'id'   => '00wHcTN0zQiun4xri9pmvX',
         'href'   => href,
         'owner'  => {'id' => 'wizzler'},
         'tracks' => {'total' => 53 }

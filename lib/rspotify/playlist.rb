@@ -49,11 +49,8 @@ module RSpotify
     #           playlist.class #=> RSpotify::Playlist
     #           playlist.name  #=> "Movie Soundtrack Masterpieces"
     def self.find(user_id, id)
-      url = if id == "starred"
-        "users/#{user_id}/starred"
-      else
-        "users/#{user_id}/playlists/#{id}"
-      end
+      url = "users/#{user_id}/"
+      url << (id == 'starred' ? id : "playlists/#{id}")
 
       response = RSpotify.resolve_auth_request(user_id, url)
       return response if RSpotify.raw_response
@@ -110,6 +107,9 @@ module RSpotify
       end
 
       super(options)
+
+      @path = "users/#{@owner.instance_variable_get('@id')}/"
+      @path << (@href =~ /\/starred$/ ? 'starred' : "playlists/#{@id}")
     end
 
     # Adds one or more tracks to a playlist in user's Spotify account. This method is only available when the
@@ -131,7 +131,7 @@ module RSpotify
     #           playlist.tracks[20].name #=> "Somebody That I Used To Know"
     def add_tracks!(tracks, position: nil)
       track_uris = tracks.map(&:uri).join(',')
-      url = "#{@href}/tracks?uris=#{track_uris}"
+      url = "#{@path}/tracks?uris=#{track_uris}"
       url << "&position=#{position}" if position
 
       response = User.oauth_post(@owner.id, url, {})
@@ -163,7 +163,7 @@ module RSpotify
     #           playlist.name   #=> "Movie Tracks"
     #           playlist.public #=> false
     def change_details!(**data)
-      User.oauth_put(@owner.id, @href, data.to_json)
+      User.oauth_put(@owner.id, @path, data.to_json)
       data.each do |field, value|
         instance_variable_set("@#{field}", value)
       end
@@ -182,7 +182,7 @@ module RSpotify
     #           playlist.complete!
     #           playlist.instance_variable_get("@description") #=> "Iconic soundtracks..."
     def complete!
-      initialize RSpotify.resolve_auth_request(@owner.id, @href)
+      initialize RSpotify.resolve_auth_request(@owner.id, @path)
     end
 
     # Check if one or more Spotify users are following a specified playlist. Checking if the user is privately
@@ -200,7 +200,7 @@ module RSpotify
     #           playlist.is_followed_by?([oauth-user]) #=> [true] (User publicly or privately following playlist)
     def is_followed_by?(users)
       user_ids = users.map(&:id).join(',')
-      url = "#{@href}/followers/contains?ids=#{user_ids}"
+      url = "#{@path}/followers/contains?ids=#{user_ids}"
 
       users_credentials = if User.class_variable_defined?('@@users_credentials')
         User.class_variable_get('@@users_credentials')
@@ -232,7 +232,7 @@ module RSpotify
         return @tracks_cache[offset..last_track]
       end
 
-      url = "#{@href}/tracks?limit=#{limit}&offset=#{offset}"
+      url = "#{@path}/tracks?limit=#{limit}&offset=#{offset}"
       response = RSpotify.resolve_auth_request(@owner.id, url)
 
       json = RSpotify.raw_response ? JSON.parse(response) : response
@@ -288,7 +288,7 @@ module RSpotify
 
       params = {
         method: :delete,
-        url: URI::encode("#{@href}/tracks"),
+        url: URI::encode(RSpotify::API_URI + @path + '/tracks'),
         headers: User.send(:oauth_header, @owner.id),
         payload: positions ? { positions: positions } : { tracks: tracks }
       }
@@ -317,7 +317,7 @@ module RSpotify
     #           # Move the tracks at index 10-14 to the start of the playlist
     #           playlist.reorder_tracks!(range_start, insert_before, range_length: 5)
     def reorder_tracks!(range_start, insert_before, **options)
-      url = "#{@href}/tracks"
+      url = "#{@path}/tracks"
       data = {
         range_start: range_start,
         insert_before: insert_before
@@ -344,7 +344,7 @@ module RSpotify
     #           playlist.tracks.map(&:name) #=> ["Somebody That I Used To Know", "Do I Wanna Know?"]
     def replace_tracks!(tracks)
       track_uris = tracks.map(&:uri).join(',')
-      url = "#{@href}/tracks?uris=#{track_uris}"
+      url = "#{@path}/tracks?uris=#{track_uris}"
       User.oauth_put(@owner.id, url, {})
 
       @total = tracks.size
