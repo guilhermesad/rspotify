@@ -43,7 +43,7 @@ module RSpotify
 
       response = RSpotify.get path
       return response if RSpotify.raw_response
-      response["#{type}s"].map { |t| type_class.new t }
+      response["#{type}s"].map { |t| type_class.new t if t }
     end
     private_class_method :find_many
 
