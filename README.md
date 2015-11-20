@@ -186,6 +186,11 @@ class UsersController < ApplicationController
     spotify_user.saved_tracks.size #=> 20
     spotify_user.remove_tracks!(tracks)
 
+    albums = RSpotify::Album.search('launeddas')
+    spotify_user.save_albums!(albums)
+    spotify_user.saved_albums.size #=> 10
+    spotify_user.remove_albums!(albums)
+
     # Use Spotify Follow features
     spotify_user.follow(playlist)
     spotify_user.follows?(artists)

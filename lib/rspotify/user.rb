@@ -286,6 +286,78 @@ module RSpotify
       User.oauth_get(@id, url)
     end
 
+    # Remove albums from the user’s “Your Music” library.
+    #
+    # @param albums [Array<Album>] The albums to remove. Maximum: 50.
+    # @return [Array<Album>] The albums removed.
+    #
+    # @example
+    #           albums = user.saved_albums
+    #
+    #           user.saved_albums.size #=> 20
+    #           user.remove_albums!(albums)
+    #           user.saved_albums.size #=> 0
+    def remove_albums!(albums)
+      albums_ids = albums.map(&:id)
+      url = "me/albums?ids=#{albums_ids.join ','}"
+      User.oauth_delete(@id, url)
+      albums
+    end
+
+    # Save albums to the user’s “Your Music” library.
+    #
+    # @param albums [Array<Album>] The albums to save. Maximum: 50.
+    # @return [Array<Album>] The albums saved.
+    #
+    # @example
+    #           albums = RSpotify::Album.search('launeddas')
+    #
+    #           user.saved_albums.size #=> 0
+    #           user.save_albums!(albums)
+    #           user.saved_albums.size #=> 10
+    def save_albums!(albums)
+      albums_ids = albums.map(&:id)
+      url = "me/albums"
+      request_body = albums_ids.inspect
+      User.oauth_put(@id, url, request_body)
+      albums
+    end
+
+    # Returns the albums saved in the Spotify user’s “Your Music” library. ** Includes albums whose tracks you saved
+    #
+    # @param limit  [Integer] Maximum number of albums to return. Maximum: 50. Minimum: 1. Default: 20.
+    # @param offset [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
+    # @return [Array<Album>]
+    #
+    # @example
+    #           albums = user.saved_albums
+    #           albums.size       #=> 20
+    #           albums.first.name #=> "Launeddas"
+    def saved_albums(limit: 20, offset: 0)
+      url = "me/albums?limit=#{limit}&offset=#{offset}"
+      response = User.oauth_get(@id, url)
+      json = RSpotify.raw_response ? JSON.parse(response) : response
+
+      albums = json['items'].select { |i| i['album'] }
+
+      return response if RSpotify.raw_response
+      albums.map { |a| Album.new a['album'] }
+    end
+
+    # Check if albums are already saved in the Spotify user’s “Your Music” library. ** Only returns true if the album was saved via me/albums, not if you saved each track individually.
+    #
+    # @param albums [Array<Album>] The albums to check. Maximum: 50.
+    # @return [Array<Boolean>] Array of booleans, in the same order in which the albums were specified.
+    #
+    # @example
+    #           albums = RSpotify::Album.search('launeddas')
+    #           user.saved_albums?(albums) #=> [true, false, true...]
+    def saved_albums?(albums)
+      albums_ids = albums.map(&:id)
+      url = "me/albums/contains?ids=#{albums_ids.join ','}"
+      User.oauth_get(@id, url)
+    end
+
     # Returns a hash containing all user attributes
     def to_hash
       pairs = instance_variables.map do |var|
