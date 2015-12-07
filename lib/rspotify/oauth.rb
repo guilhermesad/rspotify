@@ -11,8 +11,12 @@ module OmniAuth
         token_url:     RSpotify::TOKEN_URI,
       }
 
-      info do
-        access_token.get('me').parsed
+      uid { raw_info['id'] }
+
+      info { raw_info }
+
+      def raw_info
+        @raw_info ||= access_token.get('me').parsed
       end
     end
   end
