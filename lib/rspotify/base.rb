@@ -132,7 +132,7 @@ module RSpotify
     #           track.complete!
     #           track.instance_variable_get("@popularity") #=> 62
     def complete!
-      initialize RSpotify.get("#{type}s/#{@id}")
+      initialize RSpotify.get("#{@type}s/#{@id}")
     end
 
     # Used internally to retrieve an object's instance variable. If instance
