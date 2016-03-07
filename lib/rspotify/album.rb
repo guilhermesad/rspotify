@@ -11,6 +11,7 @@ module RSpotify
   # @attr [Integer]       popularity             The popularity of the album. The value will be between 0 and 100, with 100 being the most popular
   # @attr [String]        release_date           The date the album was first released, for example "1981-12-15". Depending on the precision, it might be shown as "1981" or "1981-12"
   # @attr [String]        release_date_precision The precision with which release_date value is known: "year", "month", or "day"
+  # @attr [Integer]       total_tracks           The total number of tracks in the album
   class Album < Base
 
     # Returns Album object(s) with id(s) provided
@@ -84,8 +85,11 @@ module RSpotify
         options['artists'].map { |a| Artist.new a }
       end
 
-      @tracks_cache = if options['tracks'] && options['tracks']['items']
-        options['tracks']['items'].map { |i| Track.new i }
+      @tracks_cache, @total_tracks = if options['tracks'] && options['tracks']['items']
+        [
+          options['tracks']['items'].map { |i| Track.new i },
+          options['tracks']['total']
+        ]
       end
 
       super(options)
