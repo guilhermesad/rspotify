@@ -4,7 +4,7 @@ http_interactions:
     method: post
     uri: https://5ac1cda2ad354aeaa1ad2693d33bb98c:155fc038a85840679b55a1822ef36b9b@accounts.spotify.com/api/token
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: grant_type=client_credentials
     headers:
       accept:
@@ -27,7 +27,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Sun, 21 Jun 2015 01:31:19 GMT
+      - Thu, 07 Apr 2016 14:06:14 GMT
       content-type:
       - application/json
       transfer-encoding:
@@ -46,24 +46,24 @@ http_interactions:
       - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
         https://www.google-analytics.com; img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
         https://i.imgur.com https://d2mv8tnci56s9d.cloudfront.net https://aci.scdn.co
-        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://www.google-analytics.com
-        https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net; font-src
-        ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://d3nkxvtkt5c8vi.cloudfront.net
-        https://sp-bootstrap.global.ssl.fastly.net; style-src ''self'' ''unsafe-inline''
-        https://d2d1dxiu3v1f2i.cloudfront.net; frame-src ''self'' https://www.spotify.com;'
+        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://scontent.xx.fbcdn.net
+        https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
+        font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://sp-bootstrap.global.ssl.fastly.net;
+        style-src ''self'' ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net;
+        frame-src ''self'' https://www.spotify.com;'
       x-content-security-policy:
       - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
         https://www.google-analytics.com; img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
         https://i.imgur.com https://d2mv8tnci56s9d.cloudfront.net https://aci.scdn.co
-        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://www.google-analytics.com
-        https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net; font-src
-        ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://d3nkxvtkt5c8vi.cloudfront.net
-        https://sp-bootstrap.global.ssl.fastly.net; style-src ''self'' ''unsafe-inline''
-        https://d2d1dxiu3v1f2i.cloudfront.net; frame-src ''self'' https://www.spotify.com;'
+        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://scontent.xx.fbcdn.net
+        https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
+        font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://sp-bootstrap.global.ssl.fastly.net;
+        style-src ''self'' ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net;
+        frame-src ''self'' https://www.spotify.com;'
       cache-control:
-      - ": no-cache, no-store, must-revalidate"
+      - no-cache, no-store, must-revalidate
       pragma:
-      - ": no-cache"
+      - no-cache
       content-encoding:
       - gzip
       x-content-type-options:
@@ -73,10 +73,10 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAAx3Nuw6CMBQA0H/pLEmNCaluqIOQRpSHWJcG4QrF8GobbTX+
-        u+h6lvNGeVGAUlz3d+jQCq2PXhoNY9L0yomvXmbF2dLS0S8VpFnI1KUibcSh
-        M9uGJqfDU1Tl7mb9R8aIXpoN5mNL4gZTOvdNHdSjdlm499AM/QOu7QC/BXIJ
-        clIwg5CguJjuhYvx5wvHTQLZkQAAAA==
+        H4sIAAAAAAAAAx3NwQ6CIBgA4Hfh3AFHuexWtjGjNW2rZheG9DfAZgRoWuvd
+        s67f5XsjISV4z8O9hgYt0KpIt+Y14MjKE9HToexA1XkTlf0uJpuQp20alrJY
+        K81ceWVd1h4N9nVyOQhLCTWZMOxmk2xG3VlVj44bvZ8/0QT9Ax4GC78FhAM3
+        KvRWO/BcjzeJMf58AdLU7UORAAAA
     http_version: '1.1'
-  recorded_at: Sun, 21 Jun 2015 01:31:19 GMT
+  recorded_at: Thu, 07 Apr 2016 14:06:14 GMT
 recorded_with: VCR 2.9.3
