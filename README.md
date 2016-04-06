@@ -79,8 +79,8 @@ am.album_type #=> "single"
 do_i_wanna_know = RSpotify::Track.find('2UzMpPKPhbcC8RbsmuURAZ')
 do_i_wanna_know.album #=> (Album object)
 
-wizzler = RSpotify::User.find('wizzler')
-wizzler.uri #=> "spotify:user:wizzler"
+me = RSpotify::User.find('guilhermesad')
+me.uri #=> "spotify:user:guilhermesad"
 
 # Or find several objects at once:
 
@@ -99,14 +99,14 @@ RSpotify.authenticate("<your_client_id>", "<your_client_secret>")
 
 # Now you can access playlists in detail, browse featured content and more
 
-wizzler = RSpotify::User.find('wizzler')
-wizzler.playlists #=> (Playlist array)
+me = RSpotify::User.find('guilhermesad')
+me.playlists #=> (Playlist array)
 
 # Find by id
-playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
-playlist.name               #=> "Movie Soundtrack Masterpieces"
-playlist.description        #=> "Iconic soundtracks featured..."
-playlist.followers['total'] #=> 13
+playlist = RSpotify::Playlist.find('guilhermesad', '1Xi8mgiuHHPLQYOw2Q16xv')
+playlist.name               #=> "d33p"
+playlist.description        #=> "d33p h0uz"
+playlist.followers['total'] #=> 1
 playlist.tracks             #=> (Track array)
 
 # Search by category
