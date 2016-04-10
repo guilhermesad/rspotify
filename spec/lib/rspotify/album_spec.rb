@@ -26,6 +26,7 @@ describe RSpotify::Album do
       expect(@album.type)                     .to eq      'album'
       expect(@album.uri)                      .to eq      'spotify:album:5bU1XKYxHhEwukllT20xtk'
       expect(@album.total_tracks)             .to eq      12
+
     end
 
     it 'should find album with correct artists' do
@@ -138,4 +139,51 @@ describe RSpotify::Album do
       expect(ES_albums.length).to eq(albums.length)
     end
   end
+
+  describe '.embed' do
+    before(:each) do
+      @album = VCR.use_cassette('album:find:5bU1XKYxHhEwukllT20xtk') do
+        RSpotify::Album.find('5bU1XKYxHhEwukllT20xtk')
+      end
+    end
+
+    it 'returns the correct iframe' do
+      expect(@album.embed).to eq '<iframe src="https://embed.spotify.com/?uri=spotify:album:5bU1XKYxHhEwukllT20xtk" width="300" height="380" frameborder="0" allowtransparency="true"> </iframe>'
+    end
+
+    context 'with a coverart view' do
+      it 'returns the correct iframe' do
+        expect(@album.embed(view: :coverart)).to eq '<iframe src="https://embed.spotify.com/?uri=spotify:album:5bU1XKYxHhEwukllT20xtk&view=coverart" width="300" height="380" frameborder="0" allowtransparency="true"> </iframe>'
+      end
+    end
+
+    context 'with different width & height' do
+      it 'returns the correct iframe' do
+        expect(@album.embed(width: 800)).to eq '<iframe src="https://embed.spotify.com/?uri=spotify:album:5bU1XKYxHhEwukllT20xtk" width="800" height="380" frameborder="0" allowtransparency="true"> </iframe>'
+      end
+
+      it 'returns the correct iframe' do
+        expect(@album.embed(height: 100)).to eq '<iframe src="https://embed.spotify.com/?uri=spotify:album:5bU1XKYxHhEwukllT20xtk" width="300" height="100" frameborder="0" allowtransparency="true"> </iframe>'
+      end
+    end
+
+    context 'with frameborder' do
+      it 'returns the correct iframe' do
+        expect(@album.embed(frameborder: 10)).to eq '<iframe src="https://embed.spotify.com/?uri=spotify:album:5bU1XKYxHhEwukllT20xtk" width="300" height="380" frameborder="10" allowtransparency="true"> </iframe>'
+      end
+    end
+
+    context 'with allowtransparency' do
+      it 'returns the correct iframe' do
+        expect(@album.embed(allowtransparency: false)).to eq '<iframe src="https://embed.spotify.com/?uri=spotify:album:5bU1XKYxHhEwukllT20xtk" width="300" height="380" frameborder="0" allowtransparency="false"> </iframe>'
+      end
+    end
+
+    context 'with theme' do
+      it 'returns the correct iframe' do
+        expect(@album.embed(theme: :white)).to eq '<iframe src="https://embed.spotify.com/?uri=spotify:album:5bU1XKYxHhEwukllT20xtk&theme=white" width="300" height="380" frameborder="0" allowtransparency="true"> </iframe>'
+      end
+    end
+  end
 end
+

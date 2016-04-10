@@ -121,6 +121,46 @@ module RSpotify
       @uri           = options['uri']
     end
 
+    # Generate an embed code for an album, artist or track.
+    # @param [Hash] options
+    # @option options [Fixnum] :width the width of the frame
+    # @option options [Fixnum] :height the height of the frame
+    # @option options [Fixnum] :frameborder the frameborder of the frame
+    # @option options [Boolean] :allowtransparency toggle frame transparency
+    # @option options [nil|String|Symbol] :view specific view option for iframe
+    # @option options [nil|String|Symbol] :theme specific theme option for iframe
+    #
+    # For full documentation on widgets/embeds, check out the official documentation:
+    # @see https://developer.spotify.com/technologies/widgets/examples/
+    #
+    def embed(options = {})
+      default_options = {
+        width: 300,
+        height: 380,
+        frameborder: 0,
+        allowtransparency: true,
+        view: nil,
+        theme: nil,
+      }
+      options = default_options.merge(options)
+
+      src = "https://embed.spotify.com/?uri=#{@uri}"
+      src << "&view=#{options[:view]}" unless options[:view].nil?
+      src << "&theme=#{options[:theme]}" unless options[:theme].nil?
+
+      template = <<-HTML
+        <iframe
+          src="#{src}"
+          width="#{options[:width]}"
+          height="#{options[:height]}"
+          frameborder="#{options[:frameborder]}"
+          allowtransparency="#{options[:allowtransparency]}">
+        </iframe>
+      HTML
+
+      template.gsub(/\s+/, " ").strip
+    end
+
     # When an object is obtained undirectly, Spotify usually returns a simplified version of it.
     # This method updates it into a full object, with all attributes filled.
     #
