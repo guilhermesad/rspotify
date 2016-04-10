@@ -26,7 +26,6 @@ describe RSpotify::Album do
       expect(@album.type)                     .to eq      'album'
       expect(@album.uri)                      .to eq      'spotify:album:5bU1XKYxHhEwukllT20xtk'
       expect(@album.total_tracks)             .to eq      12
-
     end
 
     it 'should find album with correct artists' do
