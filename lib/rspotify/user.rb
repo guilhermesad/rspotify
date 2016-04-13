@@ -366,6 +366,42 @@ module RSpotify
       Hash[pairs]
     end
 
+    # Get the current user’s top artists based on calculated affinity. Requires the *user-top-read* scope.
+    #
+    # @param limit  [Integer] Optional. The number of entities to return. Default: 20. Minimum: 1. Maximum: 50.
+    # @param offset [Integer] Optional. The index of the first entity to return. Default: 0 (i.e., the first track). Use with limit to get the next set of entities.
+    # @param time_range [String] Optional. Over what time frame the affinities are computed. Valid values: long_term (calculated from several years of data and including all new data as it becomes available), medium_term (approximately last 6 months), short_term (approximately last 4 weeks). Default: medium_term.
+    # @return [Array<Artist>]
+    #
+    # @example
+    #           top_artists = user.top_artists
+    #           top_artists.size       #=> 20
+    #           top_artists.first.name #=> "Nine Inch Nails"
+    def top_artists(limit: 20, offset: 0, time_range: 'medium_term')
+      url = "me/top/artists?limit=#{limit}&offset=#{offset}&time_range=#{time_range}"
+      response = User.oauth_get(@id, url) 
+      return response if RSpotify.raw_response
+      response['items'].map { |i| Artist.new i }
+    end
+
+    # Get the current user’s top tracks based on calculated affinity. Requires the *user-top-read* scope.
+    #
+    # @param limit  [Integer] Optional. The number of entities to return. Default: 20. Minimum: 1. Maximum: 50.
+    # @param offset [Integer] Optional. The index of the first entity to return. Default: 0 (i.e., the first track). Use with limit to get the next set of entities.
+    # @param time_range [String] Optional. Over what time frame the affinities are computed. Valid values: long_term (calculated from several years of data and including all new data as it becomes available), medium_term (approximately last 6 months), short_term (approximately last 4 weeks). Default: medium_term.
+    # @return [Array<Track>]
+    #
+    # @example
+    #           top_tracks = user.top_tracks
+    #           top_tracks.size       #=> 20
+    #           top_tracks.first.name #=> "Ice to Never"
+    def top_tracks(limit: 20, offset: 0, time_range: 'medium_term')
+      url = "me/top/tracks?limit=#{limit}&offset=#{offset}&time_range=#{time_range}"
+      response = User.oauth_get(@id, url) 
+      return response if RSpotify.raw_response
+      response['items'].map { |i| Track.new i }
+    end
+
     # Remove the current user as a follower of one or more artists, other Spotify users or a playlist. Unfollowing artists or users require the *user-follow-modify* scope.
     # Unfollowing a publicly followed playlist requires the *playlist-modify-public* scope; unfollowing a privately followed playlist requires the *playlist-modify-private* scope.
     #
