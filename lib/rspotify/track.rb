@@ -49,6 +49,11 @@ module RSpotify
       super(query, 'track', limit: limit, offset: offset, market: market)
     end
 
+    # Retrieves the audio features for the track
+    def audio_features
+      RSpotify::AudioFeatures.find(@id)
+    end
+
     def initialize(options = {})
       @available_markets = options['available_markets']
       @disc_number       = options['disc_number']

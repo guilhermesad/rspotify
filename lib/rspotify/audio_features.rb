@@ -61,5 +61,12 @@ module RSpotify
 
       super(options)
     end
+
+    # Spotify does not support search for audio features
+    def self.search(*)
+      warn 'Spotify API does not support search for audio features'
+      false
+    end
+
   end
 end

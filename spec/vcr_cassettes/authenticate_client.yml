@@ -4,11 +4,11 @@ http_interactions:
     method: post
     uri: https://5ac1cda2ad354aeaa1ad2693d33bb98c:155fc038a85840679b55a1822ef36b9b@accounts.spotify.com/api/token
     body:
-      encoding: UTF-8
+      encoding: US-ASCII
       string: grant_type=client_credentials
     headers:
       accept:
-      - "*/*; q=0.5, application/xml"
+      - '*/*; q=0.5, application/xml'
       accept-encoding:
       - gzip, deflate
       authorization:
@@ -27,7 +27,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Thu, 07 Apr 2016 14:06:14 GMT
+      - Sat, 16 Apr 2016 18:56:13 GMT
       content-type:
       - application/json
       transfer-encoding:
@@ -73,10 +73,10 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAAx3NwQ6CIBgA4Hfh3AFHuexWtjGjNW2rZheG9DfAZgRoWuvd
-        s67f5XsjISV4z8O9hgYt0KpIt+Y14MjKE9HToexA1XkTlf0uJpuQp20alrJY
-        K81ceWVd1h4N9nVyOQhLCTWZMOxmk2xG3VlVj44bvZ8/0QT9Ax4GC78FhAM3
-        KvRWO/BcjzeJMf58AdLU7UORAAAA
+        H4sIAAAAAAAAAx3NTQuCMBgA4P+yc4K2CumYiqgUqeXyNMZ4qbX82syc0X/P
+        uj6X540Y56A17RsJNdqiXep71+JB3EJPVjLJQa5FKDGJ7ZriJTcJToesup0v
+        z9VJGd/NG8/JgyOvurbZuyTmozk43DJdGN2jjCWqCsvyhRboH9DetPBbgClQ
+        s8LYCgWaivnGG9v+fAFe3jUNkQAAAA==
     http_version: '1.1'
-  recorded_at: Thu, 07 Apr 2016 14:06:14 GMT
+  recorded_at: Sat, 16 Apr 2016 18:56:33 GMT
 recorded_with: VCR 2.9.3

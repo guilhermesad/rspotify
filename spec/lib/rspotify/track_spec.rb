@@ -1,5 +1,5 @@
 describe RSpotify::Track do
-
+  
   describe 'Track::find receiving id as a string' do
     
     before(:each) do
@@ -99,6 +99,45 @@ describe RSpotify::Track do
       end
       ES_tracks = tracks.select { |t| t.available_markets.include?('ES') }
       expect(ES_tracks.length).to eq(tracks.length)
+    end
+  end
+
+  describe 'Track#audio_features' do
+    let(:client_id) { '5ac1cda2ad354aeaa1ad2693d33bb98c' }
+    let(:client_secret) { '155fc038a85840679b55a1822ef36b9b' }
+
+    before do
+      VCR.use_cassette('authenticate:client') do
+        RSpotify.authenticate(client_id, client_secret)
+      end
+    end
+
+    let(:track) do
+      VCR.use_cassette('track:find:3jfr0TF6DQcOLat8gGn7E2') do
+        RSpotify::Track.find('3jfr0TF6DQcOLat8gGn7E2')
+      end
+    end
+
+    it 'retrieves the audio features for the track' do
+      audio_features = VCR.use_cassette('track:audio_features:3jfr0TF6DQcOLat8gGn7E2') do
+        track.audio_features
+      end
+
+      expect(audio_features.acousticness).to     eq 0.186 
+      expect(audio_features.analysis_url).to     eq 'http://echonest-analysis.s3.amazonaws.com/TR/TR-mGwgsahAQuIJvg1GFm9sHdVOQa1Tq677JbupMzwMyyKB_i5PBIKWWtTxnarW-qvlA9zRYF6OIY6cnU=/3/full.json?AWSAccessKeyId=AKIAJRDFEY23UEVW42BQ&Expires=1460833574&Signature=5binEjpotRQp8%2BE3LdYipDL%2BE8E%3D'
+      expect(audio_features.danceability).to     eq 0.548
+      expect(audio_features.duration_ms).to      eq 272394
+      expect(audio_features.energy).to           eq 0.532
+      expect(audio_features.instrumentalness).to eq 0.000263
+      expect(audio_features.key).to              eq 5
+      expect(audio_features.liveness).to         eq 0.217
+      expect(audio_features.loudness).to         eq -7.596
+      expect(audio_features.mode).to             eq 1
+      expect(audio_features.speechiness).to      eq 0.0323
+      expect(audio_features.tempo).to            eq 85.030
+      expect(audio_features.time_signature).to   eq 4
+      expect(audio_features.track_href).to       eq 'https://api.spotify.com/v1/tracks/3jfr0TF6DQcOLat8gGn7E2'
+      expect(audio_features.valence).to          eq 0.428
     end
   end
 end
