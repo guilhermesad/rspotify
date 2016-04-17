@@ -1,0 +1,214 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://5ac1cda2ad354aeaa1ad2693d33bb98c:155fc038a85840679b55a1822ef36b9b@accounts.spotify.com/api/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Basic NWFjMWNkYTJhZDM1NGFlYWExYWQyNjkzZDMzYmI5OGM6MTU1ZmMwMzhhODU4NDA2NzliNTVhMTgyMmVmMzZiOWI=
+      content-length:
+      - '29'
+      content-type:
+      - application/x-www-form-urlencoded
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 07 Apr 2016 14:04:58 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=10
+      vary:
+      - Accept-Encoding
+      x-ua-compatible:
+      - IE=edge
+      x-frame-options:
+      - deny
+      content-security-policy:
+      - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
+        https://www.google-analytics.com; img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
+        https://i.imgur.com https://d2mv8tnci56s9d.cloudfront.net https://aci.scdn.co
+        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://scontent.xx.fbcdn.net
+        https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
+        font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://sp-bootstrap.global.ssl.fastly.net;
+        style-src ''self'' ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net;
+        frame-src ''self'' https://www.spotify.com;'
+      x-content-security-policy:
+      - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
+        https://www.google-analytics.com; img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
+        https://i.imgur.com https://d2mv8tnci56s9d.cloudfront.net https://aci.scdn.co
+        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://scontent.xx.fbcdn.net
+        https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
+        font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://sp-bootstrap.global.ssl.fastly.net;
+        style-src ''self'' ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net;
+        frame-src ''self'' https://www.spotify.com;'
+      cache-control:
+      - no-cache, no-store, must-revalidate
+      pragma:
+      - no-cache
+      content-encoding:
+      - gzip
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAx3Nuw6CMBQA0H/prElTBIlbBYWAg4APykIqXGk1CmkJIMZ/
+        F13Pct6IFwVonbf1HZ5ohdYRrVMPxIJUDtchiP4WsEvimyOtthtmJ87ADibx
+        fNwEbpjZmQ5OcdftlhalKY9YScqj3GPszq9VLB/j2eiE6NEM/YO8fTXwW4Ar
+        UJPC0EgFOpfTbVgYf76qpcjokQAAAA==
+    http_version: '1.1'
+  recorded_at: Thu, 07 Apr 2016 14:04:58 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/audio-features/1zHlj4dQ8ZAtrayhuDDmkY
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQBNixCwXaKzzVt-cA3vzPqWHpCiwVFE3mKDKM-jhwQNDo9ixhDYNQR42tUroszplPiH0rlgOT--mS0iLiSx4g
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 07 Apr 2016 14:05:39 GMT
+      content-type:
+      - application/json; charset=UTF8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      cache-control:
+      - private, max-age=0
+      access-control-allow-origin:
+      - "*"
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      content-encoding:
+      - gzip
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAHySXXOiMBiF7/srHGe2V1sgBCg44+zgqlVxu2q7/fDGSSFK
+        NCSUJAp2+t8XQ+3uVS9zzpPzJid5u2i12gliMUYvhBJZtVudlmW4/vX3k4MZ
+        LjYfWuC5WtthLQCgV5SrhGEhTtKVYwDL03LGE6wpvRI5xnFKzpxVY42BYq6E
+        JPE/x4KerS3ChCxUhplE9NNuRpI9/i8K+lrdI4rrazSiDxpR4izn+hx2YATX
+        TbKsco21kUoIX60xkqrAot2MTbQFjiO6dZK5vwxlgapU9fvZ7rlBVEE0I3Iu
+        ybrq1EC863y1QxOrtMBrvTGVMhcd00Q5MT5CjJhn5h6YmhTmV2GIIVoJIlaq
+        oJ9xdVrdMK9rkVdnwBDQQBk6coYOQg+4X5i3k/Hudv47jLNgvhh7D7yc+1G0
+        hSUdyiqF4TAvVRT2ft2osATiqQSVKBM0Ikt/eTz0fnrRAI7ILLGsajorFvd8
+        0zWhuVaUGlvB2Y/w8S6M4/pxIlyNk24YjcPJoj8cPNvwz+Dh0bF788tBmZO6
+        7y5wPMuCvguDyzuyYfoVusvXTRb5TyPg0unscEOjJZtOcvuweRHfYL9pIFEF
+        koSzVab/gG05lgubokmGV+IcdjKdi/e/AAAA//8DAM2eGPbkAgAA
+    http_version: '1.1'
+  recorded_at: Thu, 07 Apr 2016 14:05:39 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/audio-features/1zHlj4dQ8ZAtrayhuDDmkY
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQCLjzy01pcW3i4yYvehkPn1YxN63JtPCuCtAcQDhiKrYfKvIuVj0sk9dUapG3GjIajKlp9I5GrZhbqv_jiR8w
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 07 Apr 2016 14:06:14 GMT
+      content-type:
+      - application/json; charset=UTF8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      cache-control:
+      - private, max-age=0
+      access-control-allow-origin:
+      - "*"
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      content-encoding:
+      - gzip
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAHySy27iMBiF930KhNSupokThxCQ0CgMUCBtp9DbwAa5sSGG
+        xI58gYRR373BKZ1ZdelzPp/fPvbfi0ajiRGLCXqjKVVls9FtAKsVtH+cHMKI
+        2HxqHb9ltB0xguOYVco1ZkTKk3TtWQ7wjZxxTAxlVjInJE7omQMVVhso5loq
+        Gv9zAPRdY1EmldAZYQqlX3Y9ku7Jf1EwMOoepaS6Ri0GTi0qkuXcnMPtWJ12
+        nazK3GBNpDHlqzVBSgsim/VYbCznOE63Hp4Fy1AJVCZ6MMh2ixrRghpG5lzR
+        ddmtgHjX/W6HIVaJIGuzMVEql13bRjm1PkOsmGf23rENKe3vwhBDaSmpXGmR
+        fsVVaVXDvKpFXZ8BS0ILZejIGTpIM+Bpbt9PJ7v72e8wzjqz+cR/4cUsiKIt
+        LNKRKhMYjvJCR2H/7kaHhSP/FE4pC4zGdBksj4f+Lz8awjF9wACUtw9i/sQ3
+        PRvaa52m1lZy9jN8fQzjuHqciJQT3AujSTidD0bDhQufhy+vntufXQ2LnFZ9
+        9xzPBwAGrbZ39Ug3zLxCTxS3GzaN1HOCD2pxc+n2Q7bhQIo3hL1LOKg7wFog
+        RTlbZeYXuMADLVhXTTOykue4k+ldvH8AAAD//wMAMW+C7+YCAAA=
+    http_version: '1.1'
+  recorded_at: Thu, 07 Apr 2016 14:06:14 GMT
+recorded_with: VCR 2.9.3
