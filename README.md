@@ -117,6 +117,18 @@ categories = RSpotify::Category.list # See all available categories
 # Access featured content from Spotify's Browse tab
 featured_playlists = RSpotify::Playlist.browse_featured(country: 'US')
 new_releases = RSpotify::Album.new_releases(country: 'ES')
+
+# Access tracks' audio features
+sorry = RSpotify::Track.search("Sorry").first
+sorry.audio_features.danceability #=> 0.605
+sorry.audio_features.energy #=> 0.768
+sorry.audio_features.tempo #=> 100.209
+
+# Get recommendations
+recommendations = RSpotify::Recommendations.generate(seed_genres: ['blues', 'country'])
+recommendations = RSpotify::Recommendations.generate(seed_tracks: my_fav_tracks.map(&:id))
+recommendations = RSpotify::Recommendations.generate(seed_artists: my_fav_artists.map(&:id))
+recommendations.tracks #=> (Track array)
 ```
 
 ## Rails + OAuth
@@ -195,6 +207,10 @@ class UsersController < ApplicationController
     spotify_user.follow(playlist)
     spotify_user.follows?(artists)
     spotify_user.unfollow(users)
+
+    # Get user's top played artists and tracks
+    spotify_user.top_artists #=> (Artist array)
+    spotify_user.top_tracks(time_range: 'short_term') #=> (Track array)
 
     # Check doc for more
   end
