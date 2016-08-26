@@ -168,7 +168,7 @@ module RSpotify
 
       response = User.oauth_get(@id, url)
       return response if RSpotify.raw_response
-      response["#{type}s"]['items'].map { |i| type_class.new i }
+      response["#{type}s"]['items'].compact.map { |i| type_class.new i }
     end
 
     # Check if the current user is following one or more artists or other Spotify users. This method
