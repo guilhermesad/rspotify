@@ -85,6 +85,8 @@ module RSpotify
         @@users_credentials[@id] = credentials
         @credentials = @@users_credentials[@id]
       end
+
+      raise "Error - User ID cannot be empty." if @id.nil? || @id.empty?
     end
 
     # Creates a playlist in user's Spotify account. This method is only available when the current
