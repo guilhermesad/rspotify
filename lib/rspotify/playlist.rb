@@ -115,7 +115,7 @@ module RSpotify
     # Adds one or more tracks to a playlist in user's Spotify account. This method is only available when the
     # current user has granted access to the *playlist-modify-public* and *playlist-modify-private* scopes.
     #
-    # @param tracks [Array<Track>]|[Array<String>] Tracks to be added. Either array of Tracks or strings where each string is a valid spotify track uri. Maximum: 100 per request
+    # @param tracks [Array<Track>, Array<String>] Tracks to be added. Either array of Tracks or strings where each string is a valid spotify track uri. Maximum: 100 per request
     # @param position [Integer, NilClass] The position to insert the tracks, a zero-based index. Default: tracks are appended to the playlist
     # @return [Array<Track>] The tracks added
     #
