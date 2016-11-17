@@ -135,7 +135,7 @@ recommendations.tracks #=> (Track array)
 
 You might want your application to access a user's Spotify account.
 
-For instance, suppose you want your app to create playlists for the user based on his taste, or to add a feature that syncs user's playlists with some external app.
+For instance, suppose you want your app to create playlists for the user based on their taste, or to add a feature that syncs user's playlists with some external app.
 
 If so, add the following to your application (Remember to [get your credentials](https://developer.spotify.com/my-applications))
 
