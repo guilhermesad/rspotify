@@ -32,7 +32,7 @@ module RSpotify
         response = RSpotify.get(url)
         return response if RSpotify.raw_response
 
-        response['audio_features'].map { |i| AudioFeatures.new i }
+        response['audio_features'].map { |i| i.nil? ? nil : AudioFeatures.new(i) }
       when String
         url = "audio-features/#{ids}"
         response = RSpotify.get(url)
