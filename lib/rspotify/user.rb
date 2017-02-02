@@ -68,7 +68,9 @@ module RSpotify
 
     def initialize(options = {})
       credentials = options['credentials']
+      extra       = options['extra'].to_h
       options     = options['info'] if options['info']
+      options.merge!(extra['raw_info'].to_h)
 
       @birthdate    ||= options['birthdate']
       @country      ||= options['country']
