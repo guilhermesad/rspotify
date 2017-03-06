@@ -42,15 +42,17 @@ module RSpotify
     #
     # @param user_id [String]
     # @param id [String]
+    # @param market [String] Optional. An {https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to apply Track Relinking
     # @return [Playlist]
     #
     # @example
     #           playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
     #           playlist.class #=> RSpotify::Playlist
     #           playlist.name  #=> "Movie Soundtrack Masterpieces"
-    def self.find(user_id, id)
+    def self.find(user_id, id, market: nil)
       url = "users/#{user_id}/"
       url << (id == 'starred' ? id : "playlists/#{id}")
+      url << "?market=#{market}" if market
 
       response = RSpotify.resolve_auth_request(user_id, url)
       return response if RSpotify.raw_response
