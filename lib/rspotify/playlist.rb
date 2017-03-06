@@ -226,18 +226,20 @@ module RSpotify
     #
     # @param limit  [Integer] Maximum number of tracks to return. Maximum: 100. Default: 100.
     # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of objects. Default: 0.
+    # @param market [String] Optional. An {https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to apply Track Relinking
     # @return [Array<Track>]
     #
     # @example
     #           playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
     #           playlist.tracks.first.name #=> "Main Theme from Star Wars - Instrumental"
-    def tracks(limit: 100, offset: 0)
+    def tracks(limit: 100, offset: 0, market: nil)
       last_track = offset + limit - 1
       if @tracks_cache && last_track < 100 && !RSpotify.raw_response
         return @tracks_cache[offset..last_track]
       end
 
       url = "#{@path}/tracks?limit=#{limit}&offset=#{offset}"
+      url << "&market=#{market}" if market
       response = RSpotify.resolve_auth_request(@owner.id, url)
 
       json = RSpotify.raw_response ? JSON.parse(response) : response
