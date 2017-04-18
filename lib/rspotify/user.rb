@@ -117,7 +117,7 @@ module RSpotify
 
     def currently_playing
       url = "me/player/currently-playing"
-      response = User.oauth_get(@id, url)
+      response = RSpotify.resolve_auth_request(@id, url)
       return response if RSpotify.raw_response
     end
 
