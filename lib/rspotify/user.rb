@@ -115,6 +115,12 @@ module RSpotify
       Playlist.new response
     end
 
+    def currently_playing
+      url = "me/player/currently-playing"
+      response = User.oauth_get(@id, url)
+      return response if RSpotify.raw_response
+    end
+
     # Add the current user as a follower of one or more artists, other Spotify users or a playlist. Following artists or users require the *user-follow-modify*
     # scope. Following a playlist publicly requires the *playlist-modify-public* scope; following it privately requires the *playlist-modify-private* scope.
     #
@@ -383,7 +389,7 @@ module RSpotify
     #           top_artists.first.name #=> "Nine Inch Nails"
     def top_artists(limit: 20, offset: 0, time_range: 'medium_term')
       url = "me/top/artists?limit=#{limit}&offset=#{offset}&time_range=#{time_range}"
-      response = User.oauth_get(@id, url) 
+      response = User.oauth_get(@id, url)
       return response if RSpotify.raw_response
       response['items'].map { |i| Artist.new i }
     end
@@ -401,7 +407,7 @@ module RSpotify
     #           top_tracks.first.name #=> "Ice to Never"
     def top_tracks(limit: 20, offset: 0, time_range: 'medium_term')
       url = "me/top/tracks?limit=#{limit}&offset=#{offset}&time_range=#{time_range}"
-      response = User.oauth_get(@id, url) 
+      response = User.oauth_get(@id, url)
       return response if RSpotify.raw_response
       response['items'].map { |i| Track.new i }
     end
