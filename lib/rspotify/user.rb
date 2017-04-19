@@ -118,7 +118,8 @@ module RSpotify
     def currently_playing
       url = "me/player/currently-playing"
       response = RSpotify.resolve_auth_request(@id, url)
-      response["item"]
+      return response if RSpotify.raw_response
+      Track.new response["item"]
     end
 
     # Add the current user as a follower of one or more artists, other Spotify users or a playlist. Following artists or users require the *user-follow-modify*
