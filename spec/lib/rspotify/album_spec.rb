@@ -11,7 +11,9 @@ describe RSpotify::Album do
 
     it 'should find album with correct attributes' do
       expect(@album.album_type)               .to eq      'album'
-      expect(@album.available_markets)        .to include *%w(AD AT BE BG CA EE ES FR GR MC TW US)
+      %w(AD AT BE BG CA EE ES FR GR MC TW US).each do |country_code|
+        expect(@album.available_markets)      .to include country_code
+      end
       expect(@album.copyrights)               .to include ({'text' => '2013 Domino Recording Co Ltd', 'type' => 'C'})
       expect(@album.external_ids['upc'])      .to eq      '887828031795'
       expect(@album.external_urls['spotify']) .to eq      'https://open.spotify.com/album/5bU1XKYxHhEwukllT20xtk'
@@ -185,4 +187,3 @@ describe RSpotify::Album do
     end
   end
 end
-
