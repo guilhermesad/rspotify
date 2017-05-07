@@ -154,11 +154,11 @@ describe RSpotify::Playlist do
   end
 
   describe 'Playlist#tracks' do
-    use_vcr_cassette 'playlist:tracks:118430647:starred'
+    it 'should fetch more tracks correctly', :vcr do
+      VCR.use_cassette('playlist:tracks:118430647:starred') do
+        @tracks = starred_playlist.tracks(offset: 100, limit: 100)
+      end
 
-    before { @tracks = starred_playlist.tracks(offset: 100, limit: 100) }
-
-    it 'should fetch more tracks correctly' do
       expect(@tracks)           .to be_an Array
       expect(@tracks.size)      .to eq 85
       expect(@tracks.last.name) .to eq 'On The Streets - Kollectiv Turmstrasse Let Freedom Ring Remix'
