@@ -11,6 +11,8 @@ module RSpotify
   # @attr [Integer]       popularity        The popularity of the track. The value will be between 0 and 100, with 100 being the most popular
   # @attr [String]        preview_url       A link to a 30 second preview (MP3 format) of the track
   # @attr [Integer]       track_number      The number of the track. If an album has several discs, the track number is the number on the specified disc
+  # @attr [String]        played_at         The date and time the track was played. Only present when pulled from /recently-played
+  # @attr [String]        context_type      The context the track was played from. Only present when pulled from /recently-played
   class Track < Base
 
     # Returns Track object(s) with id(s) provided
@@ -64,6 +66,8 @@ module RSpotify
       @popularity        = options['popularity']
       @preview_url       = options['preview_url']
       @track_number      = options['track_number']
+      @played_at         = options['played_at']
+      @context_type      = options['context_type']
 
       @album = if options['album']
         Album.new options['album']

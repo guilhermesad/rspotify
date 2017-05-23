@@ -122,6 +122,20 @@ module RSpotify
       Track.new response["item"]
     end
 
+    def recently_played
+      url = "me/player/recently-played"
+      response = RSpotify.resolve_auth_request(@id, url)
+      return response if RSpotify.raw_response
+      
+      json = RSpotify.raw_response ? JSON.parse(response) : response
+      json['items'].map do |t| 
+        data = t['track']
+        data['played_at'] = t['played_at']
+        data['context_type'] = t['context']['type']
+        Track.new data
+      end
+    end
+
     # Add the current user as a follower of one or more artists, other Spotify users or a playlist. Following artists or users require the *user-follow-modify*
     # scope. Following a playlist publicly requires the *playlist-modify-public* scope; following it privately requires the *playlist-modify-private* scope.
     #
