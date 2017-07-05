@@ -63,6 +63,10 @@ module RSpotify
       rescue RestClient::Unauthorized
         if @client_token
           authenticate(@client_id, @client_secret)
+          
+          obj = params.find{|x| x.is_a?(Hash) && x['Authorization']}
+          obj['Authorization'] = "Bearer #{@client_token}"
+          
           response = RestClient.send(verb, url, *params)
         end
       end
