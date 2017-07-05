@@ -67,12 +67,17 @@ module RSpotify
           obj = params.find{|x| x.is_a?(Hash) && x['Authorization']}
           obj['Authorization'] = "Bearer #{@client_token}"
           
-          response = RestClient.send(verb, url, *params)
+          response = retry_connection verb, url, params
         end
       end
 
       return response if raw_response
       JSON.parse response unless response.empty?
+    end
+    
+    # Added this method for testing
+    def retry_connection verb, url, params
+      RestClient.send(verb, url, *params)
     end
 
     def auth_header
