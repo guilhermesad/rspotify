@@ -111,5 +111,32 @@ describe RSpotify::Artist do
       expect(artists.size)        .to eq 20
       expect(artists.map(&:name)) .to include('Arctic Queen', 'Arctic Sleep')
     end
+    
+    
+    context 'when token is expired' do
+      it 'should resend token with new token' do
+        auth_response = {'access_token': 'token'}.to_json
+        new_auth_response = {'access_token': 'new_token'}.to_json
+        
+        expect(RestClient).to receive(:post)
+          .and_return(auth_response, new_auth_response)
+        
+        RSpotify.authenticate('client_id', 'client_secret')
+        
+        # When token is expired it returns 401 
+        expect(RestClient).to receive(:send).and_raise(RestClient::Unauthorized)
+          .with(anything, anything, {"Authorization" => "Bearer token"})
+        
+        retry_response = {
+          "artists" => { "items" => [] }
+        }.to_json
+        expect(RestClient).to receive(:send).and_return(retry_response)
+          .with(anything, anything, {"Authorization"  => "Bearer new_token"})
+        
+        artists = VCR.use_cassette('artist:search:Arctic') do 
+          RSpotify::Artist.search('Arctic')
+        end
+      end
+    end
   end
 end
