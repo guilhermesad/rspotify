@@ -122,13 +122,22 @@ module RSpotify
       Track.new response["item"]
     end
 
-    def recently_played
-      url = "me/player/recently-played"
+    # Get the current user’s recently played tracks. Requires the *user-read-recently-played* scope.
+    #
+    # @param limit  [Integer] Optional. The number of entities to return. Default: 20. Minimum: 1. Maximum: 50.
+    # @return [Array<Track>]
+    #
+    # @example
+    #           recently_played = user.recently_played
+    #           recently_played.size       #=> 20
+    #           recently_played.first.name #=> "Ice to Never"
+    def recently_played(limit: 20)
+      url = "me/player/recently-played?limit=#{limit}"
       response = RSpotify.resolve_auth_request(@id, url)
       return response if RSpotify.raw_response
-      
+
       json = RSpotify.raw_response ? JSON.parse(response) : response
-      json['items'].map do |t| 
+      json['items'].map do |t|
         data = t['track']
         data['played_at'] = t['played_at']
         data['context_type'] = t['context']['type']
