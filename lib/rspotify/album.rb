@@ -104,13 +104,13 @@ module RSpotify
     # @example
     #           album = RSpotify::Album.find('41vPD50kQ7JeamkxQW7Vuy')
     #           album.tracks.first.name #=> "Do I Wanna Know?"
-    def tracks(limit: 50, offset: 0)
+    def tracks(limit: 50, offset: 0, market: 'US')
       last_track = offset + limit - 1
       if @tracks_cache && last_track < 50 && !RSpotify.raw_response
         return @tracks_cache[offset..last_track]
       end
 
-      url = "albums/#{@id}/tracks?limit=#{limit}&offset=#{offset}"
+      url = "albums/#{@id}/tracks?limit=#{limit}&offset=#{offset}&market=#{market}"
       response = RSpotify.get(url)
       json = RSpotify.raw_response ? JSON.parse(response) : response
 
