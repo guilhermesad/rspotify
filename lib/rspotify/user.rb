@@ -122,6 +122,13 @@ module RSpotify
       Track.new response["item"]
     end
 
+    def play_track(song_uri)
+      url = "me/player/play"
+      verb = put
+      params = {"uris": [song_uri]}
+      response = RSpotify.oauth_send(@id, put, url)
+    end
+
     # Get the current user’s recently played tracks. Requires the *user-read-recently-played* scope.
     #
     # @param limit  [Integer] Optional. The number of entities to return. Default: 20. Minimum: 1. Maximum: 50.
