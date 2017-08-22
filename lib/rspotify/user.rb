@@ -124,7 +124,7 @@ module RSpotify
 
     def play_track(song_uri)
       url = "me/player/play"
-      verb = put
+      verb = 'put'
       params = {"uris": [song_uri]}
       response = RSpotify.oauth_send(@id, put, url)
     end
