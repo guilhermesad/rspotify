@@ -126,7 +126,7 @@ module RSpotify
       url = "me/player/play"
       verb = 'put'
       params = {"uris": [song_uri]}
-      response = RSpotify.oauth_send(@id, put, url)
+      response = RSpotify.oauth_put(@id, url, params)
     end
 
     # Get the current user’s recently played tracks. Requires the *user-read-recently-played* scope.
