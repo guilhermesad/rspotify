@@ -62,7 +62,7 @@ module RSpotify
       @duration_ms       = options['duration_ms']
       @explicit          = options['explicit']
       @external_ids      = options['external_ids']
-      @uri		           = options['uri']
+      @uri               = options['uri']
       @name              = options['name']
       @popularity        = options['popularity']
       @preview_url       = options['preview_url']
