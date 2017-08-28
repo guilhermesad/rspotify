@@ -140,7 +140,7 @@ module RSpotify
       json['items'].map do |t|
         data = t['track']
         data['played_at'] = t['played_at']
-        data['context_type'] = t['context']['type']
+        data['context_type'] = t['context']['type'] if t['context']
         Track.new data
       end
     end
