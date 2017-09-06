@@ -122,6 +122,15 @@ module RSpotify
       Track.new response["item"]
     end
 
+    # Allow browser to trigger playback in the user's currently active spotify app.
+    # User must be a premium subscriber for this feature to work.
+    def play_track(song_uri)
+      url = "me/player/play"
+      verb = 'put'
+      params = {"uris": [song_uri]}
+      response = User.oauth_put(@id, url, params.to_json)
+    end
+
     # Get the current user’s recently played tracks. Requires the *user-read-recently-played* scope.
     #
     # @param limit  [Integer] Optional. The number of entities to return. Default: 20. Minimum: 1. Maximum: 50.
