@@ -23,7 +23,7 @@ describe RSpotify::AudioFeatures do
       expect(audio_features.instrumentalness).to eq 0
       expect(audio_features.key).to              eq 11
       expect(audio_features.liveness).to         eq 0.138
-      expect(audio_features.loudness).to         eq -4.106
+      expect(audio_features.loudness).to         eq(-4.106)
       expect(audio_features.mode).to             eq 1
       expect(audio_features.speechiness).to      eq 0.101
       expect(audio_features.tempo).to            eq 129.972

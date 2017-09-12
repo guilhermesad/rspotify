@@ -1,7 +1,7 @@
 describe RSpotify::Track do
-  
+
   describe 'Track::find receiving id as a string' do
-    
+
     before(:each) do
       # Get Arctic Monkeys's "Do I Wanna Know?" track as a testing sample
       @track = VCR.use_cassette('track:find:3jfr0TF6DQcOLat8gGn7E2') do
@@ -10,7 +10,9 @@ describe RSpotify::Track do
     end
 
     it 'should find track with correct attributes' do
-      expect(@track.available_markets)        .to include *%w(AD AT BE BG CA EE ES FR GR MC TW US)
+      %w(AD AT BE BG CA EE ES FR GR MC TW US).each do |country_code|
+        expect(@track.available_markets)      .to include country_code
+      end
       expect(@track.disc_number)              .to eq 1
       expect(@track.duration_ms)              .to eq 272_394
       expect(@track.explicit)                 .to eq false
@@ -45,7 +47,7 @@ describe RSpotify::Track do
   describe 'Track::find receiving array of ids' do
     it 'should find the right tracks' do
       ids = ['4oI9kesyxHUr8fqiLd6uO9']
-      tracks = VCR.use_cassette('track:find:4oI9kesyxHUr8fqiLd6uO9') do 
+      tracks = VCR.use_cassette('track:find:4oI9kesyxHUr8fqiLd6uO9') do
         RSpotify::Track.find(ids)
       end
       expect(tracks)            .to be_an Array
@@ -53,7 +55,7 @@ describe RSpotify::Track do
       expect(tracks.first.name) .to eq 'The Next Day'
 
       ids << '7D8BAYkrR9peCB9XSKCADc'
-      tracks = VCR.use_cassette('track:find:7D8BAYkrR9peCB9XSKCADc') do 
+      tracks = VCR.use_cassette('track:find:7D8BAYkrR9peCB9XSKCADc') do
         RSpotify::Track.find(ids)
       end
       expect(tracks)            .to be_an Array
@@ -65,7 +67,7 @@ describe RSpotify::Track do
 
   describe 'Track::search' do
     it 'should search for the right tracks' do
-      tracks = VCR.use_cassette('track:search:Wanna Know') do 
+      tracks = VCR.use_cassette('track:search:Wanna Know') do
         RSpotify::Track.search('Wanna Know')
       end
       expect(tracks)             .to be_an Array
@@ -76,19 +78,19 @@ describe RSpotify::Track do
     end
 
     it 'should accept additional options' do
-      tracks = VCR.use_cassette('track:search:Wanna Know:limit:10') do 
+      tracks = VCR.use_cassette('track:search:Wanna Know:limit:10') do
         RSpotify::Track.search('Wanna Know', limit: 10)
       end
       expect(tracks.size)        .to eq 10
       expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'I Wanna Know')
 
-      tracks = VCR.use_cassette('track:search:Wanna Know:offset:10') do 
+      tracks = VCR.use_cassette('track:search:Wanna Know:offset:10') do
         RSpotify::Track.search('Wanna Know', offset: 10)
       end
       expect(tracks.size)        .to eq 20
       expect(tracks.map(&:name)) .to include('They Wanna Know', 'You Wanna Know')
 
-      tracks = VCR.use_cassette('track:search:Wanna Know:limit:10:offset:10') do 
+      tracks = VCR.use_cassette('track:search:Wanna Know:limit:10:offset:10') do
         RSpotify::Track.search('Wanna Know', limit: 10, offset: 10)
       end
       expect(tracks.size)        .to eq 10
@@ -123,7 +125,7 @@ describe RSpotify::Track do
         track.audio_features
       end
 
-      expect(audio_features.acousticness).to     eq 0.186 
+      expect(audio_features.acousticness).to     eq 0.186
       expect(audio_features.analysis_url).to     eq 'http://echonest-analysis.s3.amazonaws.com/TR/TR-mGwgsahAQuIJvg1GFm9sHdVOQa1Tq677JbupMzwMyyKB_i5PBIKWWtTxnarW-qvlA9zRYF6OIY6cnU=/3/full.json?AWSAccessKeyId=AKIAJRDFEY23UEVW42BQ&Expires=1460833574&Signature=5binEjpotRQp8%2BE3LdYipDL%2BE8E%3D'
       expect(audio_features.danceability).to     eq 0.548
       expect(audio_features.duration_ms).to      eq 272394
@@ -131,7 +133,7 @@ describe RSpotify::Track do
       expect(audio_features.instrumentalness).to eq 0.000263
       expect(audio_features.key).to              eq 5
       expect(audio_features.liveness).to         eq 0.217
-      expect(audio_features.loudness).to         eq -7.596
+      expect(audio_features.loudness).to         eq(-7.596)
       expect(audio_features.mode).to             eq 1
       expect(audio_features.speechiness).to      eq 0.0323
       expect(audio_features.tempo).to            eq 85.030

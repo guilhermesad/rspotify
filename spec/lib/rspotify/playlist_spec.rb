@@ -57,7 +57,7 @@ describe RSpotify::Playlist do
     it 'should find playlist with correct attributes' do
       expect(playlist.collaborative)            .to eq    false
       expect(playlist.external_urls['spotify']) .to eq    'http://open.spotify.com/user/wizzler/playlist/00wHcTN0zQiun4xri9pmvX'
-      expect(playlist.description)              .to match /Iconic soundtracks featured in some of the greatest movies/
+      expect(playlist.description)              .to match(/Iconic soundtracks featured in some of the greatest movies/)
       expect(playlist.followers['total'])       .to be    > 0
       expect(playlist.href)                     .to eq    'https://api.spotify.com/v1/users/wizzler/playlists/00wHcTN0zQiun4xri9pmvX'
       expect(playlist.id)                       .to eq    '00wHcTN0zQiun4xri9pmvX'
@@ -154,11 +154,11 @@ describe RSpotify::Playlist do
   end
 
   describe 'Playlist#tracks' do
-    use_vcr_cassette 'playlist:tracks:118430647:starred'
+    it 'should fetch more tracks correctly', :vcr do
+      VCR.use_cassette('playlist:tracks:118430647:starred') do
+        @tracks = starred_playlist.tracks(offset: 100, limit: 100)
+      end
 
-    before { @tracks = starred_playlist.tracks(offset: 100, limit: 100) }
-
-    it 'should fetch more tracks correctly' do
       expect(@tracks)           .to be_an Array
       expect(@tracks.size)      .to eq 85
       expect(@tracks.last.name) .to eq 'On The Streets - Kollectiv Turmstrasse Let Freedom Ring Remix'
