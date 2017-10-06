@@ -2,91 +2,60 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.spotify.com/v1/search?q=Arctic&type=artist&limit=10&offset=10
+    uri: https://api.spotify.com/v1/search?limit=10&offset=10&q=Arctic&type=artist
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      accept:
-      - '*/*; q=0.5, application/xml'
-      accept-encoding:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
       - gzip, deflate
-      user-agent:
-      - Ruby
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.7.0 x86_64) ruby/2.5.0p-1
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
   response:
     status:
       code: 200
       message: OK
     headers:
-      server:
+      Server:
       - nginx
-      date:
-      - Fri, 15 Aug 2014 19:56:20 GMT
-      content-type:
+      Date:
+      - Fri, 06 Oct 2017 01:55:06 GMT
+      Content-Type:
       - application/json; charset=utf-8
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      connection:
+      Connection:
       - keep-alive
-      keep-alive:
+      Keep-Alive:
       - timeout=600
-      vary:
-      - Accept-Encoding
-      cache-control:
+      Cache-Control:
       - public, max-age=7200
-      access-control-allow-headers:
-      - Accept, Authorization, Origin, Content-Type
-      access-control-allow-origin:
-      - '*'
-      access-control-max-age:
-      - '604800'
-      access-control-allow-methods:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
       - GET, POST, OPTIONS, PUT, DELETE
-      access-control-allow-credentials:
+      Access-Control-Allow-Credentials:
       - 'true'
-      x-content-type-options:
-      - nosniff
-      strict-transport-security:
-      - max-age=31536000;
-      content-encoding:
+      Access-Control-Max-Age:
+      - '604800'
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Origin, Content-Type
+      Content-Encoding:
       - gzip
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000;
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        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
-        LPxYIR0AAA==
-    http_version: '1.1'
-  recorded_at: Fri, 15 Aug 2014 19:56:20 GMT
-recorded_with: VCR 2.8.0
+        H4sIAAAAAAAAAMyZW1MaSRTH3/MpKB58skLfL1altrTMxayKZs2ibm1t9ZWZMDBkLjEm5XffFohBYBikwOSN6Wn6/Of853dON3x/0Wg0VVbEeZE3G3uN7+E6jESZ8/eXzagohvleq6WG8ct8mBaxv31p0n7rC2zlTmUm+uNz6bLbV/uZKWKzU9wO3avxcjup97krXkGwk8T9+P5Dc3e8ely4/ijaP5N4Ycx9LVw2UMl/ZZZMKRndmwR+JCgdusEjReOoLRr1jroH70rQuVSdg0N1UvikkzQni93t/ojn0yRJb1w2G+vHkw/KJNn9OVykhUrux8HcSl03yNzkcf59GF0lg5O8V2l+WCu2o5Vqp/VVd17IQPXd6Otji35OH6bDMlFZXIwSCx7G7z0cfWEs7+cXyiwejU+eYm98f29Zxu92N+8wj9oXx/py8BUJf96O/uLZYQxvf2+HKzTPOlw77dc4vCzj23AY2NOP6Ft0ckXeHZftpBAioW8Hv7fDFZpnHa6d9mscXpbxbTiMzw+i/ofrm/TP/iA+3Ff5ZXlhvv3eDldonnW4dtqvcXhZxrdSpenfw5x+oted12WPs5K6Tn5wtTmHBURLPW52VRYS3RiWg15z3aq9+BnmqnbdtCnHp5/Qxd2ouB9mBEw9Ykj8I4FBnrGDoK01WqilobAKYMO9VZJiTKRwFHDhpLYaeeY9NRZR3pxa8ya2RTQJ9ZC2xWIweJIY40NIQi1SWgCttLaUCQI1B54JZYiRiFOuF4oJoWrEMPIELdwYK6D33HOBrcfKOY1CjjQVwBPOoFReWYMqEvNDSjWVjTeTV7WCTojXb7FLcNkGnqSXH1xfHqWhrRfH5qR/lX7q99LN4YnFFipwhehZHmunrVKBG2dRnEQq66eDcNEOJx2XF5mqtJ6vbf0yK7ZifXTSvbp+3X37wbGsd/PmRhx3hNuc9YxsxfvFque8r5u22VoslZWGMKs05ZJSBZ0BQgKEoAdCh1IstKGYm2epxU6IIEEQArnhxkPOFTcUKEy5ggYQQzlhGtHnqMVCE+WNVIhpKC01WBhjEIOEhGxpLpjy2DC+WMtKtfgoT9TAVvJI1+dxCR/b4BFdfjzDxTnctxf6/T6S/r21X9ub45FKvgUeK1TP8lg7bbM8CuWp8tAwjbHxymvgA59EUCgx1wRRJgHzAqzLI3pSceBICQ404oBTG/Zs1mIRxMlw4Rz2VrOgypPFPKI6MZA9KTNIO0G95dR5QpEhlhDptMHAA6AtsRJBxaxYKCaEWoHI89JN4zUDJFkbyGWAbANIyHB0MOydfuqlp+T2qH192Hl7pjcHJETLjy7rAVmhehbI2mm1QD6pJ3mAjJUSsvDSeU28NtLBcFzRDIcXkjDDMKNAysVA1vakpzVIzLTjoRtRHY5OhEHgnOQkHAs4sCDoswQEDuxiMRtukNJazhGknBrqnBVSOW8d0hAqCbwR4SiFueAViVmlQR6PdFXhiNbGcRkeW/k1MJVHcdS9zXA/9RkH707bXdvZJI50GzxWyJ77QbBu2mYbJAmnYYdI2J9KpLUzoV06JayVmgBDVNilCS4CFM+yYYXCs7AxDD1JqtCcgwTnQolgMsAJIKTAQMiQV8/BI7GhJoSObD1nWGkLhQVAAOpDtXaSmICogUZX7eRX4PEsUYVT5RYa5DJCHhQ1R//CjSJNPGoOAqJ1r/OK//Kh+X/5xnceBRxm7kuclvmGgs7HnIL6ftN79+LufwAAAP//AwDvQhFG4RwAAA==
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 01:55:06 GMT
+recorded_with: VCR 3.0.3

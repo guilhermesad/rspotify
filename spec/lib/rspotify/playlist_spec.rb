@@ -34,14 +34,14 @@ describe RSpotify::Playlist do
       playlists = VCR.use_cassette('playlist:browse_featured:locale:es_MX') do
         RSpotify::Playlist.browse_featured(locale: 'es_MX')
       end
-      expect(playlists.size)        .to eq 13
-      expect(playlists.map(&:name)) .to include('Dance Mega Mix', 'Peaceful Piano', 'Sleep')
+      expect(playlists.size)        .to eq 20
+      expect(playlists.map(&:name)) .to include('New Music Friday', 'Peaceful Piano')
 
       playlists = VCR.use_cassette('playlist:browse_featured:country:ES:timestamp:2014-10-23T09:00:00') do
         RSpotify::Playlist.browse_featured(country: 'ES', timestamp: '2014-10-23T09:00:00')
       end
-      expect(playlists.size)        .to eq 17
-      expect(playlists.map(&:name)) .to include('En el trabajo', 'En las Nubes')
+      expect(playlists.size)        .to eq 20
+      expect(playlists.map(&:name)) .to include('De Camino')
     end
   end
 
@@ -127,9 +127,9 @@ describe RSpotify::Playlist do
       end
       expect(playlists)             .to be_an Array
       expect(playlists.size)        .to eq 20
-      expect(playlists.total)       .to eq 14027
+      expect(playlists.total)       .to eq 218994
       expect(playlists.first)       .to be_an RSpotify::Playlist
-      expect(playlists.map(&:name)) .to include('The Indie Mix', 'Indie Folk', 'Alt/Indie')
+      expect(playlists.map(&:name)) .to include('Ultimate Indie')
     end
 
     it 'should accept additional options' do
@@ -137,19 +137,19 @@ describe RSpotify::Playlist do
         RSpotify::Playlist.search('Indie', limit: 10)
       end
       expect(playlists.size)        .to eq 10
-      expect(playlists.map(&:name)) .to include('The Indie Mix', 'Indie Folk')
+      expect(playlists.map(&:name)) .to include('Ultimate Indie')
 
       playlists = VCR.use_cassette('playlist:search:Indie:offset:10') do
         RSpotify::Playlist.search('Indie', offset: 10)
       end
       expect(playlists.size)        .to eq 20
-      expect(playlists.map(&:name)) .to include('Indie Workout', 'Indie Brunch')
+      expect(playlists.map(&:name)) .to include('Indie Acoustic')
 
       playlists = VCR.use_cassette('playlist:search:Indie:offset:10:limit:10') do
         RSpotify::Playlist.search('Indie', limit: 10, offset: 10)
       end
       expect(playlists.size)        .to eq 10
-      expect(playlists.map(&:name)) .to include('Infinite Indie')
+      expect(playlists.map(&:name)) .to include('Indie Acoustic')
     end
   end
 

@@ -2,88 +2,60 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.spotify.com/v1/search?q=Indie&type=playlist&limit=10&offset=0
+    uri: https://api.spotify.com/v1/search?limit=10&offset=0&q=Indie&type=playlist
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      accept:
-      - "*/*; q=0.5, application/xml"
-      accept-encoding:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
       - gzip, deflate
-      user-agent:
-      - Ruby
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.7.0 x86_64) ruby/2.5.0p-1
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
   response:
     status:
       code: 200
       message: OK
     headers:
-      server:
+      Server:
       - nginx
-      date:
-      - Wed, 12 Nov 2014 21:45:01 GMT
-      content-type:
+      Date:
+      - Fri, 06 Oct 2017 01:52:42 GMT
+      Content-Type:
       - application/json; charset=utf-8
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      connection:
+      Connection:
       - keep-alive
-      keep-alive:
+      Keep-Alive:
       - timeout=600
-      vary:
-      - Accept-Encoding
-      cache-control:
+      Cache-Control:
       - public, max-age=7200
-      access-control-allow-headers:
-      - Accept, Authorization, Origin, Content-Type
-      access-control-allow-origin:
+      Access-Control-Allow-Origin:
       - "*"
-      access-control-max-age:
-      - '604800'
-      access-control-allow-methods:
+      Access-Control-Allow-Methods:
       - GET, POST, OPTIONS, PUT, DELETE
-      access-control-allow-credentials:
+      Access-Control-Allow-Credentials:
       - 'true'
-      x-content-type-options:
-      - nosniff
-      strict-transport-security:
-      - max-age=31536000;
-      content-encoding:
+      Access-Control-Max-Age:
+      - '604800'
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Origin, Content-Type
+      Content-Encoding:
       - gzip
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000;
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        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
-    http_version: '1.1'
-  recorded_at: Wed, 12 Nov 2014 21:45:02 GMT
-recorded_with: VCR 2.9.3
+        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
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 01:52:42 GMT
+recorded_with: VCR 3.0.3

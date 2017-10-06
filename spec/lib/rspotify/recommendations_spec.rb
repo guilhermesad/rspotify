@@ -40,7 +40,7 @@ describe RSpotify::Recommendations do
     it 'generates a list of recommended tracks' do
       tracks = subject.tracks
       expect(tracks.count)                     .to eq(20)
-      expect(tracks.map { |track| track.name }).to include('Bonfire', 'All The Love In The World', 'Splitting The Atom')
+      expect(tracks.map { |track| track.name }).to include('The Music Scene', 'Conditions of My Parole', 'Here Is No Why')
     end
 
     it 'generates a list of recommendation seeds' do

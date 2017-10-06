@@ -81,9 +81,9 @@ describe RSpotify::Artist do
       end
       expect(artists)             .to be_an Array
       expect(artists.size)        .to eq 20
-      expect(artists.total)       .to eq 81
+      expect(artists.total)       .to eq 127
       expect(artists.first)       .to be_an RSpotify::Artist
-      expect(artists.map(&:name)) .to include('Arctic Monkeys', 'Arctic', 'Arctic Warbler', 'Arctic Express')
+      expect(artists.map(&:name)) .to include('Arctic Monkeys', 'Arctic Lake')
     end
 
     it 'should accept additional options' do
@@ -103,13 +103,13 @@ describe RSpotify::Artist do
         RSpotify::Artist.search('Arctic', limit: 10, offset: 10)
       end
       expect(artists.size)        .to eq 10
-      expect(artists.map(&:name)) .to include('Arctic Flame')
+      expect(artists.map(&:name)) .to include('Arctic')
 
       artists = VCR.use_cassette('artist:search:Arctic:market:ES') do
         RSpotify::Artist.search('Arctic', market: 'ES')
       end
       expect(artists.size)        .to eq 20
-      expect(artists.map(&:name)) .to include('Arctic Queen', 'Arctic Sleep')
+      expect(artists.map(&:name)) .to include('Arctic Lake')
     end
     
     
