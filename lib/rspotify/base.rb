@@ -53,7 +53,7 @@ module RSpotify
 
       response = RSpotify.get path
       return response if RSpotify.raw_response
-      type_class.new response
+      type_class.new response unless response.nil?
     end
     private_class_method :find_one
 
