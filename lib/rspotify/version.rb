@@ -1,3 +1,3 @@
 module RSpotify
-  VERSION = '1.22.1'
+  VERSION = '1.24.0'
 end
