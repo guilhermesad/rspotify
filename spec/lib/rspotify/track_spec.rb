@@ -70,9 +70,9 @@ describe RSpotify::Track do
       end
       expect(tracks)             .to be_an Array
       expect(tracks.size)        .to eq 20
-      expect(tracks.total)       .to eq 3647
+      expect(tracks.total)       .to eq 4834
       expect(tracks.first)       .to be_an RSpotify::Track
-      expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'I Wanna Know', 'Never Wanna Know')
+      expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'I Wanna Know', 'I Just Wanna Know')
     end
 
     it 'should accept additional options' do
@@ -86,13 +86,13 @@ describe RSpotify::Track do
         RSpotify::Track.search('Wanna Know', offset: 10)
       end
       expect(tracks.size)        .to eq 20
-      expect(tracks.map(&:name)) .to include('They Wanna Know', 'You Wanna Know')
+      expect(tracks.map(&:name)) .to include('Wanna Know')
 
       tracks = VCR.use_cassette('track:search:Wanna Know:limit:10:offset:10') do 
         RSpotify::Track.search('Wanna Know', limit: 10, offset: 10)
       end
       expect(tracks.size)        .to eq 10
-      expect(tracks.map(&:name)) .to include('You Wanna Know')
+      expect(tracks.map(&:name)) .to include('Wanna Know')
 
       tracks = VCR.use_cassette('track:search:Wanna Know:market:ES') do
         RSpotify::Track.search('Wanna Know', market: 'ES')
@@ -124,7 +124,7 @@ describe RSpotify::Track do
       end
 
       expect(audio_features.acousticness).to     eq 0.186 
-      expect(audio_features.analysis_url).to     eq 'http://echonest-analysis.s3.amazonaws.com/TR/TR-mGwgsahAQuIJvg1GFm9sHdVOQa1Tq677JbupMzwMyyKB_i5PBIKWWtTxnarW-qvlA9zRYF6OIY6cnU=/3/full.json?AWSAccessKeyId=AKIAJRDFEY23UEVW42BQ&Expires=1460833574&Signature=5binEjpotRQp8%2BE3LdYipDL%2BE8E%3D'
+      expect(audio_features.analysis_url).to     eq 'https://api.spotify.com/v1/audio-analysis/3jfr0TF6DQcOLat8gGn7E2'
       expect(audio_features.danceability).to     eq 0.548
       expect(audio_features.duration_ms).to      eq 272394
       expect(audio_features.energy).to           eq 0.532

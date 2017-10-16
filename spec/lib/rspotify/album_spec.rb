@@ -96,20 +96,30 @@ describe RSpotify::Album do
         RSpotify::Album.new_releases(country: 'ES')
       end
       expect(albums.size)        .to eq 20
-      expect(albums.map(&:name)) .to include('Me Olvide de Vivir', 'Amor Futuro')
+      expect(albums.map(&:name)) .to include('Tiempo', 'La Llamada')
     end
   end
 
   describe 'Album::search' do
+    # Keys generated specifically for the tests. Should be removed in the future
+    let(:client_id) { '5ac1cda2ad354aeaa1ad2693d33bb98c' }
+    let(:client_secret) { '155fc038a85840679b55a1822ef36b9b' }
+
+    before(:each) do
+    VCR.use_cassette('authenticate:client') do
+        RSpotify.authenticate(client_id, client_secret)
+      end
+    end
+
     it 'should search for the right albums' do
       albums = VCR.use_cassette('album:search:AM') do
         RSpotify::Album.search('AM')
       end
       expect(albums)             .to be_an Array
       expect(albums.size)        .to eq 20
-      expect(albums.total)       .to eq 8672
+      expect(albums.total)       .to eq 13866
       expect(albums.first)       .to be_an RSpotify::Album
-      expect(albums.map(&:name)) .to include('AM', 'Am I Wrong', 'A.M.', 'Melody AM')
+      expect(albums.map(&:name)) .to include('AM', 'GO:OD AM')
     end
 
     it 'should accept additional options' do
@@ -117,19 +127,19 @@ describe RSpotify::Album do
         RSpotify::Album.search('AM', limit: 10)
       end
       expect(albums.size)        .to eq 10
-      expect(albums.map(&:name)) .to include('AM', 'Am I Wrong')
+      expect(albums.map(&:name)) .to include('AM', 'GO:OD AM')
 
       albums = VCR.use_cassette('album:search:AM:offset:10') do
         RSpotify::Album.search('AM', offset: 10)
       end
       expect(albums.size)        .to eq 20
-      expect(albums.map(&:name)) .to include('Melody AM', 'I Am')
+      expect(albums.map(&:name)) .to include('3 A.M.', 'I Am')
 
       albums = VCR.use_cassette('album:search:AM:offset:10:limit:10') do
         RSpotify::Album.search('AM', limit: 10, offset: 10)
       end
       expect(albums.size)        .to eq 10
-      expect(albums.map(&:name)) .to include('Melody AM')
+      expect(albums.map(&:name)) .to include('I Am')
 
       albums = VCR.use_cassette('album:search:AM:market:ES') do
         RSpotify::Album.search('AM', market: 'ES')

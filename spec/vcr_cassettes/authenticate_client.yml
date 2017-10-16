@@ -2,47 +2,49 @@
 http_interactions:
 - request:
     method: post
-    uri: https://5ac1cda2ad354aeaa1ad2693d33bb98c:155fc038a85840679b55a1822ef36b9b@accounts.spotify.com/api/token
+    uri: https://accounts.spotify.com/api/token
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: grant_type=client_credentials
     headers:
-      accept:
-      - '*/*; q=0.5, application/xml'
-      accept-encoding:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
       - gzip, deflate
-      authorization:
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.7.0 x86_64) ruby/2.5.0p-1
+      Authorization:
       - Basic NWFjMWNkYTJhZDM1NGFlYWExYWQyNjkzZDMzYmI5OGM6MTU1ZmMwMzhhODU4NDA2NzliNTVhMTgyMmVmMzZiOWI=
-      content-length:
+      Content-Length:
       - '29'
-      content-type:
+      Content-Type:
       - application/x-www-form-urlencoded
-      user-agent:
-      - Ruby
+      Host:
+      - accounts.spotify.com
   response:
     status:
       code: 200
       message: OK
     headers:
-      server:
+      Server:
       - nginx
-      date:
-      - Sat, 16 Apr 2016 18:56:13 GMT
-      content-type:
+      Date:
+      - Fri, 06 Oct 2017 01:32:11 GMT
+      Content-Type:
       - application/json
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      connection:
+      Connection:
       - keep-alive
-      keep-alive:
-      - timeout=10
-      vary:
+      Keep-Alive:
+      - timeout=600
+      Vary:
       - Accept-Encoding
-      x-ua-compatible:
+      X-Ua-Compatible:
       - IE=edge
-      x-frame-options:
+      X-Frame-Options:
       - deny
-      content-security-policy:
+      Content-Security-Policy:
       - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
         https://www.google-analytics.com; img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
         https://i.imgur.com https://d2mv8tnci56s9d.cloudfront.net https://aci.scdn.co
@@ -50,8 +52,9 @@ http_interactions:
         https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
         font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://sp-bootstrap.global.ssl.fastly.net;
         style-src ''self'' ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net;
-        frame-src ''self'' https://www.spotify.com;'
-      x-content-security-policy:
+        frame-src ''self'' https://www.spotify.com https://app.adjust.com https://itunes.apple.com
+        itms-apps:;'
+      X-Content-Security-Policy:
       - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
         https://www.google-analytics.com; img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
         https://i.imgur.com https://d2mv8tnci56s9d.cloudfront.net https://aci.scdn.co
@@ -59,24 +62,22 @@ http_interactions:
         https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
         font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://sp-bootstrap.global.ssl.fastly.net;
         style-src ''self'' ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net;
-        frame-src ''self'' https://www.spotify.com;'
-      cache-control:
+        frame-src ''self'' https://www.spotify.com https://app.adjust.com https://itunes.apple.com
+        itms-apps:;'
+      Cache-Control:
       - no-cache, no-store, must-revalidate
-      pragma:
+      Pragma:
       - no-cache
-      content-encoding:
+      Content-Encoding:
       - gzip
-      x-content-type-options:
+      X-Content-Type-Options:
       - nosniff
-      strict-transport-security:
+      Strict-Transport-Security:
       - max-age=31536000;
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAAx3NTQuCMBgA4P+yc4K2CumYiqgUqeXyNMZ4qbX82syc0X/P
-        uj6X540Y56A17RsJNdqiXep71+JB3EJPVjLJQa5FKDGJ7ZriJTcJToesup0v
-        z9VJGd/NG8/JgyOvurbZuyTmozk43DJdGN2jjCWqCsvyhRboH9DetPBbgClQ
-        s8LYCgWaivnGG9v+fAFe3jUNkQAAAA==
-    http_version: '1.1'
-  recorded_at: Sat, 16 Apr 2016 18:56:33 GMT
-recorded_with: VCR 2.9.3
+        H4sIAAAAAAAAA6tWSkxOTi0uji/Jz07NU7JScgp0yop3zAx2y/F2zvbz9E1yDneNzCr18skxyzM3C8wNK/YINfN1d0kPCXXyiSr0y/SOMnH0KTbzLss1K81JKg639Lcw9HJJ8fSojHDKS4mozAj1r0hX0lECWxBfUlmQCrIlNbEotQgomlpRkFmUWhyfCbTb2MzAoBYAWdhNeZEAAAA=
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 01:32:11 GMT
+recorded_with: VCR 3.0.3

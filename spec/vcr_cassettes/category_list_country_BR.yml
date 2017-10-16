@@ -2,85 +2,60 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.spotify.com/v1/browse/categories?limit=20&offset=0&country=BR
+    uri: https://api.spotify.com/v1/browse/categories?country=BR&limit=20&offset=0
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      accept:
-      - "*/*; q=0.5, application/xml"
-      accept-encoding:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
       - gzip, deflate
-      authorization:
-      - Bearer BQAZNHzH_x3pHOISyXRF0LUn9MpDRXoXhYwISe5wlkgnYLQTSCRUDL3rlbwnpFehqlRgZOFIkNil9D8bzYu8ZQ
-      user-agent:
-      - Ruby
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.7.0 x86_64) ruby/2.5.0p-1
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
   response:
     status:
       code: 200
       message: OK
     headers:
-      server:
+      Server:
       - nginx
-      date:
-      - Fri, 13 Feb 2015 20:57:00 GMT
-      content-type:
+      Date:
+      - Fri, 06 Oct 2017 01:57:45 GMT
+      Content-Type:
       - application/json; charset=utf-8
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      connection:
+      Connection:
       - keep-alive
-      keep-alive:
+      Keep-Alive:
       - timeout=600
-      cache-control:
-      - private, max-age=0
-      access-control-allow-headers:
-      - Accept, Authorization, Origin, Content-Type
-      access-control-allow-origin:
+      Cache-Control:
+      - public, max-age=600
+      Access-Control-Allow-Origin:
       - "*"
-      access-control-max-age:
-      - '604800'
-      access-control-allow-methods:
+      Access-Control-Allow-Methods:
       - GET, POST, OPTIONS, PUT, DELETE
-      access-control-allow-credentials:
+      Access-Control-Allow-Credentials:
       - 'true'
-      content-encoding:
+      Access-Control-Max-Age:
+      - '604800'
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Origin, Content-Type
+      Content-Encoding:
       - gzip
-      x-content-type-options:
+      X-Content-Type-Options:
       - nosniff
-      strict-transport-security:
+      Strict-Transport-Security:
       - max-age=31536000;
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAAMSZXW/bNhSG7/srjFz0qon5/VGgGNp1QwdswNAN2MUwCIfk
-        YaxVllxZTloU+e+jZEVKnHZAaiKO4Qsf2nz1PiHPOaK+PFsszjx0eNm0JW7P
-        Fi8XX1IoBVctxv7j2arrNtuXyyVsyovtpunK+PnCN+vlFV26trne4nL+/Q++
-        2dVd+/nVm/fPmxi32L0iz6tyXXavGDl7sZ+57HA9KP09an2v2rJrNlW57bbj
-        zP3cvqkP5u5nx/Jy1fVhpuWLOb5rq3uiAbpt/ekjba/rUF/4qtmF2DZ1d1Fj
-        t1xjKGEZsC2vMEzSBaVUEWktKiACvAwqJhEdpaRUaxMLkl4p0r8v/t1cnt3R
-        vy5Dtxova4zeLP6ZzYTh6h66rGGNw9CfzWbx6zA2DN28OJboumnCY2iK42gm
-        0cuyhmrQPU/TfUrvwmpljQJOwRsvrLbCu+A1EyoGCUEX4xf/B6f4Ns77FieU
-        v/XhTBQ30HafnxDj7aIcdCeMmgdqiQbNNfXcOauAGcMtAasQmR5Xpii+G+WB
-        z4nl70M8F8xmcwqUzWYCKYSmwihhlZGE2iiRAeHALWrjQLIMIO96nDGmaCaI
-        1037odl1J0iUo3JhpJKGeuqlkCA5kSgscB+MQ5MSJzk+Tz7wOIH8axzJBDM2
-        fveompMrS15i3eJ5uYZL3J5vP+4gfbpdpBIlCZo5IxRQa6IPzIN1HDDKSLw5
-        LmkeWJ7I/jzEM3FtG//hBFu9ly2sR22RgMBoCXUuUCKsiNIZKQP3/vg9ft/d
-        RPB9Ci+eL943VZWLY1mHEguoHrXdM8EctKdFCSFw6ZjTSseoIzdWM8UgGGWI
-        dcEdT/UrXie0v/Rjy9dVh20NXbq8XIAxrIsAtccTAE7aE16CUVGmiGAkFXVP
-        hbVScGatEFKCCsfj/YrTCe9Pb39bvh3GMmH1qzJtgqdHOujO1d4LxbWIhGhD
-        eUiJwHGNJpjYr2WRYc0e+JyA/jjEM8EMZV1je4oqtVcuqFOSKHAOSN8kpbqP
-        KigrvZGaJrbHFaRDexPEt/uBTBS3FeIp2s9Bd97nQUTDFUQTwWkXOZVMpW6U
-        aI4qNffHL8kDnxPNP4Z4JpircrN60mZ+WpJJ+XwACUpRI0VQFJlF8CgjKh41
-        F1aiOnJNHvqbKL4rN4t3+Zr5tnanaJPcXNYJaqBGx1RobAhaM4Y0BJewWhqF
-        ydAs3bU490r1m2y1Zn9QdYpqs1c+j031oej7I7ScpT+fqgxoqRgHqY0ByiyX
-        GYrNodG53Iwj2e6Kkp80d1t6qOEEYPsLOO/VCqoMS3c+HKV16SZTUiZSokyZ
-        k6V2ycYMJfxbZu/cGFV9W/96+komymvs4Cl7pPmErhdOwLxlVAgeAwHpwEpH
-        HfMMUEmRGv0jj+bum5vP5oZ4rpLe7E7RZPayUwJlSjlvSeosZQhgrFTcEB+j
-        1xxEMDkK+j2Xcz3vw5lAdi1c4SlQ7oUnmBSN9SG15sxH4wKLqU3yIqbNHhla
-        mSGHHjqdz9/3A7ladvQQ8ClPlm6JjsqFTbfmKKRhgjkG3jhqRH8uEjlXXuRA
-        +cDj3LiPI8/u/fJseHo0TEvGSI2fukfD/cqTKfbw0dR+pJ/8VmzT4lXZ7Ib/
-        Qr2rqjHcNX1GSjFOU+Dm2c1/AAAA//8DADDl/gpJGwAA
-    http_version: '1.1'
-  recorded_at: Fri, 13 Feb 2015 20:57:00 GMT
-recorded_with: VCR 2.9.3
+        H4sIAAAAAAAAALyZbW/bNhDH3+dTGH7RV3FMUnwsEAzonjqgBYp2wIANg8GHo81GljyJTpsW+e6jZEeOHbdLYmkwZMBH6/53PxzJo/T1bDQaWx1hXlYB6vHo5ehrMiXjogLf/BwvYlzVL6dTvQoX9aqMwd9c2HI5vcZTU5Wfapju7v/BlusiVjeXr96/KL2vIV6iF3lYhnhJ0Ph84zlEWLZKf221nqs2jeUqD3Wst54b37YsDnw33iHMF7ExE8HOd/Z1le+JxovauiLpTZfggp46qMI1uE5nhjHmiCkFXCOqLXPcJ4/CM4axENLPUPokS3NdfFzNx/fEPgUXF9sYttbb0d+7yF0bysOUCr2Eduj3cjV60461Q7fnp+Izlf4S8qCLp/CjT+B3TCuhoZ/T9R089Nt4joTc8Xl1NzZ6u66D7YtSDVXUBXwsH0+pWOf5ozCFpZ4nCQkctJeGWUWp8s4YLpWm3mkL2JOmlOA4rEbp27SOhN7R+tCN9cRpWZZuqEJKCvNQ6LwVmWwraKYEV5LrDGsrLVVCUWucFYRy75h24rRS28+n4/a2MfeEzC5Cng/F7G7xakU6ZtRSngnqERISZ85hZDIB0knvMmao2a5gdPZsbgdJdeB+bO09kVvpKt4MRS4PxdVWonF8WhkdRNrheNfae8IRAYovw61PRPlUN4p76z2VWGgw0ksE0qZZlln+3PXpIOzdTpfsf/ZWKuVq6CmWJHYTjApMJU+0JENYeQZEo0xnCoQ0mpHTJ9heQrt6StaeiFWlvRoaWaMxUxaEAqQpeIWwMWk1oop6ZiRjLrP2dFb7qXSw3jfmnmgtwmoxXIl1O1+SaWpshjTnWDLqOAaiIHUIzAPPvMioYsDlaavVYTIdsddJ/nV/JQZuOXO6sDB0nSWhbmoi8BwTjihBSCuLqVKMZkSlposxzd3p5XYkrY7gzznYWJVFsNOf2r/0hDIULsBM53FolK1QB1O7pmEgRnDhvfCZVIJwop3kEinjemgkjiTWwfytGeuLYK5jGOwMdEevFenoGfDNcpe+JCDKqMJMcMiwsAZz6/zp9A6S6si9ae291V69ClXyWKYlavD6S147gMymMxPyXGKPtOBeOesVEch5hyWVqo/yO5rbvX62Sofx5ijaE8xPZXVVrp8wjR/dxt1va7cqk//aJr7fuT2ItcPyx3akv+7NrvO4rgbfKWIFaVEp5l2JCUMy6QXBQkmWGhWXcU49SRttRoVRspdO7kFyuyZ4G09fJOd62Xgb/lHPRoic1ogcRtth+XUz0Furu/w/upCtTFdaEqfzt6JWUZlKiTsiJJMGHPeaOoV72DwfJHav91322X7UUNehYTbY6bN5xsM9ySaGYzOhmWUTyZybWM5tutIuQNEzl7GHwe+ej20SH324+0tPvHxp1096YP2s08IcigomG4CT+p+1rnbFx4AhJ4iRlGuspLeOWK1MpsEzj+yJJ4iD/Dqev7T2s727xu2rgdYl2loK+ByfDPXIawfy8L3DZqRxfie2quA6lOt6vyrHsYy65ZypZLg9u/0XAAD//wMAjxZmTSYZAAA=
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 01:57:45 GMT
+recorded_with: VCR 3.0.3

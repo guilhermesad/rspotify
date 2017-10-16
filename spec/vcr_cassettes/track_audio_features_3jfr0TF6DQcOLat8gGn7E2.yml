@@ -1,203 +1,61 @@
 ---
 http_interactions:
 - request:
-    method: post
-    uri: https://5ac1cda2ad354aeaa1ad2693d33bb98c:155fc038a85840679b55a1822ef36b9b@accounts.spotify.com/api/token
-    body:
-      encoding: US-ASCII
-      string: grant_type=client_credentials
-    headers:
-      accept:
-      - '*/*; q=0.5, application/xml'
-      accept-encoding:
-      - gzip, deflate
-      authorization:
-      - Basic NWFjMWNkYTJhZDM1NGFlYWExYWQyNjkzZDMzYmI5OGM6MTU1ZmMwMzhhODU4NDA2NzliNTVhMTgyMmVmMzZiOWI=
-      content-length:
-      - '29'
-      content-type:
-      - application/x-www-form-urlencoded
-      user-agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      server:
-      - nginx
-      date:
-      - Sat, 16 Apr 2016 04:20:27 GMT
-      content-type:
-      - application/json
-      transfer-encoding:
-      - chunked
-      connection:
-      - keep-alive
-      keep-alive:
-      - timeout=10
-      vary:
-      - Accept-Encoding
-      x-ua-compatible:
-      - IE=edge
-      x-frame-options:
-      - deny
-      content-security-policy:
-      - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
-        https://www.google-analytics.com; img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
-        https://i.imgur.com https://d2mv8tnci56s9d.cloudfront.net https://aci.scdn.co
-        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://scontent.xx.fbcdn.net
-        https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
-        font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://sp-bootstrap.global.ssl.fastly.net;
-        style-src ''self'' ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net;
-        frame-src ''self'' https://www.spotify.com;'
-      x-content-security-policy:
-      - 'default-src ''self''; script-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
-        https://www.google-analytics.com; img-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net
-        https://i.imgur.com https://d2mv8tnci56s9d.cloudfront.net https://aci.scdn.co
-        https://graph.facebook.com https://fbcdn-profile-a.akamaihd.net https://scontent.xx.fbcdn.net
-        https://www.google-analytics.com https://stats.g.doubleclick.net data: d2d1dxiu3v1f2i.cloudfront.net;
-        font-src ''self'' https://d2d1dxiu3v1f2i.cloudfront.net https://sp-bootstrap.global.ssl.fastly.net;
-        style-src ''self'' ''unsafe-inline'' https://d2d1dxiu3v1f2i.cloudfront.net;
-        frame-src ''self'' https://www.spotify.com;'
-      cache-control:
-      - no-cache, no-store, must-revalidate
-      pragma:
-      - no-cache
-      content-encoding:
-      - gzip
-      x-content-type-options:
-      - nosniff
-      strict-transport-security:
-      - max-age=31536000;
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAx3Nuw6CMBQA0H/p7AARENwqNRolKKHaxqWBeiON8kiLFGP8
-        d9H1LOeNCinBGNG3d2jQEq0yMjCqCeGErAf9rDILdJu0Ze250T5k13Rhjw/O
-        qo41Fg/Sps1uxHGIfa3OwSWuo5Elp5y5VlJVUu5tcv9wQzP0D0T/6uC3QKFB
-        TwpjpzQYoaZ7HjjO5wunu07GkQAAAA==
-    http_version: '1.1'
-  recorded_at: Sat, 16 Apr 2016 04:20:46 GMT
-- request:
     method: get
     uri: https://api.spotify.com/v1/audio-features/3jfr0TF6DQcOLat8gGn7E2
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      accept:
-      - '*/*; q=0.5, application/xml'
-      accept-encoding:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
       - gzip, deflate
-      authorization:
-      - Bearer BQCLjzy01pcW3i4yYvehkPn1YxN63JtPCuCtAcQDhiKrYfKvIuVj0sk9dUapG3GjIajKlp9I5GrZhbqv_jiR8w
-      user-agent:
-      - Ruby
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      server:
-      - nginx
-      date:
-      - Sat, 16 Apr 2016 04:20:28 GMT
-      content-type:
-      - application/json
-      transfer-encoding:
-      - chunked
-      connection:
-      - keep-alive
-      keep-alive:
-      - timeout=600
-      www-authenticate:
-      - Bearer realm="spotify", error="invalid_token", error_description="The access
-        token expired"
-      access-control-allow-origin:
-      - '*'
-      access-control-allow-methods:
-      - GET, POST, OPTIONS, PUT, DELETE
-      access-control-allow-credentials:
-      - 'true'
-      access-control-max-age:
-      - '604800'
-      access-control-allow-headers:
-      - Accept, Authorization, Origin, Content-Type
-      content-encoding:
-      - gzip
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAKrmUlBQSi0qyi9SslKoBnKA3OKSxJLSYiDfxMBQByKUm1pc
-        nJieChRTCslIVUhMTgYKKJTkZ6fmKaRWFGQWpaYoAVXWctUCAAAA//8DAFAZ
-        BolRAAAA
-    http_version: '1.1'
-  recorded_at: Sat, 16 Apr 2016 04:20:46 GMT
-- request:
-    method: get
-    uri: https://api.spotify.com/v1/audio-features/3jfr0TF6DQcOLat8gGn7E2
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      accept:
-      - '*/*; q=0.5, application/xml'
-      accept-encoding:
-      - gzip, deflate
-      authorization:
-      - Bearer BQDCgVlW8Vsz-Kzkvk5iGk3WJ0n_32cyK3QvRmhUXu4TryD8SoC1SEPcmqpoM8WJcxyN1c-yqGIjIRaKrmGYYw
-      user-agent:
-      - Ruby
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.7.0 x86_64) ruby/2.5.0p-1
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
   response:
     status:
       code: 200
       message: OK
     headers:
-      server:
+      Server:
       - nginx
-      date:
-      - Sat, 16 Apr 2016 18:56:14 GMT
-      content-type:
-      - application/json; charset=UTF8
-      transfer-encoding:
+      Date:
+      - Fri, 06 Oct 2017 01:50:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
       - chunked
-      connection:
+      Connection:
       - keep-alive
-      keep-alive:
+      Keep-Alive:
       - timeout=600
-      cache-control:
+      Cache-Control:
       - private, max-age=0
-      access-control-allow-origin:
-      - '*'
-      access-control-allow-methods:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
       - GET, POST, OPTIONS, PUT, DELETE
-      access-control-allow-credentials:
+      Access-Control-Allow-Credentials:
       - 'true'
-      access-control-max-age:
+      Access-Control-Max-Age:
       - '604800'
-      access-control-allow-headers:
+      Access-Control-Allow-Headers:
       - Accept, Authorization, Origin, Content-Type
-      content-encoding:
+      Content-Encoding:
       - gzip
-      x-content-type-options:
+      X-Content-Type-Options:
       - nosniff
-      strict-transport-security:
+      Strict-Transport-Security:
       - max-age=31536000;
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAAHySy27iMBiF930KhNSuhlzs3EBCVRCB4VIxUNqIVWQSB0wT
-        O41taBjNu0/iDNOuKmVhf+f8x/Jxft91Ot0E0RijPcmIqLqdQcfQbMv70SiY
-        4vJwYxAo9oYVsNUmYzKhmPOG9FzN7jsK5yzBDTLVjhcYx0dy8xmaAQFUCoqZ
-        5ILEn5LptQmEclHKHFOBsi+DhgGcdjQjZ/wpANNV9IwyXF+mhRZobyFwXrAG
-        eXZ9tNGyqlCuLpIJYVGKkZAl5t328ERJ8JSWxnbijNfxaomEd5hSNwCtRZZE
-        eXjBBEmrgShR/Db4bkI5omOJUzV4FKLgA11HBdH+hWgxy/WzqSsn178LQxRl
-        FSc8kmX2P65Oq3tmdSuidzNoHGooR1dG0YWrA7ab+uvl08uBo6O/lrP5+WBO
-        J3mf/0xeV2tkbt8d153vZfF0vTxV1WIUEfvXaLYIQ7H9oKgMe+/nzO9fN7uJ
-        s5rtnJi+DHWopzLLtBNn9NEPn/04rt9mgatZMvQXM3++GU+CHYAvwWtogdH6
-        IfgoSN330LQcw4PQdq2HZ3Kg6hWG9p7Q4FSXslkX3j0YBXCZ7EgxXjZrL7iH
-        47aFRJZIEEajXP0GwAWwb7VlkxxH/BbYiNbdn78AAAD//wMAQTl2Ou0CAAA=
-    http_version: '1.1'
-  recorded_at: Sat, 16 Apr 2016 18:56:34 GMT
-recorded_with: VCR 2.9.3
+        H4sIAAAAAAAAAISQyW6DMBCG73kKxLkBYyAQzl0ulapKvSPXDMk0xkZeIqGq794wbtSe0uN8/2LPfG6SJB2EliDeUaFf0qRLWFZX7d2qgAZ7uLKSEzsBgZoGZcKgwbmVbJus3u8IT2aAFRU0uRlAHvHqYxkreUmKkCY4j/JXKtrYgNp5GybQXqg/Qcb4LkYVnuFX4EVD9CwUXJaJsOJxCw/TbFbU1penWWTLTK5UhAFNP4LwwYJL4+MDSeXHaNnb4+7+Vb48C98ennTzwKMlWCSPm43Hcem8FfLU3UqQoz9aGCl49H52XZ6LGbOfkkyaKT8XOTldfqtMaKEWh64PVv1XRxtur4mbtUOwwqPR/UR35Q0v91X8PU7QOzxoutMqVpuvbwAAAP//AwC/DSQDPgIAAA==
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 01:50:00 GMT
+recorded_with: VCR 3.0.3

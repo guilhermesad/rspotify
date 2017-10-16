@@ -52,12 +52,12 @@ describe RSpotify::Category do
         RSpotify::Category.list(locale: 'es_MX', limit: 10)
       end
       expect(categories.size)        .to eq 10
-      expect(categories.map(&:name)) .to include('Mood', 'Pop', 'Chill')
+      expect(categories.map(&:name)) .to include('Dance', 'Pop', 'Chill')
 
       categories = VCR.use_cassette('category:list:country:BR') do
         RSpotify::Category.list(country: 'BR')
       end
-      expect(categories.map(&:name)) .to include('Mood', 'Pop', 'Chill')
+      expect(categories.map(&:name)) .to include('Top Lists', 'Pop', 'Chill')
     end
   end
 
@@ -105,7 +105,7 @@ describe RSpotify::Category do
       playlists = VCR.use_cassette('category:party:playlists:country:BR') do
         category.playlists(country: 'BR')
       end
-      expect(playlists.map(&:name)) .to include('Festa Indie', 'Esquenta Sertanejo', 'Cura Ressaca')
+      expect(playlists.map(&:name)) .to include('Lista VIP', 'Sexta', 'Modo Freestyle')
     end
   end
 end
