@@ -63,18 +63,18 @@ module RSpotify
       rescue RestClient::Unauthorized
         if @client_token
           authenticate(@client_id, @client_secret)
-          
+
           obj = params.find{|x| x.is_a?(Hash) && x['Authorization']}
           obj['Authorization'] = "Bearer #{@client_token}"
-          
+
           response = retry_connection verb, url, params
         end
       end
 
       return response if raw_response
-      JSON.parse response unless response.empty?
+      JSON.parse response unless response.nil? || response.empty?
     end
-    
+
     # Added this method for testing
     def retry_connection verb, url, params
       RestClient.send(verb, url, *params)
