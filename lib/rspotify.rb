@@ -7,6 +7,7 @@ module RSpotify
   autoload :AudioFeatures,      'rspotify/audio_features'
   autoload :Base,               'rspotify/base'
   autoload :Category,           'rspotify/category'
+  autoload :Device,             'rspotify/device'
   autoload :Playlist,           'rspotify/playlist'
   autoload :Recommendations,    'rspotify/recommendations'
   autoload :RecommendationSeed, 'rspotify/recommendation_seed'

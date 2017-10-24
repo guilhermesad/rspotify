@@ -477,5 +477,13 @@ module RSpotify
       User.oauth_delete(@id, url)
       unfollowed
     end
+
+    def devices
+      url = "me/player/devices"
+      response = RSpotify.resolve_auth_request(@id, url)
+
+      return response if RSpotify.raw_response
+      response['devices'].map { |i| Device.new i }
+    end
   end
 end
