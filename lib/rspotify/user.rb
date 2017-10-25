@@ -478,6 +478,13 @@ module RSpotify
       unfollowed
     end
 
+    # Returns the user's available devices
+    #
+    # @return [Array<Device>]
+    #
+    # @example
+    #           devices = user.devices
+    #           devices.first.id #=> "5fbb3ba6aa454b5534c4ba43a8c7e8e45a63ad0e"
     def devices
       url = "me/player/devices"
       response = RSpotify.resolve_auth_request(@id, url)
