@@ -8,11 +8,11 @@ module RSpotify
   # @attr [String]      volume_percent  The current volume in percent. This may be null
   class Device < Base
     def initialize(options = {})
-      @id             = options['id'],
-      @is_active      = options['is_active'],
-      @is_restricted  = options['is_restricted'],
-      @name           = options['name'],
-      @type           = options['type'],
+      @id             = options['id']
+      @is_active      = options['is_active']
+      @is_restricted  = options['is_restricted']
+      @name           = options['name']
+      @type           = options['type']
       @volume_percent = options['volume_percent']
     end
   end
