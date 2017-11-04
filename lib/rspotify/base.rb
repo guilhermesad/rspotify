@@ -11,6 +11,7 @@ module RSpotify
     #
     # @param ids [String, Array]
     # @param type [String]
+    # @param market [String] Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}.
     # @return [Album, Artist, Track, User, Array<Album>, Array<Artist>, Array<Track>]
     #
     # @example
@@ -22,7 +23,7 @@ module RSpotify
     #           tracks = RSpotify::Base.find(ids, 'track')
     #           tracks.class       #=> Array
     #           tracks.first.class #=> RSpotify::Track
-    def self.find(ids, type)
+    def self.find(ids, type, market: nil)
       case ids
       when Array
         if type == 'user'
@@ -30,16 +31,17 @@ module RSpotify
           return false
         end
         limit = (type == 'album' ? 20 : 50)
-        find_many(ids, type)
+        find_many(ids, type, market: market)
       when String
         id = ids
-        find_one(id, type)
+        find_one(id, type, market: market)
       end
     end
 
-    def self.find_many(ids, type)
+    def self.find_many(ids, type, market: nil)
       type_class = RSpotify.const_get(type.capitalize)
       path = "#{type}s?ids=#{ids.join ','}"
+      path << "&market=#{market}" if market
 
       response = RSpotify.get path
       return response if RSpotify.raw_response
@@ -47,9 +49,10 @@ module RSpotify
     end
     private_class_method :find_many
 
-    def self.find_one(id, type)
+    def self.find_one(id, type, market: nil)
       type_class = RSpotify.const_get(type.capitalize)
       path = "#{type}s/#{id}"
+      path << "?market=#{market}" if market
 
       response = RSpotify.get path
       return response if RSpotify.raw_response

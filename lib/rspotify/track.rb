@@ -18,6 +18,7 @@ module RSpotify
     # Returns Track object(s) with id(s) provided
     #
     # @param ids [String, Array] Maximum: 50 IDs
+    # @param market [String] Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}.
     # @return [Track, Array<Track>]
     #
     # @example
@@ -29,8 +30,8 @@ module RSpotify
     #           tracks = RSpotify::Base.find(ids, 'track')
     #           tracks.class       #=> Array
     #           tracks.first.class #=> RSpotify::Track
-    def self.find(ids)
-      super(ids, 'track')
+    def self.find(ids, market: nil)
+      super(ids, 'track', market: market)
     end
 
     # Returns array of Track objects matching the query, ordered by popularity. It's also possible to find the total number of search results for the query

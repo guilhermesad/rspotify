@@ -40,6 +40,14 @@ describe RSpotify::Track do
       expect(artists.first)       .to be_an RSpotify::Artist
       expect(artists.map(&:name)) .to include('Arctic Monkeys')
     end
+
+    it 'should find a track available in the given market' do
+      track = VCR.use_cassette('track:find:3jfr0TF6DQcOLat8gGn7E2:market:ES') do
+        RSpotify::Track.find('3jfr0TF6DQcOLat8gGn7E2', market: 'ES')
+      end
+
+      expect(track.id).to eq '5FVd6KXrgO9B3JPmC8OPst'
+    end
   end
 
   describe 'Track::find receiving array of ids' do
@@ -60,6 +68,16 @@ describe RSpotify::Track do
       expect(tracks.size)       .to eq 2
       expect(tracks.first.name) .to eq 'The Next Day'
       expect(tracks.last.name)  .to eq 'Sunday'
+    end
+
+    it 'should find tracks available in the given market' do
+      ids = ['4oI9kesyxHUr8fqiLd6uO9']
+      tracks = VCR.use_cassette('track:find:4oI9kesyxHUr8fqiLd6uO9:market:ES') do
+        RSpotify::Track.find(ids, market: 'ES')
+      end
+      expect(tracks)            .to be_an Array
+      expect(tracks.size)       .to eq 1
+      expect(tracks.first.id)   .to eq '1CFz8ZV88CFLwmggjGrW4c'
     end
   end
 
