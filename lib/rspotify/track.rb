@@ -14,6 +14,7 @@ module RSpotify
   # @attr [String]        played_at         The date and time the track was played. Only present when pulled from /recently-played
   # @attr [String]        context_type      The context the track was played from. Only present when pulled from /recently-played
   # @attr [Boolean]       is_playable       Whether or not the track is playable in the given market. Only present when track relinking is applied by specifying a market when looking up the track
+  # @attr [TrackLink]     linked_from       Details of the requested track. Only present when track relinking is applied and the returned track is different to the one requested because the latter is not available in the given market
   class Track < Base
 
     # Returns Track object(s) with id(s) provided
@@ -79,6 +80,10 @@ module RSpotify
 
       @artists = if options['artists']
         options['artists'].map { |a| Artist.new a }
+      end
+
+      @linked_from = if options['linked_from']
+        TrackLink.new options['linked_from']
       end
 
       super(options)
