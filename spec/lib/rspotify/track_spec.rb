@@ -46,7 +46,17 @@ describe RSpotify::Track do
         RSpotify::Track.find('3jfr0TF6DQcOLat8gGn7E2', market: 'ES')
       end
 
-      expect(track.id).to eq '5FVd6KXrgO9B3JPmC8OPst'
+      expect(track.id)             .to eq '5FVd6KXrgO9B3JPmC8OPst'
+      expect(track.is_playable)    .to be true
+    end
+
+    it 'should find a track which is unavailable in the given market' do
+      track = VCR.use_cassette('track:find:6fi8e1nv4QBqODf9puRcyX:market:ES') do
+        RSpotify::Track.find('6fi8e1nv4QBqODf9puRcyX', market: 'ES')
+      end
+
+      expect(track.id)          .to eq '6fi8e1nv4QBqODf9puRcyX'
+      expect(track.is_playable) .to be false
     end
   end
 
