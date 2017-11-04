@@ -149,6 +149,22 @@ describe RSpotify::Album do
     end
   end
 
+  describe '#tracks' do
+    it 'should fetch more tracks' do
+      album = VCR.use_cassette('album:find:2js3lkzAjWpD656NK7ZaJX') do
+        RSpotify::Album.find('2js3lkzAjWpD656NK7ZaJX')
+      end
+
+      tracks = VCR.use_cassette('album:find:2js3lkzAjWpD656NK7ZaJX:tracks') do
+        album.tracks(offset: 50, limit: 50)
+      end
+
+      expect(tracks)            .to be_an Array
+      expect(tracks.size)       .to eq 19
+      expect(tracks.first.name) .to eq "Acoustic Guitar"
+    end
+  end
+
   describe '.embed' do
     before(:each) do
       @album = VCR.use_cassette('album:find:5bU1XKYxHhEwukllT20xtk') do
