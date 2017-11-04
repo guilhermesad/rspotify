@@ -181,7 +181,21 @@ describe RSpotify::Album do
 
       expect(tracks)            .to be_an Array
       expect(tracks.size)       .to eq 19
-      expect(tracks.first.name) .to eq "Acoustic Guitar"
+      expect(tracks.first.name) .to eq 'Acoustic Guitar'
+      expect(tracks.first.id)   .to eq '4l4IytuWNPZaN5EU80TTCO'
+    end
+
+    it "should find tracks available in the given market" do
+      album = VCR.use_cassette('album:find:2js3lkzAjWpD656NK7ZaJX') do
+        RSpotify::Album.find('2js3lkzAjWpD656NK7ZaJX')
+      end
+
+      tracks = VCR.use_cassette('album:find:2js3lkzAjWpD656NK7ZaJX:tracks:market:ES') do
+        album.tracks(offset: 50, limit: 50, market: 'ES')
+      end
+
+      expect(tracks.first.name) .to eq 'Acoustic Guitar'
+      expect(tracks.first.id)   .to eq '0wNeMTVk7bFbDj8YFIq0kY'
     end
   end
 
