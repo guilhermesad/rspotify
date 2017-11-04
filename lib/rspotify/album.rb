@@ -17,6 +17,7 @@ module RSpotify
     # Returns Album object(s) with id(s) provided
     #
     # @param ids [String, Array] Maximum: 20 IDs
+    # @param market [String] Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}.
     # @return [Album, Array<Album>]
     #
     # @example
@@ -28,8 +29,8 @@ module RSpotify
     #           albums = RSpotify::Album.find(ids)
     #           albums.class       #=> Array
     #           albums.first.class #=> RSpotify::Album
-    def self.find(ids)
-      super(ids, 'album')
+    def self.find(ids, market: nil)
+      super(ids, 'album', market: market)
     end
 
     # Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
