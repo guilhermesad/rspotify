@@ -11,6 +11,7 @@ module RSpotify
 
   class << self
     attr_accessor :raw_response
+    attr_reader :client_token
 
     # Authenticates access to restricted data. Requires {https://developer.spotify.com/my-applications user credentials}
     #
@@ -32,7 +33,7 @@ module RSpotify
 
     VERBS.each do |verb|
       define_method verb do |path, *params|
-        params << { 'Authorization' => "Bearer #{@client_token}" } if @client_token
+        params << { 'Authorization' => "Bearer #{client_token}" } if client_token
         send_request(verb, path, *params)
       end
     end
@@ -55,7 +56,6 @@ module RSpotify
       url = path.start_with?('http') ? path : API_URI + path
 
       url, query = *url.split('?')
-      url = URI::encode(url)
       url << "?#{query}" if query
 
       begin
