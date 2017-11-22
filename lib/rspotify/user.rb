@@ -153,12 +153,6 @@ module RSpotify
         Track.new data
       end
     end
-    # def top_tracks(limit: 20, offset: 0, time_range: 'medium_term')
-    #   url = "me/top/tracks?limit=#{limit}&offset=#{offset}&time_range=#{time_range}"
-    #   response = User.oauth_get(@id, url)
-    #   return response if RSpotify.raw_response
-    #   response['items'].map { |i| Track.new i }
-    # end
 
     # Add the current user as a follower of one or more artists, other Spotify users or a playlist. Following artists or users require the *user-follow-modify*
     # scope. Following a playlist publicly requires the *playlist-modify-public* scope; following it privately requires the *playlist-modify-private* scope.
