@@ -118,6 +118,7 @@ module RSpotify
     def currently_playing
       url = "me/player/currently-playing"
       response = RSpotify.resolve_auth_request(@id, url)
+      return nil unless response && response['item'].nil?
       return response if RSpotify.raw_response
       Track.new response["item"]
     end
