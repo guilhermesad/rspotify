@@ -53,7 +53,7 @@ module RSpotify
 
     def self.oauth_send(user_id, verb, path, *params)
       RSpotify.send(:send_request, verb, path, *params)
-    rescue RestClient::Unauthorized => e
+    rescue RestClient::Forbidden => e
       raise e if e.response !~ /access token expired/
       refresh_token(user_id)
       params[-1] = oauth_header(user_id)
@@ -117,7 +117,7 @@ module RSpotify
 
     def currently_playing
       url = "me/player/currently-playing"
-      response = RSpotify.resolve_auth_request(@id, url)
+      response = User.oauth_get(@id, url)
       return response if RSpotify.raw_response
       Track.new response["item"]
     end
@@ -142,7 +142,7 @@ module RSpotify
     #           recently_played.first.name #=> "Ice to Never"
     def recently_played(limit: 20)
       url = "me/player/recently-played?limit=#{limit}"
-      response = RSpotify.resolve_auth_request(@id, url)
+      response = User.oauth_get(@id, url)
       return response if RSpotify.raw_response
 
       json = RSpotify.raw_response ? JSON.parse(response) : response
