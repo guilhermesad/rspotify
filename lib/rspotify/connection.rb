@@ -60,7 +60,7 @@ module RSpotify
 
       begin
         response = RestClient.send(verb, url, *params)
-      rescue RestClient::Exception
+      rescue RestClient::Forbidden
         if @client_token
           authenticate(@client_id, @client_secret)
 
