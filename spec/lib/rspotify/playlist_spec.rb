@@ -111,6 +111,14 @@ describe RSpotify::Playlist do
       expect(tracks_is_local[track_id]).to eq false
     end
 
+    it 'should find playlist tracks that are available in the given market' do
+      playlist_in_market = VCR.use_cassette('playlist:find:00wHcTN0zQiun4xri9pmvX:market:ES') do
+        RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX', market: 'ES')
+      end
+
+      expect(playlist_in_market.tracks[1].id) .to eq '6roJqzCHo3nZBI1TrbsKhn'
+    end
+
     context 'starred playlist' do
       it "should support starred playlists" do
         expect(starred_playlist.name) .to eq 'Starred'

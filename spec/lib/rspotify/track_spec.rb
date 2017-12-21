@@ -1,7 +1,7 @@
 describe RSpotify::Track do
-  
+
   describe 'Track::find receiving id as a string' do
-    
+
     before(:each) do
       # Get Arctic Monkeys's "Do I Wanna Know?" track as a testing sample
       @track = VCR.use_cassette('track:find:3jfr0TF6DQcOLat8gGn7E2') do
@@ -40,12 +40,35 @@ describe RSpotify::Track do
       expect(artists.first)       .to be_an RSpotify::Artist
       expect(artists.map(&:name)) .to include('Arctic Monkeys')
     end
+
+    it 'should find a track available in the given market' do
+      track = VCR.use_cassette('track:find:3jfr0TF6DQcOLat8gGn7E2:market:ES') do
+        RSpotify::Track.find('3jfr0TF6DQcOLat8gGn7E2', market: 'ES')
+      end
+
+      expect(track.id)                        .to eq '5FVd6KXrgO9B3JPmC8OPst'
+      expect(track.is_playable)               .to be true
+      expect(track.linked_from.id)            .to eq '3jfr0TF6DQcOLat8gGn7E2'
+      expect(track.linked_from.href)          .to eq 'https://api.spotify.com/v1/tracks/3jfr0TF6DQcOLat8gGn7E2'
+      expect(track.linked_from.type)          .to eq 'track'
+      expect(track.linked_from.uri)           .to eq 'spotify:track:3jfr0TF6DQcOLat8gGn7E2'
+      expect(track.linked_from.external_urls) .to eq('spotify' => 'https://open.spotify.com/track/3jfr0TF6DQcOLat8gGn7E2')
+    end
+
+    it 'should find a track which is unavailable in the given market' do
+      track = VCR.use_cassette('track:find:6fi8e1nv4QBqODf9puRcyX:market:ES') do
+        RSpotify::Track.find('6fi8e1nv4QBqODf9puRcyX', market: 'ES')
+      end
+
+      expect(track.id)          .to eq '6fi8e1nv4QBqODf9puRcyX'
+      expect(track.is_playable) .to be false
+    end
   end
 
   describe 'Track::find receiving array of ids' do
     it 'should find the right tracks' do
       ids = ['4oI9kesyxHUr8fqiLd6uO9']
-      tracks = VCR.use_cassette('track:find:4oI9kesyxHUr8fqiLd6uO9') do 
+      tracks = VCR.use_cassette('track:find:4oI9kesyxHUr8fqiLd6uO9') do
         RSpotify::Track.find(ids)
       end
       expect(tracks)            .to be_an Array
@@ -53,7 +76,7 @@ describe RSpotify::Track do
       expect(tracks.first.name) .to eq 'The Next Day'
 
       ids << '7D8BAYkrR9peCB9XSKCADc'
-      tracks = VCR.use_cassette('track:find:7D8BAYkrR9peCB9XSKCADc') do 
+      tracks = VCR.use_cassette('track:find:7D8BAYkrR9peCB9XSKCADc') do
         RSpotify::Track.find(ids)
       end
       expect(tracks)            .to be_an Array
@@ -61,11 +84,22 @@ describe RSpotify::Track do
       expect(tracks.first.name) .to eq 'The Next Day'
       expect(tracks.last.name)  .to eq 'Sunday'
     end
+
+    it 'should find tracks available in the given market' do
+      ids = ['4oI9kesyxHUr8fqiLd6uO9']
+      tracks = VCR.use_cassette('track:find:4oI9kesyxHUr8fqiLd6uO9:market:ES') do
+        RSpotify::Track.find(ids, market: 'ES')
+      end
+      expect(tracks)                      .to be_an Array
+      expect(tracks.size)                 .to eq 1
+      expect(tracks.first.id)             .to eq '1CFz8ZV88CFLwmggjGrW4c'
+      expect(tracks.first.linked_from.id) .to eq '4oI9kesyxHUr8fqiLd6uO9'
+    end
   end
 
   describe 'Track::search' do
     it 'should search for the right tracks' do
-      tracks = VCR.use_cassette('track:search:Wanna Know') do 
+      tracks = VCR.use_cassette('track:search:Wanna Know') do
         RSpotify::Track.search('Wanna Know')
       end
       expect(tracks)             .to be_an Array
@@ -76,19 +110,19 @@ describe RSpotify::Track do
     end
 
     it 'should accept additional options' do
-      tracks = VCR.use_cassette('track:search:Wanna Know:limit:10') do 
+      tracks = VCR.use_cassette('track:search:Wanna Know:limit:10') do
         RSpotify::Track.search('Wanna Know', limit: 10)
       end
       expect(tracks.size)        .to eq 10
       expect(tracks.map(&:name)) .to include('Do I Wanna Know?', 'I Wanna Know')
 
-      tracks = VCR.use_cassette('track:search:Wanna Know:offset:10') do 
+      tracks = VCR.use_cassette('track:search:Wanna Know:offset:10') do
         RSpotify::Track.search('Wanna Know', offset: 10)
       end
       expect(tracks.size)        .to eq 20
       expect(tracks.map(&:name)) .to include('Wanna Know')
 
-      tracks = VCR.use_cassette('track:search:Wanna Know:limit:10:offset:10') do 
+      tracks = VCR.use_cassette('track:search:Wanna Know:limit:10:offset:10') do
         RSpotify::Track.search('Wanna Know', limit: 10, offset: 10)
       end
       expect(tracks.size)        .to eq 10
@@ -123,7 +157,7 @@ describe RSpotify::Track do
         track.audio_features
       end
 
-      expect(audio_features.acousticness).to     eq 0.186 
+      expect(audio_features.acousticness).to     eq 0.186
       expect(audio_features.analysis_url).to     eq 'https://api.spotify.com/v1/audio-analysis/3jfr0TF6DQcOLat8gGn7E2'
       expect(audio_features.danceability).to     eq 0.548
       expect(audio_features.duration_ms).to      eq 272394
