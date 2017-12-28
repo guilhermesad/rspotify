@@ -60,7 +60,8 @@ module RSpotify
 
       begin
         response = RestClient.send(verb, url, *params)
-      rescue RestClient::Unauthorized
+      rescue RestClient::Unauthorized => e
+        raise e if request_was_user_authenticated?(*params)
         if @client_token
           authenticate(@client_id, @client_secret)
 
@@ -78,6 +79,18 @@ module RSpotify
     # Added this method for testing
     def retry_connection verb, url, params
       RestClient.send(verb, url, *params)
+    end
+
+    def request_was_user_authenticated?(*params)
+      users_credentials = if User.class_variable_defined?('@@users_credentials')
+        User.class_variable_get('@@users_credentials')
+      end
+
+      obj = params.find{|x| x.is_a?(Hash) && x['Authorization']}
+      if users_credentials && !users_credentials.none?{|u| "Bearer #{u}" == obj}
+        return true
+      end
+      return false
     end
 
     def auth_header
