@@ -87,10 +87,8 @@ module RSpotify
       end
 
       obj = params.find{|x| x.is_a?(Hash) && x['Authorization']}
-      puts "DEBUG: auth: "+obj.inspect
       if users_credentials 
         creds = users_credentials.map{|user_id, creds| "Bearer #{creds['token']}"}
-        puts "DEBUG: creds: "+creds.inspect
 
         if creds.include?(obj['Authorization'])
           return true
