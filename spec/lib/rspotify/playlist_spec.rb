@@ -10,9 +10,7 @@ describe RSpotify::Playlist do
   end
 
   before do
-    VCR.use_cassette('authenticate:client') do
-      RSpotify.authenticate(client_id, client_secret)
-    end
+    authenticate_client
   end
 
   describe 'Playlist::browse_featured' do
