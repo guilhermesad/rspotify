@@ -92,9 +92,7 @@ describe RSpotify::Album do
     let(:client_secret) { '155fc038a85840679b55a1822ef36b9b' }
 
     before(:each) do
-    VCR.use_cassette('authenticate:client') do
-        RSpotify.authenticate(client_id, client_secret)
-      end
+      authenticate_client
     end
 
     it 'should find the appropriate new releases' do
@@ -126,9 +124,7 @@ describe RSpotify::Album do
     let(:client_secret) { '155fc038a85840679b55a1822ef36b9b' }
 
     before(:each) do
-    VCR.use_cassette('authenticate:client') do
-        RSpotify.authenticate(client_id, client_secret)
-      end
+      authenticate_client
     end
 
     it 'should search for the right albums' do

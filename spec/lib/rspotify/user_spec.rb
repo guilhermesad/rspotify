@@ -22,9 +22,7 @@ describe RSpotify::User do
       # Keys generated specifically for the tests. Should be removed in the future
       client_id     = '5ac1cda2ad354aeaa1ad2693d33bb98c'
       client_secret = '155fc038a85840679b55a1822ef36b9b'
-      VCR.use_cassette('authenticate:client') do
-        RSpotify.authenticate(client_id, client_secret)
-      end
+      authenticate_client
 
       playlists = VCR.use_cassette('user:wizzler:playlists:limit:20:offset:0') do
         @user.playlists

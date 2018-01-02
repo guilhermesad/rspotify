@@ -5,9 +5,7 @@ describe RSpotify::Category do
   let(:client_secret) { '155fc038a85840679b55a1822ef36b9b' }
 
   before do
-    VCR.use_cassette('authenticate:client') do
-      RSpotify.authenticate(client_id, client_secret)
-    end
+    authenticate_client
   end
 
   describe 'Category::find' do

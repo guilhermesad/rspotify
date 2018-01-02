@@ -1,6 +1,7 @@
 require 'rspotify'
 require 'vcr'
 require 'webmock/rspec'
+require 'authentication_helper'
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
@@ -9,7 +10,7 @@ end
 
 
 RSpec.configure do |config|
-
+  config.include AuthenticationHelper
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
 
