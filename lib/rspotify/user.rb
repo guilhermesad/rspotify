@@ -126,9 +126,8 @@ module RSpotify
     # User must be a premium subscriber for this feature to work.
     def play_track(song_uri)
       url = "me/player/play"
-      verb = 'put'
       params = {"uris": [song_uri]}
-      response = User.oauth_put(@id, url, params.to_json)
+      User.oauth_put(@id, url, params.to_json)
     end
 
     # Play the user's currently active player
@@ -138,7 +137,7 @@ module RSpotify
     #           player.play
     def play
       url = 'me/player/play'
-      response = User.oauth_put(@id, url, {})
+      User.oauth_put(@id, url, {})
     end
 
     # Pause the user's currently active player
@@ -148,8 +147,7 @@ module RSpotify
     #           player.pause
     def pause
       url = 'me/player/pause'
-      verb = 'put'
-      response = User.oauth_put(@id, url, {})
+      User.oauth_put(@id, url, {})
     end
 
     # Get the current user’s player
@@ -158,8 +156,7 @@ module RSpotify
     #           player = user.player
     def player
       url = 'me/player'
-      verb = 'get'
-      response = User.oauth_get(@id, url)
+      User.oauth_get(@id, url)
     end
 
     # Get the current user’s recently played tracks. Requires the *user-read-recently-played* scope.
