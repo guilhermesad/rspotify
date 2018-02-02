@@ -1,0 +1,75 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/6fi8e1nv4QBqODf9puRcyX?market=ES
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.1.0 x86_64) ruby/2.3.0p0
+      Authorization:
+      - Bearer BQAc-gDga9IQnNv4F3XMrZFixYmmlSYqSRrIumnNQDJPREtG6P5VgC1KTIBSuoKqXr2KBe6weG5z2Ui81K8qJA
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 04 Nov 2017 23:34:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=600
+      Cache-Control:
+      - public, max-age=7200
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Origin, Content-Type
+      Content-Encoding:
+      - gzip
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAKRUy27bMBC89ysEn4OIpCRa8i1B0gAp8ujj0KYoDIpaxYT1
+        Ckk5dYP8eyWKjuzUihX0qJ3F7HJmtE8fHGfCsrjOJ87MeWq+Nt9zva6gLVr4
+        yGJSC6VVC/y0/U0VfmuQBcvmtcxUz2QwVZVapGtDtdC6UjPXLSsoji1wzMvc
+        7WjdqT6JzgFiGi6X4iK6lqv6Ty4mluz5aDNvISHdIWSV2OFbYUuphjhfuERi
+        mA61FSzv5DjRZa6cj6V0boFx6Dt6wczkHqilMHW74KzDZ2899tn5ZQUflHak
+        sK15Lk0u787urq6T09s7ecmvV8E0Pn+wo+ygUZq2bGqIzhJZQQ805eweXsdo
+        AeJ+odsi9dGWfNnOXs1WPCmalVxD4voxS1kU+iwJUjyNcJBywDwBjFGIPMrx
+        NKQRcNIb8igSvbBjrAb7lvDQ+CUaJoxxgiNKU4zDkGAaEUIghRBTSDGC6RQi
+        D+1ZohnzxhLUH70D+B7iEPqIRM17QxqnAeEk9jmCKIwCQnzkkQCle4V4Fbs+
+        7lc3nzam7T8J/8S7BWfDkTOB23dI/jvrh4/Iu8I+5oCMOh+HjsfA6Xj/4bD+
+        TRKh+Lyo8xhkS4C7Yi2ZFmUxz422Hgl93zMI/K4ywYXJW8oyBbZq3RDJlhkT
+        oSQ3W12c+j8uMEEI4aD3dcDDcQ5qyfjSpakIARcr//Ppw81ZGlX1F77+3o8Y
+        Y55hUkNUhmZzp95qUfMqY2sWZ7CrzYuhX3XNl8638h70AhpXBfDmrJmeqqzq
+        jEmhzaNRV5OwEvA4t79yUWeZqUtQWgre2rMtmgSmysIMyplcgu5FMA/c8ph2
+        1U2QDNzt8TpFBpoNifz8FwAA//8DANLj9hoTCAAA
+    http_version:
+  recorded_at: Sat, 04 Nov 2017 23:34:47 GMT
+recorded_with: VCR 3.0.3

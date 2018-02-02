@@ -10,9 +10,7 @@ describe RSpotify::Playlist do
   end
 
   before do
-    VCR.use_cassette('authenticate:client') do
-      RSpotify.authenticate(client_id, client_secret)
-    end
+    authenticate_client
   end
 
   describe 'Playlist::browse_featured' do
@@ -109,6 +107,14 @@ describe RSpotify::Playlist do
 
       track_id = '2o660Ri2wTg7Rv6cKbFBCe'
       expect(tracks_is_local[track_id]).to eq false
+    end
+
+    it 'should find playlist tracks that are available in the given market' do
+      playlist_in_market = VCR.use_cassette('playlist:find:00wHcTN0zQiun4xri9pmvX:market:ES') do
+        RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX', market: 'ES')
+      end
+
+      expect(playlist_in_market.tracks[1].id) .to eq '6roJqzCHo3nZBI1TrbsKhn'
     end
 
     context 'starred playlist' do

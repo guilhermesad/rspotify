@@ -53,7 +53,7 @@ module RSpotify
 
     def self.oauth_send(user_id, verb, path, *params)
       RSpotify.send(:send_request, verb, path, *params)
-    rescue RestClient::Unauthorized => e
+    rescue RestClient::Exception => e
       raise e if e.response !~ /access token expired/
       refresh_token(user_id)
       params[-1] = oauth_header(user_id)
@@ -126,9 +126,37 @@ module RSpotify
     # User must be a premium subscriber for this feature to work.
     def play_track(song_uri)
       url = "me/player/play"
-      verb = 'put'
       params = {"uris": [song_uri]}
-      response = User.oauth_put(@id, url, params.to_json)
+      User.oauth_put(@id, url, params.to_json)
+    end
+
+    # Play the user's currently active player
+    #
+    # @example
+    #           player = user.player
+    #           player.play
+    def play
+      url = 'me/player/play'
+      User.oauth_put(@id, url, {})
+    end
+
+    # Pause the user's currently active player
+    #
+    # @example
+    #           player = user.player
+    #           player.pause
+    def pause
+      url = 'me/player/pause'
+      User.oauth_put(@id, url, {})
+    end
+
+    # Get the current user’s player
+    #
+    # @example
+    #           player = user.player
+    def player
+      url = 'me/player'
+      User.oauth_get(@id, url)
     end
 
     # Get the current user’s recently played tracks. Requires the *user-read-recently-played* scope.

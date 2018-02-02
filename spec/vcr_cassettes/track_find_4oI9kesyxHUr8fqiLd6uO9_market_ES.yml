@@ -1,0 +1,75 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks?ids=4oI9kesyxHUr8fqiLd6uO9&market=ES
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - "*/*; q=0.5, application/xml"
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - Bearer BQAWAI90GvKiMNCp1pHz4sfHGdnqDt_2IBDycfd8DMd6g2o2aluxSaWScHaUp_tvsrV1zRJyZ6RVDkUEKgZk4g
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 28 Sep 2017 09:32:45 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=600
+      cache-control:
+      - public, max-age=7200
+      access-control-allow-origin:
+      - "*"
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT, DELETE
+      access-control-allow-credentials:
+      - 'true'
+      access-control-max-age:
+      - '604800'
+      access-control-allow-headers:
+      - Accept, Authorization, Origin, Content-Type
+      content-encoding:
+      - gzip
+      x-content-type-options:
+      - nosniff
+      strict-transport-security:
+      - max-age=31536000;
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAKxV207bQBB95yusPFPsvXjXjlRVKii0KhS1lIKoqmi9u463
+        +IYvJAHx73U2jokhdgLto2dGZ8Znzpx92DOMQZExfpMPjKHxy3ioAlWIhV4Z
+        LSLL71VkXMxTuQjXBftNNitUXrQwdFzOCpnFLByXWZiv4+lsniaF8ucaMCiK
+        NB+aZpLK+KBOHPAkMpfQppWcH8/8y/M4PrsKjqD/pbyHx/NBA/e4/9Q1yKTf
+        AmWpamHegRo278JdQ1NCY20vjFm0JOeI3SlhfEymSq7nn8jTvddTZaZ0ph5y
+        uKwY9v/0o/G7WUAP0TvSvFioCciIXtHLs9F1cDr99jU/VSENb5uGTbudGF4g
+        5l2QDVRN79ayiE3kS4EFUk2CYhEm2GoRGrbmq6bjIq5GMzWQCRiAtvQ9ShFg
+        vkOg49q271BKBRRYYB9AaHsOW1/SVIkiqFs1jGweBlmvGQYTLhimHpfCpdjm
+        nrAlF7CaENkA2YT6EBGXeBuHqVptGYbgV8ziUBsIwIQktoWZdCCB0mGIIZdC
+        VJFiSeRy2EnMBmk2Z/EjkMbXSqjGEXu6m0GXpbw4iUV62CfQWp6bzeg/XMgu
+        RvTKE9nNhHa0oH4D6rSft5hPs9+BUDkfx2XkyWwBAlbhMmOFSuJxpLmGFqEO
+        qXNyloaKK61Nn4W5bOL1hpRoLWig8ozrCS/Ov48QqBRvWaC9887t7rZb/QSa
+        4HB071z/dJzD0ck0mkz+HGeXmLcb7bLW5YPaBVcDrXyvvygfpyGbMy/Uqyuy
+        ckVWqOIbKcZ+lrTf6X+W+ZIKnHx2b2Q+n326yBz/Vp0IUp65b1N5TUcH5HOR
+        bytrZKxhu1Ws08O+/1ittM+gBmmSliHLVKFpw3gVzuSdktPxcztNGzuNUvSu
+        rjIdyxUcQY6pi4GFCfM9x7MEowRW3s6Q8EFlu5h84Eq8txkH1XsAmUB25cCM
+        VW4MiYsEQp7nOo029A9uOL2NBHXQ06346sL3Hv8CAAD//wMArM9NtB8KAAA=
+    http_version: '1.1'
+  recorded_at: Thu, 28 Sep 2017 09:32:45 GMT
+recorded_with: VCR 2.9.3

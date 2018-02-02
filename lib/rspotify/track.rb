@@ -13,11 +13,14 @@ module RSpotify
   # @attr [Integer]       track_number      The number of the track. If an album has several discs, the track number is the number on the specified disc
   # @attr [String]        played_at         The date and time the track was played. Only present when pulled from /recently-played
   # @attr [String]        context_type      The context the track was played from. Only present when pulled from /recently-played
+  # @attr [Boolean]       is_playable       Whether or not the track is playable in the given market. Only present when track relinking is applied by specifying a market when looking up the track
+  # @attr [TrackLink]     linked_from       Details of the requested track. Only present when track relinking is applied and the returned track is different to the one requested because the latter is not available in the given market
   class Track < Base
 
     # Returns Track object(s) with id(s) provided
     #
     # @param ids [String, Array] Maximum: 50 IDs
+    # @param market [String] Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}.
     # @return [Track, Array<Track>]
     #
     # @example
@@ -29,8 +32,8 @@ module RSpotify
     #           tracks = RSpotify::Base.find(ids, 'track')
     #           tracks.class       #=> Array
     #           tracks.first.class #=> RSpotify::Track
-    def self.find(ids)
-      super(ids, 'track')
+    def self.find(ids, market: nil)
+      super(ids, 'track', market: market)
     end
 
     # Returns array of Track objects matching the query, ordered by popularity. It's also possible to find the total number of search results for the query
@@ -69,6 +72,7 @@ module RSpotify
       @track_number      = options['track_number']
       @played_at         = options['played_at']
       @context_type      = options['context_type']
+      @is_playable       = options['is_playable']
 
       @album = if options['album']
         Album.new options['album']
@@ -76,6 +80,10 @@ module RSpotify
 
       @artists = if options['artists']
         options['artists'].map { |a| Artist.new a }
+      end
+
+      @linked_from = if options['linked_from']
+        TrackLink.new options['linked_from']
       end
 
       super(options)
