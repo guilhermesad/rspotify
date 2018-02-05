@@ -121,7 +121,6 @@ module RSpotify
     #           player = user.player
     def player
       url = "me/player"
-      User.oauth_get(@id, url)
       response = User.oauth_get(@id, url)
 
       return response if RSpotify.raw_response
