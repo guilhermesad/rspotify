@@ -115,48 +115,15 @@ module RSpotify
       Playlist.new response
     end
 
-    def currently_playing
-      url = "me/player/currently-playing"
-      response = RSpotify.resolve_auth_request(@id, url)
-      return response if RSpotify.raw_response
-      Track.new response["item"]
-    end
-
-    # Allow browser to trigger playback in the user's currently active spotify app.
-    # User must be a premium subscriber for this feature to work.
-    def play_track(song_uri)
-      url = "me/player/play"
-      params = {"uris": [song_uri]}
-      User.oauth_put(@id, url, params.to_json)
-    end
-
-    # Play the user's currently active player
-    #
-    # @example
-    #           player = user.player
-    #           player.play
-    def play
-      url = 'me/player/play'
-      User.oauth_put(@id, url, {})
-    end
-
-    # Pause the user's currently active player
-    #
-    # @example
-    #           player = user.player
-    #           player.pause
-    def pause
-      url = 'me/player/pause'
-      User.oauth_put(@id, url, {})
-    end
-
     # Get the current user’s player
     #
     # @example
     #           player = user.player
     def player
-      url = 'me/player'
-      User.oauth_get(@id, url)
+      url = "me/player"
+      response = User.oauth_get(@id, url)
+      return response if RSpotify.raw_response
+      response.present? ? Player.new(self, response) : nil
     end
 
     # Get the current user’s recently played tracks. Requires the *user-read-recently-played* scope.

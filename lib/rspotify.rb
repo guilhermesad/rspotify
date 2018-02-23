@@ -8,10 +8,11 @@ module RSpotify
   autoload :Base,               'rspotify/base'
   autoload :Category,           'rspotify/category'
   autoload :Device,             'rspotify/device'
-  autoload :TrackLink,          'rspotify/track_link'
+  autoload :Player,             'rspotify/player'
   autoload :Playlist,           'rspotify/playlist'
   autoload :Recommendations,    'rspotify/recommendations'
   autoload :RecommendationSeed, 'rspotify/recommendation_seed'
   autoload :Track,              'rspotify/track'
+  autoload :TrackLink,          'rspotify/track_link'
   autoload :User,               'rspotify/user'
 end
