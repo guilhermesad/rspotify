@@ -340,6 +340,24 @@ module RSpotify
       self
     end
 
+    # Replace the image used to represent a specific playlist. Requires ugc-image-upload scope. Changing a public playlist 
+    # requires the *playlist-modify-public* scope; changing a private playlist requires the *playlist-modify-private* scope.
+    #
+    # @param image [String] Base64 encoded JPEG image data, maximum payload size is 256 KB
+    # @param content_type [String] The content type of the request body, e.g. "image/jpeg"
+    # @return [NilClass] When the image has been provided, Spofity forwards it on to their transcoder service in order to generate the three sizes provided in the playlist’s images object. This operation takes some time, that's why nothing is returned for this method.
+    #
+    # @example
+    #           playlist.replace_image!('SkZJRgABA...', 'image/jpeg')
+    def replace_image!(image, content_type)
+      url = "#{@path}/images"
+      headers = {
+        'Content-Type' => content_type
+      }
+      User.oauth_put(@owner.id, url, image, { headers: headers })
+      nil
+    end
+
     # Replace all the tracks in a playlist, overwriting its existing tracks. Changing a public playlist requires
     # the *playlist-modify-public* scope; changing a private playlist requires the *playlist-modify-private* scope.
     #
