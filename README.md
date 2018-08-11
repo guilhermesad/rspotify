@@ -241,6 +241,16 @@ RSpotify.raw_response = true
 RSpotify::Artist.search('Cher') #=> (String with raw json response)
 ```
 
+## Getting pagination info
+
+To get the pagination info from Spotify API requests, just toggle the `pagination_info` variable:  
+
+
+```ruby
+RSpotify.pagination_info = true
+RSpotify::Artist.search('Cher') #=> (String with raw json response)
+```
+
 ## Notes
 
 If you'd like to use OAuth outside rails, have a look [here](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow) for the requests that need to be made. You should be able to pass the response to RSpotify::User.new just as well, and from there easily create playlists and more for your user.
