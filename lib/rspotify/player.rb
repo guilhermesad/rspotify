@@ -96,5 +96,10 @@ module RSpotify
       return response if RSpotify.raw_response
       Track.new response["item"]
     end
+
+    def seek(position_ms)
+      url = "/me/player/seek?position_ms=#{position_ms}"
+      User.oauth_put(@user.id, url, {})
+    end
   end
 end
