@@ -141,7 +141,7 @@ module RSpotify
       url = "#{@path}/tracks?uris=#{track_uris}"
       url << "&position=#{position}" if position
 
-      response = User.oauth_post(@owner.id, url, {})
+      response = User.oauth_post(@owner.id, url, {}.to_json)
       @total += tracks.size
       @tracks_cache = nil
 
@@ -340,7 +340,7 @@ module RSpotify
       self
     end
 
-    # Replace the image used to represent a specific playlist. Requires ugc-image-upload scope. Changing a public playlist 
+    # Replace the image used to represent a specific playlist. Requires ugc-image-upload scope. Changing a public playlist
     # requires the *playlist-modify-public* scope; changing a private playlist requires the *playlist-modify-private* scope.
     #
     # @param image [String] Base64 encoded JPEG image data, maximum payload size is 256 KB
