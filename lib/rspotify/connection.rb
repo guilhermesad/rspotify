@@ -59,16 +59,16 @@ module RSpotify
       url << "?#{query}" if query
 
       begin
-        obj = params.find{|x| x.is_a?(Hash) && x['Authorization']}
-        obj['Accept-Language'] = ENV['ACCEPT_LANGUAGE'] if ENV['ACCEPT_LANGUAGE']
+        headers = get_headers(params)
+        headers['Accept-Language'] = ENV['ACCEPT_LANGUAGE'] if ENV['ACCEPT_LANGUAGE']
         response = RestClient.send(verb, url, *params)
       rescue RestClient::Unauthorized => e
         raise e if request_was_user_authenticated?(*params)
         if @client_token
           authenticate(@client_id, @client_secret)
 
-          obj = params.find{|x| x.is_a?(Hash) && x['Authorization']}
-          obj['Authorization'] = "Bearer #{@client_token}"
+          headers = get_headers(params)
+          headers['Authorization'] = "Bearer #{@client_token}"
 
           response = retry_connection verb, url, params
         end
@@ -88,11 +88,11 @@ module RSpotify
         User.class_variable_get('@@users_credentials')
       end
 
-      obj = params.find{|x| x.is_a?(Hash) && x['Authorization']}
-      if users_credentials 
+      headers = get_headers(params)
+      if users_credentials
         creds = users_credentials.map{|user_id, creds| "Bearer #{creds['token']}"}
 
-        if creds.include?(obj['Authorization'])
+        if creds.include?(headers['Authorization'])
           return true
         end
       end
@@ -103,5 +103,10 @@ module RSpotify
       authorization = Base64.strict_encode64 "#{@client_id}:#{@client_secret}"
       { 'Authorization' => "Basic #{authorization}" }
     end
+
+    def get_headers(params)
+      params.find{|param| param.is_a?(Hash) && param['Authorization']}
+    end
+
   end
 end
