@@ -1,0 +1,64 @@
+AllCops:
+  Exclude:
+    - spec/**/*
+Gemspec/RequiredRubyVersion:
+  Enabled: false # To change ?
+Metrics/AbcSize:
+  Exclude:
+    - lib/rspotify/audio_features.rb # Couldn't easily reduce #initialize
+    - lib/rspotify/album.rb # Couldn't easily reduce #initialize, #tracks
+    - lib/rspotify/base.rb # Couldn't easily reduce #embed, .search
+    - lib/rspotify/connection.rb # Couldn't easily reduce .send_request
+    - lib/rspotify/playlist.rb # Couldn't easily reduce #remove_tracks!, #tracks, #add_tracks!, #initialize
+    - lib/rspotify/recommendations.rb # Couldn't easily reduce .generate
+    - lib/rspotify/track.rb # Couldn't easily reduce #initialize
+    - lib/rspotify/user.rb # Couldn't easily reduce #initialize
+Metrics/ClassLength:
+  Enabled: false # Too many changes for this
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - lib/rspotify/album.rb # Couldn't easily reduce #tracks
+    - lib/rspotify/connection.rb # Couldn't easily reduce .send_request
+    - lib/rspotify/playlist.rb # Couldn't easily reduce #tracks
+    - lib/rspotify/recommendations.rb # Couldn't easily reduce .generate
+Metrics/LineLength:
+  Enabled: false # Disabled due to comments
+Metrics/MethodLength:
+  Max: 30
+Metrics/ParameterLists:
+  Exclude:
+    - lib/rspotify/recommendations.rb # Couldn't easily reduce .generate
+Metrics/PerceivedComplexity:
+  Exclude:
+    - lib/rspotify/album.rb # Couldn't easily reduce #tracks
+    - lib/rspotify/connection.rb # Couldn't easily reduce .send_request
+    - lib/rspotify/playlist.rb # Couldn't easily reduce #tracks
+    - lib/rspotify/recommendations.rb # Couldn't easily reduce .generate
+Naming/PredicateName:
+  Exclude:
+    - lib/rspotify/playlist.rb # Change #is_followed_by?
+Layout/DotPosition:
+  EnforcedStyle: trailing
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+Lint/UriEscapeUnescape:
+  Exclude:
+    - lib/rspotify/connection.rb # To change
+    - lib/rspotify/playlist.rb # To change
+Lint/Void:
+  Enabled: false
+Style/ClassVars:
+  Enabled: false # Disabled at the moment to avoid doing major changes
+Style/Documentation:
+  Exclude:
+    - lib/rspotify.rb
+    - lib/rspotify/connection.rb
+    - lib/rspotify/oauth.rb
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/MissingRespondToMissing:
+  Exclude:
+    - lib/rspotify/base.rb # To change
+Style/OptionalArguments:
+  Exclude:
+    - lib/rspotify/player.rb # To avoid non backward compatibility
