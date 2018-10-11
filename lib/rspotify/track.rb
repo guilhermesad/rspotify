@@ -1,5 +1,4 @@
 module RSpotify
-
   # @attr [Album]         album             The album on which the track appears
   # @attr [Array<Artist>] artists           The artists who performed the track
   # @attr [Array<String>] available_markets The markets in which the track can be played. See {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country codes}
@@ -16,7 +15,6 @@ module RSpotify
   # @attr [Boolean]       is_playable       Whether or not the track is playable in the given market. Only present when track relinking is applied by specifying a market when looking up the track
   # @attr [TrackLink]     linked_from       Details of the requested track. Only present when track relinking is applied and the returned track is different to the one requested because the latter is not available in the given market
   class Track < Base
-
     # Returns Track object(s) with id(s) provided
     #
     # @param ids [String, Array] Maximum: 50 IDs
@@ -27,7 +25,7 @@ module RSpotify
     #           track = RSpotify::Track.find('2UzMpPKPhbcC8RbsmuURAZ')
     #           track.class #=> RSpotify::Track
     #           track.name  #=> "Do I Wanna Know?"
-    #           
+    #
     #           ids = %w(2UzMpPKPhbcC8RbsmuURAZ 7Jzsc04YpkRwB1zeyM39wE)
     #           tracks = RSpotify::Base.find(ids, 'track')
     #           tracks.class       #=> Array
@@ -74,17 +72,13 @@ module RSpotify
       @context_type      = options['context_type']
       @is_playable       = options['is_playable']
 
-      @album = if options['album']
-        Album.new options['album']
-      end
+      @album = options['album'] && Album.new(options['album'])
 
       @artists = if options['artists']
-        options['artists'].map { |a| Artist.new a }
-      end
+                   options['artists'].map { |a| Artist.new a }
+                 end
 
-      @linked_from = if options['linked_from']
-        TrackLink.new options['linked_from']
-      end
+      @linked_from = options['linked_from'] && TrackLink.new(options['linked_from'])
 
       super(options)
     end
