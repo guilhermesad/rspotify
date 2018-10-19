@@ -98,7 +98,7 @@ module RSpotify
     end
 
     def seek(position_ms)
-      url = "/me/player/seek?position_ms=#{position_ms}"
+      url = "me/player/seek?position_ms=#{position_ms}"
       User.oauth_put(@user.id, url, {})
     end
   end
