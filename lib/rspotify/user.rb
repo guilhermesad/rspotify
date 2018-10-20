@@ -70,7 +70,7 @@ module RSpotify
       params[-1] = oauth_header(user_id).merge(custom_headers)
       RSpotify.send(:send_request, verb, path, *params)
     end
-    private_class_method :oauth_header
+    private_class_method :oauth_send
 
     RSpotify::VERBS.each do |verb|
       define_singleton_method "oauth_#{verb}" do |user_id, path, *params|
