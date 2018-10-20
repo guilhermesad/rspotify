@@ -3,10 +3,11 @@ require 'json'
 require 'restclient'
 
 module RSpotify
+  class MissingAuthentication < StandardError; end
 
-  API_URI       = 'https://api.spotify.com/v1/'
-  AUTHORIZE_URI = 'https://accounts.spotify.com/authorize'
-  TOKEN_URI     = 'https://accounts.spotify.com/api/token'
+  API_URI       = 'https://api.spotify.com/v1/'.freeze
+  AUTHORIZE_URI = 'https://accounts.spotify.com/authorize'.freeze
+  TOKEN_URI     = 'https://accounts.spotify.com/api/token'.freeze
   VERBS         = %w(get post put delete)
 
   class << self
@@ -64,22 +65,23 @@ module RSpotify
         response = RestClient.send(verb, url, *params)
       rescue RestClient::Unauthorized => e
         raise e if request_was_user_authenticated?(*params)
-        if @client_token
-          authenticate(@client_id, @client_secret)
 
-          headers = get_headers(params)
-          headers['Authorization'] = "Bearer #{@client_token}"
+        raise MissingAuthentication unless @client_token
 
-          response = retry_connection verb, url, params
-        end
+        authenticate(@client_id, @client_secret)
+
+        headers = get_headers(params)
+        headers['Authorization'] = "Bearer #{@client_token}"
+
+        response = retry_connection(verb, url, params)
       end
 
       return response if raw_response
-      JSON.parse response unless response.nil? || response.empty?
+      JSON.parse(response) unless response.nil? || response.empty?
     end
 
     # Added this method for testing
-    def retry_connection verb, url, params
+    def retry_connection(verb, url, params)
       RestClient.send(verb, url, *params)
     end
 
@@ -90,23 +92,23 @@ module RSpotify
 
       headers = get_headers(params)
       if users_credentials
-        creds = users_credentials.map{|user_id, creds| "Bearer #{creds['token']}"}
+        creds = users_credentials.map{|_user_id, creds| "Bearer #{creds['token']}"}
 
         if creds.include?(headers['Authorization'])
           return true
         end
       end
-      return false
+
+      false
     end
 
     def auth_header
-      authorization = Base64.strict_encode64 "#{@client_id}:#{@client_secret}"
+      authorization = Base64.strict_encode64("#{@client_id}:#{@client_secret}")
       { 'Authorization' => "Basic #{authorization}" }
     end
 
     def get_headers(params)
       params.find{|param| param.is_a?(Hash) && param['Authorization']}
     end
-
   end
 end
