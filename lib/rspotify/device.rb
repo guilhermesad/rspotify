@@ -1,5 +1,4 @@
 module RSpotify
-
   # @attr [String]      id              The device ID. This may be null
   # @attr [Boolean]     is_active       If this device is the currently active device
   # @attr [Boolean]     is_restricted   Whether controlling this device is restricted. At present if this is "true" then no Web API commands will be accepted by this device.
