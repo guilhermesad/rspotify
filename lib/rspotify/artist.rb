@@ -1,12 +1,10 @@
 module RSpotify
-
   # @attr [Hash]          followers  Information about the followers of the artist
   # @attr [Array<String>] genres     A list of the genres the artist is associated with. If not yet classified, the array is empty
   # @attr [Array<Hash>]   images     Images of the artist in various sizes, widest first
   # @attr [String]        name       The name of the artist
   # @attr [Integer]       popularity The popularity of the artist. The value will be between 0 and 100, with 100 being the most popular
   class Artist < Base
-
     # Returns Artist object(s) with id(s) provided
     #
     # @param ids [String, Array] Maximum: 50 IDs
@@ -74,10 +72,11 @@ module RSpotify
 
       response = RSpotify.get(url)
       return response if RSpotify.raw_response
+
       response['items'].map { |i| Album.new i }
     end
 
-    # Returns array of similar artists. Similarity is based on analysis of the Spotify community’s {http://news.spotify.com/se/2010/02/03/related-artists listening history}.
+    # Returns array of similar artists. Similarity is based on analysis of the Spotify community's {http://news.spotify.com/se/2010/02/03/related-artists listening history}.
     #
     # @return [Array<Artist>]
     #
@@ -89,9 +88,10 @@ module RSpotify
     #           related_artists.first.name #=> "Miles Kane"
     def related_artists
       return @related_artists unless @related_artists.nil? || RSpotify.raw_response
-      response = RSpotify.get("artists/#{@id}/related-artists")
 
+      response = RSpotify.get("artists/#{@id}/related-artists")
       return response if RSpotify.raw_response
+
       @related_artists = response['artists'].map { |a| Artist.new a }
     end
 
@@ -107,9 +107,10 @@ module RSpotify
     #           top_tracks.first.class #=> RSpotify::Track
     def top_tracks(country)
       return @top_tracks[country] unless @top_tracks[country].nil? || RSpotify.raw_response
-      response = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
 
+      response = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
       return response if RSpotify.raw_response
+
       @top_tracks[country] = response['tracks'].map { |t| Track.new t }
     end
   end
