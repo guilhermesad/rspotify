@@ -9,7 +9,7 @@ module RSpotify
   API_URI       = 'https://api.spotify.com/v1/'.freeze
   AUTHORIZE_URI = 'https://accounts.spotify.com/authorize'.freeze
   TOKEN_URI     = 'https://accounts.spotify.com/api/token'.freeze
-  VERBS         = %w(get post put delete)
+  VERBS         = %w[get post put delete].freeze
 
   class << self
     attr_accessor :raw_response
@@ -26,8 +26,9 @@ module RSpotify
     #           playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
     #           playlist.name #=> "Movie Soundtrack Masterpieces"
     def authenticate(client_id, client_secret)
-      @client_id, @client_secret = client_id, client_secret
-      request_body = { grant_type: 'client_credentials' }
+      @client_id = client_id
+      @client_secret = client_secret
+      request_body = {grant_type: 'client_credentials'}
       response = RestClient.post(TOKEN_URI, request_body, auth_header)
       @client_token = JSON.parse(response)['access_token']
       true
@@ -35,15 +36,13 @@ module RSpotify
 
     VERBS.each do |verb|
       define_method verb do |path, *params|
-        params << { 'Authorization' => "Bearer #{client_token}" } if client_token
+        params << {'Authorization' => "Bearer #{client_token}"} if client_token
         send_request(verb, path, *params)
       end
     end
 
     def resolve_auth_request(user_id, url)
-      users_credentials = if User.class_variable_defined?('@@users_credentials')
-        User.class_variable_get('@@users_credentials')
-      end
+      users_credentials = User.class_variable_defined?('@@users_credentials') && User.class_variable_get('@@users_credentials')
 
       if users_credentials && users_credentials[user_id]
         User.oauth_get(user_id, url)
@@ -78,6 +77,7 @@ module RSpotify
       end
 
       return response if raw_response
+
       JSON.parse(response) unless response.nil? || response.empty?
     end
 
@@ -87,29 +87,23 @@ module RSpotify
     end
 
     def request_was_user_authenticated?(*params)
-      users_credentials = if User.class_variable_defined?('@@users_credentials')
-        User.class_variable_get('@@users_credentials')
-      end
+      return false unless User.class_variable_defined?('@@users_credentials')
+
+      users_credentials = User.class_variable_get('@@users_credentials')
+      return false unless users_credentials
 
       headers = get_headers(params)
-      if users_credentials
-        creds = users_credentials.map{|_user_id, creds| "Bearer #{creds['token']}"}
-
-        if creds.include?(headers['Authorization'])
-          return true
-        end
-      end
-
-      false
+      creds = users_credentials.map { |_user_id, c| "Bearer #{c['token']}" }
+      creds.include?(headers['Authorization'])
     end
 
     def auth_header
       authorization = Base64.strict_encode64("#{@client_id}:#{@client_secret}")
-      { 'Authorization' => "Basic #{authorization}" }
+      {'Authorization' => "Basic #{authorization}"}
     end
 
     def get_headers(params)
-      params.find{|param| param.is_a?(Hash) && param['Authorization']}
+      params.find { |param| param.is_a?(Hash) && param['Authorization'] }
     end
   end
 end
