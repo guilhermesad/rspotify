@@ -1,5 +1,4 @@
 module RSpotify
-
   # @attr [String]        album_type             The type of the album (album, single, compilation)
   # @attr [Array<Artist>] artists                The artists of the album
   # @attr [Array<String>] available_markets      The markets in which the album is available. See {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country codes}
@@ -14,7 +13,6 @@ module RSpotify
   # @attr [String]        release_date_precision The precision with which release_date value is known: "year", "month", or "day"
   # @attr [Integer]       total_tracks           The total number of tracks in the album
   class Album < Base
-
     # Returns Album object(s) with id(s) provided
     #
     # @param ids [String, Array] Maximum: 20 IDs
@@ -34,7 +32,7 @@ module RSpotify
       super(ids, 'album', market: market)
     end
 
-    # Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
+    # Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player's "Browse" tab).
     #
     # @param limit   [Integer] Maximum number of albums to return. Maximum: 50. Default: 20.
     # @param offset  [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
@@ -47,9 +45,10 @@ module RSpotify
     def self.new_releases(limit: 20, offset: 0, country: nil)
       url = "browse/new-releases?limit=#{limit}&offset=#{offset}"
       url << "&country=#{country}" if country
-      response = RSpotify.get(url)
 
+      response = RSpotify.get(url)
       return response if RSpotify.raw_response
+
       response['albums']['items'].map { |i| Album.new i }
     end
 
@@ -84,15 +83,11 @@ module RSpotify
       @release_date           = options['release_date']
       @release_date_precision = options['release_date_precision']
 
-      @artists = if options['artists']
-        options['artists'].map { |a| Artist.new a }
-      end
+      @artists = options['artists'].map { |a| Artist.new a } if options['artists']
 
-      @tracks_cache, @total_tracks = if options['tracks'] && options['tracks']['items']
-        [
-          options['tracks']['items'].map { |i| Track.new i },
-          options['tracks']['total']
-        ]
+      if options['tracks'] && options['tracks']['items']
+        @tracks_cache = options['tracks']['items'].map { |i| Track.new i }
+        @total_tracks = options['tracks']['total']
       end
 
       super(options)
@@ -120,7 +115,7 @@ module RSpotify
       json = RSpotify.raw_response ? JSON.parse(response) : response
 
       tracks = json['items'].map { |i| Track.new i }
-      @tracks_cache = tracks if limit == 50 && offset == 0
+      @tracks_cache = tracks if limit == 50 && offset.zero?
       return response if RSpotify.raw_response
 
       tracks
