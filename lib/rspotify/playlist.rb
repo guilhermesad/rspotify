@@ -59,6 +59,24 @@ module RSpotify
       Playlist.new response
     end
 
+    # Returns Playlist object with id provided.
+    #
+    # @param id [String]
+    # @param market [String] Optional. An {https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to apply Track Relinking
+    # @return [Playlist]
+    #
+    # @example
+    #           playlist = RSpotify::Playlist.find_by_id('00wHcTN0zQiun4xri9pmvX')
+    #           playlist.class #=> RSpotify::Playlist
+    #           playlist.name  #=> "Movie Soundtrack Masterpieces"
+    def self.find_by_id(id, market: nil)
+      url = "playlists/#{id}"
+      url << "?market=#{market}" if market
+      response = RSpotify.resolve_auth_request(nil, url)
+      return response if RSpotify.raw_response
+      Playlist.new response
+    end
+
     # Returns array of Playlist objects matching the query. It's also possible to find the total number of search results for the query
     #
     # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.

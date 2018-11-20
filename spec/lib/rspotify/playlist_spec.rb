@@ -43,6 +43,32 @@ describe RSpotify::Playlist do
     end
   end
 
+  describe "Playlist::find_by_id" do
+    let(:playlist) do
+      # Get wizzler's "Movie Soundtrack Masterpieces" playlist as a testing sample
+      VCR.use_cassette('playlist:find_by_id:37i9dQZF1DX1R3yDogYrbo') do
+        RSpotify::Playlist.find_by_id('37i9dQZF1DX1R3yDogYrbo')
+      end
+    end
+    
+    it 'gets playlist attributes' do
+      expect(playlist.collaborative)            .to eq false
+      expect(playlist.external_urls['spotify']) .to eq    'https://open.spotify.com/playlist/37i9dQZF1DX1R3yDogYrbo'
+      expect(playlist.description)              .to match /Ouça os grandes sucessos e parcerias de um dos maiores nomes da música brasileira./
+      expect(playlist.followers['total'])       .to eq 77654
+      expect(playlist.href)                     .to eq    'https://api.spotify.com/v1/playlists/37i9dQZF1DX1R3yDogYrbo'
+      expect(playlist.id)                       .to eq    '37i9dQZF1DX1R3yDogYrbo'
+      expect(playlist.images.first['url'])      .to match %r{https://i\.scdn\.co/image/270b576e45bc1bfb10ab624c63857360c02fed6f}
+      expect(playlist.name)                     .to eq    'This Is Caetano Veloso'
+      expect(playlist.public)                   .to eq    false
+      expect(playlist.snapshot_id)              .to eq    'MTUyNzIxODU5NywwMDAwMDAwYTAwMDAwMTYzOTU1MjZjODgwMDAwMDE2MmYyYjBlOGQ4'
+      expect(playlist.total)                    .to eq    57
+      expect(playlist.type)                     .to eq    'playlist'
+      expect(playlist.uri)                      .to eq    'spotify:user:spotify:playlist:37i9dQZF1DX1R3yDogYrbo'      
+    end
+    
+  end
+
   describe 'Playlist::find' do
 
     let(:playlist) do
