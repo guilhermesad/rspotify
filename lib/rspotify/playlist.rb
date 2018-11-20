@@ -59,6 +59,16 @@ module RSpotify
       Playlist.new response
     end
 
+    # Returns Playlist object with id provided.
+    #
+    # @param id [String]
+    # @param market [String] Optional. An {https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to apply Track Relinking
+    # @return [Playlist]
+    #
+    # @example
+    #           playlist = RSpotify::Playlist.find_by_id('00wHcTN0zQiun4xri9pmvX')
+    #           playlist.class #=> RSpotify::Playlist
+    #           playlist.name  #=> "Movie Soundtrack Masterpieces"
     def self.find_by_id(id, market: nil)
       url = "playlists/#{id}"
       url << "?market=#{market}" if market
