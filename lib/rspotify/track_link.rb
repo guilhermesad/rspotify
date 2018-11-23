@@ -1,5 +1,4 @@
 module RSpotify
-
   # @attr [Hash]   external_urls Known external URLs for this playlist
   # @attr [String] href          A link to the Web API endpoint
   # @attr [String] id            The {https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids Spotify ID} for the track
