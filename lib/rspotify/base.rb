@@ -1,12 +1,10 @@
 module RSpotify
-
   # @attr [Hash]   external_urls Known external URLs for object
   # @attr [String] href          A link to the Web API endpoint
   # @attr [String] id            The {https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids Spotify ID} for the object
   # @attr [String] type          The object type (artist, album, etc.)
   # @attr [String] uri           The {https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids Spotify URI} for the object
   class Base
-
     # Returns RSpotify object(s) with id(s) and type provided
     #
     # @param ids [String, Array]
@@ -30,7 +28,6 @@ module RSpotify
           warn 'Spotify API does not support finding several users simultaneously'
           return false
         end
-        limit = (type == 'album' ? 20 : 50)
         find_many(ids, type, market: market)
       when String
         id = ids
@@ -45,6 +42,7 @@ module RSpotify
 
       response = RSpotify.get path
       return response if RSpotify.raw_response
+
       response["#{type}s"].map { |t| type_class.new t if t }
     end
     private_class_method :find_many
@@ -56,6 +54,7 @@ module RSpotify
 
       response = RSpotify.get path
       return response if RSpotify.raw_response
+
       type_class.new response unless response.nil?
     end
     private_class_method :find_one
@@ -97,12 +96,12 @@ module RSpotify
             "&limit=#{limit}&offset=#{offset}"
 
       response = if market.is_a? Hash
-        url << '&market=from_token'
-        User.oauth_get(market[:from].id, url)
-      else
-        url << "&market=#{market}" if market
-        RSpotify.get(url)
-      end
+                   url << '&market=from_token'
+                   User.oauth_get(market[:from].id, url)
+                 else
+                   url << "&market=#{market}" if market
+                   RSpotify.get(url)
+                 end
 
       return response if RSpotify.raw_response
 
@@ -143,7 +142,7 @@ module RSpotify
         frameborder: 0,
         allowtransparency: true,
         view: nil,
-        theme: nil,
+        theme: nil
       }
       options = default_options.merge(options)
 
@@ -161,7 +160,7 @@ module RSpotify
         </iframe>
       HTML
 
-      template.gsub(/\s+/, " ").strip
+      template.gsub(/\s+/, ' ').strip
     end
 
     # When an object is obtained undirectly, Spotify usually returns a simplified version of it.
@@ -203,6 +202,7 @@ module RSpotify
     def respond_to?(method_name, include_private_methods = false)
       attr = "@#{method_name}"
       return super if method_name.match(/[\?!]$/) || !instance_variable_defined?(attr)
+
       true
     end
 
@@ -210,6 +210,7 @@ module RSpotify
 
     def hash_for(tracks, field)
       return nil unless tracks
+
       pairs = tracks.map do |track|
         key = track['track']['id']
         value = yield track[field] unless track[field].nil?
