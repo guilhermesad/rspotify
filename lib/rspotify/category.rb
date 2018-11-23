@@ -1,5 +1,4 @@
 module RSpotify
-
   # @attr [NilClass] external_urls Inexistent for Category.
   # @attr [String]   href          A link to the Spotify Web API endpoint returning full details of the category.
   # @attr [Array]    icons         An array of image objects. The category icons, in various sizes.
@@ -8,7 +7,6 @@ module RSpotify
   # @attr [NilClass] type          Inexistent for Category.
   # @attr [NilClass] uri           Inexistent for Category.
   class Category < Base
-
     # Returns Category object with id provided
     #
     # @param id      [String] The {https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids Spotify ID} of the category
@@ -26,11 +24,12 @@ module RSpotify
 
       options.each_with_index do |option, index|
         url << "#{option[0]}=#{option[1]}"
-        url << '&' unless index == options.size-1
+        url << '&' unless index == (options.size - 1)
       end
 
       response = RSpotify.get(url)
       return response if RSpotify.raw_response
+
       Category.new response
     end
 
@@ -54,6 +53,7 @@ module RSpotify
 
       response = RSpotify.get(url)
       return response if RSpotify.raw_response
+
       response['categories']['items'].map { |i| Category.new i }
     end
 
@@ -96,6 +96,7 @@ module RSpotify
 
       response = RSpotify.get(url)
       return response if RSpotify.raw_response
+
       response['playlists']['items'].map { |i| Playlist.new i }
     end
   end
