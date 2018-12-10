@@ -183,6 +183,13 @@ describe RSpotify::Playlist do
       expect(playlists.size)        .to eq 10
       expect(playlists.map(&:name)) .to include('Indie Acoustic')
     end
+
+    it 'should work when user_id has question mark character' do
+      VCR.use_cassette('playlist:search:Bird:limit:7') do
+        list = RSpotify::Playlist.search("\"Andrew Bird\"", limit: 7)
+        expect(list[6].followers['total']).to eq(77)
+      end
+    end
   end
 
   describe 'Playlist#tracks' do

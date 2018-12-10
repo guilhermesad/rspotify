@@ -128,7 +128,7 @@ module RSpotify
 
       super(options)
 
-      @path = "users/#{@owner.instance_variable_get('@id')}/"
+      @path = "users/#{@owner.instance_variable_get('@id').gsub('?','')}/"
       @path << (@href =~ /\/starred$/ ? 'starred' : "playlists/#{@id}")
     end
 
