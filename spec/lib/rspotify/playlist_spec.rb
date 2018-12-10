@@ -190,6 +190,13 @@ describe RSpotify::Playlist do
         expect(list[6].followers['total']).to eq(77)
       end
     end
+
+    it 'should work when user_id has brackets' do
+      VCR.use_cassette('playlist:search:Caramell:limit:10') do
+        list = RSpotify::Playlist.search("\"Caramell\"", limit: 10)
+        expect(list[7].followers['total']).to eq(0)
+      end
+    end
   end
 
   describe 'Playlist#tracks' do
