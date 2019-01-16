@@ -1,3 +1,4 @@
+require 'addressable'
 require 'base64'
 require 'json'
 require 'restclient'
