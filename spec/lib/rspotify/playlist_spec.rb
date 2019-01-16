@@ -50,7 +50,7 @@ describe RSpotify::Playlist do
         RSpotify::Playlist.find_by_id('37i9dQZF1DX1R3yDogYrbo')
       end
     end
-    
+
     it 'gets playlist attributes' do
       expect(playlist.collaborative)            .to eq false
       expect(playlist.external_urls['spotify']) .to eq    'https://open.spotify.com/playlist/37i9dQZF1DX1R3yDogYrbo'
@@ -64,9 +64,9 @@ describe RSpotify::Playlist do
       expect(playlist.snapshot_id)              .to eq    'MTUyNzIxODU5NywwMDAwMDAwYTAwMDAwMTYzOTU1MjZjODgwMDAwMDE2MmYyYjBlOGQ4'
       expect(playlist.total)                    .to eq    57
       expect(playlist.type)                     .to eq    'playlist'
-      expect(playlist.uri)                      .to eq    'spotify:user:spotify:playlist:37i9dQZF1DX1R3yDogYrbo'      
+      expect(playlist.uri)                      .to eq    'spotify:user:spotify:playlist:37i9dQZF1DX1R3yDogYrbo'
     end
-    
+
   end
 
   describe 'Playlist::find' do
@@ -208,6 +208,20 @@ describe RSpotify::Playlist do
       expect(@tracks)           .to be_an Array
       expect(@tracks.size)      .to eq 85
       expect(@tracks.last.name) .to eq 'On The Streets - Kollectiv Turmstrasse Let Freedom Ring Remix'
+    end
+
+    it 'should fetch tracks of playlists whose user has special characters in its name' do
+      playlist = VCR.use_cassette('playlist:find_by_id:4dn0iEoAxn69ea0Tyov8V5') do
+        RSpotify::Playlist.find_by_id('4dn0iEoAxn69ea0Tyov8V5')
+      end
+
+      tracks = VCR.use_cassette('playlist:4dn0iEoAxn69ea0Tyov8V5:tracks:offset:100') do
+        playlist.tracks(offset: 100)
+      end
+
+      expect(tracks)         .to be_an Array
+      expect(tracks.size)    .to eq 100
+      expect(tracks[2].name) .to eq 'Nothing Left To Lose Now (Fieldhead Remix)'
     end
   end
 
