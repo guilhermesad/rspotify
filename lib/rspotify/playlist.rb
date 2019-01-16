@@ -128,7 +128,7 @@ module RSpotify
 
       super(options)
 
-      @path = "users/#{@owner.instance_variable_get('@id')}/"
+      @path = "users/#{@owner.instance_variable_get('@id').gsub('?','')}/"
       @path << (@href =~ /\/starred$/ ? 'starred' : "playlists/#{@id}")
     end
 
@@ -258,7 +258,7 @@ module RSpotify
         return @tracks_cache[offset..last_track]
       end
 
-      url = "#{@path}/tracks?limit=#{limit}&offset=#{offset}"
+      url = "#{@href}/tracks?limit=#{limit}&offset=#{offset}"
       url << "&market=#{market}" if market
       response = RSpotify.resolve_auth_request(@owner.id, url)
 
