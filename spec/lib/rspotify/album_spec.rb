@@ -18,6 +18,7 @@ describe RSpotify::Album do
       expect(@album.genres)                   .to be_an   Array
       expect(@album.href)                     .to eq      'https://api.spotify.com/v1/albums/5bU1XKYxHhEwukllT20xtk'
       expect(@album.id)                       .to eq      '5bU1XKYxHhEwukllT20xtk'
+      expect(@album.label)                    .to eq      'Domino Recording Co'
       expect(@album.images)                   .to include ({'height' => 640, 'width' => 640, 'url' => 'https://i.scdn.co/image/4d9ec146e3a257b10634d9a413ef6cc3de325008'})
       expect(@album.name)                     .to eq      'AM'
       expect(@album.popularity)               .to be      > 0
@@ -241,4 +242,3 @@ describe RSpotify::Album do
     end
   end
 end
-

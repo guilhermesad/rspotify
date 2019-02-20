@@ -77,6 +77,7 @@ module RSpotify
       @external_ids           = options['external_ids']
       @genres                 = options['genres']
       @images                 = options['images']
+      @label                  = options['label']
       @name                   = options['name']
       @popularity             = options['popularity']
       @release_date           = options['release_date']
