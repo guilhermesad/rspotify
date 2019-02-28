@@ -11,14 +11,14 @@ describe RSpotify::Album do
 
     it 'should find album with correct attributes' do
       expect(@album.album_type)               .to eq      'album'
-      expect(@album.available_markets)        .to include *%w(AD AT BE BG CA EE ES FR GR MC TW US)
       expect(@album.copyrights)               .to include ({'text' => '2013 Domino Recording Co Ltd', 'type' => 'C'})
       expect(@album.external_ids['upc'])      .to eq      '887828031795'
       expect(@album.external_urls['spotify']) .to eq      'https://open.spotify.com/album/5bU1XKYxHhEwukllT20xtk'
       expect(@album.genres)                   .to be_an   Array
       expect(@album.href)                     .to eq      'https://api.spotify.com/v1/albums/5bU1XKYxHhEwukllT20xtk'
       expect(@album.id)                       .to eq      '5bU1XKYxHhEwukllT20xtk'
-      expect(@album.images)                   .to include ({'height' => 640, 'width' => 640, 'url' => 'https://i.scdn.co/image/4d9ec146e3a257b10634d9a413ef6cc3de325008'})
+      expect(@album.images)                   .to include ({'height' => 640, 'width' => 640, 'url' => 'https://i.scdn.co/image/486391b05384f2299a4c01b7bd8d5b855f20def9'})
+      expect(@album.label)                    .to eq      'Domino Recording Co'
       expect(@album.name)                     .to eq      'AM'
       expect(@album.popularity)               .to be      > 0
       expect(@album.release_date)             .to eq      '2013-09-09'
