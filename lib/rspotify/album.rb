@@ -7,6 +7,7 @@ module RSpotify
   # @attr [Hash]          external_ids           Known external IDs for the album
   # @attr [Array<String>] genres                 A list of the genres used to classify the album. If not yet classified, the array is empty
   # @attr [Array<Hash>]   images                 The cover art for the album in various sizes, widest first
+  # @attr [String]        label                  The label for the album
   # @attr [String]        name                   The name of the album
   # @attr [Integer]       popularity             The popularity of the album. The value will be between 0 and 100, with 100 being the most popular
   # @attr [String]        release_date           The date the album was first released, for example "1981-12-15". Depending on the precision, it might be shown as "1981" or "1981-12"
@@ -77,6 +78,7 @@ module RSpotify
       @external_ids           = options['external_ids']
       @genres                 = options['genres']
       @images                 = options['images']
+      @label                  = options['label']
       @name                   = options['name']
       @popularity             = options['popularity']
       @release_date           = options['release_date']
