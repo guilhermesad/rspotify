@@ -85,7 +85,7 @@ module RSpotify
     def repeat(device_id: nil, state: "context")
       url = "me/player/repeat"
       url += "?state=#{state}"
-      device_id.nil? ? url = url : url += "&device_id=#{device_id}"
+      url += "&device_id=#{device_id}" if device_id
 
       User.oauth_put(@user.id, url, {})
     end
