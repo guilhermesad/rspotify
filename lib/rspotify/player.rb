@@ -80,6 +80,26 @@ module RSpotify
       User.oauth_put(@user.id, url, {})
     end
 
+    # Skip User’s Playback To Next Track
+    #
+    # @example
+    #           player = user.player
+    #           player.next
+    def next
+      url = 'me/player/next'
+      User.oauth_post(@user.id, url, {})
+    end
+
+    # Skip User’s Playback To Previous Track
+    #
+    # @example
+    #           player = user.player
+    #           player.previous
+    def previous
+      url = 'me/player/previous'
+      User.oauth_post(@user.id, url, {})
+    end
+
     # Update the user's currently active player volume
     #
     # @example
