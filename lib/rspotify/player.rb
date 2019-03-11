@@ -70,6 +70,26 @@ module RSpotify
       User.oauth_put(@user.id, url, params.to_json)
     end
 
+    # Toggle the current user's player repeat status.
+    # If `device_id` is not passed, the currently active spotify app will be triggered.
+    # If `state` is not passed, the currently active context will be set to repeat.
+    #
+    # @see https://developer.spotify.com/documentation/web-api/reference/player/set-repeat-mode-on-users-playback/
+    #
+    # @param [String] device_id the ID of the device to set the repeat state on.
+    # @param [String] state     the repeat state. Defaults to the current play context.
+    #
+    # @example
+    #          player = user.player
+    #          player.repeat(state: 'track')
+    def repeat(device_id: nil, state: "context")
+      url = "me/player/repeat"
+      url += "?state=#{state}"
+      url += "&device_id=#{device_id}" if device_id
+
+      User.oauth_put(@user.id, url, {})
+    end
+
     # Pause the user's currently active player
     #
     # @example
