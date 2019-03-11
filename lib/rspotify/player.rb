@@ -80,6 +80,26 @@ module RSpotify
       User.oauth_put(@user.id, url, {})
     end
 
+    # Toggle the current user's shuffle status.
+    # If `device_id` is not passed, the currently active spotify app will be triggered.
+    # If `state` is not passed, shuffle mode will be turned on.
+    #
+    # @see https://developer.spotify.com/documentation/web-api/reference/player/toggle-shuffle-for-users-playback/
+    #
+    # @param [String] device_id the ID of the device to set the shuffle state on.
+    # @param [String] state     the shuffle state. Defaults to turning the shuffle behavior on.
+    #
+    # @example
+    #          player = user.player
+    #          player.shuffle(state: false)
+    def shuffle(device_id: nil, state: true)
+      url = "me/player/shuffle"
+      url += "?state=#{state}"
+      url += "&device_id=#{device_id}" if device_id
+
+      User.oauth_put(@user.id, url, {})
+    end
+
     # Skip User’s Playback To Next Track
     #
     # @example
