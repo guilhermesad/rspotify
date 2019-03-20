@@ -78,7 +78,9 @@ module RSpotify
                    options['artists'].map { |a| Artist.new a }
                  end
 
-      @linked_from = options['linked_from'] && TrackLink.new(options['linked_from'])
+      @linked_from = if options['linked_from']
+                       TrackLink.new(options['linked_from'])
+                     end
 
       super(options)
     end
