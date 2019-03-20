@@ -104,13 +104,13 @@ module RSpotify
       @snapshot_id   = options['snapshot_id']
       @total         = options['tracks']['total']
 
-      @owner = User.new(options['owner']) if options['owner']
+      @owner = options['owner'] ? User.new(options['owner']) : nil
 
-      tracks = options['tracks']['items'] if options['tracks']
-      if tracks
-        tracks.select! { |t| t['track'] }
-        @tracks_cache = tracks.map { |t| Track.new(t['track']) }
-      end
+      @tracks_cache = if options['tracks'] && options['tracks']['items']
+                        tracks = options['tracks']['items']
+                        tracks.select! { |t| t['track'] }
+                        tracks.map { |t| Track.new(t['track']) }
+                      end
 
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
         Time.parse(added_at)
@@ -127,7 +127,7 @@ module RSpotify
       super(options)
 
       @path = "users/#{@owner.instance_variable_get('@id').delete('?')}/"
-      @path << (@href =~ %r{\/starred$} ? 'starred' : "playlists/#{@id}")
+      @path << (@href =~ %r{/starred$} ? 'starred' : "playlists/#{@id}")
     end
 
     # Adds one or more tracks to a playlist in user's Spotify account. This method is only available when the
