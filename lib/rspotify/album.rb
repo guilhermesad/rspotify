@@ -83,12 +83,16 @@ module RSpotify
       @release_date           = options['release_date']
       @release_date_precision = options['release_date_precision']
 
-      @artists = options['artists'].map { |a| Artist.new a } if options['artists']
+      @artists = if options['artists']
+                   options['artists'].map { |a| Artist.new a }
+                 end
 
-      if options['tracks'] && options['tracks']['items']
-        @tracks_cache = options['tracks']['items'].map { |i| Track.new i }
-        @total_tracks = options['tracks']['total']
-      end
+      @tracks_cache, @total_tracks = if options['tracks'] && options['tracks']['items']
+                                       [
+                                         options['tracks']['items'].map { |i| Track.new i },
+                                         options['tracks']['total']
+                                       ]
+                                     end
 
       super(options)
     end
