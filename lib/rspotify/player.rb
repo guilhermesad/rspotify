@@ -15,8 +15,8 @@ module RSpotify
       @progress      = options['progress_ms']
       @is_playing    = options['is_playing']
 
-      @track = Track.new(options['track']) if options['track']
-      @device = Device.new(options['device']) if options['device']
+      @track = options['track'] ? Track.new(options['track']) : nil
+      @device = options['device'] ? Device.new(options['device']) : nil
     end
 
     def playing?
