@@ -9,7 +9,7 @@ module RSpotify
   API_URI       = 'https://api.spotify.com/v1/'.freeze
   AUTHORIZE_URI = 'https://accounts.spotify.com/authorize'.freeze
   TOKEN_URI     = 'https://accounts.spotify.com/api/token'.freeze
-  VERBS         = %w(get post put delete)
+  VERBS         = %w[get post put delete].freeze
 
   class << self
     attr_accessor :raw_response

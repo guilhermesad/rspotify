@@ -30,7 +30,6 @@ module RSpotify
           warn 'Spotify API does not support finding several users simultaneously'
           return false
         end
-        limit = (type == 'album' ? 20 : 50)
         find_many(ids, type, market: market)
       when String
         id = ids
@@ -143,7 +142,7 @@ module RSpotify
         frameborder: 0,
         allowtransparency: true,
         view: nil,
-        theme: nil,
+        theme: nil
       }
       options = default_options.merge(options)
 
