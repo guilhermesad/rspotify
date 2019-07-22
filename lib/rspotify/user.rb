@@ -38,6 +38,16 @@ module RSpotify
       response = RestClient.post(TOKEN_URI, request_body, RSpotify.send(:auth_header))
       response = JSON.parse(response)
       @@users_credentials[user_id]['token'] = response['access_token']
+      proc = @@users_credentials[user_id]['access_refresh_callback']
+      # If the access token expires and a new one is granted via the refresh
+      # token, then this proc will be called with two parameters:
+      # new_access_token and token_lifetime (in seconds)
+      # The purpose is to allow the calling environment to invoke some action,
+      # such as persisting the new access token somewhere, when the new token
+      # is generated.
+      if (!proc.nil?)
+        proc.call(response['access_token'], response['expires_in'])
+      end
     rescue RestClient::BadRequest => e
       raise e if e.response !~ /Refresh token revoked/
     end
