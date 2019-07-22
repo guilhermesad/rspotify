@@ -219,8 +219,8 @@ end
 
 ## Refreshing the access token
 
-The user's access token is automatically refreshed by RSpotify when needed. This is specially useful if you persist
-the user data on a database: this way the user only need log in to Spotify once during the use of your application.
+The user's access token is automatically refreshed by RSpotify when needed. This is especially useful if you persist
+the user data on a database. This way, the user only need log in to Spotify once during the use of the application.
 
 RSpotify provides a way to facilitate persistence:
 
@@ -235,9 +235,6 @@ spotify_user = RSpotify::User.new(hash)
 spotify_user.create_playlist!('my_awesome_playlist') # automatically refreshes token
 ```
 
-## Getting raw response
-
-To get the raw response from Spotify API requests, just toggle the `raw_response` variable:
 
 ```ruby
 RSpotify.raw_response = true
@@ -273,6 +270,10 @@ spotify_user = RSpotify::User.new(
 
 
 ```
+
+## Getting raw response
+
+To get the raw response from Spotify API requests, just toggle the `raw_response` variable:
 
 ## Notes
 
