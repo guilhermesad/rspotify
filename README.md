@@ -222,26 +222,7 @@ end
 The user's access token is automatically refreshed by RSpotify when needed. This is especially useful if you persist
 the user data on a database. This way, the user only need log in to Spotify once during the use of the application.
 
-RSpotify provides a way to facilitate persistence:
-
-```ruby
-hash = spotify_user.to_hash
-# hash containing all user attributes, including access tokens
-
-# Use the hash to persist the data the way you prefer...
-
-# Then recover the Spotify user whenever you like
-spotify_user = RSpotify::User.new(hash)
-spotify_user.create_playlist!('my_awesome_playlist') # automatically refreshes token
-```
-
-
-```ruby
-RSpotify.raw_response = true
-RSpotify::Artist.search('Cher') #=> (String with raw json response)
-```
-
-Alternately, you can store a proc that is invoked when a new access token is generated. This give you the
+Additionally, you can store a proc that is invoked when a new access token is generated. This give you the
 opportunity to persist the new access token for future use. The proc will be invoked with two arguments: the
 new access token and the lifetime of the token in seconds. For example, if lifetime value returned from
 Spotify is 3600, you know that the token will be good for one hour.
@@ -271,9 +252,28 @@ spotify_user = RSpotify::User.new(
 
 ```
 
+RSpotify provides a way to facilitate persistence:
+
+```ruby
+hash = spotify_user.to_hash
+# hash containing all user attributes, including access tokens
+
+# Use the hash to persist the data the way you prefer...
+
+# Then recover the Spotify user whenever you like
+spotify_user = RSpotify::User.new(hash)
+spotify_user.create_playlist!('my_awesome_playlist') # automatically refreshes token
+```
+
+
 ## Getting raw response
 
 To get the raw response from Spotify API requests, just toggle the `raw_response` variable:
+
+```ruby
+RSpotify.raw_response = true
+RSpotify::Artist.search('Cher') #=> (String with raw json response)
+```
 
 ## Notes
 
