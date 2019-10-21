@@ -38,7 +38,7 @@ module RSpotify
       response = RestClient.post(TOKEN_URI, request_body, RSpotify.send(:auth_header))
       response = JSON.parse(response)
       @@users_credentials[user_id]['token'] = response['access_token']
-      proc = @@users_credentials[user_id]['access_refresh_callback']
+      access_refresh_proc = @@users_credentials[user_id]['access_refresh_callback']
       # If the access token expires and a new one is granted via the refresh
       # token, then this proc will be called with two parameters:
       # new_access_token and token_lifetime (in seconds)
