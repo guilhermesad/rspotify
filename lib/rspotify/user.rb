@@ -46,7 +46,7 @@ module RSpotify
       # such as persisting the new access token somewhere, when the new token
       # is generated.
       if (!proc.nil?)
-        proc.call(response['access_token'], response['expires_in'])
+        access_refresh_proc.call(response['access_token'], response['expires_in'])
       end
     rescue RestClient::BadRequest => e
       raise e if e.response !~ /Refresh token revoked/
