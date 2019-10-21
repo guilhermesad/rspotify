@@ -45,7 +45,7 @@ module RSpotify
       # The purpose is to allow the calling environment to invoke some action,
       # such as persisting the new access token somewhere, when the new token
       # is generated.
-      if (!proc.nil?)
+      if (access_refresh_proc.respond_to? :call)
         access_refresh_proc.call(response['access_token'], response['expires_in'])
       end
     rescue RestClient::BadRequest => e
