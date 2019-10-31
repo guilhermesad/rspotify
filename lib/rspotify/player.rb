@@ -157,6 +157,27 @@ module RSpotify
       Track.new response["item"]
     end
 
+    # Get tracks from the current user’s recently played tracks.
+    #
+    # @param limit    [Integer] Optional. Maximum number of tracks to return. Maximum: 50. Default: 20.
+    # @param after    [String] Optional. A Unix timestamp in milliseconds. Returns all items after (but not including) this cursor position. If after is specified, before must not be specified.
+    # @param before [String] Optional. A Unix timestamp in milliseconds. Returns all items before (but not including) this cursor position. If before is specified, after must not be specified.
+    #
+    # @example
+    #           player = user.player
+    #           player.recently_played
+    #           player.recently_played(limit: 50)
+    #           player.recently_played(after: "1572561234", before: "1572562369")
+    #           player.recently_played(limit: 50, after: "1572561234", before: "1572562369")
+    def recently_played(limit: 20, after: nil, before: nil)
+      url = "me/player/recently-played?limit=#{limit}"
+      url << "&after=#{after}" if after
+      url << "&before=#{before}" if before
+
+      response = RSpotify.resolve_auth_request(@user.id, url)
+      response["items"].map { |item| Track.new item["track"]}
+    end
+
     def seek(position_ms)
       url = "me/player/seek?position_ms=#{position_ms}"
       User.oauth_put(@user.id, url, {})
