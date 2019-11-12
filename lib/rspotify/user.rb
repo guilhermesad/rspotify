@@ -147,8 +147,8 @@ module RSpotify
     #           recently_played = user.recently_played
     #           recently_played.size       #=> 20
     #           recently_played.first.name #=> "Ice to Never"
-    # =>        recently_played(after: "1572561234", before: "1572562369")
-    #           recently_played(limit: 50, after: "1572561234", before: "1572562369")
+    #           user.recently_played(limit: 50)
+    #           user.recently_played(after: '1572561234', before: '1572562369')
     def recently_played(limit: 20, after: nil, before: nil)
       url = "me/player/recently-played?limit=#{limit}"
       url << "&after=#{after}" if after
