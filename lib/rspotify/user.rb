@@ -307,14 +307,16 @@ module RSpotify
     #
     # @param limit  [Integer] Maximum number of tracks to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of tracks. Default: 0.
+    # @param market [String]  Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}.
     # @return [Array<Track>]
     #
     # @example
     #           tracks = user.saved_tracks
     #           tracks.size       #=> 20
     #           tracks.first.name #=> "Do I Wanna Know?"
-    def saved_tracks(limit: 20, offset: 0)
+    def saved_tracks(limit: 20, offset: 0, market: nil)
       url = "me/tracks?limit=#{limit}&offset=#{offset}"
+      url << "&market=#{market}" if market
       response = User.oauth_get(@id, url)
       json = RSpotify.raw_response ? JSON.parse(response) : response
 
@@ -382,14 +384,16 @@ module RSpotify
     #
     # @param limit  [Integer] Maximum number of albums to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param offset [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
+    # @param market [String]  Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}.
     # @return [Array<Album>]
     #
     # @example
     #           albums = user.saved_albums
     #           albums.size       #=> 20
     #           albums.first.name #=> "Launeddas"
-    def saved_albums(limit: 20, offset: 0)
+    def saved_albums(limit: 20, offset: 0, market: nil)
       url = "me/albums?limit=#{limit}&offset=#{offset}"
+      url << "&market=#{market}" if market
       response = User.oauth_get(@id, url)
       json = RSpotify.raw_response ? JSON.parse(response) : response
 
