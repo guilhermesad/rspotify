@@ -81,9 +81,8 @@ module RSpotify
       url = "me/player/queue"
       url = device_id.nil? ? url : "#{url}?device_id=#{device_id}"
       param = {"uri": uri}
-
-      User.oauth_put(@user.id, url, param.to_json)
-    end    
+      User.oauth_post(@user.id, url, param.to_json)
+    end
 
     # Toggle the current user's player repeat status.
     # If `device_id` is not passed, the currently active spotify app will be triggered.
