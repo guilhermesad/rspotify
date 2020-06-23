@@ -116,9 +116,9 @@ module RSpotify
     #           playlist = user.create_playlist!('my-second-playlist', public: false)
     #           playlist.name   #=> "my-second-playlist"
     #           playlist.public #=> false
-    def create_playlist!(name, public: true)
+    def create_playlist!(name, description, public: true, collaborative: false)
       url = "users/#{@id}/playlists"
-      request_data = { name: name, public: public }.to_json
+      request_data = { name: name, public: public, description: description, collaborative: collaborative }.to_json
 
       response = User.oauth_post(@id, url, request_data)
       return response if RSpotify.raw_response
