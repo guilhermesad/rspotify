@@ -125,9 +125,9 @@ module RSpotify
 
     # Generate an embed code for an album, artist or track.
     # @param [Hash] options
-    # @option options [Fixnum] :width the width of the frame
-    # @option options [Fixnum] :height the height of the frame
-    # @option options [Fixnum] :frameborder the frameborder of the frame
+    # @option options [Integer] :width the width of the frame
+    # @option options [Integer] :height the height of the frame
+    # @option options [Integer] :frameborder the frameborder of the frame
     # @option options [Boolean] :allowtransparency toggle frame transparency
     # @option options [nil|String|Symbol] :view specific view option for iframe
     # @option options [nil|String|Symbol] :theme specific theme option for iframe

@@ -303,7 +303,7 @@ module RSpotify
     #           positions = [0,3,8]
     #           playlist.remove_tracks!(positions, snapshot_id: '0ZvtH...')
     def remove_tracks!(tracks, snapshot_id: nil)
-      positions = tracks if tracks.first.is_a? Fixnum
+      positions = tracks if tracks.first.is_a? Integer
 
       tracks = tracks.map do |track|
         next { uri: track.uri } if track.is_a? Track
