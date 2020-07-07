@@ -103,8 +103,8 @@ module RSpotify
 
     # Creates a playlist in user's Spotify account. This method is only available when the current
     # user has granted access to the *playlist-modify-public* and *playlist-modify-private* scopes.
-    # note: if the user has not granted the aforementioned scopes, the "collaborative" option may cause a 400 error.
-    # see the offical spotify api documentation for more information.
+    #
+    # @note To create a collaborative playlist the public option must be set to false.
     #
     # @param name [String] The name for the new playlist
     # @param public [Boolean] Whether the playlist is public or private. Default: true
@@ -118,10 +118,14 @@ module RSpotify
     #           playlist = user.create_playlist!('my-second-playlist', public: false)
     #           playlist.name   #=> "my-second-playlist"
     #           playlist.public #=> false
-    def create_playlist!(name, description = nil, public: true, collaborative: false)
+    def create_playlist!(name, description: nil, public: true, collaborative: false)
       url = "users/#{@id}/playlists"
-      request_data = { name: name, public: public, description: description, collaborative: collaborative }.to_json
-
+      request_data = {
+        name: name,
+        public: public,
+        description: description,
+        collaborative: collaborative
+      }.to_json
       response = User.oauth_post(@id, url, request_data)
       return response if RSpotify.raw_response
       Playlist.new response
