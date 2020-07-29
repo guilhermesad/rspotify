@@ -9,6 +9,8 @@ module RSpotify
       @progress               = options['progress_ms']
       @is_playing             = options['is_playing']
       @currently_playing_type = options['currently_playing_type']
+      @context_type           = options.dig('context', 'type')
+      @context_uri            = options.dig('context', 'uri')
 
       @track = if options['track']
         Track.new options['track']
