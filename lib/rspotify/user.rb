@@ -139,7 +139,7 @@ module RSpotify
       url = "me/player"
       response = User.oauth_get(@id, url)
       return response if RSpotify.raw_response
-      response.present? ? Player.new(self, response) : nil
+      response ? Player.new(self, response) : Player.new(self)
     end
 
     # Get the current user’s recently played tracks. Requires the *user-read-recently-played* scope.
