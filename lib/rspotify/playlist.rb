@@ -390,7 +390,7 @@ module RSpotify
     def replace_tracks!(tracks)
       track_uris = tracks.map(&:uri).join(',')
       url = "#{@path}/tracks?uris=#{track_uris}"
-      User.oauth_put(@owner.id, url, {})
+      User.oauth_put(@owner.id, url, {}.to_json)
 
       @total = tracks.size
       @tracks_cache = nil
