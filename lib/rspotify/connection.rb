@@ -67,7 +67,7 @@ module RSpotify
       rescue RestClient::Unauthorized => e
         raise e if request_was_user_authenticated?(*params)
 
-        raise MissingAuthentication unless @client_token
+        raise MissingAuthentication unless @client_id && @client_secret
 
         authenticate(@client_id, @client_secret)
 
