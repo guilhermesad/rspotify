@@ -16,8 +16,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(/^spec\//)
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'omniauth-oauth2', '~> 1.4'
+  spec.add_dependency 'omniauth-oauth2', '~> 1.5.0'
   spec.add_dependency 'rest-client', '~> 2.0.2'
+  spec.add_dependency 'addressable', '~> 2.5.2'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'webmock'
