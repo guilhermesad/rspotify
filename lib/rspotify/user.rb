@@ -39,7 +39,7 @@ module RSpotify
       response = JSON.parse(response)
       @@users_credentials[user_id]['token'] = response['access_token']
     rescue RestClient::BadRequest => e
-      raise e if e.response !~ /Refresh token revoked/
+      raise e
     end
     private_class_method :refresh_token
 
