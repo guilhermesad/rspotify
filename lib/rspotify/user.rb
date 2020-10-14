@@ -423,6 +423,31 @@ module RSpotify
       User.oauth_get(@id, url)
     end
 
+    def subscribe_to_shows!(shows)
+      shows_ids = shows.map(&:id)
+      url = 'me/shows'
+      request_body = shows_ids.inspect
+      User.oauth_put(@id, url, request_body)
+    end
+
+    def subscribed_to_shows(limit: 20, offset: 0, market: nil)
+      url = "me/shows?limit=#{limit}&offset=#{offset}"
+      url << "&market=#{market}" if market
+      response = User.oauth_get(@id, url)
+      json = RSpotify.raw_response ? JSON.parse(response) : response
+
+      shows = json['items'].select { |i| i['show'] }
+
+      return response if RSpotify.raw_response
+      shows.map { |a| Show.new a['show'] }
+    end
+
+    def subscribed_to_shows?(shows)
+      shows_ids = shows.map(&:id)
+      url = "me/shows/contains?ids=#{shows_ids.join ','}"
+      User.oauth_get(@id, url)
+    end
+
     # Returns a hash containing all user attributes
     def to_hash
       pairs = instance_variables.map do |var|
