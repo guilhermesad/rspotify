@@ -43,6 +43,32 @@ describe RSpotify::Playlist do
     end
   end
 
+  describe "Playlist::find_by_id" do
+    let(:playlist) do
+      # Get wizzler's "Movie Soundtrack Masterpieces" playlist as a testing sample
+      VCR.use_cassette('playlist:find_by_id:37i9dQZF1DX1R3yDogYrbo') do
+        RSpotify::Playlist.find_by_id('37i9dQZF1DX1R3yDogYrbo')
+      end
+    end
+
+    it 'gets playlist attributes' do
+      expect(playlist.collaborative)            .to eq false
+      expect(playlist.external_urls['spotify']) .to eq    'https://open.spotify.com/playlist/37i9dQZF1DX1R3yDogYrbo'
+      expect(playlist.description)              .to match /Ouça os grandes sucessos e parcerias de um dos maiores nomes da música brasileira./
+      expect(playlist.followers['total'])       .to eq 77654
+      expect(playlist.href)                     .to eq    'https://api.spotify.com/v1/playlists/37i9dQZF1DX1R3yDogYrbo'
+      expect(playlist.id)                       .to eq    '37i9dQZF1DX1R3yDogYrbo'
+      expect(playlist.images.first['url'])      .to match %r{https://i\.scdn\.co/image/270b576e45bc1bfb10ab624c63857360c02fed6f}
+      expect(playlist.name)                     .to eq    'This Is Caetano Veloso'
+      expect(playlist.public)                   .to eq    false
+      expect(playlist.snapshot_id)              .to eq    'MTUyNzIxODU5NywwMDAwMDAwYTAwMDAwMTYzOTU1MjZjODgwMDAwMDE2MmYyYjBlOGQ4'
+      expect(playlist.total)                    .to eq    57
+      expect(playlist.type)                     .to eq    'playlist'
+      expect(playlist.uri)                      .to eq    'spotify:user:spotify:playlist:37i9dQZF1DX1R3yDogYrbo'
+    end
+
+  end
+
   describe 'Playlist::find' do
 
     let(:playlist) do
@@ -157,6 +183,20 @@ describe RSpotify::Playlist do
       expect(playlists.size)        .to eq 10
       expect(playlists.map(&:name)) .to include('Indie Acoustic')
     end
+
+    it 'should work when user_id has question mark character' do
+      VCR.use_cassette('playlist:search:Bird:limit:7') do
+        list = RSpotify::Playlist.search("\"Andrew Bird\"", limit: 7)
+        expect(list[6].followers['total']).to eq(77)
+      end
+    end
+
+    it 'should work when user_id has brackets' do
+      VCR.use_cassette('playlist:search:Caramell:limit:10') do
+        list = RSpotify::Playlist.search("\"Caramell\"", limit: 10)
+        expect(list[7].followers['total']).to eq(0)
+      end
+    end
   end
 
   describe 'Playlist#tracks' do
@@ -168,6 +208,20 @@ describe RSpotify::Playlist do
       expect(@tracks)           .to be_an Array
       expect(@tracks.size)      .to eq 85
       expect(@tracks.last.name) .to eq 'On The Streets - Kollectiv Turmstrasse Let Freedom Ring Remix'
+    end
+
+    it 'should fetch tracks of playlists whose user has special characters in its name' do
+      playlist = VCR.use_cassette('playlist:find_by_id:4dn0iEoAxn69ea0Tyov8V5') do
+        RSpotify::Playlist.find_by_id('4dn0iEoAxn69ea0Tyov8V5')
+      end
+
+      tracks = VCR.use_cassette('playlist:4dn0iEoAxn69ea0Tyov8V5:tracks:offset:100') do
+        playlist.tracks(offset: 100)
+      end
+
+      expect(tracks)         .to be_an Array
+      expect(tracks.size)    .to eq 100
+      expect(tracks[2].name) .to eq 'Nothing Left To Lose Now (Fieldhead Remix)'
     end
   end
 

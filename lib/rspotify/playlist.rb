@@ -59,6 +59,24 @@ module RSpotify
       Playlist.new response
     end
 
+    # Returns Playlist object with id provided.
+    #
+    # @param id [String]
+    # @param market [String] Optional. An {https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to apply Track Relinking
+    # @return [Playlist]
+    #
+    # @example
+    #           playlist = RSpotify::Playlist.find_by_id('00wHcTN0zQiun4xri9pmvX')
+    #           playlist.class #=> RSpotify::Playlist
+    #           playlist.name  #=> "Movie Soundtrack Masterpieces"
+    def self.find_by_id(id, market: nil)
+      url = "playlists/#{id}"
+      url << "?market=#{market}" if market
+      response = RSpotify.resolve_auth_request(nil, url)
+      return response if RSpotify.raw_response
+      Playlist.new response
+    end
+
     # Returns array of Playlist objects matching the query. It's also possible to find the total number of search results for the query
     #
     # @param query  [String]  The search query's keywords. See the q description in {https://developer.spotify.com/web-api/search-item here} for details.
@@ -110,7 +128,7 @@ module RSpotify
 
       super(options)
 
-      @path = "users/#{@owner.instance_variable_get('@id')}/"
+      @path = "users/#{@owner.instance_variable_get('@id').gsub('?','')}/"
       @path << (@href =~ /\/starred$/ ? 'starred' : "playlists/#{@id}")
     end
 
@@ -141,7 +159,7 @@ module RSpotify
       url = "#{@path}/tracks?uris=#{track_uris}"
       url << "&position=#{position}" if position
 
-      response = User.oauth_post(@owner.id, url, {})
+      response = User.oauth_post(@owner.id, url, {}.to_json)
       @total += tracks.size
       @tracks_cache = nil
 
@@ -240,7 +258,7 @@ module RSpotify
         return @tracks_cache[offset..last_track]
       end
 
-      url = "#{@path}/tracks?limit=#{limit}&offset=#{offset}"
+      url = "#{@href}/tracks?limit=#{limit}&offset=#{offset}"
       url << "&market=#{market}" if market
       response = RSpotify.resolve_auth_request(@owner.id, url)
 
@@ -285,7 +303,7 @@ module RSpotify
     #           positions = [0,3,8]
     #           playlist.remove_tracks!(positions, snapshot_id: '0ZvtH...')
     def remove_tracks!(tracks, snapshot_id: nil)
-      positions = tracks if tracks.first.is_a? Fixnum
+      positions = tracks if tracks.first.is_a? Integer
 
       tracks = tracks.map do |track|
         next { uri: track.uri } if track.is_a? Track
@@ -340,7 +358,7 @@ module RSpotify
       self
     end
 
-    # Replace the image used to represent a specific playlist. Requires ugc-image-upload scope. Changing a public playlist 
+    # Replace the image used to represent a specific playlist. Requires ugc-image-upload scope. Changing a public playlist
     # requires the *playlist-modify-public* scope; changing a private playlist requires the *playlist-modify-private* scope.
     #
     # @param image [String] Base64 encoded JPEG image data, maximum payload size is 256 KB
@@ -372,7 +390,7 @@ module RSpotify
     def replace_tracks!(tracks)
       track_uris = tracks.map(&:uri).join(',')
       url = "#{@path}/tracks?uris=#{track_uris}"
-      User.oauth_put(@owner.id, url, {})
+      User.oauth_put(@owner.id, url, {}.to_json)
 
       @total = tracks.size
       @tracks_cache = nil

@@ -39,7 +39,7 @@ module RSpotify
       response = JSON.parse(response)
       @@users_credentials[user_id]['token'] = response['access_token']
     rescue RestClient::BadRequest => e
-      raise e if e.response !~ /Refresh token revoked/
+      raise e
     end
     private_class_method :refresh_token
 
@@ -70,7 +70,7 @@ module RSpotify
       params[-1] = oauth_header(user_id).merge(custom_headers)
       RSpotify.send(:send_request, verb, path, *params)
     end
-    private_class_method :oauth_header
+    private_class_method :oauth_send
 
     RSpotify::VERBS.each do |verb|
       define_singleton_method "oauth_#{verb}" do |user_id, path, *params|
@@ -104,6 +104,8 @@ module RSpotify
     # Creates a playlist in user's Spotify account. This method is only available when the current
     # user has granted access to the *playlist-modify-public* and *playlist-modify-private* scopes.
     #
+    # @note To create a collaborative playlist the public option must be set to false.
+    #
     # @param name [String] The name for the new playlist
     # @param public [Boolean] Whether the playlist is public or private. Default: true
     # @return [Playlist]
@@ -116,10 +118,14 @@ module RSpotify
     #           playlist = user.create_playlist!('my-second-playlist', public: false)
     #           playlist.name   #=> "my-second-playlist"
     #           playlist.public #=> false
-    def create_playlist!(name, public: true)
+    def create_playlist!(name, description: nil, public: true, collaborative: false)
       url = "users/#{@id}/playlists"
-      request_data = { name: name, public: public }.to_json
-
+      request_data = {
+        name: name,
+        public: public,
+        description: description,
+        collaborative: collaborative
+      }.to_json
       response = User.oauth_post(@id, url, request_data)
       return response if RSpotify.raw_response
       Playlist.new response
@@ -133,20 +139,27 @@ module RSpotify
       url = "me/player"
       response = User.oauth_get(@id, url)
       return response if RSpotify.raw_response
-      response.present? ? Player.new(self, response) : nil
+      response ? Player.new(self, response) : Player.new(self)
     end
 
     # Get the current user’s recently played tracks. Requires the *user-read-recently-played* scope.
     #
     # @param limit  [Integer] Optional. The number of entities to return. Default: 20. Minimum: 1. Maximum: 50.
+    # @param after  [String] Optional. A Unix timestamp in milliseconds. Returns all items after (but not including) this cursor position. If after is specified, before must not be specified.
+    # @param before [String] Optional. A Unix timestamp in milliseconds. Returns all items before (but not including) this cursor position. If before is specified, after must not be specified.
     # @return [Array<Track>]
     #
     # @example
     #           recently_played = user.recently_played
     #           recently_played.size       #=> 20
     #           recently_played.first.name #=> "Ice to Never"
-    def recently_played(limit: 20)
+    #           user.recently_played(limit: 50)
+    #           user.recently_played(after: '1572561234', before: '1572562369')
+    def recently_played(limit: 20, after: nil, before: nil)
       url = "me/player/recently-played?limit=#{limit}"
+      url << "&after=#{after}" if after
+      url << "&before=#{before}" if before
+
       response = RSpotify.resolve_auth_request(@id, url)
       return response if RSpotify.raw_response
 
@@ -300,14 +313,16 @@ module RSpotify
     #
     # @param limit  [Integer] Maximum number of tracks to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of tracks. Default: 0.
+    # @param market [String]  Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}.
     # @return [Array<Track>]
     #
     # @example
     #           tracks = user.saved_tracks
     #           tracks.size       #=> 20
     #           tracks.first.name #=> "Do I Wanna Know?"
-    def saved_tracks(limit: 20, offset: 0)
+    def saved_tracks(limit: 20, offset: 0, market: nil)
       url = "me/tracks?limit=#{limit}&offset=#{offset}"
+      url << "&market=#{market}" if market
       response = User.oauth_get(@id, url)
       json = RSpotify.raw_response ? JSON.parse(response) : response
 
@@ -375,14 +390,16 @@ module RSpotify
     #
     # @param limit  [Integer] Maximum number of albums to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param offset [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
+    # @param market [String]  Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}.
     # @return [Array<Album>]
     #
     # @example
     #           albums = user.saved_albums
     #           albums.size       #=> 20
     #           albums.first.name #=> "Launeddas"
-    def saved_albums(limit: 20, offset: 0)
+    def saved_albums(limit: 20, offset: 0, market: nil)
       url = "me/albums?limit=#{limit}&offset=#{offset}"
+      url << "&market=#{market}" if market
       response = User.oauth_get(@id, url)
       json = RSpotify.raw_response ? JSON.parse(response) : response
 
