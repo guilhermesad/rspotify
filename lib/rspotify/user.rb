@@ -448,6 +448,12 @@ module RSpotify
       User.oauth_get(@id, url)
     end
 
+    def unsubscribe_from_shows!(shows)
+      shows_ids = shows.map(&:id)
+      url = "me/shows?ids=#{shows_ids.join ','}"
+      User.oauth_delete(@id, url)
+    end
+
     # Returns a hash containing all user attributes
     def to_hash
       pairs = instance_variables.map do |var|
