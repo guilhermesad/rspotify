@@ -73,10 +73,13 @@ module RSpotify
 
     # Add an item to the end of the user’s current playback queue
     # If `device_id` is not passed, the currently active spotify app will be triggered
+    # 
+    # @param [String] device_id the ID of the device to set the repeat state on.
+    # @param [String] uri       the spotify uri of the track to be queued
     #
     # @example
     #           player = user.player
-    #           player.queue(nil, "spotify:track:4iV5W9uYEdYUVa79Axb7Rh")
+    #           player.queue("spotify:track:4iV5W9uYEdYUVa79Axb7Rh")
     def queue(device_id = nil, uri)
       url = "me/player/queue?uri=#{uri}"
       url = device_id.nil? ? url : "#{url}&device_id=#{device_id}"
