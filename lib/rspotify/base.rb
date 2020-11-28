@@ -5,6 +5,7 @@ module RSpotify
   # @attr [String] id            The {https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids Spotify ID} for the object
   # @attr [String] type          The object type (artist, album, etc.)
   # @attr [String] uri           The {https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids Spotify URI} for the object
+  # @attr [Hash]   json          The JSON response received for this object
   class Base
 
     # Returns RSpotify object(s) with id(s) and type provided
@@ -121,6 +122,7 @@ module RSpotify
       @id            = options['id']
       @type          = options['type']
       @uri           = options['uri']
+      @json          = options
     end
 
     # Generate an embed code for an album, artist or track.
