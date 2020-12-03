@@ -217,7 +217,40 @@ class UsersController < ApplicationController
 end
 ```
 
-The user's access token is automatically refreshed by RSpotify when needed. This is specially useful if you persist the user data on a database: this way he only needs to log in to Spotify once in his entire use of your application.
+## Refreshing the access token
+
+The user's access token is automatically refreshed by RSpotify when needed. This is especially useful if you persist
+the user data on a database. This way, the user only need log in to Spotify once during the use of the application.
+
+Additionally, you can store a proc that is invoked when a new access token is generated. This give you the
+opportunity to persist the new access token for future use. The proc will be invoked with two arguments: the
+new access token and the lifetime of the token in seconds. For example, if lifetime value returned from
+Spotify is 3600, you know that the token will be good for one hour.
+
+In the sample code below, the credentials have been retrieved from some persistent store such as
+AWS SecretsManager.
+
+```ruby
+
+callback_proc = Proc.new { |new_access_token, token_lifetime |
+   now = Time.now.utc.to_i  # seconds since 1/1/1970, midnight UTC
+   deadline = now+token_lifetime
+   #puts("new access token will expire at #{Time.at(deadline).utc.to_s}")
+   self.save_new_access_token(new_access_token)
+ }
+
+spotify_user = RSpotify::User.new(
+  {
+    'credentials' => {
+       "token" => self.credentials["access_token"],
+       "refresh_token" => self.credentials["refresh_token"],
+       "access_refresh_callback" => callback_proc
+    } ,
+    'id' => self.credentials["user_id"]
+  })
+
+
+```
 
 RSpotify provides a way to facilitate persistence:
 
@@ -231,6 +264,7 @@ hash = spotify_user.to_hash
 spotify_user = RSpotify::User.new(hash)
 spotify_user.create_playlist!('my_awesome_playlist') # automatically refreshes token
 ```
+
 
 ## Getting raw response
 
