@@ -33,12 +33,14 @@ module RSpotify
     def self.refresh_token(user_id)
       request_body = {
         grant_type: 'refresh_token',
-        refresh_token: @@users_credentials[user_id]['refresh_token']
+        refresh_token: @@users[user_id].credentials['refresh_token']
       }
       response = RestClient.post(TOKEN_URI, request_body, RSpotify.send(:auth_header))
       response = JSON.parse(response)
-      @@users_credentials[user_id]['token'] = response['access_token']
-      access_refresh_proc = @@users_credentials[user_id]['access_refresh_callback']
+      @@users[user_id].credentials['token'] = response['access_token']
+      @@users[user_id].credentials['expires_in'] = response['expires_in']
+      @@users[user_id].credentials['scope'] = response['scope']
+      access_refresh_proc = @@users[user_id].access_refresh_callback
       # If the access token expires and a new one is granted via the refresh
       # token, then this proc will be called with two parameters:
       # new_access_token and token_lifetime (in seconds)
@@ -62,7 +64,7 @@ module RSpotify
 
     def self.oauth_header(user_id)
       {
-        'Authorization' => "Bearer #{@@users_credentials[user_id]['token']}",
+        'Authorization' => "Bearer #{@@users[user_id].credentials['token']}",
         'Content-Type'  => 'application/json'
       }
     end
@@ -105,10 +107,12 @@ module RSpotify
       super(options)
 
       if credentials
-        @@users_credentials ||= {}
-        @@users_credentials[@id] = credentials
-        @credentials = @@users_credentials[@id]
+        @credentials = credentials
+        @access_refresh_callback = credentials['access_refresh_callback']
       end
+
+      @@users ||= {}
+      @@users[@id] = self
     end
 
     # Creates a playlist in user's Spotify account. This method is only available when the current
@@ -131,11 +135,11 @@ module RSpotify
     def create_playlist!(name, description: nil, public: true, collaborative: false)
       url = "users/#{@id}/playlists"
       request_data = {
-        name: name,
-        public: public,
-        description: description,
-        collaborative: collaborative
-      }.to_json
+                       name: name,
+                       public: public,
+                       description: description,
+                       collaborative: collaborative
+                     }.to_json
       response = User.oauth_post(@id, url, request_data)
       return response if RSpotify.raw_response
       Playlist.new response

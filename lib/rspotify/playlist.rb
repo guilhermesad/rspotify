@@ -227,13 +227,13 @@ module RSpotify
       user_ids = users.map(&:id).join(',')
       url = "#{@path}/followers/contains?ids=#{user_ids}"
 
-      users_credentials = if User.class_variable_defined?('@@users_credentials')
-        User.class_variable_get('@@users_credentials')
+      users = if User.class_variable_defined?('@@users')
+        User.class_variable_get('@@users')
       end
 
       auth_users = users.select do |user|
-        users_credentials[user.id]
-      end if users_credentials
+        users[user.id]
+      end if users
 
       if auth_users && auth_users.any?
         User.oauth_get(auth_users.first.id, url)
@@ -346,9 +346,9 @@ module RSpotify
     def reorder_tracks!(range_start, insert_before, **options)
       url = "#{@path}/tracks"
       data = {
-        range_start: range_start,
-        insert_before: insert_before
-      }.merge options
+               range_start: range_start,
+               insert_before: insert_before
+             }.merge options
 
       response = User.oauth_put(@owner.id, url, data.to_json)
       json = RSpotify.raw_response ? JSON.parse(response) : response

@@ -41,11 +41,11 @@ module RSpotify
     end
 
     def resolve_auth_request(user_id, url)
-      users_credentials = if User.class_variable_defined?('@@users_credentials')
-        User.class_variable_get('@@users_credentials')
+      users = if User.class_variable_defined?('@@users')
+        User.class_variable_get('@@users')
       end
 
-      if users_credentials && users_credentials[user_id]
+      if users && users[user_id]
         User.oauth_get(user_id, url)
       else
         get(url)
@@ -87,13 +87,13 @@ module RSpotify
     end
 
     def request_was_user_authenticated?(*params)
-      users_credentials = if User.class_variable_defined?('@@users_credentials')
-        User.class_variable_get('@@users_credentials')
+      users = if User.class_variable_defined?('@@users')
+        User.class_variable_get('@@users')
       end
 
       headers = get_headers(params)
-      if users_credentials
-        creds = users_credentials.map{|_user_id, creds| "Bearer #{creds['token']}"}
+      if users
+        creds = users.map{|_user_id, user| "Bearer #{user.credentials['token']}"}
 
         if creds.include?(headers['Authorization'])
           return true
