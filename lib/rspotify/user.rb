@@ -264,7 +264,10 @@ module RSpotify
       User.oauth_get(@id, url)
     end
 
-    # Returns all playlists from user
+    # Returns all playlists from user.  This method is only available when the current user has granted
+    # access to any scope. It will only return private playlists if the current user has granted access
+    # to the *playlist-read-private* scope. It will only return private playlists if the current user
+    # has granted access to the *playlist-read-collaborative.
     #
     # @param limit  [Integer] Maximum number of playlists to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param offset [Integer] The index of the first playlist to return. Use with limit to get the next set of playlists. Default: 0.
