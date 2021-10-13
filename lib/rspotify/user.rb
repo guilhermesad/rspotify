@@ -276,8 +276,8 @@ module RSpotify
     #           playlists.first.class #=> RSpotify::Playlist
     #           playlists.first.name  #=> "Movie Soundtrack Masterpieces"
     def playlists(limit: 20, offset: 0)
-      url = "users/#{@id}/playlists?limit=#{limit}&offset=#{offset}"
-      response = RSpotify.resolve_auth_request(@id, url)
+      url = "me/playlists?limit=#{limit}&offset=#{offset}"
+      response = User.oauth_get(@id, url)
       return response if RSpotify.raw_response
       response['items'].map { |i| Playlist.new i }
     end
