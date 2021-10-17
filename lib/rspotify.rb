@@ -8,6 +8,7 @@ module RSpotify
   autoload :Base,               'rspotify/base'
   autoload :Category,           'rspotify/category'
   autoload :Device,             'rspotify/device'
+  autoload :Episode,            'rspotify/episode'
   autoload :Player,             'rspotify/player'
   autoload :Playlist,           'rspotify/playlist'
   autoload :Recommendations,    'rspotify/recommendations'

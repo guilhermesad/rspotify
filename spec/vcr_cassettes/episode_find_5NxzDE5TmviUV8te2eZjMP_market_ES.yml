@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/5NxzDE5TmviUV8te2eZjMP?market=ES
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-IjA5Y2MyZTU4MTBiNGRmYTE5OGNhZTBhZDJmMjMwMmFhIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:08 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAMxXXW/aSBR9318xYl+T4G8gqiqVbwImFDtJN9sVGjxjmI3xWLYJoVX/+9rHNkpSaLN9Kg9XYuaec8+dLw5f/yCkRrdMyEUU80fBd4ttHNTIJamt0zRKLuv16CLxWHjhyfom0s/LrLrCrAblzFI85pueplJmeUuDGYqmcVNlXsPwzZZpstpZXoHxxItFlAoZgtsW3prygDhrHgQ8XPJ4xWMiEkLJv3IbhzQQSUpoyAjdpmsZX5BhNhnQlGfDSykfzsjnmkND0o9pmAjvQV6Su/WezGK5inmSiEeekPlWhKQjUsGTs881shNBQJacRNtlxr7mjMiQXHupzKoTVTsjmqKpF6XebUxzsYtNkutVFUPVWw0Vc/wpCoQn0nwijbe8HEx5LjtfPUC+ZqPZeBLJVPj7FwsqIx5elBPZsm7qPBKJZLxuTp++dHumu3kUN7fNlGv8/l97VsuYvqHIOub+CyYaiRdEj2rFlZwiK4jSTbB4vSfvove/77a8q0fvC+2CQe2P2hMbuuLYhb+rfVhzsVpjyyxDOSvGXh90cTjoIKjTpdWwTEtXss+SNrOvXqOl+56qGpqmqopveLqpLdVaybcTLF2XJbBnv1nxjOsXipu+6r+5eIY42fkv1PatJvsfjeelyT/FEUgW1ZUM9ou1TFKOc+PTIOFVRhTQPV0G/MVNDmi42mZCIJKH5zdO7cV4ea7KqbJcSDcF4E+1obbIOTl6kwqimAecJnzBsmsDTH7Az1XlXDW+T8hfZU8k1R1ldF/lJNtNNitFmD57bvxt3m7e16t2n0MS8expUw6vS7KWu2dU9JGKIF+dxYbGDzyt+v7QrZ1lsYc4QJwg2ojXiHNEF/EG8T6P7Q+IbUQwtPuI4GkPEUeIV4hTRHC2wdl2EMHcvkMEcwfMHTB0wNCBqg5UdcDQAUPnFhHYzl+IYOhCTxd1u2NEYLvAdpHT6yAiswfNPejpo2If2D5QfdQaQNUA/Q6wbgNgB9A5QOYAPQ4+IhYodDeAwgEUDqFniMwhcobIGWJtR2AegXmErkfIHEHbCJlXqHWFXq5meRwjfwwlY+gfI2cM7BjVJ9A/gf4Jep8gcwINE/BPwD+BkgnW1gbKRr6NKjbWykYtG73Y0Gmjlg1VNjhtsNlgsws2KLE/IWI1bOzFFFWm4J+CfwptUzBPwTlFp1MwT4G6Ro8zYGfAzoCdQdsM2Bn6mkHJDNVnqPsRqDmY58iZQ+ccOQ5mHayVg94d8Dvgd6DNQe8OqjhQ4mAFHCh0UNFB1w7UuthZFwwuFLrAukC5UOIC6wLrAutCjwuGG+i8gf4bjNxC2y0YbqH/DjmfoO0eXdxD2/1d+bxlr4Eno32cv+XlM1CNvzYR7poT6fuZP6IBiSTzaOYMpE8yd8KZyJzBleRkLlc0vCB9GQRyR3LIYZR0AhElJH+LSJS9tsSXMUkycE6SZpnL3GpssoEwTYgfyw1GK9dzUf0qHDNpp23aW41aLqtuxNfyyuqtYr851kbxfvdld20/1ED0razzFqeWkyWn2CqeY0btd1nj0on9uIPvvdhxQ/QGZ9CifqPlM8XiusE41T2mNTyDqx6zuNfQDd3jmkJ9o3ZgfGWKnjmT48boDSKYTrnZoorRZL7f4C1TVVqUe2qzqei+pi35kjc1pvlHRBTm6JSIyiC9ZSEazPKZr3PTpDpVPVWxLI2puqbpmuctmak3DGXp6UcXopBwuMA/NUo/sT7ZNE7dIt1HhZ3ZiCfOqu0/GKOXJ7D3FPFY8NDjVWJl/2NkHzKr6VSm2a2tjiD+k7WUZjVZlYaFOfhMUYwVt+4yn7s8fXcLD3RgKisVZus1VTl5eer/2rf/AAAA//8DAKi31X9WDwAA
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:08 GMT
+recorded_with: VCR 3.0.3
