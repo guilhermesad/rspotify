@@ -74,6 +74,10 @@ module RSpotify
       @resume_point      = options['resume_point'] || {}
       @uri               = options['uri']
 
+      @show = if options['show']
+        Show.new options['show']
+      end
+
       super(options)
     end
   end

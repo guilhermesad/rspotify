@@ -13,6 +13,7 @@ module RSpotify
   autoload :Playlist,           'rspotify/playlist'
   autoload :Recommendations,    'rspotify/recommendations'
   autoload :RecommendationSeed, 'rspotify/recommendation_seed'
+  autoload :Show,               'rspotify/show'
   autoload :Track,              'rspotify/track'
   autoload :TrackLink,          'rspotify/track_link'
   autoload :User,               'rspotify/user'
