@@ -5,13 +5,14 @@ module RSpotify
   class Recommendations < Base
     
     # Retrieve a list of available genres seed parameter values for recommendations. 
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<String>] 
     #
     # @example
     #          genres = RSpotify::Recommendations.available_genre_seeds
-    def self.available_genre_seeds
+    def self.available_genre_seeds(raw_response: false)
       response = RSpotify.get('recommendations/available-genre-seeds')
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
 
       response['genres']
     end
@@ -25,6 +26,7 @@ module RSpotify
     # @param seed_genres  [Array<String>] A list of any genres in the set of {https://developer.spotify.com/web-api/get-recommendations/#available-genre-seeds available genre seeds}.
     # @param seed_tracks  [Array<String>] A list of Spotify IDs for seed tracks.
     # @param market       [String]        Optional. An {https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2  ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to apply Track Relinking. Because min_*, max_* and target_* are applied to pools before relinking, the generated results may not precisely match the filters applied. Original, non-relinked tracks are available via the linked_from attribute of the relinked track response.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @option options     [Float]         :min_acousticness Hard floor on the confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.          
     # @option options     [Float]         :max_acousticness Hard ceiling on the confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic. 
     # @option options     [Float]         :target_acousticness Target value on the confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.
@@ -73,7 +75,7 @@ module RSpotify
     #          recommendations = RSpotify::Recommendations.generate(limit: 20, seed_tracks: ['0c6xIDDpzE81m2q797ordA'])
     #          recommendations = RSpotify::Recommendations.generate(seed_tracks: ['0c6xIDDpzE81m2q797ordA'], seed_artists: ['4NHQUGzhtTLFvgF5SZesLK'], market: 'ES')
     #          recommendations = RSpotify::Recommendations.generate(seed_tracks: ['0c6xIDDpzE81m2q797ordA'], seed_genres: ['alt_rock'], seed_artists: ['4NHQUGzhtTLFvgF5SZesLK'], target_energy: 1.0)
-    def self.generate(limit: 20, seed_artists: [], seed_genres: [], seed_tracks: [], market: nil, **options)
+    def self.generate(limit: 20, seed_artists: [], seed_genres: [], seed_tracks: [], market: nil, raw_response: false, **options)
       url = "recommendations?limit=#{limit}"
 
       url << "&seed_artists=#{seed_artists.join(',')}" if seed_artists.any?
@@ -92,7 +94,7 @@ module RSpotify
         RSpotify.get(url)
       end
 
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
 
       Recommendations.new response
     end

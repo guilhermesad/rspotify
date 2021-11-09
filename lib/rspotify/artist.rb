@@ -60,25 +60,27 @@ module RSpotify
     # @param offset     [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
     # @param album_type [String]  Optional. A comma-separated list of keywords that will be used to filter the response. If not supplied, all album types will be returned. Valid values are: album; single; appears_on; compilation.
     # @param market     [String]  Optional. (synonym: country). An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Supply this parameter to limit the response to one particular geographical market. If not supplied, results will be returned for all markets. Note if you do not provide this field, you are likely to get duplicate results per album, one for each market in which the album is available.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Album>]
     #
     # @example
     #           artist.albums
     #           artist.albums(album_type: 'single,compilation')
     #           artist.albums(limit: 50, country: 'US')
-    def albums(limit: 20, offset: 0, **filters)
+    def albums(limit: 20, offset: 0, raw_response: false, **filters)
       url = "artists/#{@id}/albums?limit=#{limit}&offset=#{offset}"
       filters.each do |filter_name, filter_value|
         url << "&#{filter_name}=#{filter_value}"
       end
 
       response = RSpotify.get(url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response['items'].map { |i| Album.new i }
     end
 
     # Returns array of similar artists. Similarity is based on analysis of the Spotify community’s {http://news.spotify.com/se/2010/02/03/related-artists listening history}.
     #
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Artist>]
     #
     # @example
@@ -87,17 +89,18 @@ module RSpotify
     #
     #           related_artists.size       #=> 20
     #           related_artists.first.name #=> "Miles Kane"
-    def related_artists
-      return @related_artists unless @related_artists.nil? || RSpotify.raw_response
+    def related_artists(raw_response: false)
+      return @related_artists unless @related_artists.nil? || return_raw_response?(raw_response)
       response = RSpotify.get("artists/#{@id}/related-artists")
 
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       @related_artists = response['artists'].map { |a| Artist.new a }
     end
 
     # Returns artist's 10 top tracks by country.
     #
     # @param country [Symbol] An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Track>]
     #
     # @example
@@ -105,11 +108,11 @@ module RSpotify
     #           top_tracks.class       #=> Array
     #           top_tracks.size        #=> 10
     #           top_tracks.first.class #=> RSpotify::Track
-    def top_tracks(country)
-      return @top_tracks[country] unless @top_tracks[country].nil? || RSpotify.raw_response
+    def top_tracks(country, raw_response: false)
+      return @top_tracks[country] unless @top_tracks[country].nil? || return_raw_response?(raw_response)
       response = RSpotify.get("artists/#{@id}/top-tracks?country=#{country}")
 
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       @top_tracks[country] = response['tracks'].map { |t| Track.new t }
     end
   end

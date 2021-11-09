@@ -20,23 +20,24 @@ module RSpotify
     # Retrieves AudioFeatures object(s) for the track id(s) provided
     #
     # @param ids [String, Array] Either a single track id or a list track ids. Maximum: 100 IDs.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [AudioFeatures, Array<AudioFeatures>]
     #
     # @example
     #           audio_features = RSpotify::AudioFeatures.find('1zHlj4dQ8ZAtrayhuDDmkY')
     #           audio_features = RSpotify::AudioFeatures.find(['1zHlj4dQ8ZAtrayhuDDmkY', '7ouMYWpwJ422jRcDASZB7P', '4VqPOruhp5EdPBeR92t6lQ'])
-    def self.find(ids)
+    def self.find(ids, raw_response: false)
       case ids
       when Array
         url = "audio-features?ids=#{ids.join(',')}"
         response = RSpotify.get(url)
-        return response if RSpotify.raw_response
+        return response if return_raw_response?(raw_response)
 
         response['audio_features'].map { |i| i.nil? ? nil : AudioFeatures.new(i) }
       when String
         url = "audio-features/#{ids}"
         response = RSpotify.get(url)
-        return response if RSpotify.raw_response
+        return response if return_raw_response?(raw_response)
 
         AudioFeatures.new response
       end

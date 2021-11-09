@@ -39,17 +39,18 @@ module RSpotify
     # @param limit   [Integer] Maximum number of albums to return. Maximum: 50. Default: 20.
     # @param offset  [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
     # @param country [String]  Optional. A country: an {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want the list of returned albums to be relevant to a particular country. If omitted, the returned albums will be relevant to all countries.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Album>]
     #
     # @example
     #           albums = RSpotify::Album.new_releases
     #           albums = RSpotify::Album.new_releases(country: 'US', limit: 10)
-    def self.new_releases(limit: 20, offset: 0, country: nil)
+    def self.new_releases(limit: 20, offset: 0, country: nil, raw_response: false)
       url = "browse/new-releases?limit=#{limit}&offset=#{offset}"
       url << "&country=#{country}" if country
       response = RSpotify.get(url)
 
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response['albums']['items'].map { |i| Album.new i }
     end
 
@@ -103,25 +104,26 @@ module RSpotify
     # @param limit  [Integer] Maximum number of tracks to return. Maximum: 50. Default: 50.
     # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of objects. Default: 0.
     # @param market [String] Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Default: nil.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Track>]
     #
     # @example
     #           album = RSpotify::Album.find('41vPD50kQ7JeamkxQW7Vuy')
     #           album.tracks.first.name #=> "Do I Wanna Know?"
-    def tracks(limit: 50, offset: 0, market: nil)
+    def tracks(limit: 50, offset: 0, market: nil, raw_response: false)
       last_track = offset + limit - 1
-      if @tracks_cache && last_track < 50 && !RSpotify.raw_response
+      if @tracks_cache && last_track < 50 && !return_raw_response?(raw_response)
         return @tracks_cache[offset..last_track]
       end
 
       url = "albums/#{@id}/tracks?limit=#{limit}&offset=#{offset}"
       url << "&market=#{market}" if market
       response = RSpotify.get(url)
-      json = RSpotify.raw_response ? JSON.parse(response) : response
+      json = return_raw_response?(raw_response) ? JSON.parse(response) : response
 
       tracks = json['items'].map { |i| Track.new i }
       @tracks_cache = tracks if limit == 50 && offset == 0
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
 
       tracks
     end

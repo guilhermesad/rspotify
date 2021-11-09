@@ -168,10 +168,10 @@ module RSpotify
       User.oauth_put(@user.id, url, {})
     end
 
-    def currently_playing
+    def currently_playing(raw_response: false)
       url = "me/player/currently-playing"
       response = RSpotify.resolve_auth_request(@user.id, url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       Track.new response["item"]
     end
 

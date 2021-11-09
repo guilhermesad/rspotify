@@ -18,6 +18,7 @@ module RSpotify
     #
     # @param limit    [Integer] Maximum number of playlists to return. Maximum: 50. Default: 20.
     # @param offset   [Integer] The index of the first playlist to return. Use with limit to get the next set of playlists. Default: 0.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @param country   [String] Optional. A country: an {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want the list of returned playlists to be relevant to a particular country. If omitted, the returned playlists will be relevant to all countries.
     # @param locale    [String] Optional. The desired language, consisting of a lowercase {http://en.wikipedia.org/wiki/ISO_639 ISO 639 language code} and an uppercase {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}, joined by an underscore. For details access {https://developer.spotify.com/web-api/get-list-featured-playlists/ here} and look for the locale parameter description.
     # @param timestamp [String] Optional. A timestamp in {http://en.wikipedia.org/wiki/ISO_8601 ISO 8601} format: yyyy-MM-ddTHH:mm:ss. Use this parameter to specify the user's local time to get results tailored for that specific date and time in the day. If not provided, the response defaults to the current UTC time. Example: "2014-10-23T09:00:00" for a user whose local time is 9AM.
@@ -27,14 +28,14 @@ module RSpotify
     #           playlists = RSpotify::Playlist.browse_featured
     #           playlists = RSpotify::Playlist.browse_featured(locale: 'es_MX', limit: 10)
     #           playlists = RSpotify::Playlist.browse_featured(country: 'US', timestamp: '2014-10-23T09:00:00')
-    def self.browse_featured(limit: 20, offset: 0, **options)
+    def self.browse_featured(limit: 20, offset: 0, raw_response: false, **options)
       url = "browse/featured-playlists?limit=#{limit}&offset=#{offset}"
       options.each do |option, value|
         url << "&#{option}=#{value}"
       end
 
       response = RSpotify.get(url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response['playlists']['items'].map { |i| Playlist.new i }
     end
 
@@ -43,19 +44,20 @@ module RSpotify
     # @param user_id [String]
     # @param id [String]
     # @param market [String] Optional. An {https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to apply Track Relinking
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Playlist]
     #
     # @example
     #           playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
     #           playlist.class #=> RSpotify::Playlist
     #           playlist.name  #=> "Movie Soundtrack Masterpieces"
-    def self.find(user_id, id, market: nil)
+    def self.find(user_id, id, market: nil, raw_response: false)
       url = "users/#{user_id}/"
       url << (id == 'starred' ? id : "playlists/#{id}")
       url << "?market=#{market}" if market
 
       response = RSpotify.resolve_auth_request(user_id, url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       Playlist.new response
     end
 
@@ -63,17 +65,18 @@ module RSpotify
     #
     # @param id [String]
     # @param market [String] Optional. An {https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to apply Track Relinking
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Playlist]
     #
     # @example
     #           playlist = RSpotify::Playlist.find_by_id('00wHcTN0zQiun4xri9pmvX')
     #           playlist.class #=> RSpotify::Playlist
     #           playlist.name  #=> "Movie Soundtrack Masterpieces"
-    def self.find_by_id(id, market: nil)
+    def self.find_by_id(id, market: nil, raw_response: false)
       url = "playlists/#{id}"
       url << "?market=#{market}" if market
       response = RSpotify.resolve_auth_request(nil, url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       Playlist.new response
     end
 
@@ -137,6 +140,7 @@ module RSpotify
     #
     # @param tracks [Array<Track>, Array<String>] Tracks to be added. Either array of Tracks or strings where each string is a valid spotify track uri. Maximum: 100 per request
     # @param position [Integer, NilClass] The position to insert the tracks, a zero-based index. Default: tracks are appended to the playlist
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Track>] The tracks added
     #
     # @example
@@ -149,7 +153,7 @@ module RSpotify
     #
     #           playlist.add_tracks!(tracks, position: 20)
     #           playlist.tracks[20].name #=> "Somebody That I Used To Know"
-    def add_tracks!(tracks, position: nil)
+    def add_tracks!(tracks, position: nil, raw_response: false)
       track_uris = nil
       if tracks.first.is_a? String
         track_uris = tracks.join(',')
@@ -163,7 +167,7 @@ module RSpotify
       @total += tracks.size
       @tracks_cache = nil
 
-      if RSpotify::raw_response
+      if return_raw_response?(raw_response)
         @snapshot_id = JSON.parse(response)['snapshot_id']
         return response
       end
@@ -247,14 +251,15 @@ module RSpotify
     # @param limit  [Integer] Maximum number of tracks to return. Maximum: 100. Default: 100.
     # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of objects. Default: 0.
     # @param market [String] Optional. An {https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to apply Track Relinking
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Track>]
     #
     # @example
     #           playlist = RSpotify::Playlist.find('wizzler', '00wHcTN0zQiun4xri9pmvX')
     #           playlist.tracks.first.name #=> "Main Theme from Star Wars - Instrumental"
-    def tracks(limit: 100, offset: 0, market: nil)
+    def tracks(limit: 100, offset: 0, market: nil, raw_response: false)
       last_track = offset + limit - 1
-      if @tracks_cache && last_track < 100 && !RSpotify.raw_response
+      if @tracks_cache && last_track < 100 && !return_raw_response?(raw_response)
         return @tracks_cache[offset..last_track]
       end
 
@@ -262,7 +267,7 @@ module RSpotify
       url << "&market=#{market}" if market
       response = RSpotify.resolve_auth_request(@owner.id, url)
 
-      json = RSpotify.raw_response ? JSON.parse(response) : response
+      json = return_raw_response?(raw_response) ? JSON.parse(response) : response
       tracks = json['items'].select { |i| i['track'] }
 
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
@@ -279,7 +284,7 @@ module RSpotify
 
       tracks.map! { |t| Track.new t['track'] }
       @tracks_cache = tracks if limit == 100 && offset == 0
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       tracks
     end
 
@@ -334,6 +339,7 @@ module RSpotify
     #
     # @param range_start   [Integer] The position of the first track to be reordered.
     # @param insert_before [Integer] The position where the tracks should be inserted. To reorder the tracks to the end of the playlist, simply set insert_before to the position after the last track.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @param range_length  [Integer] Optional. The amount of tracks to be reordered. Default: 1.
     # @param snapshot_id   [String]  Optional. The playlist's snapshot ID against which you want to make the changes.
     # @return [Playlist]
@@ -343,7 +349,7 @@ module RSpotify
     #           insert_before = 0
     #           # Move the tracks at index 10-14 to the start of the playlist
     #           playlist.reorder_tracks!(range_start, insert_before, range_length: 5)
-    def reorder_tracks!(range_start, insert_before, **options)
+    def reorder_tracks!(range_start, insert_before, raw_response: false, **options)
       url = "#{@path}/tracks"
       data = {
         range_start: range_start,
@@ -351,7 +357,7 @@ module RSpotify
       }.merge options
 
       response = User.oauth_put(@owner.id, url, data.to_json)
-      json = RSpotify.raw_response ? JSON.parse(response) : response
+      json = return_raw_response?(raw_response) ? JSON.parse(response) : response
 
       @snapshot_id = json['snapshot_id']
       @tracks_cache = nil

@@ -275,6 +275,8 @@ RSpotify.raw_response = true
 RSpotify::Artist.search('Cher') #=> (String with raw json response)
 ```
 
+Alternatively, pass `raw_response: true` to the individual method you are calling to override the app configuration.
+
 ## Notes
 
 If you'd like to use OAuth outside rails, have a look [here](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow) for the requests that need to be made. You should be able to pass the response to RSpotify::User.new just as well, and from there easily create playlists and more for your user.

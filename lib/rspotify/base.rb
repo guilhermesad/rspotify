@@ -37,24 +37,24 @@ module RSpotify
       end
     end
 
-    def self.find_many(ids, type, market: nil)
+    def self.find_many(ids, type, market: nil, raw_response: false)
       type_class = RSpotify.const_get(type.capitalize)
       path = "#{type}s?ids=#{ids.join ','}"
       path << "&market=#{market}" if market
 
       response = RSpotify.get path
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response["#{type}s"].map { |t| type_class.new t if t }
     end
     private_class_method :find_many
 
-    def self.find_one(id, type, market: nil)
+    def self.find_one(id, type, market: nil, raw_response: false)
       type_class = RSpotify.const_get(type.capitalize)
       path = "#{type}s/#{id}"
       path << "?market=#{market}" if market
 
       response = RSpotify.get path
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       type_class.new response unless response.nil?
     end
     private_class_method :find_one
@@ -79,6 +79,7 @@ module RSpotify
     # @param limit  [Integer]      Maximum number of objects to return. Maximum: 50. Default: 20.
     # @param offset [Integer]      The index of the first object to return. Use with limit to get the next set of objects. Default: 0.
     # @param market [String, Hash] Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code} or the hash { from: user }, where user is a RSpotify user authenticated using OAuth with scope *user-read-private*. This will take the user's country as the market value. (Playlist results are not affected by the market parameter.) For details access {https://developer.spotify.com/web-api/search-item here} and look for the market parameter description.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Album>, Array<Artist>, Array<Track>, Array<Playlist>, Array<Base>]
     #
     # @example
@@ -88,7 +89,7 @@ module RSpotify
     #           albums  = RSpotify::Base.search('AM', 'album', market: { from: user })
     #
     #           RSpotify::Base.search('Arctic', 'album,artist,playlist').total #=> 2142
-    def self.search(query, types, limit: 20, offset: 0, market: nil)
+    def self.search(query, types, limit: 20, offset: 0, market: nil, raw_response: false)
       query = CGI.escape query
       types.gsub!(/\s+/, '')
 
@@ -103,7 +104,7 @@ module RSpotify
         RSpotify.get(url)
       end
 
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
 
       types = types.split(',')
       result = types.flat_map do |type|
@@ -113,6 +114,10 @@ module RSpotify
 
       insert_total(result, types, response)
       result
+    end
+
+    def self.return_raw_response?(raw_response)
+      RSpotify.raw_response || raw_response
     end
 
     def initialize(options = {})
@@ -203,6 +208,10 @@ module RSpotify
       attr = "@#{method_name}"
       return super if method_name.match(/[\?!]$/) || !instance_variable_defined?(attr)
       true
+    end
+
+    def return_raw_response?(raw_response)
+      self.class.return_raw_response?(raw_response)
     end
 
     protected
