@@ -118,6 +118,7 @@ module RSpotify
     #
     # @param name [String] The name for the new playlist
     # @param public [Boolean] Whether the playlist is public or private. Default: true
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Playlist]
     #
     # @example
@@ -128,7 +129,7 @@ module RSpotify
     #           playlist = user.create_playlist!('my-second-playlist', public: false)
     #           playlist.name   #=> "my-second-playlist"
     #           playlist.public #=> false
-    def create_playlist!(name, description: nil, public: true, collaborative: false)
+    def create_playlist!(name, description: nil, public: true, collaborative: false, raw_response: false)
       url = "users/#{@id}/playlists"
       request_data = {
         name: name,
@@ -137,7 +138,7 @@ module RSpotify
         collaborative: collaborative
       }.to_json
       response = User.oauth_post(@id, url, request_data)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       Playlist.new response
     end
 
@@ -145,10 +146,10 @@ module RSpotify
     #
     # @example
     #           player = user.player
-    def player
+    def player(raw_response: false)
       url = "me/player"
       response = User.oauth_get(@id, url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response ? Player.new(self, response) : Player.new(self)
     end
 
@@ -157,6 +158,7 @@ module RSpotify
     # @param limit  [Integer] Optional. The number of entities to return. Default: 20. Minimum: 1. Maximum: 50.
     # @param after  [String] Optional. A Unix timestamp in milliseconds. Returns all items after (but not including) this cursor position. If after is specified, before must not be specified.
     # @param before [String] Optional. A Unix timestamp in milliseconds. Returns all items before (but not including) this cursor position. If before is specified, after must not be specified.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Track>]
     #
     # @example
@@ -165,15 +167,15 @@ module RSpotify
     #           recently_played.first.name #=> "Ice to Never"
     #           user.recently_played(limit: 50)
     #           user.recently_played(after: '1572561234', before: '1572562369')
-    def recently_played(limit: 20, after: nil, before: nil)
+    def recently_played(limit: 20, after: nil, before: nil, raw_response: false)
       url = "me/player/recently-played?limit=#{limit}"
       url << "&after=#{after}" if after
       url << "&before=#{before}" if before
 
       response = RSpotify.resolve_auth_request(@id, url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
 
-      json = RSpotify.raw_response ? JSON.parse(response) : response
+      json = return_raw_response?(raw_response) ? JSON.parse(response) : response
       json['items'].map do |t|
         data = t['track']
         data['played_at'] = t['played_at']
@@ -225,6 +227,7 @@ module RSpotify
     # @param type  [String]  The ID type: currently only "artist" is supported
     # @param limit [Integer] Maximum number of items to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param after [String]  Optional. The last artist ID retrieved from the previous request.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Artist>]
     #
     # @example
@@ -232,13 +235,13 @@ module RSpotify
     #           followed_artists.first.class #=> RSpotify::Artist
     #
     #           followed_artists = user.following(type: 'artist', limit: 50)
-    def following(type: nil, limit: 20, after: nil)
+    def following(type: nil, limit: 20, after: nil, raw_response: false)
       type_class = RSpotify.const_get(type.capitalize)
       url = "me/following?type=#{type}&limit=#{limit}"
       url << "&after=#{after}" if after
 
       response = User.oauth_get(@id, url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response["#{type}s"]['items'].compact.map { |i| type_class.new i }
     end
 
@@ -267,10 +270,11 @@ module RSpotify
     # Returns all playlists from user.  This method is only available when the current user has granted
     # access to any scope. It will only return private playlists if the current user has granted access
     # to the *playlist-read-private* scope. It will only return private playlists if the current user
-    # has granted access to the *playlist-read-collaborative.
+    # has granted access to the *playlist-read-collaborative* scope.
     #
     # @param limit  [Integer] Maximum number of playlists to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param offset [Integer] The index of the first playlist to return. Use with limit to get the next set of playlists. Default: 0.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Playlist>]
     #
     # @example
@@ -278,10 +282,10 @@ module RSpotify
     #           playlists.class       #=> Array
     #           playlists.first.class #=> RSpotify::Playlist
     #           playlists.first.name  #=> "Movie Soundtrack Masterpieces"
-    def playlists(limit: 20, offset: 0)
+    def playlists(limit: 20, offset: 0, raw_response: false)
       url = "me/playlists?limit=#{limit}&offset=#{offset}"
       response = User.oauth_get(@id, url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response['items'].map { |i| Playlist.new i }
     end
 
@@ -327,24 +331,25 @@ module RSpotify
     # @param limit  [Integer] Maximum number of tracks to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param offset [Integer] The index of the first track to return. Use with limit to get the next set of tracks. Default: 0.
     # @param market [String]  Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Track>]
     #
     # @example
     #           tracks = user.saved_tracks
     #           tracks.size       #=> 20
     #           tracks.first.name #=> "Do I Wanna Know?"
-    def saved_tracks(limit: 20, offset: 0, market: nil)
+    def saved_tracks(limit: 20, offset: 0, market: nil, raw_response: false)
       url = "me/tracks?limit=#{limit}&offset=#{offset}"
       url << "&market=#{market}" if market
       response = User.oauth_get(@id, url)
-      json = RSpotify.raw_response ? JSON.parse(response) : response
+      json = return_raw_response?(raw_response) ? JSON.parse(response) : response
 
       tracks = json['items'].select { |i| i['track'] }
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
         Time.parse added_at
       end
 
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       tracks.map { |t| Track.new t['track'] }
     end
 
@@ -404,21 +409,22 @@ module RSpotify
     # @param limit  [Integer] Maximum number of albums to return. Maximum: 50. Minimum: 1. Default: 20.
     # @param offset [Integer] The index of the first album to return. Use with limit to get the next set of albums. Default: 0.
     # @param market [String]  Optional. An {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Album>]
     #
     # @example
     #           albums = user.saved_albums
     #           albums.size       #=> 20
     #           albums.first.name #=> "Launeddas"
-    def saved_albums(limit: 20, offset: 0, market: nil)
+    def saved_albums(limit: 20, offset: 0, market: nil, raw_response: false)
       url = "me/albums?limit=#{limit}&offset=#{offset}"
       url << "&market=#{market}" if market
       response = User.oauth_get(@id, url)
-      json = RSpotify.raw_response ? JSON.parse(response) : response
+      json = return_raw_response?(raw_response) ? JSON.parse(response) : response
 
       albums = json['items'].select { |i| i['album'] }
 
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       albums.map { |a| Album.new a['album'] }
     end
 
@@ -449,16 +455,17 @@ module RSpotify
     # @param limit  [Integer] Optional. The number of entities to return. Default: 20. Minimum: 1. Maximum: 50.
     # @param offset [Integer] Optional. The index of the first entity to return. Default: 0 (i.e., the first track). Use with limit to get the next set of entities.
     # @param time_range [String] Optional. Over what time frame the affinities are computed. Valid values: long_term (calculated from several years of data and including all new data as it becomes available), medium_term (approximately last 6 months), short_term (approximately last 4 weeks). Default: medium_term.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Artist>]
     #
     # @example
     #           top_artists = user.top_artists
     #           top_artists.size       #=> 20
     #           top_artists.first.name #=> "Nine Inch Nails"
-    def top_artists(limit: 20, offset: 0, time_range: 'medium_term')
+    def top_artists(limit: 20, offset: 0, time_range: 'medium_term', raw_response: false)
       url = "me/top/artists?limit=#{limit}&offset=#{offset}&time_range=#{time_range}"
       response = User.oauth_get(@id, url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response['items'].map { |i| Artist.new i }
     end
 
@@ -467,16 +474,17 @@ module RSpotify
     # @param limit  [Integer] Optional. The number of entities to return. Default: 20. Minimum: 1. Maximum: 50.
     # @param offset [Integer] Optional. The index of the first entity to return. Default: 0 (i.e., the first track). Use with limit to get the next set of entities.
     # @param time_range [String] Optional. Over what time frame the affinities are computed. Valid values: long_term (calculated from several years of data and including all new data as it becomes available), medium_term (approximately last 6 months), short_term (approximately last 4 weeks). Default: medium_term.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Track>]
     #
     # @example
     #           top_tracks = user.top_tracks
     #           top_tracks.size       #=> 20
     #           top_tracks.first.name #=> "Ice to Never"
-    def top_tracks(limit: 20, offset: 0, time_range: 'medium_term')
+    def top_tracks(limit: 20, offset: 0, time_range: 'medium_term', raw_response: false)
       url = "me/top/tracks?limit=#{limit}&offset=#{offset}&time_range=#{time_range}"
       response = User.oauth_get(@id, url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response['items'].map { |i| Track.new i }
     end
 
@@ -515,16 +523,17 @@ module RSpotify
 
     # Returns the user's available devices
     #
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Device>]
     #
     # @example
     #           devices = user.devices
     #           devices.first.id #=> "5fbb3ba6aa454b5534c4ba43a8c7e8e45a63ad0e"
-    def devices
+    def devices(raw_response: false)
       url = "me/player/devices"
       response = RSpotify.resolve_auth_request(@id, url)
 
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response['devices'].map { |i| Device.new i }
     end
   end

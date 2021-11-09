@@ -14,13 +14,14 @@ module RSpotify
     # @param id      [String] The {https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids Spotify ID} of the category
     # @param country [String] Optional. A country: an {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter to ensure that the category exists for a particular country.
     # @param locale  [String] Optional. The desired language, consisting of a lowercase {http://en.wikipedia.org/wiki/ISO_639 ISO 639 language code} and an uppercase {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}, joined by an underscore. For details access {https://developer.spotify.com/web-api/get-category/ here} and look for the locale parameter description.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Category]
     #
     # @example
     #           category = RSpotify::Category.find('party')
     #           category = RSpotify::Category.find('party', country: 'US')
     #           category = RSpotify::Category.find('party', locale: 'es_MX')
-    def self.find(id, **options)
+    def self.find(id, raw_response: false, **options)
       url = "browse/categories/#{id}"
       url << '?' if options.any?
 
@@ -30,7 +31,7 @@ module RSpotify
       end
 
       response = RSpotify.get(url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       Category.new response
     end
 
@@ -40,20 +41,21 @@ module RSpotify
     # @param offset [Integer] Optional. The index of the first category to return. Use with limit to get the next set of categories. Default: 0.
     # @param country [String] Optional. A country: an {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to narrow the list of returned categories to those relevant to a particular country. If omitted, the returned categories will be globally relevant.
     # @param locale  [String] Optional. The desired language, consisting of a lowercase {http://en.wikipedia.org/wiki/ISO_639 ISO 639 language code} and an uppercase {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}, joined by an underscore. For details access {https://developer.spotify.com/web-api/get-category/ here} and look for the locale parameter description.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Category>]
     #
     # @example
     #           categories = RSpotify::Category.list
     #           categories = RSpotify::Category.list(country: 'US')
     #           categories = RSpotify::Category.list(locale: 'es_MX', limit: 10)
-    def self.list(limit: 20, offset: 0, **options)
+    def self.list(limit: 20, offset: 0, raw_response: false, **options)
       url = "browse/categories?limit=#{limit}&offset=#{offset}"
       options.each do |option, value|
         url << "&#{option}=#{value}"
       end
 
       response = RSpotify.get(url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response['categories']['items'].map { |i| Category.new i }
     end
 
@@ -80,13 +82,14 @@ module RSpotify
     # @param limit  [Integer] Maximum number of playlists to return. Maximum: 50. Default: 20.
     # @param offset [Integer] The index of the first playlist to return. Use with limit to get the next set of playlists. Default: 0.
     # @param country [String] Optional. A country: an {http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2 country code}. Provide this parameter if you want to narrow the list of returned playlists to those relevant to a particular country. If omitted, the returned playlists will be globally relevant.
+    # @param raw_response [Boolean] Whether the return value should be the raw JSON response or parsed into RSpotify models
     # @return [Array<Playlist>]
     #
     # @example
     #           playlists = category.playlists
     #           playlists = category.playlists(country: 'BR')
     #           playlists = category.playlists(limit: 10, offset: 20)
-    def playlists(limit: 20, offset: 0, **options)
+    def playlists(limit: 20, offset: 0, raw_response: false, **options)
       url = "browse/categories/#{@id}/playlists"\
             "?limit=#{limit}&offset=#{offset}"
 
@@ -95,7 +98,7 @@ module RSpotify
       end
 
       response = RSpotify.get(url)
-      return response if RSpotify.raw_response
+      return response if return_raw_response?(raw_response)
       response['playlists']['items'].map { |i| Playlist.new i }
     end
   end
