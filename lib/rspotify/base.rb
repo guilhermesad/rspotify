@@ -116,6 +116,10 @@ module RSpotify
       result
     end
 
+    def self.return_raw_response?(raw_response)
+      RSpotify.raw_response || raw_response
+    end
+
     def initialize(options = {})
       @external_urls = options['external_urls']
       @href          = options['href']
@@ -207,7 +211,7 @@ module RSpotify
     end
 
     def return_raw_response?(raw_response)
-      RSpotify.raw_response || raw_response
+      self.class.return_raw_response?(raw_response)
     end
 
     protected

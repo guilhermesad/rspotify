@@ -342,9 +342,8 @@ module RSpotify
       url = "me/tracks?limit=#{limit}&offset=#{offset}"
       url << "&market=#{market}" if market
       response = User.oauth_get(@id, url)
-      json = return_raw_response?(raw_response) ? JSON.parse(response) : response
 
-      tracks = json['items'].select { |i| i['track'] }
+      tracks = response['items'].select { |i| i['track'] }
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
         Time.parse added_at
       end
