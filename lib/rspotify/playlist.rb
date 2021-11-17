@@ -267,8 +267,7 @@ module RSpotify
       url << "&market=#{market}" if market
       response = RSpotify.resolve_auth_request(@owner.id, url)
 
-      json = return_raw_response?(raw_response) ? JSON.parse(response) : response
-      tracks = json['items'].select { |i| i['track'] }
+      tracks = response['items'].select { |i| i['track'] }
 
       @tracks_added_at = hash_for(tracks, 'added_at') do |added_at|
         Time.parse added_at
