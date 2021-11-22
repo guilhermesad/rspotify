@@ -1,0 +1,694 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/search?limit=20&market=CA&offset=0&q=Tredje%20rikets%20knarkande%20granskas&type=episode
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=7200
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:03 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:04 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/2avPHD55yvxBnStQbn4UFg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-IjMzNzZhN2Y2MmMyODExOWE0MzQwMmY0NzUyZTkxZTZjIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:04 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:04 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/7xuDGjOv1hBSfdtnbDFTyN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-IjI1ZmNmMzhiOTRlMDJjY2JhYzcxY2U4MGNhOGExZjA0Ig=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:04 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAOxY227bSBJ9n69o6Dm2qRslGYNZRFIs2ZYUjakos95dCE2yKbVFkUQ3qUQY5G+SX/AP6Mem+pBUfFPWOy8LDOalEHdXnXOqurtYyu8/MVbhmS/jRaLEVopPi0yFFXbOKqs0TfT52Vlyqj0/OvXis01SPym8zqqWsPxGvW55ttsK7KAdiI7l+rV6x2rYjVqd11qiLoJO5Y1h8IX2lExSGUfAHmaKrXnEglhFnAVK+DrY3ytf8SUL918VZ7HWjKcp/XWvOfP5UkSareMoCOU6Feof7AJBsdJrrgSLvRXbyFCmFLySOo2VXAvFNvv7VDPJdGpSJD4iAawv9TojHEO+/7YkKRvhMx6Fwo9ktGR8y5ytUHIpNNvfk3xfLlWuNAepWxbbf1NMC59HpwxyRERUk51Ouc+qrVqVySgSLienkLhSluy/MeOkt5TMmjMjc8PXqU6lWTY5GOwtj/yQ+6JUQKBLlUXkcspmsSu5ph0eiVD6LFX7r0FAFKjhCTDKKpXFidhUUKrsIw9DIk5FwfW8XhGbreIN4d/E6ep7sQy30vt7kryigytPijJ6Xgq2vIvVd+2axRvkY4pKp3EXyiXIt1Sj76cv8uvw/ejjDaienTvcXEmOyyXXp6wvtM5S8j4UYiuhKiDhyH3Ml1Gm2Xz/lTJXrorfMCp5JsIQRz7bKU6nRCR0CEwTkiv0WkmSzxJKIc5P1SXIO6Kme1FtWdZJykNK37jTdsTTTK15ynWq4iAvSnHGlOApe0/5ajp7veWKFBb1Fgk5k/xYsb701mzIlZKaLqm5JoSaX0xTiSzdcHMrDVp+T+lQlsRCV2i9/3bYKjhPizeXKW4e3GKjzZur2e2mZVnYEp+TUHoyNesBD7UoVqlAEQ9NB0DI77RK6zqJUxnsHjWFOKHbWGxQa9iciYS0++Ks9TnrD+7eb6urrhP4aeT2L2a7SYWQvoBkpUTwCIkn8hHQtlpi6WNgOVC6CRd/+b7ys6vOfoH5u8P8XzrMv6O/W8zRFiN9vLofPVO5oQKjm/yr7CcrIZcr9B67gX5Ea0+HDnkYOgBwxl27ZTdtugiW5fI29xrNliXcRiDadq3TtIOa4L5t80qB90n66aqgQO95Tl63/gx5M6gGryaniCPkduNPcAd22/8fEjfU7D/5KehF2d3D3WIV0z31Hzd/8khCvuNuKMxGqrJ8PeTRMiMhEKm3lUeLxbma9YIo4pvc9cVuZV5f+fiePbwcWolQcC0WPk9zoJpVq55Y7ZN69bmDmVk9qcvu7/Nd6aOzDe3GMkoffMiCzGRv0nyS/cMQLR98NK3Dd0uv4k8PoPiWy9AUa7Hhai3SshJv+5U3ZN/BDmBHsGPY97A3sDPYD7C3xnbfwnZhgdC9gAVOdwh7CXsFO4EFZheYXQcWyN2PsEDuAbkHhB4QelDVg6oeEHpA6M1hEdv7JywQ+tDTB2//GhaxfcT24fOuBwvPd9D8DnouwHiB2AtEXYBrAFUD5DtA3QaIHUDnAJ4D5Dj4FTaPQnYDKBxA4RB6hvAcwmcInyFqewnkSyBfIutLeF5C2yU8r8B1hVyupsZew/8aSq6h/xo+14i9BvsI+kfQP0LuI3iOoGEE/BHwR1AyQm3HiBrDfwyWMWo1BtcYuYyhcwyuMVSNgTkG2hho4xwNSsa/waIaY5zFBCwT4E+AP4G2CZAnwJwg0wmQJ4h6jxyniJ0idorYKbRNETtFXlMomYJ9Ct5fEXUD5Bv43EDnDXwc7DqolYPcHeA7wHegzUHuDlgcKHFQAQcKHTA6yNqB2hlOdgaEGRTOEDtD1AxKZoidIXaG2Bn0zIDwATo/QP8HrMyhbQ6EOfR/hM9v0HaLLG6h7fZj0fOoG3hxslOmtRdtoFx/Op7OJTMd0Dem/ERHZumUvY3Mp5tGlyxdSvqXOGcTSR/cAfVaXTb3F+f245P7a2d309vO6m3XaTQ+37nz+W19Ete7u4uqf1UB0JeC5zXDuwHTx9BKnJdm9+PFwfz7qgIVA8mP2Z+PJC8PJa/4OrcbrtdqWC2vxe2qaFvNWrtRrzZcEbTdjvCbvOXRnzW7ckB8Mpg8mA5eHk5eIaLhtjtBm2YAbteaXmDVgk47aFtuh8YF3qy5drPTaLhB7QUR+YByTEQ5pLxCg+dVRYPKIOqiyat2x6/VmzXRrvpeldvtKvdarutZrv9iIXIJh1fzX4eVH00gtEfjq+SLdJfkAwT+d6s8+8N8MqcfLGaSTbTi+Ak3zK/cYZBKMjeUekVziXE//Ni44Q/Q0piG9EX5c9U4Ng9D5YEfk8Nh2pP5Wv5mzs3e+fGXl48eB6SCKJ9xnkIVm+fHfoB/+QMAAP//AwCv9hVC6xMAAA==
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:05 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/2EPdE5gPNGeEUJD9mBKf3P
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-IjVjNmI4MGM2ODA4ZGZiYmVhODI2NmVjZjY0YjhiYjEyIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:05 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:05 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/0MPuKWvKo6YCYBniGTcTmd
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-IjljMTc1ZWZhZDk2NzllZjE5ZGM3NDRiNTc0Mjk2ZmEwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:05 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:06 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/5NpCD13gJ0ON049YIS2LcS
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-IjI2MDEzODNlY2ViMTNjYjEwOTIxNWJiN2M3OTBlYzJiIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:06 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:06 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/0AmYvo3ESvGVv0NW2BundY
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-ImIxM2YzZTg5MzZiZjdjYTIwNDIxZjgwNGJjMDJkODNiIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:06 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAOxZWXIbyRH99ynK+DA9ESQIgCS4SGIEN4EUAYhDgNRiORjV3dVAqdeoqoYMjRXhO/gC80FdQQcY3MQncebrBgWR4liSJ8JLaD5qiOrKly+zsnNp/fQ7IWqyCHR2lRs10erNVWHimtgRtbFzud1ZXc3r1g/Sup+tJvnaSnVq1Qu8jXCj6fsyaG61Wpuet9b0Nv3W+uZ2S6774XpTBa1NX9WWWUOgrG907nSWArs/uzYilW+1dcqkUjg50k4kMnIqFSqkTWF0ZAM5sp6RaUC7s/dGNLfX1kTmj4WdkmAinbaRE5HJrJVOyDiWgg4bKXJpnCaQfPbem30wryURENJ4yilSowIhnRNZEmYmkWI4tVFMcpViVlZSI3QpdKCyOBvptL4Xx06no0XeIwIXEx3MqbNZ9L+Qtj1lVKBiq4RO+TfhulKDdWZ2PSFKxFyPaBePmRHpC0MprB6JWHkqtUYWSf1pMiF2MakmaBsRxUXz62IQEUFmw8RCMltaEZrZezqczN5beipT4XQciyLVE9KvyQsqrYv+RyszM5KpJi/SDbEC2iJ8fywXverriY7vnC1VhdKP2A6VEk9pcEvR1ESZKVXbaOqcWjhRF0dRlmaJTueAID5W8YJD3OvZNRlmCutYyuo0oD8NyRSOjBrTUzutjFMlHFN3KjN8/SqO2ZgiLSHTInT1EyEnNtUE3my16G+RZwFf+TG5gqSk6BfCysTJmKzITTYyMolVIIm3uDAeae0SC/J/UEZSj0ONxCk+y91llgqVtWS6FuM5LEfJRaJm7xdvYZmCUAwpUF4rca4jRbd5SAHBYUSxI5yh6OGAIt9otXDW8FlhacOT7DeDmKFoJxS6NBOIJ+JoQgFEEBrhe1u4fqwdO2dCLgxUKZ/5kSWIJKN3I88zYsg3zPevy+gd0V2QLzh2TthJHr817ASK5ZiiYCRFRMZJCkZL0Ug+TsjtAd4+9iFpEoO9lYR0gvyRSa0T57MP42SZzaTbCIkA35WdfaBXu3CJJJ0lVysyndqIXp40chKvXL1XWB3t3Fj9TI4oJJfoZE5eEZ3ZBwo6E8yuk0SZIh3tiIFWo5CcGVhP0dVOEFaJNJbiVU7cWIkLCg4VDJx0xJpuV6dKHGQmt2KfDFgWvlEU+hMl/CxJstQ+EM90pEVPBVrWf/m5O7u2O3eu4R9/+7sYjjXtnCvNqpw4y94oegsGSgnpS+sowyaruSH3+VNBmUnM/2YnZ7lbyQrHuYRzFl9MvUqthcHPq8Ryal1rtVtrWw08Un/JY+1rx/uhpFRU7SJ3xZzoIfIT7dK+zTOnw+knuZ/cmNarB+Cncm2zQK029pIXk2ztaDDpXE4a/Wet/SINXtQI6R2UjI0KP0GSuf4EaNKcY9n7wEogl8RXt8vHw3z3f7KCPFzNdx96Zpf4/6eKyQKF73Xlt6wrC479XmLKErPgkv+ParNg0H9b4QG1fPcPqWfzB9WPryxFlXVidffhmG0U1k1j9WjJ5zSwMzJq+oDqUupWrH6rdhr1zQ2VPFjaRQV7KD9zeomysqGc9GjpyqNcES0Jo+JHS2nGZYWiIM2oSihjyHGCC8ajpZtqcbsgLu3e2Xq4Kne/qE6yXWUx0QHKx6/VG53IkUJZ/NO8MI6VHo1RRNvrKKy0d3tI0jdDEgBWpdfebG+01xr0nye35Hpzaz1ca4TbG36r7W00g3VvY2u75dcqvDc6cONKBYroXeWE9Q3KN8Jm+MXKSeIe5e31b9AdtreCrzCcVYs/l7dgr+ZtSjy9Gmec9T7tYuhEHsup9GLFD5wpyn2Ks1FBREBSpbVPNqt75f1KUSqT8uhi4rKfr7lVgeUWYoWWbfFHTqBrP5Q6KLQVJcqrgF5fILYarcZKY3tlrXH3AA/bvrbzfiaQ0/kZWyT0lFKPW2jNwoLdwPbecsOiSJlAqzawcdOJ2XH2ZgFKTiTVWvLaFeUetrVyyd5hbZnWI6wdrF2sPaxPsZ5jHWK9wPqS1/09rPtYgbD/GCtw9o+xnmB9grWPFZj7wNwfYAXy/jOsQD4A8gEQDoBwAFYHYHUAhAMgHFxihezBC6xAOASfQ+g9PMUK2UPIHuLM0QFWnDwC5yPweQyNjyH7GFKPoasDVh3Y24HfOpDtgGcHJzuwsfMj1lIK1nXAsAOGx+BzjJPHOHOMM8fw7QmQT4B8AqtPcPIE3E5w8gl0PYEtT854PcX5UzA5Bf9TnDmF7Cm0d8G/C/5d2N7FyS44dIHfBX4XTLrwbQ9SPZzvQUsPvupBVw+29MCzB109sOoBswe0HtB6JRqY9J5jhTd6uIs+tPSB3wd+H9z6QO4Dsw9L+0DuQ+opbDyD7BlkzyB7Bm5nkD2DXWdgcgbtZ9D7I6TOgXyOM+fgeY4zAzwdwFcD2D4A/gD4A3AbwPYBtAzAZAAPDMBwAI0DWD0A2yFudgiEIRgOITuE1BBMhpAdQnYI2SH4DIFwAZ4X4H+BnUtwuwTCJfg/w5nn4PYSVrwEt5fPquRH2cDP8qnhHF+lgfn+7YFrsXPlzpEaWi7H1ERRX8UNFrXZ3JJzdz5Gj0cJyqDr4tTJO4ZnFOr/TIyO7myx7QXmrc53WbzOCi4ApBq43KMSiXm7q1Ju9uriUhrK29QO0agnbDy7znNuNLVIp3Lehy+L4KOGm86bW8moIOrUSLICyrmUTK1MHc9i1zyVlb3ymMcknj0SnlpcNZnQWIhdbomb7UZjhVDpMGYGz5DWcvhLcm6sqaYUeT7irhW6KIPHJbgXa+rEXxd5MI2qGUeLZFqOhFRySGBCbR4elHNHhNGprEYWLrXE2OZ0WTTx0U98Vsj5VtADzx0GA2wWcwEq7yYLQ0PtH40/1GnryXKlgHvdMRUKuhjcILXWdIpgSjxP2bhYGCPI54bwI3YzXWk1U7OVMg6IJRXn2ftIj1z9l58XA4kbUbonjL03l0qdO0+l6vf/7oeR+75/3P8F5Eu/gXBFXW12xy/etg/b+eXFJH6+fqHi7sRkNQC9q/R8yUcQBrP3oc1x7vkG8v2t/P5W/iZvZTUvfvnLuTAq5jcDIEa4V7V7Z7hXNcx/r2ppFmZxnL15VfstprqPc92vv0V3J7vPz3bfMN21tpTc9Nvb/oYXrnmbodfy1v32hqrdIN6a7xaGrM/PeN8w5X0FiXLOu4/EfNb7hmnvqxxRUrjpOf7lzPeZQc5OPvYyCX8HuXLTvBy/8I+a87u/GfPmIV5PC2SaW+ltfj4vKAHYsTKLQpw48LFF/FXscdzOT7uMkszV/HM2izS3t+bP5nwwh90M0brcK2vBDj/bub+ilIPcDVKlqJwYb0NVD3fu+0D/7p8AAAD//wMAbWr4W/IdAAA=
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:06 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/62LPybkicCCEOR89YcKVTA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-IjNkNzJjMWMyYmUyYWRiMTVkOGU4MGQ0Njk4YjUwYTk0Ig=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:06 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:07 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/2LBIvIqx5ihlslX5uByk71
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-IjJlZTYyNDlhMjFmODk3MDZkNWYxYTBhYzZmNjA5NmRiIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:07 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:07 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/1ZNASXCRig90xY0WBfoFgM
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-ImM0ZjE3NTllOWJhNjE4ODVkZmI1MjkxMzg4NGNjOWI5Ig=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:07 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:07 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes/3VTJTzBZSMEIrCHlVWiveH
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-ImE5ZmZkYTk4NDk0NzBkNzhiMGMzMzE2NjRiNjVhYTU4Ig=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:07 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:08 GMT
+recorded_with: VCR 3.0.3

@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/episodes?ids=512ojhOuo1ktJprKbVcKyQ,18RPZgmvEGKtEC2WMTHghd
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin20 x86_64) ruby/3.0.2p107
+      Authorization:
+      - Bearer BQBj_AiSFlKCkNIMbCWEYjuJLl6n76QmVsHU6MGDgTUBLZqNiKZ4ALs6Kvm6ulbsW9O81JDdIHyXBndXyhUOxg
+      Host:
+      - api.spotify.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=60
+      Etag:
+      - '"MC-ImQ3MTNmMDdhNWVlNjk0ZGUzNDY4NTRmOGI0ODgzYTVjIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Encoding:
+      - gzip
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Wed, 20 Oct 2021 22:38:08 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Alt-Svc:
+      - clear
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version:
+  recorded_at: Wed, 20 Oct 2021 22:38:09 GMT
+recorded_with: VCR 3.0.3
