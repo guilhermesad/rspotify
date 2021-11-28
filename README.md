@@ -155,7 +155,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 ```
 
-You should replace the scope values for the ones your own app will require from the user. You can see the list of available scopes in [here](https://developer.spotify.com/web-api/using-scopes).
+You should replace the scope values for the ones your own app will require from the user. You can see the list of available scopes in [here](https://developer.spotify.com/documentation/general/guides/authorization/scopes/).
 
 Next, make a link so the user can log in with his Spotify account:
 
