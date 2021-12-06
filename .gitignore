@@ -1,4 +1,6 @@
 .bundle
+.idea
+.rakeTasks
 .yardoc
 doc
 pkg
