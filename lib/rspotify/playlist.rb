@@ -156,14 +156,17 @@ module RSpotify
     def add_tracks!(tracks, position: nil, raw_response: false)
       track_uris = nil
       if tracks.first.is_a? String
-        track_uris = tracks.join(',')
+        track_uris = tracks
       else
-        track_uris = tracks.map(&:uri).join(',')
+        track_uris = tracks.map(&:uri)
       end
-      url = "#{@path}/tracks?uris=#{track_uris}"
-      url << "&position=#{position}" if position
+      url = "#{@href}/tracks"
+      params = {
+        uris: tracks
+      }
+      params.merge!(position: position) if position
 
-      response = User.oauth_post(@owner.id, url, {}.to_json)
+      response = User.oauth_post(@owner.id, url, params.to_json)
       @total += tracks.size
       @tracks_cache = nil
 
