@@ -153,6 +153,8 @@ require 'rspotify/oauth'
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :spotify, "<your_client_id>", "<your_client_secret>", scope: 'user-read-email playlist-modify-public user-library-read user-library-modify'
 end
+
+OmniAuth.config.allowed_request_methods = [:post, :get]
 ```
 
 You should replace the scope values for the ones your own app will require from the user. You can see the list of available scopes in [here](https://developer.spotify.com/documentation/general/guides/authorization/scopes/).
