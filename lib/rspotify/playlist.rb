@@ -303,7 +303,7 @@ module RSpotify
     #           positions = [0,3,8]
     #           playlist.remove_tracks!(positions, snapshot_id: '0ZvtH...')
     def remove_tracks!(tracks, snapshot_id: nil)
-      positions = tracks if tracks.first.is_a? Fixnum
+      positions = tracks if tracks.first.is_a? Integer
 
       tracks = tracks.map do |track|
         next { uri: track.uri } if track.is_a? Track
@@ -315,7 +315,7 @@ module RSpotify
 
       params = {
         method: :delete,
-        url: URI::encode(RSpotify::API_URI + @path + '/tracks'),
+        url: Addressable::URI.encode(RSpotify::API_URI + @path + '/tracks'),
         headers: User.send(:oauth_header, @owner.id),
         payload: positions ? { positions: positions } : { tracks: tracks }
       }
@@ -390,7 +390,7 @@ module RSpotify
     def replace_tracks!(tracks)
       track_uris = tracks.map(&:uri).join(',')
       url = "#{@path}/tracks?uris=#{track_uris}"
-      User.oauth_put(@owner.id, url, {})
+      User.oauth_put(@owner.id, url, {}.to_json)
 
       @total = tracks.size
       @tracks_cache = nil

@@ -18,6 +18,11 @@ module OmniAuth
       def raw_info
         @raw_info ||= access_token.get('me').parsed
       end
+      
+      # Fix for: https://github.com/guilhermesad/rspotify/issues/189
+      def callback_url
+        full_host + script_name + callback_path
+      end
     end
   end
 end
