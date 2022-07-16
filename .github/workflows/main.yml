@@ -3,15 +3,20 @@ name: Ruby
 on: [push, pull_request]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ruby-version: ['2.7', '2.6', '2.3', '2.1', '2.0']
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Ruby ${{ matrix.ruby-version }}
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.6'
+          ruby-version: ${{ matrix.ruby-version }}
 
       - name: Install dependencies
         run: bundle install
