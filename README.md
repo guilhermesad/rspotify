@@ -1,7 +1,7 @@
 # RSpotify
 
 [![Gem Version](https://badge.fury.io/rb/rspotify.svg)](http://badge.fury.io/rb/rspotify)
-[![Build Status](https://travis-ci.org/guilhermesad/rspotify.svg?branch=master)](https://travis-ci.org/guilhermesad/rspotify)
+[![Build Status](https://github.com/guilhermesad/rspotify/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/guilhermesad/rspotify/actions)
 
 This is a ruby wrapper for the [Spotify Web API](https://developer.spotify.com/web-api).
 
