@@ -31,7 +31,7 @@ RSpotify was designed with usability as its primary goal, so that you can forget
 
 You can write things like `my_playlist.tracks.sort_by(&:popularity).last.album` without having to think which API calls must be done. RSpotify fills the gaps for you.
 
-Below are some basic usage examples. Check the [documentation](http://rdoc.info/github/guilhermesad/rspotify/master/frames) for the complete reference.
+Below are some basic usage examples. Check the [documentation](http://rubydoc.info/github/guilhermesad/rspotify/master/frames) for the complete reference.
 
 ```ruby
 require 'rspotify'
