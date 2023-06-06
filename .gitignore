@@ -6,3 +6,5 @@ doc
 pkg
 Gemfile.lock
 *.swp
+.tool-versions
+.DS_Store
