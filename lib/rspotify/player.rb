@@ -73,6 +73,22 @@ module RSpotify
       User.oauth_put(@user.id, url, params.to_json)
     end
 
+    # Get the user’s current playback queue
+    #
+    # @example
+    #           player = user.player
+    #           player.next_up
+    def next_up
+      url = "me/player/queue"
+      response = User.oauth_get(@user.id, url)
+      return response if RSpotify.raw_response
+
+      response["queue"].map do |item|
+        type_class = RSpotify.const_get(item["type"].capitalize)
+        type_class.new item
+      end
+    end
+
     # Add an item to the end of the user’s current playback queue
     # If `device_id` is not passed, the currently active spotify app will be triggered
     # 
