@@ -13,6 +13,7 @@ module RSpotify
 
   class << self
     attr_accessor :raw_response
+    attr_accessor :pagination_info
     attr_reader :client_token
 
     # Authenticates access to restricted data. Requires {https://developer.spotify.com/my-applications user credentials}
