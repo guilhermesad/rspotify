@@ -61,8 +61,11 @@ module RSpotify
     private_class_method :extract_custom_headers
 
     def self.oauth_header(user_id)
+      token = @@users_credentials.dig(user_id, 'token')
+      # Fallback for playlist.add_tracks! if no credentials for the playlist owner exist
+      token ||= @@users_credentials.values.dig(0, 'token')
       {
-        'Authorization' => "Bearer #{@@users_credentials[user_id]['token']}",
+        'Authorization' => "Bearer #{token}",
         'Content-Type'  => 'application/json'
       }
     end
