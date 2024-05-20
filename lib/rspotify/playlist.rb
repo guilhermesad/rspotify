@@ -128,8 +128,11 @@ module RSpotify
 
       super(options)
 
-      @path = "users/#{@owner.instance_variable_get('@id').gsub('?','')}/"
-      @path << (@href =~ /\/starred$/ ? 'starred' : "playlists/#{@id}")
+      @path = if @href =~ /\/starred$/
+        "users/#{@owner.instance_variable_get('@id').gsub('?','')}/starred"
+      else
+        "playlists/#{@id}"
+      end
     end
 
     # Adds one or more tracks to a playlist in user's Spotify account. This method is only available when the
