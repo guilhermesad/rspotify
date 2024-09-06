@@ -78,7 +78,12 @@ module RSpotify
       end
 
       return response if raw_response
-      JSON.parse(response) unless response.nil? || response.empty?
+
+      begin
+        JSON.parse(response) unless response.nil? || response.empty?
+      rescue JSON::ParserError, TypeError => e
+        response.to_s # Fall back to raw body when the response is not actually a valid JSON response
+      end
     end
 
     # Added this method for testing
