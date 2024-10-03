@@ -394,8 +394,8 @@ module RSpotify
     def save_albums!(albums)
       albums_ids = albums.map(&:id)
       url = "me/albums"
-      request_body = albums_ids.inspect
-      User.oauth_put(@id, url, request_body)
+      request_body = { ids: albums_ids }
+      User.oauth_put(@id, url, request_body.to_json)
       albums
     end
 
