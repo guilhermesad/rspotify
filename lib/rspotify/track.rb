@@ -59,6 +59,11 @@ module RSpotify
       RSpotify::AudioFeatures.find(@id)
     end
 
+    # Retrieves the audio analysis for the track
+    def audio_analysis
+      RSpotify::AudioAnalysis.find(@id)
+    end
+        
     def initialize(options = {})
       @available_markets = options['available_markets']
       @disc_number       = options['disc_number']
