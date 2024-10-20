@@ -45,23 +45,24 @@ class Show < Base
     end
 
     def initialize(options = {})
-      @available_markets = options['available_markets']
-      @copyrights        = options['copyrights']
-      @description       = options['description']
-      @explicit          = options['explicit']
-      @html_description  = options['html_description']
-      @images            = options['images']
-      @is_externally_hosted = options['is_externally_hosted']
-      @languages         = options['languages']
-      @media_type        = options['media_type']
-      @name              = options['name']
-      @publisher         = options['publisher']
+      @available_markets = options&.dig('available_markets')
+      @copyrights        = options&.dig('copyrights')
+      @description       = options&.dig('description')
+      @explicit          = options&.dig('explicit')
+      @html_description  = options&.dig('html_description')
+      @images            = options&.dig('images')
+      @is_externally_hosted = options&.dig('is_externally_hosted')
+      @languages         = options&.dig('languages')
+      @media_type        = options&.dig('media_type')
+      @name              = options&.dig('name')
+      @publisher         = options&.dig('publisher')
 
-      episodes = options['episodes']['items'] if options['episodes']
+      episodes = options['episodes']['items'] if options&.dig('episodes').present?
 
-      @episodes_cache = if episodes
-        episodes.map { |e| Episode.new e }
-      end
+      @episodes_cache = 
+        if episodes.present?
+          episodes.map { |e| Episode.new e }
+        end
 
       super(options)
     end
